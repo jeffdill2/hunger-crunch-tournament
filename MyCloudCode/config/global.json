@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "_default": {
+            "link": "hunger-crunch"
+        }, 
+        "hunger-crunch": {
+            "applicationId": "KjlIhHJBGyjsDEpV4Z98GBo66QCcNGukFyTbxbGH", 
+            "masterKey": "Kn1prawRfOaFk5keS0J7tvfquFJF6jp7mTmtjyEH"
+        }
+    }
+}
