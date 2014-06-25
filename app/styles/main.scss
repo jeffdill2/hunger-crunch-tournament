@@ -1,93 +1,108 @@
+////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// PARTIALS
+////////////////////////////////////////////////////////////
+@import 'variables';
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// BOOTSTRAP
+////////////////////////////////////////////////////////////
 $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
 // bower:scss
 @import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
+////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// IE SUCKS
+////////////////////////////////////////////////////////////
 .browsehappy {
     margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
+    background: $colorLightGray;
+    color: $colorBlack;
     padding: 0.2em 0;
 }
 
-/* Space out content a bit */
+////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////// TAGS
+////////////////////////////////////////////////////////////
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    background-color: $colorDuskBlue;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-left: 15px;
-    padding-right: 15px;
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////////// CONTAINERS
+////////////////////////////////////////////////////////////
+.logo {
+	background: url("images/hunger-crunch-logo.png");
+	margin: 0 auto;
+	width: 80%;
 }
 
-/* Custom page header */
-.header {
-    border-bottom: 1px solid #e5e5e5;
-
-    /* Make the masthead heading the same height as the navigation */
-    h3 {
-        margin-top: 0;
-        margin-bottom: 0;
-        line-height: 40px;
-        padding-bottom: 19px;
-    }
+.scrolling-background {
+	position: relative;
+    height: 40em;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    background: url('../images/mountains.png') repeat-x;
+    vertical-align: middle;
 }
 
-/* Custom page footer */
-.footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
-}
+.header-ribbon {
+	position: relative;
+	font-size: 3.25em;
+	font-family: $fontSigmarOneRegular;
+	width: 70%;
+	background: $colorPaleOrange1;
+	color: $colorWhite;
+	text-align: center;
+	padding: 0.125em 0.125em;
+	margin: 0.5em auto 1.5em;
+	text-shadow: 1px 1px 1px $colorMidnightGray;
 
-.container-narrow > hr {
-    margin: 30px 0;
-}
+	&:before {
+		content: "";
+		position: absolute;
+		display: block;
+		bottom: -0.6em;
+		border: 1em solid $colorPaleOrange2;
+		z-index: -1;
+		left: -1.5em;
+		border-right-width: 1.5em;
+		border-left-color: transparent;
+	}
 
-/* Main marketing message and sign up button */
-.jumbotron {
-    text-align: center;
-    border-bottom: 1px solid #e5e5e5;
-    .btn {
-        font-size: 21px;
-        padding: 14px 24px;
-    }
-}
+	&:after {
+		content: "";
+		position: absolute;
+		display: block;
+		bottom: -0.6em;
+		border: 1em solid $colorPaleOrange2;
+		z-index: -1;
+		right: -1.5em;
+		border-left-width: 1.5em;
+		border-right-color: transparent;
+	}
 
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
-    p + h4 {
-        margin-top: 28px;
-    }
-}
+	& .header-ribbon-content:before {
+		content: "";
+		position: absolute;
+		display: block;
+		border-style: solid;
+		border-color: $colorPaleOrange3 transparent transparent transparent;
+		bottom: -0.6em;
+		left: 0;
+		border-width: 0.6em 0 0 1em;
+	}
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
-
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
-
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
+	& .header-ribbon-content:after {
+		content: "";
+		position: absolute;
+		display: block;
+		border-style: solid;
+		border-color: $colorPaleOrange3 transparent transparent transparent;
+		bottom: -0.6em;
+		right: 0;
+		border-width: 0.6em 1em 0 0;
+	}
 }
