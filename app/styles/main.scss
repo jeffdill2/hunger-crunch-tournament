@@ -16,93 +16,96 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 /////////////////////////////////////////////////// IE SUCKS
 ////////////////////////////////////////////////////////////
 .browsehappy {
-    margin: 0.2em 0;
-    background: $colorLightGray;
-    color: $colorBlack;
-    padding: 0.2em 0;
+	background: $colorLightGray;
+	color: $colorBlack;
+	margin: 0.2em 0;
+	padding: 0.2em 0;
 }
 
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
 body {
-    background-color: $colorDuskBlue;
+	background-color: $colorDuskBlue;
 }
 
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// CONTAINERS
 ////////////////////////////////////////////////////////////
+.logo-container {
+	padding-top: 9em;
+	text-align: center;
+}
+
 .logo {
-	background: url("images/hunger-crunch-logo.png");
-	margin: 0 auto;
-	width: 80%;
+	width: 70%;
 }
 
 .scrolling-background {
+	background: url('../images/mountains.png') repeat-x;
+	height: 40em;
+	left: 0px;
 	position: relative;
-    height: 40em;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-    background: url('../images/mountains.png') repeat-x;
-    vertical-align: middle;
+	right: 0px;
+	top: 0px;
+	vertical-align: middle;
 }
 
 .header-ribbon {
-	position: relative;
-	font-size: 3.25em;
-	font-family: $fontSigmarOneRegular;
-	width: 70%;
 	background: $colorPaleOrange1;
 	color: $colorWhite;
-	text-align: center;
-	padding: 0.125em 0.125em;
+	font-family: $fontSigmarOneRegular;
+	font-size: 3.25em;
 	margin: 0.5em auto 1.5em;
+	padding: 0.125em 0.125em;
+	position: relative;
+	text-align: center;
 	text-shadow: 1px 1px 1px $colorMidnightGray;
+	width: 70%;
 
 	&:before {
-		content: "";
-		position: absolute;
-		display: block;
-		bottom: -0.6em;
 		border: 1em solid $colorPaleOrange2;
-		z-index: -1;
-		left: -1.5em;
-		border-right-width: 1.5em;
 		border-left-color: transparent;
+		border-right-width: 1.5em;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		left: -1.5em;
+		position: absolute;
+		z-index: -1;
 	}
 
 	&:after {
-		content: "";
-		position: absolute;
-		display: block;
-		bottom: -0.6em;
 		border: 1em solid $colorPaleOrange2;
-		z-index: -1;
-		right: -1.5em;
 		border-left-width: 1.5em;
 		border-right-color: transparent;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		position: absolute;
+		right: -1.5em;
+		z-index: -1;
 	}
 
 	& .header-ribbon-content:before {
-		content: "";
-		position: absolute;
-		display: block;
-		border-style: solid;
 		border-color: $colorPaleOrange3 transparent transparent transparent;
-		bottom: -0.6em;
-		left: 0;
+		border-style: solid;
 		border-width: 0.6em 0 0 1em;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		left: 0;
+		position: absolute;
 	}
 
 	& .header-ribbon-content:after {
-		content: "";
-		position: absolute;
-		display: block;
-		border-style: solid;
 		border-color: $colorPaleOrange3 transparent transparent transparent;
-		bottom: -0.6em;
-		right: 0;
+		border-style: solid;
 		border-width: 0.6em 1em 0 0;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		position: absolute;
+		right: 0;
 	}
 }
