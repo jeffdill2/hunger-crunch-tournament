@@ -29,13 +29,105 @@
             <div class="header-ribbon-content">Tournament Data</div>
         </div>
 
+    <div class="test-data">
+        <div class="purchase-data-generator">
+            <h3>Purchase Test Data</h3>
+            Number of possible unique users
+            <select class="purchase-data-unique-id-amount">
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>50</option>
+            </select>
+            Number of possible unique groups
+            <select class="purchase-data-unique-group-amount">
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+            </select>
+            Number of Purchase events to generate
+            <select class="purchase-data-amount-select">
+                <option>10</option>
+                <option>50</option>
+                <option>75</option>
+                <option>100</option>
+                <option>500</option>
+            </select>
+
+            <button class="purchase-event-button">Create events</button>
+        </div>
+
+
+        <div class="collectible-data-generator">
+            <h3>Collectible Test Data</h3>
+            Number of possible unique users
+            <select class="collectible-data-unique-id-amount">
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>50</option>
+            </select>
+            Number of possible unique groups
+            <select class="collectible-data-unique-group-amount">
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+            </select>
+            Number of Collectible events to generate
+            <select class="collectible-data-amount-select">
+                <option>10</option>
+                <option>50</option>
+                <option>75</option>
+                <option>100</option>
+                <option>500</option>
+            </select>
+            <button class="collectible-event-button">Create events</button>
+        </div>
+
+        <div class="level-end-data-generator">
+            <h3>Level End Test Data</h3>
+            Number of possible unique users
+            <select class="level-end-data-unique-id-amount">
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+                <option>50</option>
+            </select>
+            Number of possible unique groups
+            <select class="level-end-data-unique-group-amount">
+                <option>1</option>
+                <option>2</option>
+                <option>5</option>
+                <option>10</option>
+            </select>
+            Number of Level End events to generate
+            <select class="level-end-amount-select">
+                <option>10</option>
+                <option>50</option>
+                <option>75</option>
+                <option>100</option>
+                <option>500</option>
+            </select>
+            <button class="level-end-event-button">Create events</button>
+        </div>
+    </div>
+
+
+
+
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="scripts/jquery.fittext.js"></script>
-        <script src="scripts/jquery.spritely.js"></script>
+
         <!-- endbower -->
         <!-- endbuild -->
+        <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -63,6 +155,8 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/joshd.js"></script>
+        <script src="scripts/model.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>

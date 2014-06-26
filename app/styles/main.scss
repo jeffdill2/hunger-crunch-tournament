@@ -33,7 +33,7 @@ body {
 ///////////////////////////////////////////////// CONTAINERS
 ////////////////////////////////////////////////////////////
 .logo {
-	background: url("images/hunger-crunch-logo.png");
+	background: url('../images/hunger-crunch-logo.png');
 	margin: 0 auto;
 	width: 80%;
 }
@@ -105,4 +105,40 @@ body {
 		right: 0;
 		border-width: 0.6em 1em 0 0;
 	}
+}
+
+
+////////////////////////////////////////////////////////////
+///////////////////////////// TEMPORARY TEST DATA GENERATORS
+////////////////////////////////////////////////////////////
+
+.test-data {
+	margin: 0 auto 2em;
+	width: 76%;
+}
+
+.purchase-data-generator, .collectible-data-generator, .level-end-data-generator {
+	display: inline-block;
+	color: orange;
+	width: 270px;
+	padding-bottom: 3em;
+	border-right: 2px solid $colorPaleOrange3;
+
+		& h3 {
+			padding-bottom: .25em;
+			text-align: center;
+			border-bottom: 2px solid $colorPaleOrange3;
+		}
+		& select {
+			display: block;
+		}
+
+		& button {
+			margin-top: 1em;
+			color: #111;
+		}
+}
+
+.level-end-data-generator {
+	border-right: none;
 }
