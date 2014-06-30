@@ -56,7 +56,7 @@ var TotalStats = Parse.Object.extend({
 //   });
 // });
 
-Parse.Cloud.define("totals", function(request, response) {
+Parse.Cloud.job("totals", function(request, response) {
 
 var totalCoins;
 var totalMinions;
@@ -76,7 +76,7 @@ var totalMinions;
 		}, 0);
 
       
-      response.success([totalCoins, totalMinions]);
+      response.success('' + [totalCoins, totalMinions]);
     },
     error: function() {
       response.error("score lookup failed");
