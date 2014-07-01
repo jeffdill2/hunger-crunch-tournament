@@ -32,6 +32,26 @@ body {
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// CONTAINERS
 ////////////////////////////////////////////////////////////
+
+.new-user-login-container {
+	width: 50%;
+	min-height: 15em;
+	margin: 5em auto;
+	border: 0.0625em solid black;
+	background: $colorWhite;
+	padding: 1em;
+
+	& input, & button {
+		display: block;
+		margin: 1em auto;
+		width: 45%;
+		font-size: 1.5em;
+	}
+
+	& button {
+		width: 20%;
+}
+
 .logo-container {
 	padding-top: 9em;
 	text-align: center;
@@ -86,26 +106,19 @@ body {
 		right: -1.5em;
 		z-index: -1;
 	}
+}
 
-	& .header-ribbon-content:before {
-		border-color: $colorPaleOrange3 transparent transparent transparent;
-		border-style: solid;
-		border-width: 0.6em 0 0 1em;
-		bottom: -0.6em;
-		content: "";
-		display: block;
-		left: 0;
-		position: absolute;
-	}
+.new-user-email-input{
 
-	& .header-ribbon-content:after {
-		border-color: $colorPaleOrange3 transparent transparent transparent;
-		border-style: solid;
-		border-width: 0.6em 1em 0 0;
-		bottom: -0.6em;
-		content: "";
-		display: block;
-		position: absolute;
-		right: 0;
-	}
+}
+.new-user-username-input{
+
+}
+.new-user-password-input{
+
+}
+
+.new-user-creation-button {
+
+
 }
