@@ -13,10 +13,20 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 // endbower
 
 ////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// IE SUCKS
+////////////////////////////////////////////////////////////
+.browsehappy {
+	background: $colorLightGray;
+	color: $colorBlack;
+	margin: 0.2em 0;
+	padding: 0.2em 0;
+}
+
+////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
 body {
-    background-color: $colorDuskBlue;
+	background-color: $colorDuskBlue;
 }
 
 ////////////////////////////////////////////////////////////
@@ -40,6 +50,61 @@ body {
 
 	& button {
 		width: 20%;
+}
+
+.logo-container {
+	padding-top: 9em;
+	text-align: center;
+}
+
+.logo {
+	width: 70%;
+}
+
+.scrolling-background {
+	background: url('../images/mountains.png') repeat-x;
+	height: 40em;
+	left: 0px;
+	position: relative;
+	right: 0px;
+	top: 0px;
+	vertical-align: middle;
+}
+
+.header-ribbon {
+	background: $colorPaleOrange1;
+	color: $colorWhite;
+	font-family: $fontSigmarOneRegular;
+	font-size: 3.25em;
+	margin: 0.5em auto 1.5em;
+	padding: 0.125em 0.125em;
+	position: relative;
+	text-align: center;
+	text-shadow: 1px 1px 1px $colorMidnightGray;
+	width: 70%;
+
+	&:before {
+		border: 1em solid $colorPaleOrange2;
+		border-left-color: transparent;
+		border-right-width: 1.5em;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		left: -1.5em;
+		position: absolute;
+		z-index: -1;
+	}
+
+	&:after {
+		border: 1em solid $colorPaleOrange2;
+		border-left-width: 1.5em;
+		border-right-color: transparent;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		position: absolute;
+		right: -1.5em;
+		z-index: -1;
 	}
 }
 
@@ -54,5 +119,6 @@ body {
 }
 
 .new-user-creation-button {
+
 
 }
