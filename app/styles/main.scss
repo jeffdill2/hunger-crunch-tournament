@@ -13,16 +13,6 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 // endbower
 
 ////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////// IE SUCKS
-////////////////////////////////////////////////////////////
-.browsehappy {
-    margin: 0.2em 0;
-    background: $colorLightGray;
-    color: $colorBlack;
-    padding: 0.2em 0;
-}
-
-////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
 body {
@@ -32,77 +22,37 @@ body {
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// CONTAINERS
 ////////////////////////////////////////////////////////////
-.logo {
-	background: url("images/hunger-crunch-logo.png");
-	margin: 0 auto;
-	width: 80%;
+
+.new-user-login-container {
+	width: 50%;
+	min-height: 15em;
+	margin: 5em auto;
+	border: 0.0625em solid black;
+	background: $colorWhite;
+	padding: 1em;
+
+	& input, & button {
+		display: block;
+		margin: 1em auto;
+		width: 45%;
+		font-size: 1.5em;
+	}
+
+	& button {
+		width: 20%;
+	}
 }
 
-.scrolling-background {
-	position: relative;
-    height: 40em;
-    top: 0px;
-    right: 0px;
-    left: 0px;
-    background: url('../images/mountains.png') repeat-x;
-    vertical-align: middle;
+.new-user-email-input{
+
+}
+.new-user-username-input{
+
+}
+.new-user-password-input{
+
 }
 
-.header-ribbon {
-	position: relative;
-	font-size: 3.25em;
-	font-family: $fontSigmarOneRegular;
-	width: 70%;
-	background: $colorPaleOrange1;
-	color: $colorWhite;
-	text-align: center;
-	padding: 0.125em 0.125em;
-	margin: 0.5em auto 1.5em;
-	text-shadow: 1px 1px 1px $colorMidnightGray;
+.new-user-creation-button {
 
-	&:before {
-		content: "";
-		position: absolute;
-		display: block;
-		bottom: -0.6em;
-		border: 1em solid $colorPaleOrange2;
-		z-index: -1;
-		left: -1.5em;
-		border-right-width: 1.5em;
-		border-left-color: transparent;
-	}
-
-	&:after {
-		content: "";
-		position: absolute;
-		display: block;
-		bottom: -0.6em;
-		border: 1em solid $colorPaleOrange2;
-		z-index: -1;
-		right: -1.5em;
-		border-left-width: 1.5em;
-		border-right-color: transparent;
-	}
-
-	& .header-ribbon-content:before {
-		content: "";
-		position: absolute;
-		display: block;
-		border-style: solid;
-		border-color: $colorPaleOrange3 transparent transparent transparent;
-		bottom: -0.6em;
-		left: 0;
-		border-width: 0.6em 0 0 1em;
-	}
-
-	& .header-ribbon-content:after {
-		content: "";
-		position: absolute;
-		display: block;
-		border-style: solid;
-		border-color: $colorPaleOrange3 transparent transparent transparent;
-		bottom: -0.6em;
-		right: 0;
-		border-width: 0.6em 1em 0 0;
-	}
 }
