@@ -98,3 +98,20 @@ resetTotals.get("KEpS6v6cfg", {
   	}
 	});
 });
+
+Parse.Cloud.define('collected', function(request, response) {
+	var query = new Parse.Query("playerEvent");
+	query.equalTo('eventType', 'collectible');
+	query.find({
+		success: function(results) {
+
+			var collected = results.forEach(function (x) {
+				x.get('collectible');
+			});
+			response.success(collected);
+		},
+		error: function() {
+			response.error("score lookup failed");
+		}
+	})
+});
