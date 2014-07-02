@@ -1,9 +1,9 @@
-var LoginView = Parse.View.extend ({
+var SignInView = Parse.View.extend ({
 
-	template: _.template($('.login-view').text()),
+	template: _.template($('.sign-in-view').text()),
 
 	initialize: function (options) {
-		$('.nav-container').append(this.el);
+		$('.app-container').append(this.el);
 		this.render();
 	},
 

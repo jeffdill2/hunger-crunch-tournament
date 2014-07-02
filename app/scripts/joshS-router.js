@@ -3,6 +3,8 @@ var AppRouter = Parse.Router.extend({
 	routes: {
 		''							: 'home',
 		'dashboard' 				: 'dashboardView',
+		'sign-in'					: 'signInView',
+		'sign-up'					: 'signUpView',
 		'group/:groupID' 			: 'groupView',
 		'group/:groupID/:playerID' 	: 'playerView',
 		
@@ -15,14 +17,16 @@ var AppRouter = Parse.Router.extend({
 
 	home: function () {
 		this.swap( new HomeView() );
-		this.navCheck( new LoginView() );
 	},
 
-	navCheck: function (view) {
-		if(this.navOptions) this.navOptions.remove();
-		this.navOptions = view;
-		this.navOptions.render();
+	signUpView: function () {
+		this.swap( new SignUpView() );
 	},
+
+	signInView: function () {
+		this.swap( new SignInView() );
+	},
+
 
 	dashboardView: function () {
 		this.swap( new DashboardView() );
@@ -39,10 +43,14 @@ var AppRouter = Parse.Router.extend({
 		this.swap( new PlayerView({"playerID": playerID}) );
 	},
 
+	navCheck: function () {
+		
+	},
 	
 	swap: function (view) {
 		if(this.currentView) this.currentView.remove();
 		this.currentView = view;
 		this.currentView.render();
+		this.navCheck();
 	},
 })
