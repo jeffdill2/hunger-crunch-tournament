@@ -93,7 +93,7 @@ body {
 ////////////////////////////////////////////////////////////
 .new-user-login-container {
 	background: $colorWhite;
-	border: 0.0625em solid black;
+	border: 0.0625em solid $colorBlack;
 	margin: 5em auto;
 	min-height: 15em;
 	padding: 1em;
@@ -108,6 +108,7 @@ body {
 
 	& button {
 		width: 20%;
+	}
 }
 
 .new-user-email-input {
