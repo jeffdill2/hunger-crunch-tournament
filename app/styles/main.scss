@@ -13,10 +13,53 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 // endbower
 
 ////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////// IE SUCKS
+////////////////////////////////////////////////////////////
+.browsehappy {
+	background: $colorLightGray;
+	color: $colorBlack;
+	margin: 0.2em 0;
+	padding: 0.2em 0;
+}
+
+////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
 body {
-    background-color: $colorDuskBlue;
+	background-color: $colorWhite;
+}
+
+header {
+	height: 110px;
+	padding: 20px 30px; 
+	background: url(../images/map-bg.png); 
+	background-size: 87px auto;
+	background-repeat: repeat;
+	background-position: top left;
+
+	.header-breadcrumb {
+		color: $colorWhite;
+		font-size: 1.5em;
+		& img {
+			height: 50px;
+			width: 50px;
+			margin-right: 10px;
+		}
+	}
+
+	.header-account-options {
+
+		& ul {
+			list-style: none;
+			float: right;
+			
+			& li {
+				display: inline-block;
+				margin-left: 30px;
+				color: $colorWhite;
+			}
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -24,6 +67,7 @@ body {
 ////////////////////////////////////////////////////////////
 
 .new-user-login-container {
+	display: none;
 	width: 50%;
 	min-height: 15em;
 	margin: 5em auto;
@@ -43,16 +87,128 @@ body {
 	}
 }
 
-.new-user-email-input{
-
-}
-.new-user-username-input{
-
-}
-.new-user-password-input{
-
+.logo-container {
+	padding-top: 9em;
+	text-align: center;
 }
 
-.new-user-creation-button {
-
+.logo {
+	width: 70%;
 }
+
+.scrolling-background {
+	background: url('../images/mountains.png') repeat-x;
+	height: 40em;
+	left: 0px;
+	position: relative;
+	right: 0px;
+	top: 0px;
+	vertical-align: middle;
+}
+
+.header-ribbon {
+	background: $colorPaleOrange1;
+	color: $colorWhite;
+	font-family: $fontSigmarOneRegular;
+	font-size: 3.25em;
+	margin: 0.5em auto 1.5em;
+	padding: 0.125em 0.125em;
+	position: relative;
+	text-align: center;
+	text-shadow: 1px 1px 1px $colorMidnightGray;
+	width: 70%;
+
+	&:before {
+		border: 1em solid $colorPaleOrange2;
+		border-left-color: transparent;
+		border-right-width: 1.5em;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		left: -1.5em;
+		position: absolute;
+		z-index: -1;
+	}
+
+	&:after {
+		border: 1em solid $colorPaleOrange2;
+		border-left-width: 1.5em;
+		border-right-color: transparent;
+		bottom: -0.6em;
+		content: "";
+		display: block;
+		position: absolute;
+		right: -1.5em;
+		z-index: -1;
+	}
+}
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// HOME PAGE
+////////////////////////////////////////////////////////////
+
+.landing-page-copy {
+	width: 85%;
+	margin: 4em auto 2em;
+	text-align: center;
+
+	& h3 {
+		color: $colorStoneGray;
+	}
+
+	& p {
+		color: $colorLightGray;
+		font-size: 1.2em;
+		line-height: 1.6;
+	}
+}
+
+.hunger-minions-counter-container {
+	width: 100%;
+	height: 250px;
+	background: lighten($colorStoneGray, 20%);
+	padding: 1em;
+
+	& .minion-counter-content {
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
+
+		& .cyclops-home-graphic {
+			height: 90px;
+			width: 100px;
+			margin-right: .5em;
+		}
+
+		& .counter-home-graphic {
+			margin-top: 1em;
+		}
+
+		& h3 {
+			color: $colorStoneGray;
+			display: inline-block;
+			vertical-align: bottom;
+		}
+	}
+}
+
+.sign-up-button-container {
+	width: 33%;
+	margin: 2em auto;
+	text-align: center;
+	overflow: hidden;
+
+	& .sign-up-button {
+		width: 450px;
+		height: 75px;
+		background: url("../images/play-sprite.png");
+		background-size: 700px auto;
+		background-repeat: no-repeat;
+
+		&:active {
+			background-position: 140% 0;
+		}
+	}
+}
+

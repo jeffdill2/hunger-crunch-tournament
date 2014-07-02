@@ -20,6 +20,44 @@
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        
+        <header>
+            <div class="header-account-options">
+                <ul>
+                    <li>Sign Up</li>
+                    <li>Login</li>
+                </ul>
+            </div>
+            <div class="header-breadcrumb">
+                <img src="../images/hunger-crunch-shiled.png">
+                 &gt;&nbsp;&nbsp;TOURNAMENTS
+            </div>
+        </header>
+
+        <div class="landing-page-copy">
+            <h3>A WAR IS BEING WAGED AGAINST WORLD HUNGER</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+
+        <div class="hunger-minions-counter-container">
+            <div class="minion-counter-content">
+                <img class="cyclops-home-graphic" src="../images/cyclops.gif">
+                <h3>HUNGER MINIONS STOMPED</h3>
+                <img class="counter-home-graphic"src="../images/fake-counter.png">
+            </div>
+        </div>
+        <div class="sign-up-button-container">
+            <div class="sign-up-button"></div>
+        </div>
+
+        <div class="app-container"></div>
+        
+
 
         <div class="new-user-login-container">
             <input class="new-user-email-input" placeholder="Your Email" type="email">
@@ -31,12 +69,33 @@
 
 
 
+<script type="text/template" class="home-view">
+        <h1>Home View</h1>
+        <div class="create-new-user">Create New User</div>
+        <input class="group-id" placeholder="Group #">
+        <button class="button submit-group-id">Find Group</button>
+</script>
+
+<script type="text/template" class="add-user-view">
+        <div class="new-user-login-container">
+            <input class="new-user-email-input" placeholder="Your Email">
+            <input class="new-user-username-input" placeholder="Name or Organization">
+            <input class="new-user-password-input" placeholder="Password">
+            <input class="new-user-password-verification-input" placeholder="Password Again">
+            <button class="button new-user-creation-button">Sign Up</button>
+        </div>
+</script>
+
+<script type="text/template" class="group-view">
+    <h1>Group View</h1>
+</script>
+
+
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <script src="scripts/jquery.fittext.js"></script>
-
+        <script src="../bower_components/underscore/underscore.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
         <script src="//www.parsecdn.com/js/parse-1.2.18.min.js"></script>
@@ -67,8 +126,12 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/joshd.js"></script>
+
         <script src="scripts/model.js"></script>
+        <script src="scripts/home-view.js"></script>
+        <script src="scripts/new-user-view.js"></script>
+        <script src="scripts/group-view.js"></script>
+        <script src="scripts/joshS-router.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>
