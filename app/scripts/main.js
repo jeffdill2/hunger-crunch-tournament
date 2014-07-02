@@ -5,3 +5,4 @@ Parse.initialize("KjlIhHJBGyjsDEpV4Z98GBo66QCcNGukFyTbxbGH", "Kte3zdBYCUlWK03TnW
 
 var router = new AppRouter();
 Parse.history.start();
+
