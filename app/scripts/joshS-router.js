@@ -9,11 +9,11 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	initialize: function () {
+		var navOptions = new LoginView()
 		this.currentView = null;
 	},
 
 	home: function () {
-		new LoginView();
 		this.swap( new HomeView() );
 	},
 
