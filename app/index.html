@@ -79,10 +79,18 @@
 </script>
 
 <!-- template for the nav bar if no user signed in -->
-<script type="text/template" class="nav-view">
+<script type="text/template" class="no-user-nav-view">
     <ul>
         <li>Sign In</li>
         <li>Sign Up</li>
+    </ul>
+</script>
+
+<!-- template for the nav bar if user is signed in -->
+<script type="text/template" class="user-nav-view">
+    <ul>
+        <li>Dashboard</li>
+        <li>Settings</li>
     </ul>
 </script>
 
@@ -128,6 +136,8 @@
         <!-- <script src="scripts/joshd.js"></script> -->
         <script src="scripts/model.js"></script>
         <script src="scripts/home-view.js"></script>
+        <script src="scripts/no-user-nav-view.js"></script>
+        <script src="scripts/user-nav-view.js"></script>
         <script src="scripts/sign-up-view.js"></script>
         <script src="scripts/sign-in-view.js"></script>
         <script src="scripts/dashboard-view.js"></script>
