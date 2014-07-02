@@ -9,12 +9,19 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	initialize: function () {
-		var navOptions = new LoginView()
+		this.navOptions = null;
 		this.currentView = null;
 	},
 
 	home: function () {
 		this.swap( new HomeView() );
+		this.navCheck( new LoginView() );
+	},
+
+	navCheck: function (view) {
+		if(this.navOptions) this.navOptions.remove();
+		this.navOptions = view;
+		this.navOptions.render();
 	},
 
 	dashboardView: function () {
