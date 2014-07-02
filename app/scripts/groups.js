@@ -34,8 +34,9 @@ function populateCollection(collection) {
 function generateRandomGroupdID() {
 	var strGroupID = "";
 	var strCharsAvailable = "abcdefghijklmnopqrstuvwxyz";
+	var numGroupIDLength = 5;
 
-	for (var i = 0; i < 5; i += 1) {
+	for (var i = 0; i < numGroupIDLength; i += 1) {
 		strGroupID += strCharsAvailable.charAt(Math.floor(Math.random() * strCharsAvailable.length));
 	}
 
