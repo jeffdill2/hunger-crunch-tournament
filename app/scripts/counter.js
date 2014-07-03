@@ -22,14 +22,21 @@ var CounterCollection = Parse.Collection.extend({
 ////////////////////////////////////////////////////////////
 var numRefreshIntervalMinutes = 1;
 var myCounter;
+var numCounterIntervalID;
 
-setInterval(function() {
-	updateCounterTotal();
-}, numRefreshIntervalMinutes * 60000);
+function startCounter() {
+	updateCounter();
 
-updateCounterTotal();
+	numCounterIntervalID = setInterval(function() {
+		updateCounter();
+	}, numRefreshIntervalMinutes * 60000);
+}
 
-function updateCounterTotal() {
+function stopCounter() {
+	clearInterval(numCounterIntervalID);
+}
+
+function updateCounter() {
 	var counterCollection = new CounterCollection();
 
 	populateCollection(counterCollection).done(function() {

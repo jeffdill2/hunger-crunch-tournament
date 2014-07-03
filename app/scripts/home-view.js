@@ -12,6 +12,8 @@ var HomeView = Parse.View.extend ({
 	initialize: function () {
 		$('.app-container').append(this.el);
 		this.render();
+
+		startCounter();
 	},
 
 	render: function() {
@@ -25,5 +27,10 @@ var HomeView = Parse.View.extend ({
 
 	signUpView: function () {
 		window.location = '/#sign-up';
+	},
+
+	remove: function() {
+	    stopCounter();
+	    Parse.View.prototype.remove.call(this);
 	}
 })
