@@ -1,5 +1,7 @@
 var HomeView = Parse.View.extend ({
 
+	className: "home-view-container",
+
 	events: {
 		'click .submit-group-id' : 'submitGroup',
 	},

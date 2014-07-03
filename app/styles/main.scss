@@ -66,27 +66,6 @@ header {
 ////////////////////////////////////////////////// HOME PAGE
 ////////////////////////////////////////////////////////////
 
-.new-user-login-container {
-	display: none;
-	width: 50%;
-	min-height: 15em;
-	margin: 5em auto;
-	border: 0.0625em solid black;
-	background: $colorWhite;
-	padding: 1em;
-
-	& input, & button {
-		display: block;
-		margin: 1em auto;
-		width: 45%;
-		font-size: 1.5em;
-	}
-
-	& button {
-		width: 20%;
-	}
-}
-
 .logo-container {
 	padding-top: 9em;
 	text-align: center;
@@ -215,25 +194,23 @@ header {
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// NEW USER
 ////////////////////////////////////////////////////////////
+
 .new-user-login-container {
-	background: $colorWhite;
-	border: 0.0625em solid $colorBlack;
-	margin: 5em auto;
-	min-height: 15em;
-	padding: 1em;
 	width: 50%;
+	min-height: 15em;
+	margin: 5em auto;
+	border: 0.0625em solid black;
+	background: $colorWhite;
+	padding: 1em;
 
 	& input, & button {
 		display: block;
-		font-size: 1.5em;
 		margin: 1em auto;
 		width: 45%;
+		font-size: 1.5em;
 	}
 
 	& button {
 		width: 20%;
 	}
 }
-	
-
-
