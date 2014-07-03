@@ -1,9 +1,10 @@
 function createRole() {
 var roleACL = new Parse.ACL();
-roleACL.setWriteAccess("Administrator",true); 
+roleACL.setWriteAccess("GroupAdmin",true); 
 roleACL.setPublicReadAccess(true);
-var role = new Parse.Role("Administrator", roleACL);
+var role = new Parse.Role("GroupAdmin", roleACL);
 role.getUsers().add(Parse.User.current());
+
 
 role.save(null, {
     success: function(saveObject) {
@@ -22,7 +23,7 @@ role.save(null, {
 function getUser() {
 
 var query = new Parse.Query(Parse.User);
-query.get("maMVD1fwLs",{
+query.get( Parse.User.current.id,{
     success: function(returnObj) {
         alert(returnObj.get("username"));
         getRole(returnObj);
@@ -36,7 +37,7 @@ query.get("maMVD1fwLs",{
 function getRole (user) {
 
 var query = new Parse.Query(Parse.Role);
-query.equalTo("name", "Administrator");
+query.equalTo("name", "GroupAdmin");
 
 query.get(null, {
     success: function(returnObj) {

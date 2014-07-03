@@ -24,6 +24,7 @@ var SignUpView = Parse.View.extend ({
 
 		user.signUp(null, {
   			success: function(user) {
+  				createRole();
   				window.location = '/#dashboard';
   			},
   			error: function(user, error) {
