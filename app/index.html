@@ -21,71 +21,81 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <div class="nav-container"></div>
-    <div class="app-container"></div>
+
+        <!--////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////// STATIC
+        /////////////////////////////////////////////////////////-->
+        <div class="nav-container"></div>
+        <div class="app-container"></div>
 
 
+        <!--////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////// TEMPLATES
+        /////////////////////////////////////////////////////////-->
 
-<!-- template for the landing page -->
-<script type="text/template" class="home-view">
-        <h1>Home View</h1>
-        <input class="group-id" placeholder="Group #">
-        <button class="button submit-group-id">Find Group</button>
-        <button class="signup">Sign Up</button>
+        <!-- template for the landing page -->
+        <script type="text/template" class="home-view">
+            <h1>Home View</h1>
 
-</script>
-<!-- template for the sign up modal -->
-<script type="text/template" class="sign-up-view">
-        <div class="new-user-login-container">
-            <input class="new-user-email-input" placeholder="Your Email">
-            <input class="new-user-username-input" placeholder="Name or Organization">
-            <input class="new-user-password-input" placeholder="Password">
-            <input class="new-user-password-verification-input" placeholder="Password Again">
-            <button class="button new-user-creation-button">Sign Up</button>
-        </div>
-</script>
+            <input class="group-id" placeholder="Group #">
 
-<!-- template for the sign in view -->
-<script type="text/template" class="sign-in-view">
-    <h1>Sign In View</h1>
+            <button class="button submit-group-id">Find Group</button>
+            <button class="signup">Sign Up</button>
 
-</script>
+            <div id="flip-counter" class="flip-counter"></div>
+        </script>
 
-<!-- template for the single group view -->
-<script type="text/template" class="group-view">
-    <h1>Group View</h1>
+        <!-- template for the sign up modal -->
+        <script type="text/template" class="sign-up-view">
+            <div class="new-user-login-container">
+                <input class="new-user-email-input" placeholder="Your Email">
+                <input class="new-user-username-input" placeholder="Name or Organization">
+                <input class="new-user-password-input" placeholder="Password">
+                <input class="new-user-password-verification-input" placeholder="Password Again">
 
-    <div class="players" value="1234">player whatever<div>
-</script>
+                <button class="button new-user-creation-button">Sign Up</button>
+            </div>
+        </script>
 
-<!-- template for the players listed on the single group view -->
-<script type="text/template" class"group-player-view">
-    <div>name</div>
-    <div>score</div>
-</script>
+        <!-- template for the sign in view -->
+        <script type="text/template" class="sign-in-view">
+            <h1>Sign In View</h1>
+        </script>
 
-<!-- template for the single player view -->
-<script type="text/template" class="player-view">
-    <h1>player View</h1>
+        <!-- template for the single group view -->
+        <script type="text/template" class="group-view">
+            <h1>Group View</h1>
 
-    <div class="stats">whatever<div>
-</script>
+            <div class="players" value="1234">player whatever<div>
+        </script>
 
-<!-- template for the dashboard view -->
-<script type="text/template" class="dashboard-view">
-    <h1>dashboard View</h1>
+        <!-- template for the players listed on the single group view -->
+        <script type="text/template" class"group-player-view">
+            <div>name</div>
+            <div>score</div>
+        </script>
 
-    <div class="users-groups">List of groups created<div>
-</script>
+        <!-- template for the single player view -->
+        <script type="text/template" class="player-view">
+            <h1>player View</h1>
 
-<!-- template for the nav bar if no user signed in -->
-<script type="text/template" class="nav-view">
-    <ul>
-        <li>Sign In</li>
-        <li>Sign Up</li>
-    </ul>
-</script>
+            <div class="stats">whatever<div>
+        </script>
 
+        <!-- template for the dashboard view -->
+        <script type="text/template" class="dashboard-view">
+            <h1>dashboard View</h1>
+
+            <div class="users-groups">List of groups created<div>
+        </script>
+
+        <!-- template for the nav bar if no user signed in -->
+        <script type="text/template" class="nav-view">
+            <ul>
+                <li>Sign In</li>
+                <li>Sign Up</li>
+            </ul>
+        </script>
 
 
         <!-- build:js scripts/vendor.js -->
@@ -136,7 +146,8 @@
         <script src="scripts/player-view.js"></script>
         <script src="scripts/groups.js"></script>
         <script src="scripts/joshS-router.js"></script>
+        <script src="scripts/counter.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
-</body>
+    </body>
 </html>

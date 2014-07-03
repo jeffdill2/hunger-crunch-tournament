@@ -32,7 +32,6 @@ body {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////// HOME PAGE
 ////////////////////////////////////////////////////////////
-
 .logo-container {
 	padding-top: 9em;
 	text-align: center;
@@ -126,4 +125,40 @@ body {
 
 .new-user-creation-button {
 
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////// TOTAL COUNTER
+////////////////////////////////////////////////////////////
+.flip-counter {
+	margin: 0 auto;
+
+	& ul.cd {
+		float: left;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	& li {
+		background: url(../images/digits.png) 0 0 no-repeat;
+	}
+
+	& li.t {
+		background-position: 0 0;
+		height: 39px;
+		width: 53px;
+	}
+
+	& li.b {
+		background-position: 0 0;
+		height: 64px;
+		width: 53px;
+	}
+
+	& li.s {
+		background-position: -53px -1030px;
+		height: 103px;
+		width: 14px;
+	}
 }
