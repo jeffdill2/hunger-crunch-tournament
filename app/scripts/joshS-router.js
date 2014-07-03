@@ -13,6 +13,8 @@ var AppRouter = Parse.Router.extend({
 	initialize: function () {
 		this.navOptions = null;
 		this.currentView = null;
+		this.navCheck();
+
 	},
 
 	home: function () {
@@ -38,19 +40,36 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	playerView: function (groupID, playerID) {
-		console.log(groupID);
-		console.log(playerID);
 		this.swap( new PlayerView({"playerID": playerID}) );
 	},
 
+	noUserNav: function () {
+		if(this.navOptions) this.navOptions.remove();
+		this.navOptions = new NoUserNavView;
+		this.navOptions.render();
+
+	},
+
+	userNav: function () {
+		if(this.navOptions) this.navOptions.remove();
+		this.navOptions = new UserNavView();
+		this.navOptions.render();
+
+	},
+
 	navCheck: function () {
-		
+		if(Parse.User.current()) {
+			this.userNav();
+		}else{
+			this.noUserNav();
+		}
 	},
 	
 	swap: function (view) {
+		this.navCheck();
+
 		if(this.currentView) this.currentView.remove();
 		this.currentView = view;
 		this.currentView.render();
-		this.navCheck();
 	},
 })
