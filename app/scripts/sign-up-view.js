@@ -1,5 +1,9 @@
 var SignUpView = Parse.View.extend ({
 
+	events: {
+		'click	.new-user-creation-button'	: 'createNewUser',
+	},
+
 	template: _.template($('.sign-up-view').text()),
 
 	className: "new-user-login-container",
@@ -10,7 +14,7 @@ var SignUpView = Parse.View.extend ({
 	},
 
 	initialize: function (options) {
-		$('.nav-container').append(this.el);
+		$('.app-container').append(this.el);
 		this.render();
 	},
 
@@ -33,8 +37,8 @@ var SignUpView = Parse.View.extend ({
 			success: function () {
 				// remove login window and show new user dashboard/welcome
 				console.log('Welcome,', user.attributes.username);
-				$('.nav-container').html("<p>Welcome, " + user.attributes.username + "</p>");
-				$('.new-user-login-container').hide();
+				$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
+				router.navigate('dashboard', {trigger:true})
 			},
 			error: function (user, error) {
 				// display error and retry as necessary

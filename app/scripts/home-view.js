@@ -4,6 +4,7 @@ var HomeView = Parse.View.extend ({
 
 	events: {
 		'click .submit-group-id' : 'submitGroup',
+		'click .sign-up-button' : 'signUpView',
 	},
 
 	template: _.template($('.home-view').text()),
@@ -20,5 +21,9 @@ var HomeView = Parse.View.extend ({
 
 	submitGroup : function () {
 		window.location = '/#group/' + $('.group-id').val();
+	},
+
+	signUpView: function () {
+		window.location = '/#sign-up';
 	}
 })

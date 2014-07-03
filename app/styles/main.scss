@@ -22,6 +22,9 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 	padding: 0.2em 0;
 }
 
+
+
+
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
@@ -31,7 +34,7 @@ body {
 
 header {
 	height: 110px;
-	padding: 20px 30px; 
+	padding: 20px 30px 10px; 
 	background: url(../images/map-bg.png); 
 	background-size: 87px auto;
 	background-repeat: repeat;
@@ -60,12 +63,38 @@ header {
 			}
 		}
 	}
+
+	.nav-container {
+		float: right;
+		margin-top: 10px;
+
+		& ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			& li {
+				margin-left: 30px;
+				display: inline-block;
+				color: $colorWhite;
+			}
+		}
+	}
+}
+
+.clearfix {
+
+	&:after {
+		content: " ";
+		display: block; 
+		height: 0; 
+		clear: both;
+	}
 }
 
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////// HOME PAGE
 ////////////////////////////////////////////////////////////
-
 .logo-container {
 	padding-top: 9em;
 	text-align: center;
@@ -195,7 +224,7 @@ header {
 /////////////////////////////////////////////////// NEW USER
 ////////////////////////////////////////////////////////////
 
-.new-user-login-container {
+.new-user-login-container, .existing-user-login-container {
 	width: 50%;
 	min-height: 15em;
 	margin: 5em auto;
@@ -213,4 +242,158 @@ header {
 	& button {
 		width: 20%;
 	}
+}
+
+.error-report {
+	text-align: center;
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////// TOTAL COUNTER
+////////////////////////////////////////////////////////////
+.flip-counter {
+	margin: 2em auto;
+	width: 400px;
+
+	& ul.cd {
+		float: left;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	& li {
+		background: url(../images/digits.png) 0 0 no-repeat;
+	}
+
+	& li.t {
+		background-position: 0 0;
+		height: 39px;
+		width: 53px;
+	}
+
+	& li.b {
+		background-position: 0 0;
+		height: 64px;
+		width: 53px;
+	}
+
+	& li.s {
+		background-position: -53px -1030px;
+		height: 103px;
+		width: 14px;
+	}
+}
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////// DASHBOARD VIEW
+////////////////////////////////////////////////////////////
+
+.dashboard-header {
+	width: 100%;
+	min-height: 80px;
+	padding: 20px 20px 20px 0;
+
+	& .dashboard-location {
+		padding: 5px 15px;
+		display: inline-block;
+		font-size: 2.75em;
+		background: $colorGoldenrod;
+	}
+}
+
+.dashboard-nav {
+	@extend .clearfix;
+
+	& ul {
+		list-style: none;
+		float: right;
+		padding: 0;
+		margin: -30px 0 0;
+		vertical-align: bottom;
+
+		& li {
+			margin-right: 20px;
+			padding: 3px 10px;
+			display: inline-block;
+			border: 1px solid black;
+		}
+	}
+}
+
+.dashboard-group-content {
+	width: 100%;
+	padding: 35px 5%;
+	background: $colorLightGray;
+
+	@extend .clearfix;
+}
+
+.test-group {
+	float: left;
+	width: 47.5%;
+	min-height: 200px;
+	margin-right: 5%;
+	margin-bottom: 50px;
+	padding: 10px;
+	border: 1px solid black;
+	background: $colorWhite;
+		
+	&:nth-of-type(2n) {
+		margin-right: 0;
+	}
+}
+
+.group-details-container {
+	height: 80px;
+	width: 100%;
+	padding: 10px;
+	border-bottom: 1px solid $colorStoneGray
+}
+
+.groupname-and-code {
+	display: inline-block;
+
+	& h3 {
+		margin-top: 0;
+		margin-bottom: 2px;
+	}
+	& p {
+		margin: 0;
+	}
+}
+
+.dashboard-group-details {
+	float: right;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	& li {
+
+	}
+}
+
+.dashboard-group-statistics {
+	padding: 10px;
+}
+.group-minion-count, .group-candy-count, .group-meals-provided {
+	width: 33%;
+	float: left;
+	text-align: center;
+	padding: 10px 20px 0;
+}
+.minion-image, .candy-image, .meals-image {
+	height: 80px;
+	width: 80px;
+	margin: 0 auto;
+	background: $colorLightGray;
+}
+
+.candy-image {
+	background: $colorBurntOrange;
+}
+
+.meals-image {
+	background: $colorGoldenrod;
 }
