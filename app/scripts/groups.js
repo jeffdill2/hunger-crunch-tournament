@@ -68,6 +68,8 @@ function createNewGroupID() {
 		}
 
 		var objGroup = new GroupModel();
+		var groupName = $('.new-group-name-input').val();
+		var orgName = $('.new-group-organization-input').val();
 
 		objGroup.save({
 			groupID: strGroupID,
@@ -78,7 +80,9 @@ function createNewGroupID() {
 			endDate: {
 				__type: "Date",
 				iso: moment().add('days', 14).toISOString()
-			}
+			},
+			groupName: groupName,
+			orgName: orgName
 		}, {
 			success: function() {
 				console.log('New group successfully added.');
