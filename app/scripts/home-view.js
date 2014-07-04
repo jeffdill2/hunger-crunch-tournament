@@ -1,8 +1,10 @@
 var HomeView = Parse.View.extend ({
 
+	className: "home-view-container",
+
 	events: {
 		'click .submit-group-id' : 'submitGroup',
-		'click .signup' : 'signUpView',
+		'click .sign-up-button' : 'signUpView',
 	},
 
 	template: _.template($('.home-view').text()),
@@ -10,6 +12,8 @@ var HomeView = Parse.View.extend ({
 	initialize: function () {
 		$('.app-container').append(this.el);
 		this.render();
+
+		startCounter();
 	},
 
 	render: function() {
@@ -23,5 +27,10 @@ var HomeView = Parse.View.extend ({
 
 	signUpView: function () {
 		window.location = '/#sign-up';
+	},
+
+	remove: function() {
+	    stopCounter();
+	    Parse.View.prototype.remove.call(this);
 	}
 })

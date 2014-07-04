@@ -21,79 +21,216 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <div class="nav-container"></div>
-    <div class="app-container"></div>
+        
+        <!--////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////// STATIC
+        /////////////////////////////////////////////////////////-->
+        <header>
+            <div class="header-account-options">
+                <ul>
+                    <li>Sign Up</li>
+                    <li>Login</li>
+                </ul>
+            </div>
+            <div class="header-breadcrumb">
+                <img src="../images/hunger-crunch-shiled.png">
+                 &gt;&nbsp;&nbsp;TOURNAMENTS
+            </div>
+            <div class="nav-container"></div>
+        </header>
 
 
+        <div class="app-container"></div>
+        
+        
 
-<!-- template for the landing page -->
-<script type="text/template" class="home-view">
-        <h1>Home View</h1>
-        <input class="group-id" placeholder="Group #">
-        <button class="button submit-group-id">Find Group</button>
-        <button class="signup">Sign Up</button>
 
-</script>
-<!-- template for the sign up modal -->
-<script type="text/template" class="sign-up-view">
-        <div class="new-user-login-container">
-            <input class="new-user-email-input" placeholder="Your Email">
+        <!--////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////// TEMPLATES
+        /////////////////////////////////////////////////////////-->
+
+        <!-- template for the landing page -->
+
+        <script type="text/template" class="home-view">
+                <div class="landing-page-copy">
+                    <h3>A WAR IS BEING WAGED AGAINST WORLD HUNGER</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+
+                <div class="hunger-minions-counter-container">
+                    <div class="minion-counter-content">
+                        <img class="cyclops-home-graphic" src="../images/cyclops.gif">
+                        <h3>HUNGER MINIONS STOMPED</h3>
+                        <div id="flip-counter" class="flip-counter"></div>
+                    </div>
+                </div>
+                <div class="sign-up-button-container">
+                    <div class="sign-up-button"></div>
+                </div>
+        </script>
+
+        <!-- template for the sign up view -->
+        <script type="text/template" class="sign-up-view">
+            <input class="new-user-email-input" placeholder="Your Email" type="email">
             <input class="new-user-username-input" placeholder="Name or Organization">
-            <input class="new-user-password-input" placeholder="Password">
-            <input class="new-user-password-verification-input" placeholder="Password Again">
-            <button class="button new-user-creation-button">Sign Up</button>
+            <input class="new-user-password-input" placeholder="Password" type="password">
+            <input class="new-user-password-verification-input" placeholder="Confirm Password" type="password">
+            <button class="button new-user-creation-button" disabled="true">Sign Up</button>
+        </script>
+        <!-- template for the sign in view -->
+        <script type="text/template" class="sign-in-view">
+
+            <div class="error-report"></div>
+            <input class="existing-user-username-input" placeholder="Username">
+            <input class="existing-user-password-input" placeholder="Password" type="password">
+            <button class="button existing-user-login-button" >Sign In</button>
+        </script>
+
+        <!-- template for the single group view -->
+        <script type="text/template" class="group-view">
+            <h1>Group View</h1>
+
+            <div class="players" value="1234">player whatever<div>
+        </script>
+
+        <!-- template for the players listed on the single group view -->
+        <script type="text/template" class"group-player-view">
+            <div>name</div>
+            <div>score</div>
+        </script>
+
+        <!-- template for the single player view -->
+        <script type="text/template" class="player-view">
+            <h1>player View</h1>
+
+            <div class="stats">whatever<div>
+        </script>
+        <!-- template for the dashboard view -->
+        <script type="text/template" class="dashboard-view">
+            <div class="dashboard-header">
+            <div class="dashboard-location">DASHBOARD</div>
+            <div class="dashboard-nav">
+                <ul>
+                    <li>CREATE GROUP</li>
+                    <li>COMPARE GROUPS</li>
+                </ul>
+            </div>
         </div>
-</script>
+        <div class="dashboard-group-content">
+            
+            <div class="test-group">
+                <div class="group-details-container">
+                    <div class="groupname-and-code">
+                        <h3>Group Name</h3>
+                        <p>Group Code</p>
+                    </div>
 
-<!-- template for the sign in view -->
-<script type="text/template" class="sign-in-view">
-    <h1>Sign In View</h1>
+                    <ul class="dashboard-group-details">
+                        <li>6/30/14 - 7/30/14</li>
+                        <li>32 Players</li>
+                    </ul>
+                </div>
+                <div class="dashboard-group-statistics">
+                    <div class="group-minion-count">
+                        <div class="minion-image"></div>
+                        <h3 class="minion-stat">354</h3>
+                    </div>
+                    <div class="group-candy-count">
+                        <div class="candy-image"></div>
+                        <h3 class="candy-stat">29,100</h3>
 
-</script>
+                    </div>
+                    <div class="group-meals-provided">
+                        <div class="meals-image"></div>
+                        <h3 class="meals-stat">16</h3>
 
-<!-- template for the single group view -->
-<script type="text/template" class="group-view">
-    <h1>Group View</h1>
+                    </div>
+                </div>
+            </div>
 
-    <div class="players" value="1234">player whatever<div>
-</script>
+            <div class="test-group">
+                <div class="group-details-container">
+                    <div class="groupname-and-code">
+                        <h3>Group Name</h3>
+                        <p>Group Code</p>
+                    </div>
 
-<!-- template for the players listed on the single group view -->
-<script type="text/template" class"group-player-view">
-    <div>name</div>
-    <div>score</div>
-</script>
+                    <ul class="dashboard-group-details">
+                        <li>6/30/14 - 7/30/14</li>
+                        <li>32 Players</li>
+                    </ul>
+                </div>
+                <div class="dashboard-group-statistics">
+                    <div class="group-minion-count">
+                        <div class="minion-image"></div>
+                        <h3 class="minion-stat">354</h3>
+                    </div>
+                    <div class="group-candy-count">
+                        <div class="candy-image"></div>
+                        <h3 class="candy-stat">29,100</h3>
 
-<!-- template for the single player view -->
-<script type="text/template" class="player-view">
-    <h1>player View</h1>
+                    </div>
+                    <div class="group-meals-provided">
+                        <div class="meals-image"></div>
+                        <h3 class="meals-stat">16</h3>
 
-    <div class="stats">whatever<div>
-</script>
+                    </div>
+                </div>
+            </div>
 
-<!-- template for the dashboard view -->
-<script type="text/template" class="dashboard-view">
-    <h1>dashboard View</h1>
+            <div class="test-group">
+                <div class="group-details-container">
+                    <div class="groupname-and-code">
+                        <h3>Group Name</h3>
+                        <p>Group Code</p>
+                    </div>
 
-    <div class="users-groups">List of groups created<div>
-</script>
+                    <ul class="dashboard-group-details">
+                        <li>6/30/14 - 7/30/14</li>
+                        <li>32 Players</li>
+                    </ul>
+                </div>
+                <div class="dashboard-group-statistics">
+                    <div class="group-minion-count">
+                        <div class="minion-image"></div>
+                        <h3 class="minion-stat">354</h3>
+                    </div>
+                    <div class="group-candy-count">
+                        <div class="candy-image"></div>
+                        <h3 class="candy-stat">29,100</h3>
 
-<!-- template for the nav bar if no user signed in -->
-<script type="text/template" class="no-user-nav-view">
-    <ul>
-        <li>Sign In</li>
-        <li>Sign Up</li>
-    </ul>
-</script>
+                    </div>
+                    <div class="group-meals-provided">
+                        <div class="meals-image"></div>
+                        <h3 class="meals-stat">16</h3>
 
-<!-- template for the nav bar if user is signed in -->
-<script type="text/template" class="user-nav-view">
-    <ul>
-        <li>Dashboard</li>
-        <li>Settings</li>
-    </ul>
-</script>
+                    </div>
+                </div>
+            </div>
 
+        </div>
+        </script>
+
+        <!-- template for the nav bar if no user signed in -->
+        <script type="text/template" class="no-user-nav-view">
+            <ul>
+                <li>Sign In</li>
+                <li>Sign Up</li>
+            </ul>
+        </script>
+
+        <!-- template for the nav bar if user is signed in -->
+        <script type="text/template" class="user-nav-view">
+            <ul>
+                <li>DASHBOARD</li>
+                <li>SETTINGS</li>
+            </ul>
+        </script>
 
 
         <!-- build:js scripts/vendor.js -->
@@ -101,7 +238,6 @@
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/moment/moment.js"></script>
         <script src="../bower_components/underscore/underscore.js"></script>
-        <script src="scripts/jquery.fittext.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -133,7 +269,6 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
-        <!-- <script src="scripts/joshd.js"></script> -->
         <script src="scripts/model.js"></script>
         <script src="scripts/create-role.js"></script>
         <script src="scripts/home-view.js"></script>
@@ -147,7 +282,8 @@
         <script src="scripts/player-view.js"></script>
         <script src="scripts/groups.js"></script>
         <script src="scripts/joshS-router.js"></script>
+        <script src="scripts/counter.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
-</body>
+    </body>
 </html>

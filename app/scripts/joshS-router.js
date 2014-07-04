@@ -18,7 +18,8 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	home: function () {
-		this.swap( new HomeView() );
+		this.swap( new HomeView() )
+		console.log('hi there')
 	},
 
 	signUpView: function () {
