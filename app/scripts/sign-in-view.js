@@ -1,3 +1,5 @@
+"use strict";
+
 var SignInView = Parse.View.extend ({
 
 	template: _.template($('.sign-in-view').text()),
@@ -27,8 +29,8 @@ var SignInView = Parse.View.extend ({
 			},
 			error: function(user, error) {
 				$('.error-report').html("Username or password is incorrect").css({'margin-bottom':'-19px'});
-				console.log('user is',user)
-				console.log('error is',error)
+				console.log('user is',user);
+				console.log('error is',error);
 			}
 		});
 	}

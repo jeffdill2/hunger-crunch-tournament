@@ -1,76 +1,87 @@
+"use strict";
+
 var AppRouter = Parse.Router.extend({
 
 	routes: {
 		''							: 'home',
-		'dashboard' 				: 'dashboardView',
+		'dashboard'					: 'dashboardView',
 		'sign-in'					: 'signInView',
 		'sign-up'					: 'signUpView',
-		'group/:groupID' 			: 'groupView',
-		'group/:groupID/:playerID' 	: 'playerView',
-		
+		'group/:groupID'			: 'groupView',
+		'group/:groupID/createGroup': 'createGroupView',
+		'group/:groupID/settings'	: 'settingsView',
+		'group/:groupID/:playerID'	: 'playerView',
+
+
 	},
 
-	initialize: function () {
+	initialize: function() {
 		this.navOptions = null;
 		this.currentView = null;
 		this.navCheck();
 
 	},
 
-	home: function () {
-		this.swap( new HomeView() )
-		console.log('hi there')
+	home: function() {
+		this.swap( new HomeView() );
+		console.log('hi there');
 	},
 
-	signUpView: function () {
+	signUpView: function() {
 		this.swap( new SignUpView() );
 	},
 
-	signInView: function () {
+	signInView: function() {
 		this.swap( new SignInView() );
 	},
 
 
-	dashboardView: function () {
+	dashboardView: function() {
 		this.swap( new DashboardView() );
 	},
 
-	groupView: function (groupID) {
-		this.swap( new GroupView({"groupID": groupID}) );
+	groupView: function(groupID) {
+		this.swap( new GroupView({ "groupID": groupID }) );
 
 	},
 
-	playerView: function (groupID, playerID) {
-		this.swap( new PlayerView({"playerID": playerID}) );
+	playerView: function(groupID, playerID) {
+		this.swap( new PlayerView({ "playerID": playerID }) );
 	},
 
-	noUserNav: function () {
-		if(this.navOptions) this.navOptions.remove();
-		this.navOptions = new NoUserNavView;
-		this.navOptions.render();
-
+	createGroupView: function(groupID) {
+		this.swap( new CreateGroupView({"groupID": groupID}) );
 	},
 
-	userNav: function () {
-		if(this.navOptions) this.navOptions.remove();
+	settingsView: function(groupID) {
+		this.swap( new SettingsView({"groupID": groupID}) );
+	},
+
+	noUserNav: function() {
+		if (this.navOptions) {this.navOptions.remove()};
+		this.navOptions = new NoUserNavView();
+	},
+
+	userNav: function() {
+		if (this.navOptions) {this.navOptions.remove()};
 		this.navOptions = new UserNavView();
 		this.navOptions.render();
 
 	},
 
-	navCheck: function () {
-		if(Parse.User.current()) {
+	navCheck: function() {
+		if (Parse.User.current()) {
 			this.userNav();
-		}else{
+		} else {
 			this.noUserNav();
 		}
 	},
-	
-	swap: function (view) {
+
+
+	swap: function(view) {
 		this.navCheck();
 
-		if(this.currentView) this.currentView.remove();
+		if (this.currentView) {this.currentView.remove()};
 		this.currentView = view;
-		this.currentView.render();
 	},
-})
+});
