@@ -22,11 +22,74 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 	padding: 0.2em 0;
 }
 
+
+
+
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
 body {
-	background-color: #8E839C;
+	background-color: $colorWhite;
+}
+
+header {
+	height: 110px;
+	padding: 20px 30px 10px; 
+	background: url(../images/map-bg.png); 
+	background-size: 87px auto;
+	background-repeat: repeat;
+	background-position: top left;
+
+	.header-breadcrumb {
+		color: $colorWhite;
+		font-size: 1.5em;
+		& img {
+			height: 50px;
+			width: 50px;
+			margin-right: 10px;
+		}
+	}
+
+	.header-account-options {
+
+		& ul {
+			list-style: none;
+			float: right;
+			
+			& li {
+				display: inline-block;
+				margin-left: 30px;
+				color: $colorWhite;
+			}
+		}
+	}
+
+	.nav-container {
+		float: right;
+		margin-top: 10px;
+
+		& ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+
+			& li {
+				margin-left: 30px;
+				display: inline-block;
+				color: $colorWhite;
+			}
+		}
+	}
+}
+
+.clearfix {
+
+	&:after {
+		content: " ";
+		display: block; 
+		height: 0; 
+		clear: both;
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -89,21 +152,91 @@ body {
 }
 
 ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// HOME PAGE
+////////////////////////////////////////////////////////////
+
+.landing-page-copy {
+	width: 85%;
+	margin: 4em auto 2em;
+	text-align: center;
+
+	& h3 {
+		color: $colorStoneGray;
+	}
+
+	& p {
+		color: $colorLightGray;
+		font-size: 1.2em;
+		line-height: 1.6;
+	}
+}
+
+.hunger-minions-counter-container {
+	width: 100%;
+	height: 250px;
+	background: lighten($colorStoneGray, 20%);
+	padding: 1em;
+
+	& .minion-counter-content {
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
+
+		& .cyclops-home-graphic {
+			height: 90px;
+			width: 100px;
+			margin-right: .5em;
+		}
+
+		& .counter-home-graphic {
+			margin-top: 1em;
+		}
+
+		& h3 {
+			color: $colorStoneGray;
+			display: inline-block;
+			vertical-align: bottom;
+		}
+	}
+}
+
+.sign-up-button-container {
+	width: 33%;
+	margin: 2em auto;
+	text-align: center;
+	overflow: hidden;
+
+	& .sign-up-button {
+		width: 450px;
+		height: 75px;
+		background: url("../images/play-sprite.png");
+		background-size: 700px auto;
+		background-repeat: no-repeat;
+
+		&:active {
+			background-position: 140% 0;
+		}
+	}
+}
+
+
+////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// NEW USER
 ////////////////////////////////////////////////////////////
-.new-user-login-container {
-	background: $colorWhite;
-	border: 0.0625em solid $colorBlack;
-	margin: 5em auto;
-	min-height: 15em;
-	padding: 1em;
+
+.new-user-login-container, .existing-user-login-container {
 	width: 50%;
+	min-height: 15em;
+	margin: 5em auto;
+	border: 0.0625em solid black;
+	background: $colorWhite;
+	padding: 1em;
 
 	& input, & button {
 		display: block;
-		font-size: 1.5em;
 		margin: 1em auto;
 		width: 45%;
+		font-size: 1.5em;
 	}
 
 	& button {
@@ -111,27 +244,16 @@ body {
 	}
 }
 
-.new-user-email-input {
-
-}
-
-.new-user-username-input {
-
-}
-
-.new-user-password-input {
-
-}
-
-.new-user-creation-button {
-
+.error-report {
+	text-align: center;
 }
 
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// TOTAL COUNTER
 ////////////////////////////////////////////////////////////
 .flip-counter {
-	margin: 0 auto;
+	margin: 2em auto;
+	width: 400px;
 
 	& ul.cd {
 		float: left;
@@ -161,4 +283,117 @@ body {
 		height: 103px;
 		width: 14px;
 	}
+}
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////// DASHBOARD VIEW
+////////////////////////////////////////////////////////////
+
+.dashboard-header {
+	width: 100%;
+	min-height: 80px;
+	padding: 20px 20px 20px 0;
+
+	& .dashboard-location {
+		padding: 5px 15px;
+		display: inline-block;
+		font-size: 2.75em;
+		background: $colorGoldenrod;
+	}
+}
+
+.dashboard-nav {
+	@extend .clearfix;
+
+	& ul {
+		list-style: none;
+		float: right;
+		padding: 0;
+		margin: -30px 0 0;
+		vertical-align: bottom;
+
+		& li {
+			margin-right: 20px;
+			padding: 3px 10px;
+			display: inline-block;
+			border: 1px solid black;
+		}
+	}
+}
+
+.dashboard-group-content {
+	width: 100%;
+	padding: 35px 5%;
+	background: $colorLightGray;
+
+	@extend .clearfix;
+}
+
+.test-group {
+	float: left;
+	width: 47.5%;
+	min-height: 200px;
+	margin-right: 5%;
+	margin-bottom: 50px;
+	padding: 10px;
+	border: 1px solid black;
+	background: $colorWhite;
+		
+	&:nth-of-type(2n) {
+		margin-right: 0;
+	}
+}
+
+.group-details-container {
+	height: 80px;
+	width: 100%;
+	padding: 10px;
+	border-bottom: 1px solid $colorStoneGray
+}
+
+.groupname-and-code {
+	display: inline-block;
+
+	& h3 {
+		margin-top: 0;
+		margin-bottom: 2px;
+	}
+	& p {
+		margin: 0;
+	}
+}
+
+.dashboard-group-details {
+	float: right;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	& li {
+
+	}
+}
+
+.dashboard-group-statistics {
+	padding: 10px;
+}
+.group-minion-count, .group-candy-count, .group-meals-provided {
+	width: 33%;
+	float: left;
+	text-align: center;
+	padding: 10px 20px 0;
+}
+.minion-image, .candy-image, .meals-image {
+	height: 80px;
+	width: 80px;
+	margin: 0 auto;
+	background: $colorLightGray;
+}
+
+.candy-image {
+	background: $colorBurntOrange;
+}
+
+.meals-image {
+	background: $colorGoldenrod;
 }

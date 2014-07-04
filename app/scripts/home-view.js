@@ -1,8 +1,10 @@
 var HomeView = Parse.View.extend ({
 
+	className: "home-view-container",
+
 	events: {
 		'click .submit-group-id' : 'submitGroup',
-		'click .signup' : 'signUpView'
+		'click .sign-up-button' : 'signUpView',
 	},
 
 	template: _.template($('.home-view').text()),

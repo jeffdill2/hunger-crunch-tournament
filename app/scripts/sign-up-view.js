@@ -6,8 +6,15 @@ var SignUpView = Parse.View.extend ({
 
 	template: _.template($('.sign-up-view').text()),
 
+	className: "new-user-login-container",
+
+	events: {
+		'click .new-user-creation-button' 				: 'createParseUser',
+		'focus .new-user-password-verification-input'	: 'passwordValidation'
+	},
+
 	initialize: function (options) {
-		$('.nav-container').append(this.el);
+		$('.app-container').append(this.el);
 		this.render();
 	},
 
@@ -16,20 +23,46 @@ var SignUpView = Parse.View.extend ({
 		this.$el.html(renderedTemplate);
 	},
 
-	createNewUser: function () {
+	createParseUser: function () {
+		var name = $('.new-user-username-input').val();
+		var pw = $('.new-user-password-input').val();
+		var emailAddy = $('.new-user-email-input').val();
+
 		var user = new Parse.User();
-		user.set("username", $('.new-user-username-input').val() );
-		user.set("password", $('.new-user-password-input').val());
-		user.set("email", $('.new-user-email-input').val());
+		user.set("username", name);
+		user.set("password", pw);
+		user.set("email", emailAddy);
 
 		user.signUp(null, {
-  			success: function(user) {
-  				window.location = '/#dashboard';
-  			},
-  			error: function(user, error) {
-  			  alert("Something went wrong, email may already be taken");
-  			}
+			success: function () {
+				// remove login window and show new user dashboard/welcome
+				console.log('Welcome,', user.attributes.username);
+				$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
+				router.navigate('dashboard', {trigger:true})
+			},
+			error: function (user, error) {
+				// display error and retry as necessary
+			}
 		});
 	},
+
+	passwordValidation: function () {
+		$('.new-user-password-verification-input').keyup(function () {
+			var pw = $('.new-user-password-input').val();
+			var check = $(".new-user-password-verification-input").val();
+			if(pw === check && check.length > 0) {
+				$('.new-user-creation-button').attr('disabled',false);
+				$(".new-user-password-verification-input").css({'background': 'rgba(255, 255, 255, 1)'});
+			}
+			else if (pw != check && check.length === 0) {
+				$('.new-user-creation-button').attr('disabled',true);
+				$(".new-user-password-verification-input").css({'background': 'rgba(255, 255, 255, 1)'});
+			}
+			else {
+				$('.new-user-creation-button').attr('disabled',true);
+				$(".new-user-password-verification-input").css({'background': 'rgba(255, 0, 0, .7)'});
+			}
+		});
+	}
 
 });
