@@ -1,23 +1,42 @@
 function createRole() {
-var roleACL = new Parse.ACL();
-roleACL.setWriteAccess("GroupAdmin",true); 
-roleACL.setPublicReadAccess(true);
-var role = new Parse.Role("GroupAdmin", roleACL);
-role.getUsers().add(Parse.User.current());
+// var roleACL = new Parse.ACL();
+// roleACL.setWriteAccess(Parse.User.current(), true);
+// roleACL.setPublicReadAccess(true);
+// var role = new Parse.Role("GroupAdmin", roleACL);
 
+// var roleACL = new Parse.ACL();
+// roleACL.setRoleWriteAccess(role,true);
+// roleACL.setPublicReadAccess(true);
 
-role.save(null, {
-    success: function(saveObject) {
+    var currentUser = Parse.User.current();
+
+    var query = new Parse.Query(Parse.Role);
+    query.equalTo('name', 'GroupAdmin');
+    query.first().then(function(role){
+      role.getUsers().add(currentUser);
+      return role.save();
+    }).then(function(role){
         // The object was saved successfully.
         alert('role creation done');
         getUser(); 
-     },
-     error: function(saveObject, error) {
+    }, function(error){
         // The save failed.
-        window.alert("Failed creating role with error: " + error.code + ":"+ error.message);
+        window.alert("ln19: Failed creating role with error: " + error.code + ":"+ error.message);
         //assignRoles();
-     }
-});
+    });
+
+// role.save(null, {
+//     success: function(saveObject) {
+//         // The object was saved successfully.
+//         alert('role creation done');
+//         getUser(); 
+//      },
+//      error: function(saveObject, error) {
+//         // The save failed.
+//         window.alert("ln19: Failed creating role with error: " + error.code + ":"+ error.message);
+//         //assignRoles();
+//      }
+// });
 }
 
 function getUser() {
@@ -29,7 +48,7 @@ query.get( Parse.User.current.id,{
         getRole(returnObj);
     },
     error: function(returnObj, error) {
-        window.alert("Failed with error: " + error.code + ":"+ error.message);
+        window.alert("ln34: Failed with error: " + error.code + ":"+ error.message);
     } 
 });
 }
@@ -46,7 +65,7 @@ query.get(null, {
         updateRole(returnObj);
     },
     error: function(returnObj, error) {
-        window.alert("Failed with error: " + error.code + ":"+ error.message);
+        window.alert("ln51: Failed with error: " + error.code + ":"+ error.message);
     }
 });         
 }
@@ -60,7 +79,7 @@ role.save(null, {
     },
     error: function(saveObject, error) {
         // The save failed.
-        window.alert("Failed with error: " + error.code + ":"+ error.message);
+        window.alert("ln65: Failed with error: " + error.code + ":"+ error.message);
     }
 });
 }
