@@ -74,6 +74,10 @@ var CreateGroupView = Parse.View.extend({
 		var objGroup = new GroupModel();
 		var groupName = $('.new-group-name-input').val();
 		var orgName = $('.new-group-organization-input').val();
+		var groupACL = new Parse.ACL(Parse.User.current());
+		groupACL.setPublicReadAccess(true);
+		groupACL.setPublicWriteAccess(false);
+		objGroup.setACL(groupACL);
 
 		objGroup.save({
 			groupID: strGroupID,
@@ -86,10 +90,11 @@ var CreateGroupView = Parse.View.extend({
 				iso: moment().add('days', 14).toISOString()
 			},
 			groupName: groupName,
-			orgName: orgName
+			orgName: orgName,
 		}, {
 			success: function() {
 				console.log('New group successfully added.');
+
 				window.location = '/#dashboard';
 			},
 			error: function(error) {

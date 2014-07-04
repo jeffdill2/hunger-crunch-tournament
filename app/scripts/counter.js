@@ -40,7 +40,6 @@ function stopCounter() {
 
 function updateCounter() {
 	var counterCollection = new CounterCollection();
-
 	populateCollection(counterCollection).done(function() {
 		var numCounterTotal = counterCollection.models[0].attributes.total;
 

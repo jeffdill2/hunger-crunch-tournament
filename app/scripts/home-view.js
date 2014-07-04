@@ -33,4 +33,4 @@ var HomeView = Parse.View.extend ({
 	    stopCounter();
 	    Parse.View.prototype.remove.call(this);
 	}
-})
+});

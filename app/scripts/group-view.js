@@ -1,16 +1,16 @@
-var SignInView = Parse.View.extend ({
+var GroupView = Parse.View.extend({
 
-	template: _.template($('.sign-in-view').text()),
-
-	className: "existing-user-login-container",
+	template: _.template($('.group-view').text()),
 
 	events: {
-		'click .existing-user-login-button'	: 'userSignIn'
+		'click .players' : 'showPlayer',
 	},
 
 	initialize: function (options) {
 		$('.app-container').append(this.el);
 		this.render();
+		this.group = options.groupID;
+		console.log(this.group);
 	},
 
 	render: function () {
@@ -18,20 +18,9 @@ var SignInView = Parse.View.extend ({
 		this.$el.html(renderedTemplate);
 	},
 
-	userSignIn: function () {
-		var name = $('.existing-user-username-input').val();
-		var pw = $('.existing-user-password-input').val();
-		Parse.User.logIn(name, pw, {
-			success: function(user) {
-				router.navigate('dashboard', {trigger:true});
-			},
-			error: function(user, error) {
-				$('.error-report').html("Username or password is incorrect").css({'margin-bottom':'-19px'});
-				console.log('user is',user);
-				console.log('error is',error);
-			}
-		});
+	showPlayer: function () {
+		var playerID = $(".players").attr("value");
+		window.location = '/#group/' + this.group + '/' + playerID; 
 	}
-
-});
+})
 
