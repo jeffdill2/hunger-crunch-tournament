@@ -78,14 +78,6 @@ var AppRouter = Parse.Router.extend({
 		}
 	},
 
-	compareGroupsView: function () {
-		this.swap( new CompareGroupsView());
-	},
-
-	createGroupView: function () {
-	
-	},
-
 	groupViewCodeView: function (groupID) {
 		this.swap( new GroupCodeView({group: groupID}));
 	},
