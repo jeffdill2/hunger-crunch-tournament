@@ -78,10 +78,6 @@ var AppRouter = Parse.Router.extend({
 		}
 	},
 
-	settingsView: function () {
-
-	},
-
 	compareGroupsView: function () {
 		this.swap( new CompareGroupsView());
 	},
