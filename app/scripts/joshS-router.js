@@ -6,14 +6,13 @@ var AppRouter = Parse.Router.extend({
 		''								: 'home',
 		'sign-in'						: 'signInView',
 		'sign-up'						: 'signUpView',
-		'group/:groupID'				: 'groupView',
-		'group/:groupID/:playerID'		: 'playerView',
-		'dashboard'						: 'dashboardView',
+		'group/:groupID' 				: 'groupView',
+		'group/:groupID/:playerID' 		: 'playerView',
+		'dashboard' 					: 'dashboardView',
 		'dashboard/settings'			: 'settingsView',
 		'dashboard/createGroup'			: 'createGroupView',
+		'dashboard/:groupID/:groupCode'	: 'groupViewCodeView',
 		'dashboard/compareGroups'		: 'compareGroupsView',
-
-
 	},
 
 	initialize: function() {
@@ -41,9 +40,8 @@ var AppRouter = Parse.Router.extend({
 		this.swap( new DashboardView() );
 	},
 
-	groupView: function(groupID) {
-		this.swap( new GroupView({ "groupID": groupID }) );
-
+	groupView: function (groupID) {
+		this.swap( new GroupView({"groupID": groupID}) );
 	},
 
 	playerView: function(groupID, playerID) {
@@ -70,7 +68,6 @@ var AppRouter = Parse.Router.extend({
 		if (this.navOptions) {this.navOptions.remove()};
 		this.navOptions = new UserNavView();
 		this.navOptions.render();
-
 	},
 
 	navCheck: function() {
@@ -81,8 +78,11 @@ var AppRouter = Parse.Router.extend({
 		}
 	},
 
-
-	swap: function(view) {
+	groupViewCodeView: function (groupID, groupCode) {
+		this.swap( new GroupCodeView({'group': groupID, 'code': groupCode}));
+	},
+	
+	swap: function (view) {
 		this.navCheck();
 
 		if (this.currentView) {this.currentView.remove()};
