@@ -9,6 +9,7 @@ var AppRouter = Parse.Router.extend({
 		'dashboard' 				: 'dashboardView',
 		'dashboard/settings'		: 'settingsView',
 		'dashboard/createGroup'		: 'createGroupView',
+		'dashboard/:groupID/code'	: 'groupViewCodeView',
 		'dashboard/compareGroups'	: 'compareGroupsView',
 		
 	},
@@ -73,11 +74,15 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	compareGroupsView: function () {
-		this.swap( new CompareGroupsView())
+		this.swap( new CompareGroupsView());
 	},
 
 	createGroupView: function () {
+	
+	},
 
+	groupViewCodeView: function (groupID) {
+		this.swap( new GroupCodeView({group: groupID}));
 	},
 	
 	swap: function (view) {

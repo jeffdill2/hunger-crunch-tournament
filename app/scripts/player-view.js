@@ -15,7 +15,7 @@ var PlayerView = Parse.View.extend({
 		this.tableSort();
 	},
 
-	// sort function
+	// sort function using list.js
 	tableSort: function () {
 		var options = {
 			valueNames: ['level-play-data', 'level-minions-data', 'level-coins-data']

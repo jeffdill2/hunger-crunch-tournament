@@ -455,34 +455,43 @@
             </ul>
         </script>
 
-        <!-- template for adding a group to the compare groups view -->
-        <script type="text/template" class="compare-groups-add-group-template">
-            
-            <div id="avaialble-group-names">
 
-                <input class="search" placeholder="Search" />
-                <button class="sort" data-sort="compare-group-name-search">SORT BY NAME</button>
-                <ul class="list">
-                  <li>
-                    <h3 class="compare-group-name-search">SENIORS</h3>
-                    <p class="valid">Live</p>
-                  </li>
-                  <li>
-                    <h3 class="compare-group-name-search">JUNIORS</h3>
-                    <p class="valid">Not-Live</p>
-                  </li>
-                  <li>
-                    <h3 class="compare-group-name-search">SOPHOMORES</h3>
-                    <p class="valid">Not-Live</p>
-                  </li>
-                  <li>
-                    <h3 class="compare-group-name-search">FRESHMEN</h3>
-                    <p class="valid">Live</p>
-                  </li>
-                </ul>
+        <!-- template for a new group's code generation page -->
+        <script type="text/template" class="group-view-code-template">
+            <div class="group-created-header-container">
+                <div class="group-created-header-content">
+                    <h1>GROUP CREATED FOR "WEST HILLS"</h1>
+                </div>
             </div>
-        </script>
+            <div class="group-created-main-container">
+                <div class="player-instructions">
+                    <h4>PLAYER INSTRUCTIONS</h4>
+                    <p>Give the following code to the players in your group:</p>
+                    <div class="group-code-box">
+                        <input type="text" value="3h9sy" class="group-code" readonly="readonly">
+                    </div>
+                </div>
+                <div class="instruction-images">
+                    <div class="instruction-image-one">
+                        <span>1</span>
+                        <img src="../images/game-screen.png">
+                    </div>
+                    <div class="instruction-image-two">
+                        <span>2</span>
+                        <div class="placeholder-image"></div>
+                    </div>
+                </div>
+                <div class="observer-instructions">
+                    <h4>SHARE LINK FOR OBSERVERS</h4>
+                    <p>Give the following link to people that would like to observe the group:</p>
+                    <div class="group-link-box">
+                        <input type="text" value="http://www.hungercrunch.com/tournaments/hahafawneoifaew" class="group-link"readonly="readonly">
+                    </div>
+                </div>
+                <button class="view-group-page">VIEW THE GROUP PAGE</button>
+            </div>
 
+        </script>
 
         <!-- template for the compare groups view -->
         <script type="text/template" class="compare-groups-view-template">
@@ -538,6 +547,35 @@
             </div>
         </script>
 
+        <!-- template for adding a group to the compare groups view -->
+        <script type="text/template" class="compare-groups-add-group-template">
+            
+            <div id="avaialble-group-names">
+
+                <input class="search" placeholder="Search" />
+                <button class="sort" data-sort="compare-group-name-search">SORT BY NAME</button>
+                <ul class="list">
+                  <li>
+                    <h3 class="compare-group-name-search">SENIORS</h3>
+                    <p class="valid">Live</p>
+                  </li>
+                  <li>
+                    <h3 class="compare-group-name-search">JUNIORS</h3>
+                    <p class="valid">Not-Live</p>
+                  </li>
+                  <li>
+                    <h3 class="compare-group-name-search">SOPHOMORES</h3>
+                    <p class="valid">Not-Live</p>
+                  </li>
+                  <li>
+                    <h3 class="compare-group-name-search">FRESHMEN</h3>
+                    <p class="valid">Live</p>
+                  </li>
+                </ul>
+            </div>
+        </script>
+
+
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -583,6 +621,7 @@
         <script src="scripts/sign-up-view.js"></script>
         <script src="scripts/sign-in-view.js"></script>
         <script src="scripts/dashboard-view.js"></script>
+        <script src="scripts/new-group-code-view.js"></script>
         <script src="scripts/new-user-view.js"></script>
         <script src="scripts/group-view.js"></script>
         <script src="scripts/player-view.js"></script>
