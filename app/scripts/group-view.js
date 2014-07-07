@@ -9,11 +9,29 @@ var GroupView = Parse.View.extend({
 	initialize: function (options) {
 		this.group = options;
 		$('.app-container').append(this.el);
-		this.render();
+
+		var Group = Parse.Object.extend("Groups");
+		var query = new Parse.Query(Group);
+		var spacedGroupName = this.group.groupID.replace(/%20/g, ' ');
+		query.equalTo("groupName", spacedGroupName);
+
+		var that = this;
+		query.find({
+			success: function (results) {
+				that.groupInfo = results[0].attributes;
+				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
+				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
+				that.render();
+			},	
+			error: function (error) {
+				console.log(error)
+			}
+		});
 	},
 
 	render: function () {
-		var renderedTemplate = this.template(this.group);
+				console.log(this.groupInfo)
+		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 		// using list.js to sort the table of data
 		this.tableSort();

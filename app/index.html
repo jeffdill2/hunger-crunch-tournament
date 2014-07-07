@@ -100,12 +100,15 @@
         <script type="text/template" class="group-view-template">
             <div class="group-view-header-content">
                 <div class="group-view-location-banner">
-                <%= groupID ? groupID : GROUPNAME%> 
+                <%=groupName ? groupName:GROUPNAME%>
+ 
                 </div>
 
                     <ul class="group-view-details">
-                        <li>GROUP CODE: 1a2b3</li>
-                        <li>6/30/14-7/30/14</li>
+                        <li>GROUP CODE: <%=groupID%></li>
+                        <li>
+                        <%=startDate%> - <%=endDate%>
+                        </li>
                         <li>32 Members</li>
                     </ul>
 
@@ -501,7 +504,7 @@
                     <h4>PLAYER INSTRUCTIONS</h4>
                     <p>Give the following code to the players in your group:</p>
                     <div class="group-code-box">
-                        <input type="text" value="3h9sy" class="group-code" readonly="readonly">
+                        <input type="text" value="<%=code%>" class="group-code" readonly="readonly">
                     </div>
                 </div>
                 <div class="instruction-images">
@@ -518,7 +521,7 @@
                     <h4>SHARE LINK FOR OBSERVERS</h4>
                     <p>Give the following link to people that would like to observe the group:</p>
                     <div class="group-link-box">
-                        <input type="text" value="http://www.hungercrunch.com/tournaments/hahafawneoifaew" class="group-link"readonly="readonly">
+                        <input type="text" value="http://www.hungercrunch.com/tournaments/<%=group%>" class="group-link"readonly="readonly">
                     </div>
                 </div>
                 <button class="view-group-page">VIEW THE GROUP PAGE</button>

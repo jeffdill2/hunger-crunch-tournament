@@ -7,8 +7,7 @@ var GroupCodeView = Parse.View.extend({
 	},
 
 	initialize: function (groupID) {
-		this.group = groupID.group;
-		// console.log(this.group)
+		this.user = groupID;
 		$('.app-container').html(this.el);
 		this.render();
 
@@ -22,12 +21,12 @@ var GroupCodeView = Parse.View.extend({
 	},
 
 	render: function () {
-		var renderedTemplate = this.template();
+		var renderedTemplate = this.template(this.user);
 		this.$el.html(renderedTemplate);
 	},
 
 	goToGroupView: function () {
-		router.navigate('group/'+this.group, {trigger: true});
+		router.navigate('group/'+this.user.group, {trigger: true});
 	}
 
 });

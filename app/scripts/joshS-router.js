@@ -3,16 +3,16 @@
 var AppRouter = Parse.Router.extend({
 
 	routes: {
-		''							: 'home',
-		'sign-in'					: 'signInView',
-		'sign-up'					: 'signUpView',
-		'group/:groupID' 			: 'groupView',
-		'group/:groupID/:playerID' 	: 'playerView',
-		'dashboard' 				: 'dashboardView',
-		'dashboard/settings'		: 'settingsView',
-		'dashboard/createGroup'		: 'createGroupView',
-		'dashboard/:groupID/code'	: 'groupViewCodeView',
-		'dashboard/compareGroups'	: 'compareGroupsView',
+		''								: 'home',
+		'sign-in'						: 'signInView',
+		'sign-up'						: 'signUpView',
+		'group/:groupID' 				: 'groupView',
+		'group/:groupID/:playerID' 		: 'playerView',
+		'dashboard' 					: 'dashboardView',
+		'dashboard/settings'			: 'settingsView',
+		'dashboard/createGroup'			: 'createGroupView',
+		'dashboard/:groupID/:groupCode'	: 'groupViewCodeView',
+		'dashboard/compareGroups'		: 'compareGroupsView',
 	},
 
 	initialize: function() {
@@ -78,8 +78,8 @@ var AppRouter = Parse.Router.extend({
 		}
 	},
 
-	groupViewCodeView: function (groupID) {
-		this.swap( new GroupCodeView({group: groupID}));
+	groupViewCodeView: function (groupID, groupCode) {
+		this.swap( new GroupCodeView({'group': groupID, 'code': groupCode}));
 	},
 	
 	swap: function (view) {
