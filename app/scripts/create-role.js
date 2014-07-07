@@ -1,34 +1,54 @@
 function createRole() {
-var roleACL = new Parse.ACL();
-roleACL.setWriteAccess("Administrator",true); 
-roleACL.setPublicReadAccess(true);
-var role = new Parse.Role("Administrator", roleACL);
-role.getUsers().add(Parse.User.current());
+// var roleACL = new Parse.ACL();
+// roleACL.setWriteAccess(Parse.User.current(), true);
+// roleACL.setPublicReadAccess(true);
+// var role = new Parse.Role("GroupAdmin", roleACL);
 
-role.save(null, {
-    success: function(saveObject) {
+// var roleACL = new Parse.ACL();
+// roleACL.setRoleWriteAccess(role,true);
+// roleACL.setPublicReadAccess(true);
+
+    var currentUser = Parse.User.current();
+
+    var query = new Parse.Query(Parse.Role);
+    query.equalTo('name', 'GroupAdmin');
+    query.first().then(function(role){
+      role.getUsers().add(currentUser);
+      return role.save();
+    }).then(function(role){
         // The object was saved successfully.
         alert('role creation done');
         getUser(); 
-     },
-     error: function(saveObject, error) {
+    }, function(error){
         // The save failed.
-        window.alert("Failed creating role with error: " + error.code + ":"+ error.message);
+        window.alert("ln19: Failed creating role with error: " + error.code + ":"+ error.message);
         //assignRoles();
-     }
-});
+    });
+
+// role.save(null, {
+//     success: function(saveObject) {
+//         // The object was saved successfully.
+//         alert('role creation done');
+//         getUser(); 
+//      },
+//      error: function(saveObject, error) {
+//         // The save failed.
+//         window.alert("ln19: Failed creating role with error: " + error.code + ":"+ error.message);
+//         //assignRoles();
+//      }
+// });
 }
 
 function getUser() {
 
 var query = new Parse.Query(Parse.User);
-query.get("maMVD1fwLs",{
+query.get( Parse.User.current.id,{
     success: function(returnObj) {
         alert(returnObj.get("username"));
         getRole(returnObj);
     },
     error: function(returnObj, error) {
-        window.alert("Failed with error: " + error.code + ":"+ error.message);
+        window.alert("ln34: Failed with error: " + error.code + ":"+ error.message);
     } 
 });
 }
@@ -36,7 +56,7 @@ query.get("maMVD1fwLs",{
 function getRole (user) {
 
 var query = new Parse.Query(Parse.Role);
-query.equalTo("name", "Administrator");
+query.equalTo("name", "GroupAdmin");
 
 query.get(null, {
     success: function(returnObj) {
@@ -45,7 +65,7 @@ query.get(null, {
         updateRole(returnObj);
     },
     error: function(returnObj, error) {
-        window.alert("Failed with error: " + error.code + ":"+ error.message);
+        window.alert("ln51: Failed with error: " + error.code + ":"+ error.message);
     }
 });         
 }
@@ -59,7 +79,7 @@ role.save(null, {
     },
     error: function(saveObject, error) {
         // The save failed.
-        window.alert("Failed with error: " + error.code + ":"+ error.message);
+        window.alert("ln65: Failed with error: " + error.code + ":"+ error.message);
     }
 });
 }

@@ -1,8 +1,10 @@
-var AddUserView = Parse.View.extend ({
+"use strict";
 
-	template: _.template($('.add-user-view').text()),
+var CompareGroupsView = Parse.View.extend({
 
-	initialize: function () {
+	template: _.template($('.compare-groups-view').text()),
+
+	initialize: function(options) {
 		$('.app-container').append(this.el);
 		this.render();
 	},
@@ -11,4 +13,4 @@ var AddUserView = Parse.View.extend ({
 		var renderedTemplate = this.template;
 		this.$el.html(renderedTemplate);
 	}
-})
+});
