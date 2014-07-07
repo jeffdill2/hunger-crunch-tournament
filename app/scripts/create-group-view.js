@@ -72,11 +72,15 @@ var CreateGroupView = Parse.View.extend({
 		}
 
 		var objGroup = new GroupModel();
+		
 		var groupName = $('.new-group-name-input').val();
 		var orgName = $('.new-group-organization-input').val();
+
 		var groupACL = new Parse.ACL(Parse.User.current());
 		groupACL.setPublicReadAccess(true);
 		groupACL.setPublicWriteAccess(false);
+		groupACL.setRoleReadAccess('siteAdmin', true);
+		groupACL.setRoleWriteAccess('siteAdmin', true);
 		objGroup.setACL(groupACL);
 
 		objGroup.save({

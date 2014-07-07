@@ -26,7 +26,12 @@ var HomeView = Parse.View.extend ({
 	},
 
 	signUpView: function () {
-		window.location = '/#sign-up';
+		if(Parse.User.current()){
+			window.location = '/#dashboard';
+			
+		}else{
+			window.location = '/#sign-up';
+		}
 	},
 
 	remove: function() {

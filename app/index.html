@@ -110,8 +110,8 @@
             <div class="dashboard-location">DASHBOARD</div>
             <div class="dashboard-nav">
                 <ul>
-                    <li>CREATE GROUP</li>
-                    <li>COMPARE GROUPS</li>
+                    <li class="create-group-button">CREATE GROUP</li>
+                    <li class="compare-groups-button">COMPARE GROUPS</li>
                 </ul>
             </div>
         </div>
@@ -209,12 +209,18 @@
 
         </div>
         </script>
-
         <!-- template for the settings view -->
         <script type="text/template" class="settings-view">
             <h1>Settings View</h1>
-
+            <div class="user-username">Username: <%= username %></div>
+            <div class="user-email">Email: <%= email %></div>
+            <div class="update-email">
+                <button class="edit-email">Edit Email</button>
+            </div>
+            
+            <button class="change-password">Change Password</button>
         </script>
+                
 
           <!-- template for creating groups -->
         <script type="text/template" class="create-group-view">
@@ -236,16 +242,17 @@
         <!-- template for the nav bar if no user signed in -->
         <script type="text/template" class="no-user-nav-view">
             <ul>
-                <li>Sign In</li>
-                <li>Sign Up</li>
+                <li class="sign-in-button">Sign In</li>
+                <li class="sign-up-button">Sign Up</li>
             </ul>
         </script>
 
         <!-- template for the nav bar if user is signed in -->
         <script type="text/template" class="user-nav-view">
             <ul>
-                <li>DASHBOARD</li>
-                <li>SETTINGS</li>
+                <li class="dashboard-button">DASHBOARD</li>
+                <li class="settings-button">SETTINGS</li>
+                <li class="sign-out-button">SIGN OUT</li>
             </ul>
         </script>
 
