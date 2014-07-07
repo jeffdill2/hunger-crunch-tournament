@@ -1,3 +1,5 @@
+"use strict";
+
 var AppRouter = Parse.Router.extend({
 
 	routes: {
@@ -11,31 +13,30 @@ var AppRouter = Parse.Router.extend({
 		'dashboard/createGroup'		: 'createGroupView',
 		'dashboard/:groupID/code'	: 'groupViewCodeView',
 		'dashboard/compareGroups'	: 'compareGroupsView',
-		
 	},
 
-	initialize: function () {
+	initialize: function() {
 		this.navOptions = null;
 		this.currentView = null;
 		this.navCheck();
 
 	},
 
-	home: function () {
-		this.swap( new HomeView() )
-		console.log('hi there')
+	home: function() {
+		this.swap( new HomeView() );
+		console.log('hi there');
 	},
 
-	signUpView: function () {
+	signUpView: function() {
 		this.swap( new SignUpView() );
 	},
 
-	signInView: function () {
+	signInView: function() {
 		this.swap( new SignInView() );
 	},
 
 
-	dashboardView: function () {
+	dashboardView: function() {
 		this.swap( new DashboardView() );
 	},
 
@@ -43,28 +44,36 @@ var AppRouter = Parse.Router.extend({
 		this.swap( new GroupView({"groupID": groupID}) );
 	},
 
-	playerView: function (groupID, playerID) {
-		this.swap( new PlayerView({"playerID": playerID}) );
+	playerView: function(groupID, playerID) {
+		this.swap( new PlayerView({ "playerID": playerID }) );
 	},
 
-	noUserNav: function () {
-		if(this.navOptions) this.navOptions.remove();
-		this.navOptions = new NoUserNavView;
-		this.navOptions.render();
-
+	createGroupView: function() {
+		this.swap( new CreateGroupView() );
+	},
+	compareGroupsView: function() {
+		this.swap( new CompareGroupsView() );
 	},
 
-	userNav: function () {
-		if(this.navOptions) this.navOptions.remove();
+	settingsView: function() {
+		this.swap( new SettingsView() );
+	},
+
+	noUserNav: function() {
+		if (this.navOptions) {this.navOptions.remove()};
+		this.navOptions = new NoUserNavView();
+	},
+
+	userNav: function() {
+		if (this.navOptions) {this.navOptions.remove()};
 		this.navOptions = new UserNavView();
 		this.navOptions.render();
-
 	},
 
-	navCheck: function () {
-		if(Parse.User.current()) {
+	navCheck: function() {
+		if (Parse.User.current()) {
 			this.userNav();
-		}else{
+		} else {
 			this.noUserNav();
 		}
 	},
@@ -88,7 +97,7 @@ var AppRouter = Parse.Router.extend({
 	swap: function (view) {
 		this.navCheck();
 
-		if(this.currentView) this.currentView.remove();
+		if (this.currentView) {this.currentView.remove()};
 		this.currentView = view;
 	},
-})
+});

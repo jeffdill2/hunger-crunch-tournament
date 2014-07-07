@@ -89,6 +89,13 @@
             <input class="existing-user-username-input" placeholder="Username">
             <input class="existing-user-password-input" placeholder="Password" type="password">
             <button class="button existing-user-login-button" >Sign In</button>
+            <button class="forgot-password-button">Forgot Password?</button>
+        </script>
+
+        <!-- reset password login screen view -->
+         <script type="text/template" class="reset-password-view">
+            <input class="lookup-email-input" placeholder="Account Email">
+            <button class="button reset-password-button" >Reset Email</button>
         </script>
 
         
@@ -336,13 +343,12 @@
         <!-- template for the dashboard view -->
         <script type="text/template" class="dashboard-view">
             <div class="dashboard-header">
-                <div class="dashboard-location">DASHBOARD</div>
-                <div class="dashboard-nav">
-                    <ul>
-                        <li>CREATE GROUP</li>
-                        <li>COMPARE GROUPS</li>
-                    </ul>
-                </div>
+            <div class="dashboard-location">DASHBOARD</div>
+            <div class="dashboard-nav">
+                <ul>
+                    <li class="create-group-button">CREATE GROUP</li>
+                    <li class="compare-groups-button">COMPARE GROUPS</li>
+                </ul>
             </div>
         <div class="dashboard-group-content">
             
@@ -438,20 +444,50 @@
 
         </div>
         </script>
+        <!-- template for the settings view -->
+        <script type="text/template" class="settings-view">
+            <h1>Settings View</h1>
+            <div class="user-username">Username: <%= username %></div>
+            <div class="user-email">Email: <%= email %></div>
+            <div class="update-email">
+                <button class="edit-email">Edit Email</button>
+            </div>
+            
+            <button class="reset-password">Reset Password</button>
+        </script>
+                
+
+          <!-- template for creating groups -->
+        <script type="text/template" class="create-group-view">
+            <h1>Create Group View</h1>
+
+            <input class="new-group-name-input" placeholder="Group Name">
+            <input class="new-group-organization-input" placeholder="Organization">
+            <input class="new-group-start-date-input" placeholder="Start Date">
+            <input class="new-group-end-date-input" placeholder="End Date">
+            <button class="button new-group-creation-button">Create Group</button>
+        </script>
+
+        <!-- template for the compare groups view -->
+        <script type="text/template" class="compare-groups-view">
+            <h1>Compare Groups View</h1>
+
+        </script>
 
         <!-- template for the nav bar if no user signed in -->
         <script type="text/template" class="no-user-nav-view">
             <ul>
-                <li>Sign In</li>
-                <li>Sign Up</li>
+                <li class="sign-in-button">Sign In</li>
+                <li class="sign-up-button">Sign Up</li>
             </ul>
         </script>
 
         <!-- template for the nav bar if user is signed in -->
         <script type="text/template" class="user-nav-view">
             <ul>
-                <li>DASHBOARD</li>
-                <li>SETTINGS</li>
+                <li class="dashboard-button">DASHBOARD</li>
+                <li class="settings-button">SETTINGS</li>
+                <li class="sign-out-button">SIGN OUT</li>
             </ul>
         </script>
 
@@ -613,22 +649,22 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/model.js"></script>
         <script src="scripts/create-role.js"></script>
+        <script src="scripts/counter.js"></script>
+        <script src="scripts/groups.js"></script>
+        <script src="scripts/model.js"></script>
         <script src="scripts/home-view.js"></script>
-        <script src="scripts/no-user-nav-view.js"></script>
         <script src="scripts/user-nav-view.js"></script>
         <script src="scripts/sign-up-view.js"></script>
         <script src="scripts/sign-in-view.js"></script>
         <script src="scripts/dashboard-view.js"></script>
         <script src="scripts/new-group-code-view.js"></script>
-        <script src="scripts/new-user-view.js"></script>
+        <script src="scripts/settings-view.js"></script>
+        <script src="scripts/create-group-view.js"></script>
+        <script src="scripts/compare-groups-view.js"></script>
         <script src="scripts/group-view.js"></script>
         <script src="scripts/player-view.js"></script>
-        <script src="scripts/compare-groups-view.js"></script>
-        <script src="scripts/groups.js"></script>
         <script src="scripts/joshS-router.js"></script>
-        <script src="scripts/counter.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
     </body>
