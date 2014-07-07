@@ -50,17 +50,8 @@ header {
 	}
 
 	.header-account-options {
-
-		& ul {
-			list-style: none;
-			float: right;
-			
-			& li {
-				display: inline-block;
-				margin-left: 30px;
-				color: $colorWhite;
-			}
-		}
+		float: right;
+		color: $colorWhite;
 	}
 
 	.nav-container {
@@ -76,6 +67,7 @@ header {
 				margin-left: 30px;
 				display: inline-block;
 				color: $colorWhite;
+				cursor: pointer;
 			}
 		}
 	}
@@ -200,20 +192,20 @@ header {
 }
 
 .sign-up-button-container {
-	width: 33%;
+	width: 29.5%;
 	margin: 2em auto;
 	text-align: center;
 	overflow: hidden;
 
 	& .sign-up-button {
-		width: 450px;
+		width: 350px;
 		height: 75px;
 		background: url("../images/play-sprite.png");
 		background-size: 700px auto;
 		background-repeat: no-repeat;
 
 		&:active {
-			background-position: 140% 0;
+			background-position: 100% 0;
 		}
 	}
 }
@@ -316,6 +308,7 @@ header {
 			padding: 3px 10px;
 			display: inline-block;
 			border: 1px solid black;
+			cursor: pointer;
 		}
 	}
 }

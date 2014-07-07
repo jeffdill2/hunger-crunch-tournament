@@ -27,10 +27,7 @@
         /////////////////////////////////////////////////////////-->
         <header>
             <div class="header-account-options">
-                <ul>
-                    <li>Sign Up</li>
-                    <li>Login</li>
-                </ul>
+                
             </div>
             <div class="header-breadcrumb">
                 <img src="../images/hunger-crunch-shiled.png">
@@ -343,12 +340,13 @@
         <!-- template for the dashboard view -->
         <script type="text/template" class="dashboard-view">
             <div class="dashboard-header">
-            <div class="dashboard-location">DASHBOARD</div>
-            <div class="dashboard-nav">
-                <ul>
-                    <li class="create-group-button">CREATE GROUP</li>
-                    <li class="compare-groups-button">COMPARE GROUPS</li>
-                </ul>
+                <div class="dashboard-location">DASHBOARD</div>
+                <div class="dashboard-nav">
+                    <ul>
+                        <li class="create-group-button">CREATE GROUP</li>
+                        <li class="compare-groups-button">COMPARE GROUPS</li>
+                    </ul>
+                </div>
             </div>
         <div class="dashboard-group-content">
             
@@ -468,18 +466,17 @@
             <button class="button new-group-creation-button">Create Group</button>
         </script>
 
-        <!-- template for the compare groups view -->
-        <script type="text/template" class="compare-groups-view">
-            <h1>Compare Groups View</h1>
-
-        </script>
-
         <!-- template for the nav bar if no user signed in -->
         <script type="text/template" class="no-user-nav-view">
             <ul>
                 <li class="sign-in-button">Sign In</li>
                 <li class="sign-up-button">Sign Up</li>
             </ul>
+        </script>
+        <!-- template for the nav options if user signed in -->
+        <script type="text/template" class="user-nav-welcome-template">
+            <p>Welcome back, <%=username%></p>
+            
         </script>
 
         <!-- template for the nav bar if user is signed in -->

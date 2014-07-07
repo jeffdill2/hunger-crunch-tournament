@@ -9,29 +9,34 @@ var UserNavView = Parse.View.extend({
 	},
 
 	template: _.template($('.user-nav-view').text()),
+	welcomeTemplate: _.template($('.user-nav-welcome-template').text()),
+
 
 	initialize: function() {
 		$('.nav-container').append(this.el);
-		this.render();
+		this.user = Parse.User.current();
 
+		this.render();
 	},
 
 	render: function() {
-		var renderedTemplate = this.template;
+		var renderedTemplate = this.template();
 		this.$el.html(renderedTemplate);
+		var navRenderedTemplate = this.welcomeTemplate(this.user.attributes);
+		$('.header-account-options').html(navRenderedTemplate);
 	},
 
 	dashboardNav: function () {
-		window.location = '/#dashboard';
+		router.navigate('/#dashboard', {trigger: true});
 	},
 
 	settingsNav: function () {
-		window.location = '/#dashboard/settings';
+		router.navigate('/#dashboard/settings', {trigger: true});
 	},
 
 	signOutNav: function () {
 		Parse.User.logOut();
-		window.location = '';
+		router.navigate('', {trigger: true});
 	},
 });
 
@@ -51,6 +56,8 @@ var NoUserNavView = Parse.View.extend({
 	},
 
 	render: function () {
+		$('.header-account-options').html('');
+		
 		var renderedTemplate = this.template;
 		this.$el.html(renderedTemplate);
 	},

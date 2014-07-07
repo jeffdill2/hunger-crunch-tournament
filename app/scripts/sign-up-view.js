@@ -38,9 +38,7 @@ var SignUpView = Parse.View.extend({
 				// remove login window and show new user dashboard/welcome
 				console.log('Welcome,', user.attributes.username);
 				$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
-				router.navigate('dashboard', {
-					trigger: true
-				});
+				router.navigate('dashboard', {trigger: true});
 			},
 			error: function(user, error) {
 				// display error and retry as necessary
