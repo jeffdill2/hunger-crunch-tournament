@@ -91,36 +91,259 @@
             <button class="button existing-user-login-button" >Sign In</button>
         </script>
 
+        
         <!-- template for the single group view -->
-        <script type="text/template" class="group-view">
-            <h1>Group View</h1>
+        <script type="text/template" class="group-view-template">
+            <div class="group-view-header-content">
+                <div class="group-view-location-banner">
+                <%= groupID ? groupID : GROUPNAME%> 
+                </div>
 
-            <div class="players" value="1234">player whatever<div>
-        </script>
+                    <ul class="group-view-details">
+                        <li>GROUP CODE: 1a2b3</li>
+                        <li>6/30/14-7/30/14</li>
+                        <li>32 Members</li>
+                    </ul>
 
-        <!-- template for the players listed on the single group view -->
-        <script type="text/template" class"group-player-view">
-            <div>name</div>
-            <div>score</div>
+                    <ul class="group-view-options">
+                        <li>CHANGE DATES</li>
+                        <li>EDIT MEMBERS</li>
+                    </ul>
+            </div>
+
+            <div class="group-summary-info">
+                <h3>GROUP SUMMARY</h3>
+                <ul>
+                    <li>
+                        <div class="minion-image"></div>
+                        <div class="group-summary-stats">
+                            <h3>3,120</h3>
+                            <h4>MINIONS STOMPED</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="coins-image"></div>
+                        <div class="group-summary-stats">
+                            <h3>312,114</h3>
+                            <h4>COINS COLLECTED</h4>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="meals-image"></div>
+                        <div class="group-summary-stats">
+                            <h3>203</h3>
+                            <h4>MEALS PROVIDED</h4>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="group-stats-container">
+                <h3>PLAYER STATISTICS</h3>
+                <div class="group-stats-drop-down" id="single-group-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>PLAYER NAME</td>
+                                <td>
+                                    <button class="sort" data-sort="minions-data"></button>
+                                    <div class="minion-image"></div>
+                                    <span>MINIONS STOMPED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="coins-data"></button>
+                                    <div class="coins-image"></div>
+                                    <span>COINS COLLECTED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="collectibles-data"></button>
+                                    <div class="collectibles-image"></div>
+                                    <span>COLLECTIBLES FOUND</span>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <tr>
+                                <td class="player-name">SAM</td>
+                                <td class="minions-data">400</td>
+                                <td class="coins-data">3,200</td>
+                                <td class="collectibles-data">14</td>
+                            </tr>
+                            <tr>
+                                <td class="player-name">BOB</td>
+                                <td class="minions-data">300</td>
+                                <td class="coins-data">3,100</td>
+                                <td class="collectibles-data">13</td>
+                            </tr>
+                            <tr>
+                                <td class="player-name">BILL</td>
+                                <td class="minions-data">200</td>
+                                <td class="coins-data">3,000</td>
+                                <td class="collectibles-data">15</td>
+                            </tr>
+
+                            <tr>
+                                <td class="player-name">SUPERLONG NAME</td>
+                                <td class="minions-data">100</td>
+                                <td class="coins-data">200</td>
+                                <td class="collectibles-data">16</td>
+                            </tr>
+
+                            <tr>
+                                <td class="player-name">SUPERLONG NAME</td>
+                                <td class="minions-data">99</td>
+                                <td class="coins-data">199</td>
+                                <td class="collectibles-data">17</td>
+                            </tr>
+
+                            <tr>
+                                <td class="player-name">SUPERLONG NAME</td>
+                                <td class="minions-data">98</td>
+                                <td class="coins-data">198</td>
+                                <td class="collectibles-data">18</td>
+                            </tr>
+
+                            <tr>
+                                <td class="player-name">SUPERLONG NAME</td>
+                                <td class="minions-data">97</td>
+                                <td class="coins-data">197</td>
+                                <td class="collectibles-data">19</td>
+                            </tr>
+
+                            <tr>
+                                <td class="player-name">SUPERLONG NAME</td>
+                                <td class="minions-data">96</td>
+                                <td class="coins-data">196</td>
+                                <td class="collectibles-data">21</td>
+                            </tr>
+
+                            <tr>
+                                <td class="player-name">SUPERLONG NAME</td>
+                                <td class="minions-data">95</td>
+                                <td class="coins-data">195</td>
+                                <td class="collectibles-data">22</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
         </script>
 
         <!-- template for the single player view -->
         <script type="text/template" class="player-view">
-            <h1>player View</h1>
+            <div class="player-view-header-content">
+                    <div class="player-view-location-banner"><span>GROUPNAME &gt;</span> PLAYERNAME</div>
 
-            <div class="stats">whatever<div>
+                    <div class="remove-player-button">REMOVE MEMBER</div>
+            </div>
+            <div class="player-view-content">
+                <div class="player-view-summary">
+                    <h3>PLAYER SUMMARY</h3>
+                    <ul>
+                        <li>
+                            <div class="minion-image"></div>
+                            <div class="player-summary-stats">
+                                <h3>3,120</h3>
+                                <h4>MINIONS STOMPED</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="coins-image"></div>
+                            <div class="player-summary-stats">
+                                <h3>324,120</h3>
+                                <h4>COINS COLLECTED</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="meals-image"></div>
+                            <div class="player-summary-stats">
+                                <h3>120</h3>
+                                <h4>MEALS PROVIDED</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="collectibles-image"></div>
+                            <div class="player-summary-stats">
+                                <h3>12</h3>
+                                <h4>COLLECTIBLES FOUND</h4>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="player-summary-per-level" id="player-summary-table">
+                    <h3>STATISTICS PER LEVEL</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <button class="sort" data-sort="level-play-data"></button>
+                                    <span>LEVEL</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="level-minions-data"></button>
+                                    <div class="minion-image"></div>
+                                    <span>MINIONS STOMPED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="level-coins-data"></button>
+                                    <div class="coins-image"></div>
+                                    <span>COINS COLLECTED</span>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <tr>
+                                <td class="level-play-data">1</td>
+                                <td class="level-minions-data">40</td>
+                                <td class="level-coins-data">345</td>
+                            </tr>
+
+                            <tr>
+                                <td class="level-play-data">2</td>
+                                <td class="level-minions-data">1402</td>
+                                <td class="level-coins-data">77</td>
+                            </tr>
+
+                            <tr>
+                                <td class="level-play-data">3</td>
+                                <td class="level-minions-data">508</td>
+                                <td class="level-coins-data">34,405</td>
+                            </tr>
+
+                            <tr>
+                                <td class="level-play-data">4</td>
+                                <td class="level-minions-data">162</td>
+                                <td class="level-coins-data">13,405</td>
+                            </tr>
+
+                            <tr>
+                                <td class="level-play-data">5</td>
+                                <td class="level-minions-data">290</td>
+                                <td class="level-coins-data">43,405</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </script>
+
         <!-- template for the dashboard view -->
         <script type="text/template" class="dashboard-view">
             <div class="dashboard-header">
-            <div class="dashboard-location">DASHBOARD</div>
-            <div class="dashboard-nav">
-                <ul>
-                    <li>CREATE GROUP</li>
-                    <li>COMPARE GROUPS</li>
-                </ul>
+                <div class="dashboard-location">DASHBOARD</div>
+                <div class="dashboard-nav">
+                    <ul>
+                        <li>CREATE GROUP</li>
+                        <li>COMPARE GROUPS</li>
+                    </ul>
+                </div>
             </div>
-        </div>
         <div class="dashboard-group-content">
             
             <div class="test-group">
@@ -140,9 +363,9 @@
                         <div class="minion-image"></div>
                         <h3 class="minion-stat">354</h3>
                     </div>
-                    <div class="group-candy-count">
-                        <div class="candy-image"></div>
-                        <h3 class="candy-stat">29,100</h3>
+                    <div class="group-coins-count">
+                        <div class="coins-image"></div>
+                        <h3 class="coins-stat">29,100</h3>
 
                     </div>
                     <div class="group-meals-provided">
@@ -170,9 +393,9 @@
                         <div class="minion-image"></div>
                         <h3 class="minion-stat">354</h3>
                     </div>
-                    <div class="group-candy-count">
-                        <div class="candy-image"></div>
-                        <h3 class="candy-stat">29,100</h3>
+                    <div class="group-coins-count">
+                        <div class="coins-image"></div>
+                        <h3 class="coins-stat">29,100</h3>
 
                     </div>
                     <div class="group-meals-provided">
@@ -200,9 +423,9 @@
                         <div class="minion-image"></div>
                         <h3 class="minion-stat">354</h3>
                     </div>
-                    <div class="group-candy-count">
-                        <div class="candy-image"></div>
-                        <h3 class="candy-stat">29,100</h3>
+                    <div class="group-coins-count">
+                        <div class="coins-image"></div>
+                        <h3 class="coins-stat">29,100</h3>
 
                     </div>
                     <div class="group-meals-provided">
@@ -232,12 +455,95 @@
             </ul>
         </script>
 
+        <!-- template for adding a group to the compare groups view -->
+        <script type="text/template" class="compare-groups-add-group-template">
+            
+            <div id="avaialble-group-names">
+
+                <input class="search" placeholder="Search" />
+                <button class="sort" data-sort="compare-group-name-search">SORT BY NAME</button>
+                <ul class="list">
+                  <li>
+                    <h3 class="compare-group-name-search">SENIORS</h3>
+                    <p class="valid">Live</p>
+                  </li>
+                  <li>
+                    <h3 class="compare-group-name-search">JUNIORS</h3>
+                    <p class="valid">Not-Live</p>
+                  </li>
+                  <li>
+                    <h3 class="compare-group-name-search">SOPHOMORES</h3>
+                    <p class="valid">Not-Live</p>
+                  </li>
+                  <li>
+                    <h3 class="compare-group-name-search">FRESHMEN</h3>
+                    <p class="valid">Live</p>
+                  </li>
+                </ul>
+            </div>
+        </script>
+
+
+        <!-- template for the compare groups view -->
+        <script type="text/template" class="compare-groups-view-template">
+            <div class="compare-groups-header-content">
+                <div class="compare-groups-location-banner">COMPARE GROUPS</div>
+            </div>
+            <div class="compare-groups-content" id="compare-groups-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                <button class="sort" data-sort="compare-group-name"></button>
+                                <span>GROUP NAME</span>
+                            </td>
+                            <td>
+                                <button class="sort" data-sort="compare-minions-data"></button>
+                                <div class="minion-image"></div>
+                                <span>MINIONS STOMPED</span>
+                            </td>
+                            <td>
+                                <button class="sort" data-sort="compare-coins-data"></button>
+                                <div class="coins-image"></div>
+                                <span>COINS COLLECTED</span>
+                            </td>
+                            <td>
+                                <button class="sort" data-sort="compare-meals-data"></button>
+                                <div class="meals-image"></div>
+                                <span>MEALS PROVIDED</span>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        <tr>
+                            <td class="compare-group-name">NORTH HILLS</td>
+                            <td class="compare-minions-data">439</td>
+                            <td class="compare-coins-data">3,200</td>
+                            <td class="compare-meals-data">14</td>
+                        </tr>
+
+                        <tr>
+                            <td class="compare-group-name">NORTH HILLS 2</td>
+                            <td class="compare-minions-data">4394</td>
+                            <td class="compare-coins-data">3,100</td>
+                            <td class="compare-meals-data">13</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="table-footer" colspan="4">ADD A GROUP</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </script>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/moment/moment.js"></script>
         <script src="../bower_components/underscore/underscore.js"></script>
+        <script src="../bower_components/list.js/dist/list.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -280,6 +586,7 @@
         <script src="scripts/new-user-view.js"></script>
         <script src="scripts/group-view.js"></script>
         <script src="scripts/player-view.js"></script>
+        <script src="scripts/compare-groups-view.js"></script>
         <script src="scripts/groups.js"></script>
         <script src="scripts/joshS-router.js"></script>
         <script src="scripts/counter.js"></script>

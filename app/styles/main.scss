@@ -24,7 +24,6 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 
 
 
-
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
@@ -377,23 +376,404 @@ header {
 .dashboard-group-statistics {
 	padding: 10px;
 }
-.group-minion-count, .group-candy-count, .group-meals-provided {
+.group-minion-count, .group-coins-count, .group-meals-provided {
 	width: 33%;
 	float: left;
 	text-align: center;
 	padding: 10px 20px 0;
 }
-.minion-image, .candy-image, .meals-image {
+.minion-image, .coins-image, .meals-image, .collectibles-image {
 	height: 80px;
 	width: 80px;
 	margin: 0 auto;
-	background: $colorLightGray;
+	background: lighten($colorDuskBlue, 18%);
 }
 
-.candy-image {
+.coins-image {
 	background: $colorBurntOrange;
 }
 
 .meals-image {
 	background: $colorGoldenrod;
+}
+
+.collectibles-image {
+	background: $colorMidnightGray;
+}
+
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////////// GROUP VIEW
+////////////////////////////////////////////////////////////
+
+.group-view-header-content {
+	@extend .dashboard-header;
+	@extend .clearfix;
+}
+
+.group-view-location-banner {
+	padding: 5px 15px;
+	min-width: 250px;
+	float: left;
+	text-align: center;
+	font-size: 2.75em;
+	background: $colorGoldenrod;
+}
+
+.group-view-details {
+	list-style: none;
+	float: right;
+	padding: 0;
+	margin: 0;
+
+	& li {
+		display: inline-block;
+		margin-right: 30px;
+		font-size: 1.25em;
+		color: $colorStoneGray;
+	}
+}
+.group-view-options {
+	list-style: none;
+	float: right;
+	padding: 0;
+	margin: 20px 0 0;
+	clear: right;
+
+	& li {
+		margin-right: 30px;
+		padding: 3px 10px;
+		border: 1px solid black;
+		display: inline-block;
+	}
+}
+
+
+.group-summary-info {
+	width: 100%;
+	min-height: 150px;
+	padding: 35px;
+	background: $colorLightGray;
+
+	& > h3 {
+		margin-top: 0;
+		margin-bottom: 40px;
+	}
+
+	& ul {
+		list-style: none;
+		margin: 0 auto;
+		padding: 0 25px;
+
+		& li {
+			display: inline-block;
+			width: 33%;
+			& div:first-child {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+.group-summary-stats {
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: super;
+}
+
+.group-stats-container {
+	padding: 25px;
+
+	& h3 {
+		margin-top: 0;
+	}
+}
+
+.group-stats-drop-down {
+	padding: 30px 100px;
+	text-align: center; 
+	color: $colorStoneGray;
+
+	& table {
+		width: 100%;
+		// all cells
+		& tr {
+			border-bottom: 1px solid $colorLightGray;
+			height: 40px;
+			vertical-align: middle;
+			font-size: 1.15em;
+
+			& td {
+				border-right: 1px solid $colorLightGray;
+				border-left: 1px solid $colorLightGray;
+				width: 23.3333333%;
+
+				&:first-child {
+					width: 30%;
+					text-align: left;
+					border-left: none;
+					cursor: pointer;
+				}
+
+				&:last-child {
+					border-right: none;
+				}
+			}
+		}
+
+		// only table header
+		& thead tr{
+			height: 160px;
+			font-size: 1em;
+			vertical-align: bottom;
+
+			& td:first-child {
+				cursor: default;
+			}
+				
+		}
+		// only the first three rows of table body
+		& tbody tr {
+			&:nth-child(-n+3) {
+				height: 70px;
+				font-size: 1.5em;
+				font-weight: bold;
+			}
+		}	
+	}
+}
+
+////////////////////////////////////////////////////////////
+//////////////////////////////////////////////// PLAYER VIEW
+////////////////////////////////////////////////////////////
+
+.player-view-header-content {
+	@extend .dashboard-header;
+	@extend .clearfix;
+}
+
+.player-view-location-banner {
+	padding: 5px 15px;
+	min-width: 250px;
+	float: left;
+	text-align: center;
+	font-size: 2.75em;
+	background: $colorGoldenrod;
+
+	& span {
+		font-size: .5em;
+	}
+}
+
+.remove-player-button {
+	float: right;
+	margin-right: 30px;
+	margin-top: 15px;
+	padding: 3px 10px;
+	border: 1px solid black;
+}
+.player-view-content {
+	border-top: 1px solid $colorStoneGray;
+	padding: 25px 75px;
+	color: $colorStoneGray;
+	@extend .clearfix;
+}
+
+.player-view-summary {
+	width: 49%;
+	float: left;
+
+	& > h3 {
+		margin-top: 0;
+		margin-bottom: 40px;
+	}
+
+	& ul {
+		list-style: none;
+		margin: 0 auto;
+		padding: 0 25px;
+
+		& li {
+			& div:first-child {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+.player-summary-stats {
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: super;
+}
+
+
+.player-summary-per-level {
+	width: 49%;
+	float: right;
+
+	& h3 {
+		margin-top: 0;
+	}
+
+	& table {
+		text-align: center; 
+		width: 100%;
+		// all cells
+		& tr {
+			border-bottom: 1px solid $colorLightGray;
+			height: 50px;
+			vertical-align: middle;
+			font-size: 1.5em;
+			font-weight: bold;
+
+			& td {
+				border-right: 1px solid $colorLightGray;
+				border-left: 1px solid $colorLightGray;
+				width: 23.3333333%;
+
+				&:first-child {
+					width: 30%;
+					// text-align: left;
+					border-left: none;
+					cursor: pointer;
+				}
+
+				&:last-child {
+					border-right: none;
+				}
+			}
+		}
+
+		// only table header
+		& thead tr{
+			height: 160px;
+			font-size: 1em;
+			vertical-align: bottom;
+
+			& td:first-child {
+				cursor: default;
+				& span {
+					display: block;
+				}
+			}
+				
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////
+//////////////////////////////////////// COMPARE GROUPS VIEW
+////////////////////////////////////////////////////////////
+
+.compare-groups-header-content {
+	@extend .dashboard-header;
+	@extend .clearfix;
+}
+
+.compare-groups-location-banner {
+	padding: 5px 15px;
+	min-width: 250px;
+	float: left;
+	text-align: center;
+	font-size: 2.75em;
+	background: $colorGoldenrod;
+}
+
+.compare-groups-content {
+	padding: 30px 150px;
+	border-top: 1px solid $colorLightGray;
+}
+
+.compare-groups-content {
+	color: $colorStoneGray;
+
+	& table {
+		text-align: center; 
+		width: 100%;
+		margin-bottom: 20px;
+		// all cells
+		& tr {
+			border-bottom: 1px solid $colorLightGray;
+			height: 50px;
+			vertical-align: middle;
+			font-size: 1.5em;
+			font-weight: bold;
+
+			& td {
+				border-right: 1px solid $colorLightGray;
+				border-left: 1px solid $colorLightGray;
+				width: 23.3333333%;
+
+				&:first-child {
+					width: 30%;
+					// text-align: left;
+					border-left: none;
+					cursor: pointer;
+				}
+
+				&:last-child {
+					border-right: none;
+				}
+			}
+		}
+
+		// only table header
+		& thead tr{
+			height: 160px;
+			font-size: 1em;
+			vertical-align: bottom;
+
+			& td:first-child {
+				cursor: default;
+				& span {
+					display: block;
+				}
+			}
+				
+		}
+
+		& .table-footer {
+			padding-left: 50px;
+			text-align: left;
+			color: lighten($colorDuskBlue, 28%);
+		}
+	}
+
+}
+
+
+
+
+
+.list {
+  font-family:sans-serif;
+  margin:0;
+  padding:20px 0 0;
+}
+.list > li {
+  display:block;
+  background-color: #eee;
+  padding:10px;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+h3 {
+  font-size: 16px;
+  margin:0 0 0.3rem;
+  font-weight: normal;
+  font-weight:bold;
+}
+
+
+
+input {
+  border:solid 1px #ccc;
+  border-radius: 5px;
+  padding:7px 14px;
+  margin-bottom:10px
+}
+input:focus {
+  outline:none;
+  border-color:#aaa;
 }

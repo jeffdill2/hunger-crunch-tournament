@@ -12,5 +12,14 @@ var PlayerView = Parse.View.extend({
 	render: function () {
 		var renderedTemplate = this.template;
 		this.$el.html(renderedTemplate);
+		this.tableSort();
+	},
+
+	// sort function
+	tableSort: function () {
+		var options = {
+			valueNames: ['level-play-data', 'level-minions-data', 'level-coins-data']
+		};
+		var userTable = new List('player-summary-table', options)
 	}
 });
