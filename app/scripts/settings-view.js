@@ -4,7 +4,8 @@ var SettingsView = Parse.View.extend({
 
 	events: {
 		'click .edit-email' : 'changeEmail',
-		'click .save-email'	: 'saveEmail'
+		'click .save-email'	: 'saveEmail',
+		'click .reset-password'	: 'resetPassword',
 	},
 
 	template: _.template($('.settings-view').text()),
@@ -40,5 +41,19 @@ var SettingsView = Parse.View.extend({
   			}
   		});
   			
+	},
+
+	resetPassword: function() {
+		var userEmail = Parse.User.current().attributes.email;
+		Parse.User.requestPasswordReset(userEmail , {
+  			success: function() {
+   			 // Password reset request was sent successfully
+   			 alert("An email has been sent to your account to reset your password")
+  			},
+  			error: function(error) {
+  			  // Show the error message somewhere
+  			  alert("Error: " + error.code + " " + error.message);
+  			}
+			});
 	}
 });
