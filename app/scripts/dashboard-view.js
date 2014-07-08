@@ -24,7 +24,8 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	compareGroupsNav: function() {
-		window.location = '/#dashboard/compareGroups'
+			window.location = '/#dashboard/compareGroups'
+		
 	},
 
 })

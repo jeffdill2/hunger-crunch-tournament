@@ -21,7 +21,7 @@ function createRole() {
         getUser(); 
     }, function(error){
         // The save failed.
-        window.alert("ln19: Failed creating role with error: " + error.code + ":"+ error.message);
+        window.alert(" Failed creating role with error: " + error.code + ":"+ error.message);
         //assignRoles();
     });
 
@@ -65,7 +65,7 @@ query.get(null, {
         updateRole(returnObj);
     },
     error: function(returnObj, error) {
-        window.alert("ln51: Failed with error: " + error.code + ":"+ error.message);
+        window.alert("Failed with error: " + error.code + ":"+ error.message);
     }
 });         
 }
