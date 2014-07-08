@@ -6,7 +6,8 @@
     "jquery": "~1.11.0",
     "moment": "~2.7.0",
     "underscore": "~1.6.0",
-    "list.js": "~1.1.1"
+    "list.js": "~1.1.1",
+    "pickadate": "~3.5.2"
   },
   "devDependencies": {}
 }
