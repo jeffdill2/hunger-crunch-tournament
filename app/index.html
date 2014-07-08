@@ -559,19 +559,7 @@
                         </tr>
                     </thead>
                     <tbody class="list">
-                        <tr>
-                            <td class="compare-group-name">NORTH HILLS</td>
-                            <td class="compare-minions-data">439</td>
-                            <td class="compare-coins-data">3,200</td>
-                            <td class="compare-meals-data">14</td>
-                        </tr>
-
-                        <tr>
-                            <td class="compare-group-name">NORTH HILLS 2</td>
-                            <td class="compare-minions-data">4394</td>
-                            <td class="compare-coins-data">3,100</td>
-                            <td class="compare-meals-data">13</td>
-                        </tr>
+                    <!-- place where player group totals will be appended -->
                     </tbody>
                     <tfoot>
                         <tr>
@@ -581,6 +569,16 @@
                 </table>
             </div>
         </script>
+        <!-- template for adding in groups the user has created -->
+        <script type="text/template" class="compare-groups-user-groups-template">
+            <tr>
+                <td class="compare-group-name"> <%= groupName %> </td>
+                <td class="compare-minions-data"><%= minionSum %></td>
+                <td class="compare-coins-data"><%= coinSum %></td>
+                <td class="compare-meals-data">14</td>
+            </tr>
+        </script>
+                        
 
         <!-- template for adding a group to the compare groups view -->
         <script type="text/template" class="compare-groups-add-group-template">

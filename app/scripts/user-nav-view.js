@@ -65,6 +65,7 @@ var NoUserNavView = Parse.View.extend({
 	signInNav: function () {
 		Parse.User.logOut();
 		window.location = '/#sign-in';
+		Parse.history.loadUrl();
 	},
 
 	signUpNav: function () {
