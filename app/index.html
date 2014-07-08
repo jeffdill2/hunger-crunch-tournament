@@ -39,7 +39,6 @@
 
         <div class="app-container"></div>
         
-        
 
 
         <!--////////////////////////////////////////////////////////
@@ -459,13 +458,13 @@
                 
 
           <!-- template for creating groups -->
-        <script type="text/template" class="create-group-view">
-            <h1>Create Group View</h1>
+        <script type="text/template" class="create-group-view-template">
 
             <input class="new-group-name-input" placeholder="Group Name">
-            <input class="new-group-organization-input" placeholder="Organization">
-            <input class="new-group-start-date-input" placeholder="Start Date">
-            <input class="new-group-end-date-input" placeholder="End Date">
+            <input type="text" class="new-group-start-date-input start-date-picker" placeholder="Start Date" readonly>
+            <div class="start-date-container"></div>
+            <input class="new-group-end-date-input end-date-picker" placeholder="End Date" readonly>
+            <div class="end-date-container"></div>
             <button class="button new-group-creation-button">Create Group</button>
         </script>
 
@@ -615,6 +614,8 @@
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/pickadate/lib/compressed/picker.js"></script>
+        <script src="../bower_components/pickadate/lib/compressed/picker.date.js"></script>
         <script src="../bower_components/moment/moment.js"></script>
         <script src="../bower_components/underscore/underscore.js"></script>
         <script src="../bower_components/list.js/dist/list.js"></script>
