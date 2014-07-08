@@ -38,15 +38,38 @@
 
         describe('Group creator', function() {
             it('should be able to fetch all data in the Groups class', function() {
+                var groups = new GroupCollection();
 
-            });
-
-            it('should be able to fetch all groups whose end date is not beyond the threshold', function() {
-
+                populateCollection(groups).done(function() {
+                    expect(groups).to.have.length.above(0);
+                });
             });
 
             it('should be able to randomly generate a five-character group ID', function() {
+                var strGroupID;
 
+                for (var i = 0; i <= 1000; i += 1) {
+                    strGroupID = generateRandomGroupdID();
+
+                    expect(strGroupID.length).to.equal(5);
+                }
+            });
+
+            it('should be able to randomly generate a group ID consisting only of lowercase alpha characters', function() {
+                var strGroupID;
+                var cCurrentCharacter;
+                var numCurrentCharacterCode;
+
+                for (var i = 0; i <= 1000; i += 1) {
+                    strGroupID = generateRandomGroupdID();
+
+                    for (var j = 0; j <= 4; j += 1) {
+                        cCurrentCharacter = strGroupID[j];
+                        numCurrentCharacterCode = cCurrentCharacter.charCodeAt();
+
+                        expect(numCurrentCharacterCode).to.be.within(97, 122);
+                    }
+                }
             });
 
             it('should be able to verify that a group ID doesn\'t already exist in the Groups class', function() {
