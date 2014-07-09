@@ -1,117 +1,134 @@
 var _ = require('underscore');
 
-var TotalStats = Parse.Object.extend({
-
-	className: 'TotalStats',
-
-});
-
-// function addPlayer (pl, pt) {
-
-// 	var test = new Parse.Object('test');
-// 			test.set('player', pl );
-// 			test.set('score', pt);
-// 			test.save();
-//  }
-// // Use Parse.Cloud.define to define as many cloud functions as you want.
-// // For example:
-// Parse.Cloud.define("addTestPlayer", function(request, response) {
-//   response.success(addPlayer('player3', 45));
-// });
-// var totalsLog = {};
-
-// Parse.Cloud.define("averageScore", function(request, response) {
-//   var query = new Parse.Query("test");
-//   // query.equalTo("player", request.params.movie);
-//   query.find({
-//     success: function(results) {
-//       var sum = 0;
-//       for (var i = 0; i < results.length; i += 1) {
-//         sum += results[i].get("score");
-//       }
-//       totalsLog[0] = sum / results.length;
-//       response.success(totalsLog);
-//     },
-//     error: function() {
-//       response.error("score lookup failed");
-//     }
-//   });
-// });
-
-// Parse.Cloud.define("totalScore", function(request, response) {
-//   var query = new Parse.Query("test");
-//   // query.equalTo("player", request.params.movie);
-//   query.find({
-//     success: function(results) {
-//       var sum = 0;
-//       for (var i = 0; i < results.length; i += 1) {
-//         sum += results[i].get("score");
-//       }
-//       totalsLog[1] = sum;
-//       response.success(totalsLog);
-//     },
-//     error: function() {
-//       response.error("score lookup failed");
-//     }
-//   });
-// });
-
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////// OVERALL TOTALS
+////////////////////////////////////////////////////////////
 Parse.Cloud.job("totals", function(request, response) {
+	var TotalStats = Parse.Object.extend({
+		className: 'TotalStats'
+	});
 
-var totalCoins;
-var totalMinions;
+	var totalCoins;
+	var totalMinions;
 
-  var query = new Parse.Query("playerEvent");
-  query.equalTo('eventType', 'levelEnd');
-  query.find({
-    success: function(results) {
-    	console.log(results);
+	var query = new Parse.Query("playerEvent");
+	query.equalTo('eventType', 'levelEnd');
 
-		totalCoins = results.reduce(function(a,b){
-			return a + b.get('level').levelCoins;
-		}, 0);
+	query.find({
+		success: function(levelStats) {
+			totalCoins = levelStats.reduce(function(a, b) {
+				return a + b.get('level').levelCoins;
+			}, 0);
 
-		totalMinions = results.reduce(function(a,b){
-			return a + b.get('level').levelMinions;
-		}, 0);
+			totalMinions = levelStats.reduce(function(a, b) {
+				return a + b.get('level').levelMinions;
+			}, 0);
 
-      
-      response.success('' + [totalCoins, totalMinions]);
-    },
-    error: function() {
-      response.error("score lookup failed");
-    }
-  }).done();
+			response.message('Results: ' + [totalCoins, totalMinions]);
+		},
+		error: function() {
+			response.message("Score lookup failed.");
+		}
+	}).done();
 
-var totalsLog = Parse.Object('TotalStats');
-var resetTotals = new Parse.Query(TotalStats);
+	var totalsLog = Parse.Object('TotalStats');
+	var resetTotals = new Parse.Query(TotalStats);
 
-resetTotals.get("KEpS6v6cfg", {
-  	success: function(totalsLog) {
-  		console.log('totals log is' + totalsLog);
-		totalsLog.set('Coins', totalCoins );
-		totalsLog.set('Minions', totalMinions);
-		totalsLog.save();  			},
-  	error: function(object, error) {
-  	  // The object was not retrieved successfully.
-  	  // error is a Parse.Error with an error code and description.
-  	}
+	resetTotals.get("KEpS6v6cfg", {
+		success: function(totalsLog) {
+			totalsLog.set('Coins', totalCoins );
+			totalsLog.set('Minions', totalMinions);
+			totalsLog.save({
+				success: function() {
+					response.success('Score totals has successfully saved.');
+				},
+				error: function() {
+					response.message('Saving totals to TotalStats failed.');
+				}
+			});
+		},
+		error: function(object, error) {
+			response.error('error: ' + error.code + " - " + error.message);
+		}
 	});
 });
 
-Parse.Cloud.define('collected', function(request, response) {
-	var query = new Parse.Query("playerEvent");
-	query.equalTo('eventType', 'collectible');
-	query.find({
-		success: function(results) {
+////////////////////////////////////////////////////////////
+////////////////////////////////////////// GROUP AGGREGATION
+////////////////////////////////////////////////////////////
+Parse.Cloud.job("groups", function(request, response) {
+	var groupsQuery = new Parse.Query('Groups');
+	var groupTotalsQuery = new Parse.Query('GroupTotals');
 
-			var collected = results.forEach(function (x) {
-				x.get('collectible');
+	groupsQuery.exists('groupID');
+	groupTotalsQuery.exists('groupID');
+
+	groupTotalsQuery.find({
+		success: function(groupTotals) {
+			groupTotals.forEach(function(groupTotal) {
+				groupTotal.destroy({
+					success: function() {
+						response.message('Group total successfully destroyed.');
+					},
+					error: function() {
+						response.message('Group total failed to destroy.');
+					}
+				});
 			});
-			response.success(collected);
+
+			groupsQuery.find({
+				success: function(groups) {
+					groups.forEach(function(group) {
+						var strGroupID = group.get('groupID');
+						var strGroupName = group.get('groupName')
+						var objGroupTotal = new Parse.Object('GroupTotals');
+
+						var eventsQuery = new Parse.Query('playerEvent');
+						eventsQuery.equalTo('groupID', strGroupID);
+
+						eventsQuery.find({
+							success: function(events) {
+								var numCoinSum = 0;
+								var numMinionSum = 0;
+
+								events.forEach(function(playerEvent) {
+									numCoinSum += playerEvent.attributes.level.levelCoins;
+									numMinionSum += playerEvent.attributes.level.levelMinions;
+								});
+
+								objGroupTotal.save({
+									groupID: strGroupID,
+									groupName: strGroupName,
+									coins: numCoinSum,
+									minions: numMinionSum
+								}, {
+									success: function() {
+										response.message('Group total save has succeeded.');
+									},
+									error: function(error) {
+										response.message('Group total save has failed.');
+									}
+								});
+
+								response.message('Player events query has succeeded.');
+							},
+							error: function() {
+								response.message('Player events query has failed.');
+							}
+						});
+					});
+
+					response.message('Groups query has succeeded.');
+				},
+				error: function() {
+					response.message('Groups query has failed.');
+				}
+			}).done(function() {
+				// response.success('Group aggregation has succeeded!');
+			});
 		},
 		error: function() {
-			response.error("score lookup failed");
+			response.error('Group aggregation has failed.');
 		}
-	})
+	});
 });
