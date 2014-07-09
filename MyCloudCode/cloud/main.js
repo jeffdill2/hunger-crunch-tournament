@@ -78,6 +78,9 @@ Parse.Cloud.job("groups", function(request, response) {
 
 			groupsQuery.find({
 				success: function(groups) {
+					var numCounter = 0;
+					var numGroups = groups.length;
+
 					groups.forEach(function(group) {
 						var strGroupID = group.get('groupID');
 						var strGroupName = group.get('groupName')
@@ -85,6 +88,7 @@ Parse.Cloud.job("groups", function(request, response) {
 
 						var eventsQuery = new Parse.Query('playerEvent');
 						eventsQuery.equalTo('groupID', strGroupID);
+						eventsQuery.equalTo('eventType', 'levelEnd');
 
 						eventsQuery.find({
 							success: function(events) {
@@ -103,6 +107,12 @@ Parse.Cloud.job("groups", function(request, response) {
 									minions: numMinionSum
 								}, {
 									success: function() {
+										numCounter += 1;
+
+										if (numCounter === numGroups) {
+											response.success('Group aggregation has succeeded!');
+										}
+
 										response.message('Group total save has succeeded.');
 									},
 									error: function(error) {
@@ -123,8 +133,6 @@ Parse.Cloud.job("groups", function(request, response) {
 				error: function() {
 					response.message('Groups query has failed.');
 				}
-			}).done(function() {
-				// response.success('Group aggregation has succeeded!');
 			});
 		},
 		error: function() {
