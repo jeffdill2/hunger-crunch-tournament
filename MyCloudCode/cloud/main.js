@@ -13,8 +13,8 @@ var strGameTotals = 'GameTotals';
 ///////////////////////////////////////////// OVERALL TOTALS
 ////////////////////////////////////////////////////////////
 Parse.Cloud.job("gameTotals", function(request, response) {
-	var numTotalCoins;
-	var numTotalMinions;
+	var numTotalCoins = 0;
+	var numTotalMinions = 0;
 	var gameTotalsQuery = new Parse.Query(strGameTotals);
 	var scoreDataQuery = new Parse.Query(strScores);
 
@@ -38,13 +38,10 @@ Parse.Cloud.job("gameTotals", function(request, response) {
 				success: function(scoreData) {
 					var objGameTotal = new Parse.Object(strGameTotals);
 
-					numTotalCoins = scoreData.reduce(function(previous, current) {
-						return previous + current.get('coinsCollected');
-					}, 0);
-
-					numTotalMinions = scoreData.reduce(function(previous, current) {
-						return previous + current.get('minionsStomped');
-					}, 0);
+					scoreData.forEach(function(score) {
+						numTotalCoins += score.get('coinsCollected');
+						numTotalMinions += score.get('minionsStomped');
+					});
 
 					objGameTotal.save({
 						coins: numTotalCoins,
@@ -114,13 +111,10 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 								var numTotalCoins = 0;
 								var numTotalMinions = 0;
 
-								numTotalCoins = scoreData.reduce(function(previous, current) {
-									return previous + current.get('coinsCollected');
-								}, 0);
-
-								numTotalMinions = scoreData.reduce(function(previous, current) {
-									return previous + current.get('minionsStomped');
-								}, 0);
+								scoreData.forEach(function(score) {
+									numTotalCoins += score.get('coinsCollected');
+									numTotalMinions += score.get('minionsStomped');
+								});
 
 								objGroupTotal.save({
 									groupID: objGroupPointer,
