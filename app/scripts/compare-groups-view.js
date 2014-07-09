@@ -44,30 +44,33 @@ var CompareGroupsView = Parse.View.extend({
 		    		success: function (results) {
 		    			// gets groups that have matching names of the player events being totaled
 		    			var query = new Parse.Query(Groups);
-		    			query.equalTo("groupID", results[0].attributes.groupID);
-		    			
-		    			query.find({
-		    				success: function (group) {
-		    					console.log(results)
-		    					var groupSum = {
-		    						groupName: group[0].attributes.groupName,
-				    				coinSum: 0,
-				    				minionSum: 0
-				    			};
-				    			// adds all matching player event numbers to object being passed
-				    			// to the template
-		    					for (var i = 0; i < results.length; i++) { 
-		    						groupSum.coinSum += results[i].attributes.level.levelCoins;
-		    						groupSum.minionSum += results[i].attributes.level.levelMinions;
-		    					}
-		    			// appends instance of group totals and group name to the template
-		    					$('.list').append( compareUserGroupsTemplate( groupSum ) );
-		    					that.tableSort();
-		    				},
-		    				error: function (error) {
-		    					console.log(error);
-		    				}
-		    			})
+		    			// only passes groups with members
+		    			if(results.length > 0){
+
+			    			query.equalTo("groupID", results[0].attributes.groupID);
+			    			
+			    			query.find({
+			    				success: function (group) {
+			    					var groupSum = {
+			    						groupName: group[0].attributes.groupName,
+					    				coinSum: 0,
+					    				minionSum: 0
+					    			};
+					    			// adds all matching player event numbers to object being passed
+					    			// to the template
+			    					for (var i = 0; i < results.length; i++) { 
+			    						groupSum.coinSum += results[i].attributes.level.levelCoins;
+			    						groupSum.minionSum += results[i].attributes.level.levelMinions;
+			    					}
+			    			// appends instance of group totals and group name to the template
+			    					$('.list').append( compareUserGroupsTemplate( groupSum ) );
+			    					that.tableSort();
+			    				},
+			    				error: function (error) {
+			    					console.log(error);
+			    				}
+			    			})
+		    			}
 
 		    			
 		    		},
