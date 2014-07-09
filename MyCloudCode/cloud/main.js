@@ -72,87 +72,92 @@ Parse.Cloud.job("gameTotals", function(request, response) {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////// GROUP AGGREGATION
 ////////////////////////////////////////////////////////////
-// Parse.Cloud.job("groupTotals", function(request, response) {
-// 	var groupsQuery = new Parse.Query('Groups');
-// 	var groupTotalsQuery = new Parse.Query('GroupTotals');
+Parse.Cloud.job("groupTotals", function(request, response) {
+	var groupsQuery = new Parse.Query(strGroups);
+	var groupTotalsQuery = new Parse.Query(strGroupTotals);
 
-// 	groupsQuery.exists('groupID');
-// 	groupTotalsQuery.exists('groupID');
+	groupsQuery.exists('objectId');
+	groupTotalsQuery.exists('objectId');
 
-// 	groupTotalsQuery.find({
-// 		success: function(groupTotals) {
-// 			groupTotals.forEach(function(groupTotal) {
-// 				groupTotal.destroy({
-// 					success: function() {
-// 						response.message('Group total successfully destroyed.');
-// 					},
-// 					error: function() {
-// 						response.message('Group total failed to destroy.');
-// 					}
-// 				});
-// 			});
+	groupTotalsQuery.find({
+		success: function(groupTotals) {
+			groupTotals.forEach(function(groupTotal) {
+				groupTotal.destroy({
+					success: function() {
+						response.message('Group total successfully destroyed.');
+					},
+					error: function() {
+						response.message('Group total failed to destroy.');
+					}
+				});
+			});
 
-// 			groupsQuery.find({
-// 				success: function(groups) {
-// 					var numCounter = 0;
-// 					var numGroups = groups.length;
+			groupsQuery.find({
+				success: function(groups) {
+					var numCounter = 0;
+					var numGroups = groups.length;
 
-// 					groups.forEach(function(group) {
-// 						var strGroupID = group.get('groupID');
-// 						var strGroupName = group.get('groupName')
-// 						var objGroupTotal = new Parse.Object('GroupTotals');
+					groups.forEach(function(group) {
+						var strGroupID = group.id;
+						var objGroupTotal = new Parse.Object(strGroupTotals);
+						var objGroupPointer = {
+							__type: "Pointer",
+							className: strGroups,
+							objectId: strGroupID
+						};
 
-// 						var eventsQuery = new Parse.Query('playerEvent');
-// 						eventsQuery.equalTo('groupID', strGroupID);
-// 						eventsQuery.equalTo('eventType', 'levelEnd');
+						var scoreDataQuery = new Parse.Query(strScores);
+						scoreDataQuery.equalTo('tntGrp', objGroupPointer);
 
-// 						eventsQuery.find({
-// 							success: function(events) {
-// 								var numCoinSum = 0;
-// 								var numMinionSum = 0;
+						scoreDataQuery.find({
+							success: function(scoreData) {
+								var numTotalCoins = 0;
+								var numTotalMinions = 0;
 
-// 								events.forEach(function(playerEvent) {
-// 									numCoinSum += playerEvent.attributes.level.levelCoins;
-// 									numMinionSum += playerEvent.attributes.level.levelMinions;
-// 								});
+								numTotalCoins = scoreData.reduce(function(previous, current) {
+									return previous + current.get('coinsCollected');
+								}, 0);
 
-// 								objGroupTotal.save({
-// 									groupID: strGroupID,
-// 									groupName: strGroupName,
-// 									coins: numCoinSum,
-// 									minions: numMinionSum
-// 								}, {
-// 									success: function() {
-// 										numCounter += 1;
+								numTotalMinions = scoreData.reduce(function(previous, current) {
+									return previous + current.get('minionsStomped');
+								}, 0);
 
-// 										if (numCounter === numGroups) {
-// 											response.success('Group aggregation has succeeded!');
-// 										}
+								objGroupTotal.save({
+									groupID: objGroupPointer,
+									coins: numTotalCoins,
+									minions: numTotalMinions
+								}, {
+									success: function() {
+										numCounter += 1;
 
-// 										response.message('Group total save has succeeded.');
-// 									},
-// 									error: function(error) {
-// 										response.message('Group total save has failed.');
-// 									}
-// 								});
+										if (numCounter === numGroups) {
+											response.success('Group totals has succeeded!');
+										}
 
-// 								response.message('Player events query has succeeded.');
-// 							},
-// 							error: function() {
-// 								response.message('Player events query has failed.');
-// 							}
-// 						});
-// 					});
+										response.message('Group total save has succeeded.');
+									},
+									error: function(error) {
+										response.message('Group total save has failed.');
+									}
+								});
 
-// 					response.message('Groups query has succeeded.');
-// 				},
-// 				error: function() {
-// 					response.message('Groups query has failed.');
-// 				}
-// 			});
-// 		},
-// 		error: function() {
-// 			response.error('Group aggregation has failed.');
-// 		}
-// 	});
-// });
+								response.message('Player events query has succeeded.');
+							},
+							error: function() {
+								response.message('Player events query has failed.');
+							}
+						});
+					});
+
+					response.message('Groups query has succeeded.');
+				},
+				error: function() {
+					response.message('Groups query has failed.');
+				}
+			});
+		},
+		error: function() {
+			response.error('Group aggregation has failed.');
+		}
+	});
+});
