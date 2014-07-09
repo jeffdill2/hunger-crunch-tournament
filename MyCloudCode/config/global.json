@@ -1,13 +1,13 @@
 {
     "applications": {
         "_default": {
-            "link": "hunger-crunch"
-        }, 
+            "link": "Hunger Crunch Dev"
+        },
         "hunger-crunch": {
-            "applicationId": "KjlIhHJBGyjsDEpV4Z98GBo66QCcNGukFyTbxbGH", 
-            "masterKey": "Kn1prawRfOaFk5keS0J7tvfquFJF6jp7mTmtjyEH"
+            "applicationId": "4PRYxlghLlDHrL3AXef2mz3tUeiTtcfxQegE95Hc",
+            "masterKey": "lvilqXxlSGMxabLUPP4MbLTmyFwVQHmqiWmqJ9bD"
         }
-    }, 
+    },
     "global": {
         "parseVersion": "1.2.18"
     }
