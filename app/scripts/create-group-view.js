@@ -81,18 +81,6 @@ var CreateGroupView = Parse.View.extend({
 		}
 	},
 
-	populateCollection: function(collection) {
-		return collection.fetch({
-			success: function() {
-				console.log('Data successfully retrieved');
-			},
-			error: function(error) {
-				console.log('An error has occured - details below:');
-				console.log('Error ' + error.code + " : " + error.message);
-			}
-		});
-	},
-
 	generateRandomGroupdID: function () {
 
 		var strGroupID = "";
@@ -110,7 +98,7 @@ var CreateGroupView = Parse.View.extend({
 		var groups = new GroupCollection();
 		var strGroupID = "";
 
-		this.populateCollection(groups).done(function() {
+		populateCollection(groups).done(function() {
 			var aryGroupIDs = groups.models.map(function(model) {
 				return model.attributes.groupID;
 			});

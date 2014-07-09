@@ -15,3 +15,18 @@ var GroupModel = Parse.Object.extend({
 var GroupCollection = Parse.Collection.extend({
 	model: GroupModel
 });
+
+////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////// QUERIES
+////////////////////////////////////////////////////////////
+function populateCollection(collection) {
+	return collection.fetch({
+		success: function() {
+			console.log('Data successfully retrieved');
+		},
+		error: function(error) {
+			console.log('An error has occured - details below:');
+			console.log('Error ' + error.code + " : " + error.message);
+		}
+	});
+}

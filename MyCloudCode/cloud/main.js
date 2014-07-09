@@ -14,16 +14,6 @@ Parse.Cloud.job("totals", function(request, response) {
 	var query = new Parse.Query("playerEvent");
 	query.equalTo('eventType', 'levelEnd');
 
-	query.find({
-		success: function(levelStats) {
-			totalCoins = levelStats.reduce(function(a, b) {
-				return a + b.get('level').levelCoins;
-			}, 0);
-
-			totalMinions = levelStats.reduce(function(a, b) {
-				return a + b.get('level').levelMinions;
-			}, 0);
-
 			response.message('Results: ' + [totalCoins, totalMinions]);
 		},
 		error: function() {
