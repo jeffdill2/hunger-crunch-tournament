@@ -1,44 +1,67 @@
 var _ = require('underscore');
 
 ////////////////////////////////////////////////////////////
+///////////////////////////////////////// PARSE DATA CLASSES
+////////////////////////////////////////////////////////////
+var strScores = 'TntScore';
+var strGroups = 'TntGroup';
+var strCollectibles = 'TntCollectibles';
+var strGroupTotals = 'GroupTotals';
+var strGameTotals = 'GameTotals';
+
+////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// OVERALL TOTALS
 ////////////////////////////////////////////////////////////
-Parse.Cloud.job("totals", function(request, response) {
-	var TotalStats = Parse.Object.extend({
-		className: 'TotalStats'
-	});
+Parse.Cloud.job("gameTotals", function(request, response) {
+	var numTotalCoins = 0;
+	var numTotalMinions = 0;
+	var gameTotalsQuery = new Parse.Query(strGameTotals);
+	var scoreDataQuery = new Parse.Query(strScores);
 
-	var totalCoins;
-	var totalMinions;
+	gameTotalsQuery.exists('objectId');
+	scoreDataQuery.exists('objectId');
 
-	var query = new Parse.Query("playerEvent");
-	query.equalTo('eventType', 'levelEnd');
+	gameTotalsQuery.find({
+		success: function(gameTotals) {
+			gameTotals.forEach(function(gameTotal) {
+				gameTotal.destroy({
+					success: function() {
+						response.message('Game total successfully destroyed.');
+					},
+					error: function() {
+						response.message('Game total failed to destroy.');
+					}
+				});
+			});
 
-			response.message('Results: ' + [totalCoins, totalMinions]);
-		},
-		error: function() {
-			response.message("Score lookup failed.");
-		}
-	}).done();
+			scoreDataQuery.find({
+				success: function(scoreData) {
+					var objGameTotal = new Parse.Object(strGameTotals);
 
-	var totalsLog = Parse.Object('TotalStats');
-	var resetTotals = new Parse.Query(TotalStats);
+					scoreData.forEach(function(score) {
+						numTotalCoins += score.get('coinsCollected');
+						numTotalMinions += score.get('minionsStomped');
+					});
 
-	resetTotals.get("KEpS6v6cfg", {
-		success: function(totalsLog) {
-			totalsLog.set('Coins', totalCoins );
-			totalsLog.set('Minions', totalMinions);
-			totalsLog.save({
-				success: function() {
-					response.success('Score totals has successfully saved.');
+					objGameTotal.save({
+						coins: numTotalCoins,
+						minions: numTotalMinions
+					}, {
+						success: function() {
+							response.success('Game totals has succeeded!');
+						},
+						error: function(error) {
+							response.message('Game total save has failed.');
+						}
+					});
 				},
 				error: function() {
-					response.message('Saving totals to TotalStats failed.');
+					response.message('Score data query failed.');
 				}
 			});
 		},
-		error: function(object, error) {
-			response.error('error: ' + error.code + " - " + error.message);
+		error: function() {
+			response.message('Game total query failed.');
 		}
 	});
 });
@@ -46,12 +69,12 @@ Parse.Cloud.job("totals", function(request, response) {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////// GROUP AGGREGATION
 ////////////////////////////////////////////////////////////
-Parse.Cloud.job("groups", function(request, response) {
-	var groupsQuery = new Parse.Query('Groups');
-	var groupTotalsQuery = new Parse.Query('GroupTotals');
+Parse.Cloud.job("groupTotals", function(request, response) {
+	var groupsQuery = new Parse.Query(strGroups);
+	var groupTotalsQuery = new Parse.Query(strGroupTotals);
 
-	groupsQuery.exists('groupID');
-	groupTotalsQuery.exists('groupID');
+	groupsQuery.exists('objectId');
+	groupTotalsQuery.exists('objectId');
 
 	groupTotalsQuery.find({
 		success: function(groupTotals) {
@@ -72,35 +95,37 @@ Parse.Cloud.job("groups", function(request, response) {
 					var numGroups = groups.length;
 
 					groups.forEach(function(group) {
-						var strGroupID = group.get('groupID');
-						var strGroupName = group.get('groupName')
-						var objGroupTotal = new Parse.Object('GroupTotals');
+						var strGroupID = group.id;
+						var objGroupTotal = new Parse.Object(strGroupTotals);
+						var objGroupPointer = {
+							__type: "Pointer",
+							className: strGroups,
+							objectId: strGroupID
+						};
 
-						var eventsQuery = new Parse.Query('playerEvent');
-						eventsQuery.equalTo('groupID', strGroupID);
-						eventsQuery.equalTo('eventType', 'levelEnd');
+						var scoreDataQuery = new Parse.Query(strScores);
+						scoreDataQuery.equalTo('tntGrp', objGroupPointer);
 
-						eventsQuery.find({
-							success: function(events) {
-								var numCoinSum = 0;
-								var numMinionSum = 0;
+						scoreDataQuery.find({
+							success: function(scoreData) {
+								var numTotalCoins = 0;
+								var numTotalMinions = 0;
 
-								events.forEach(function(playerEvent) {
-									numCoinSum += playerEvent.attributes.level.levelCoins;
-									numMinionSum += playerEvent.attributes.level.levelMinions;
+								scoreData.forEach(function(score) {
+									numTotalCoins += score.get('coinsCollected');
+									numTotalMinions += score.get('minionsStomped');
 								});
 
 								objGroupTotal.save({
-									groupID: strGroupID,
-									groupName: strGroupName,
-									coins: numCoinSum,
-									minions: numMinionSum
+									groupID: objGroupPointer,
+									coins: numTotalCoins,
+									minions: numTotalMinions
 								}, {
 									success: function() {
 										numCounter += 1;
 
 										if (numCounter === numGroups) {
-											response.success('Group aggregation has succeeded!');
+											response.success('Group totals has succeeded!');
 										}
 
 										response.message('Group total save has succeeded.');
