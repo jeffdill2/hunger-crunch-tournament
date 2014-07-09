@@ -33,7 +33,6 @@ var CompareGroupsView = Parse.View.extend({
 		  success: function(groups) {
 		    // Do something with the returned Parse.Object values
 		    for (var i = 0; i < groups.length; i++) { 
-
 		    	// query for all playerEvent objects
 		    	var playerEvent = Parse.Object.extend("playerEvent");
 		    	var query = new Parse.Query(playerEvent);
@@ -59,8 +58,10 @@ var CompareGroupsView = Parse.View.extend({
 					    			// adds all matching player event numbers to object being passed
 					    			// to the template
 			    					for (var i = 0; i < results.length; i++) { 
-			    						groupSum.coinSum += results[i].attributes.level.levelCoins;
-			    						groupSum.minionSum += results[i].attributes.level.levelMinions;
+			    						if(results[i].attributes.level){
+			    							groupSum.coinSum += results[i].attributes.level.levelCoins;
+			    							groupSum.minionSum += results[i].attributes.level.levelMinions;
+										}
 			    					}
 			    			// appends instance of group totals and group name to the template
 			    					$('.list').append( compareUserGroupsTemplate( groupSum ) );
