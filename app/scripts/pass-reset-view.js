@@ -25,7 +25,7 @@ var PassResetView = Parse.View.extend ({
    			 // Password reset request was sent successfully
    			 router.currentView.render();
    			 alert("An email has been sent to your account to reset your password")
-   			 router.navigate('/#sign-in', {trigger: true});
+   			 router.navigate('/#tournament/sign-in', {trigger: true});
   			},
   			error: function(error) {
   			  // Show the error message somewhere

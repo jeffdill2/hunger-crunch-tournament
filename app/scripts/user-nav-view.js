@@ -45,16 +45,16 @@ var UserNavView = Parse.View.extend({
 	},
 
 	dashboardNav: function () {
-		router.navigate('/#dashboard', {trigger: true});
+		router.navigate('/#tournament/dashboard', {trigger: true});
 	},
 
 	settingsNav: function () {
-		router.navigate('/#dashboard/settings', {trigger: true});
+		router.navigate('/#tournament/dashboard/settings', {trigger: true});
 	},
 
 	signOutNav: function () {
 		Parse.User.logOut();
-		router.navigate('/#', {trigger: true});
+		router.navigate('/#tournament', {trigger: true});
 	},
 });
 
@@ -82,13 +82,13 @@ var NoUserNavView = Parse.View.extend({
 
 	signInNav: function () {
 		Parse.User.logOut();
-		router.navigate('/#sign-in', {trigger: true});
+		router.navigate('/#tournament/sign-in', {trigger: true});
 		Parse.history.loadUrl();
 	},
 
 	signUpNav: function () {
 		Parse.User.logOut();
-		router.navigate('/#sign-up', {trigger: true});
+		router.navigate('/#tournament/sign-up', {trigger: true});
 	},
 
 });
