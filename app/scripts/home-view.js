@@ -1,4 +1,4 @@
-var HomeView = Parse.View.extend ({
+var HomeView = Parse.View.extend({
 
 	className: "home-view-container",
 
@@ -9,7 +9,7 @@ var HomeView = Parse.View.extend ({
 
 	template: _.template($('.home-view').text()),
 
-	initialize: function () {
+	initialize: function() {
 		$('.app-container').append(this.el);
 		this.render();
 	},
@@ -19,16 +19,20 @@ var HomeView = Parse.View.extend ({
 		this.$el.html(renderedTemplate);
 	},
 
-	submitGroup : function () {
+	submitGroup : function() {
 		router.navigate('/#group/' + $('.group-id').val(), {trigger: true});
 	},
 
-	signUpView: function () {
-		if(Parse.User.current()){
-			router.navigate('/#dashboard' + $('.group-id').val(), {trigger: true});
-			
-		}else{
-			router.navigate('/#sign-up' + $('.group-id').val(), {trigger: true});
+	signUpView: function() {
+		if (Parse.User.current()) {
+			$('.sign-up-button-container .alert').remove();
+
+			var alertTemplate = _.template($('.alert-template').text());
+			var renderedTemplate = alertTemplate({message: 'No need to sign up since you\'re already signed in!'});
+
+			$('.sign-up-button-container').append(renderedTemplate);
+		} else {
+			router.navigate('/#sign-up', {trigger: true});
 		}
 	}
 });

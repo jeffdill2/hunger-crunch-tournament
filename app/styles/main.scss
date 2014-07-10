@@ -280,6 +280,13 @@ header {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////// HOME PAGE
 ////////////////////////////////////////////////////////////
+.alert {
+	font-size: 18px;
+	margin: 0 auto;
+	margin-top: 20px;
+	max-width: 800px;
+	padding: 20px;
+}
 
 .landing-page-copy {
 	width: 85%;
@@ -329,7 +336,6 @@ header {
 
 
 .sign-up-button-container {
-	width: 23.5%;
 	margin: 45px auto;
 	text-align: center;
 
@@ -346,6 +352,7 @@ header {
 		font-style: italic;
 		letter-spacing: 0.06em;
 		text-shadow: 1px 1px darken($colorButtonTeal, 10%);
+		margin: 0 auto;
 
 		&:hover {
 			cursor: pointer;
@@ -407,7 +414,7 @@ header {
 			position: relative;
 			text-shadow: 1px 1px darken($colorCharcoalDark, 15%);
 			box-shadow: 2px 2px 1px 0 darken($colorCharcoalDark, 15%);
-			
+
 			&:before, &:after {
 				position: absolute;
 				content: '';
