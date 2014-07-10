@@ -11,7 +11,7 @@ var CompareGroupsView = Parse.View.extend({
 	events: {
 		'click .table-footer': 'displayAvailableGroups',
 		'click .compare-group-name-search': 'addGroup',
-		'click .remove-player-button': 'removeGroup',
+		'click .remove-group-button': 'removeGroup',
 	},
 
 	initialize: function(options) {
@@ -25,7 +25,6 @@ var CompareGroupsView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template();
 		this.$el.html(renderedTemplate);
-
 	},
 
 	// sort function

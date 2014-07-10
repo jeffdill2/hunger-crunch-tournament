@@ -27,50 +27,106 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
-body {
-	background-color: $colorWhite;
+* {
+	-webkit-font-smoothing: antialiased
 }
 
-header {
-	height: 110px;
-	padding: 20px 30px 10px; 
-	background: url(../images/map-bg.png); 
-	background-size: 87px auto;
-	background-repeat: repeat;
-	background-position: top left;
+body {
+	background-color: $colorWhite;
+	font-family: "cubano", sans-serif;
+	font-size: 1;
+	line-height: 1.625;
+	color: #939598;
+}
 
-	.header-breadcrumb {
-		color: $colorWhite;
+table {
+	text-align: center; 
+	width: 100%;
+	margin-bottom: 20px;
+	// all cells
+	& tr {
+		border-bottom: 1px solid $colorLightGray;
+		height: 50px;
+		vertical-align: middle;
 		font-size: 1.5em;
-		& img {
-			height: 50px;
-			width: 50px;
-			margin-right: 10px;
-		}
-	}
+		font-weight: bold;
 
-	.header-account-options {
-		float: right;
-		color: $colorWhite;
-	}
+		& td {
+			border-right: 1px solid $colorLightGray;
+			border-left: 1px solid $colorLightGray;
+			width: 23.3333333%;
 
-	.nav-container {
-		float: right;
-		margin-top: 10px;
+			& span, & button {
+				display: block;
+				margin: 0 auto;
+			}
 
-		& ul {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-
-			& li {
-				margin-left: 30px;
-				display: inline-block;
-				color: $colorWhite;
+			&:first-child {
+				width: 30%;
+				border-left: none;
 				cursor: pointer;
+			}
+
+			&:last-child {
+				border-right: none;
 			}
 		}
 	}
+
+	// only table header
+	& thead tr{
+		height: 160px;
+		font-size: 1em;
+		vertical-align: bottom;
+
+		& td:first-child {
+			cursor: default;
+			& span {
+				display: block;
+			}
+		}	
+	}
+
+	& .table-footer {
+		padding-left: 50px;
+		text-align: left;
+		color: lighten($colorDuskBlue, 28%);
+	}
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////// MULTI-USE CLASSES
+////////////////////////////////////////////////////////////
+
+.h1-flag {
+	display: inline-block;
+	background: $colorCoral;
+	color: #fff;
+	height: 60px;
+	line-height: 60px;
+	position: relative;
+	padding: 0 20px;
+	font-size: 2.75em;
+}
+
+.h1-flag:after {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 0;
+	border-top: 30px solid $colorCoral;
+	border-bottom: 30px solid $colorCoral;
+	border-right: 15px solid transparent;
+	right: -15px;
+	top: 0;
+}
+
+.arrow-2 {
+  width: 9px;
+  height: 16px;
+}
+.arrow-2 path {
+  fill: white;
 }
 
 .clearfix {
@@ -83,62 +139,127 @@ header {
 	}
 }
 
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////////// HOME PAGE
-////////////////////////////////////////////////////////////
-.logo-container {
-	padding-top: 9em;
-	text-align: center;
-}
-
-.logo {
-	width: 70%;
-}
-
-.scrolling-background {
-	background: url('../images/mountains.png') repeat-x;
-	height: 40em;
-	left: 0px;
+.angle-button-teal {
 	position: relative;
-	right: 0px;
-	top: 0px;
-	vertical-align: middle;
-}
+	height: 33px;
+	background-image: url('../images/angle-button-teal-middle.png');
+	background-size: contain;
+	background-repeat: repeat-x;
+	border: none;
+	display: inline-block;
+	// margin-left: 30px;
+	color: #fff;
+	font-style: italic;
 
-.header-ribbon {
-	background: $colorPaleOrange1;
-	color: $colorWhite;
-	font-family: $fontSigmarOneRegular;
-	font-size: 3.25em;
-	margin: 0.5em auto 1.5em;
-	padding: 0.125em 0.125em;
-	position: relative;
-	text-align: center;
-	text-shadow: 1px 1px 1px $colorMidnightGray;
-	width: 70%;
-
-	&:before {
-		border: 1em solid $colorPaleOrange2;
-		border-left-color: transparent;
-		border-right-width: 1.5em;
-		bottom: -0.6em;
-		content: "";
-		display: block;
-		left: -1.5em;
+	&:before, &:after {
+		content: '';
 		position: absolute;
-		z-index: -1;
+		background-size: contain;
+		background-repeat: no-repeat;
+		height: 33px;
+		top: 0;
 	}
 
+	&:before {
+		background-image: url('../images/angle-button-teal-left.png');
+		width: 11px;
+		left: -10px;
+	}
 	&:after {
-		border: 1em solid $colorPaleOrange2;
-		border-left-width: 1.5em;
-		border-right-color: transparent;
-		bottom: -0.6em;
-		content: "";
-		display: block;
-		position: absolute;
-		right: -1.5em;
-		z-index: -1;
+		background-image: url('../images/angle-button-teal-right.png');
+		width: 16px;
+		right: -15px;
+	}
+}
+
+.content-header {
+	width: 100%;
+	min-height: 80px;
+	padding: 20px 20px 20px 0;
+}
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// HEADER
+////////////////////////////////////////////////////////////
+
+
+header {
+	height: 110px;
+	padding: 20px 30px 10px; 
+	background: url(../images/map-bg.png); 
+	background-size: 87px auto;
+	background-repeat: repeat;
+	background-position: top left;
+	position: relative;	
+
+	& a {
+		text-decoration: none;
+		color: $colorWhite;
+
+		&:hover {
+			color: $colorWhite;
+		}
+	}
+}
+
+.header-breadcrumb {
+	color: $colorWhite;
+	font-size: 1.65em;
+	& img {
+		height: 36px;
+		width: 34px;
+		margin-right: 10px;
+	}
+}
+
+.header-content {
+	width: 90%;
+	margin: 0 auto;
+}
+.header-account-options {
+	float: right;
+	color: $colorWhite;
+	font-family: "proxima-nova", sans-serif;
+
+	& span {
+		font-weight: bold;
+	}
+}
+
+.nav-container {
+	float: right;
+	margin-top: 10px;
+
+	& ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		& li {
+			margin-left: 30px;
+			display: inline-block;
+			color: $colorWhite;
+			cursor: pointer;
+			font-size: 1.1em;
+			// letter-spacing: 0.06em;
+		}
+	}
+}
+
+.header-image {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -60px;
+	height: 50px;
+	width: 120px;
+	border-radius: 100px 100px 0 0;
+	background: $colorWhite;
+	text-align: center;
+	& img {
+		height: 77px;
+		width: 88px;
+		margin-top: -35px;
 	}
 }
 
@@ -151,14 +272,16 @@ header {
 	margin: 4em auto 2em;
 	text-align: center;
 
-	& h3 {
-		color: $colorStoneGray;
+	& strong {
+		color: $colorTextDarkGray;
+		// letter-spacing: 0.05em;
+		font-size: 1.5em;
 	}
 
 	& p {
-		color: $colorLightGray;
+		color: $colorTextDarkGray;
 		font-size: 1.2em;
-		line-height: 1.6;
+		font-family: "proxima-nova", sans-serif;
 	}
 }
 
@@ -184,56 +307,150 @@ header {
 		}
 
 		& h3 {
-			color: $colorStoneGray;
+			color: $colorTextDarkGray;
 			display: inline-block;
 			vertical-align: bottom;
 		}
 	}
 }
 
+
 .sign-up-button-container {
-	width: 29.5%;
-	margin: 2em auto;
+	width: 23.5%;
+	margin: 45px auto;
 	text-align: center;
-	overflow: hidden;
-
+	
 	& .sign-up-button {
-		width: 350px;
+		width: 250px;
 		height: 75px;
-		background: url("../images/play-sprite.png");
-		background-size: 700px auto;
-		background-repeat: no-repeat;
+		line-height: 65px;
+		background-image: url('../images/angle-button-teal-middle.png');
+		background-size: contain;
+		background-repeat: repeat-x;
+		position: relative;
+		color: $colorWhite;
+		font-size: 2.5em;
+		font-style: italic;
+		letter-spacing: 0.06em;
+		text-shadow: 1px 1px darken($colorButtonTeal, 10%);
+	}
 
-		&:active {
-			background-position: 100% 0;
-		}
+	.sign-up-button:before,
+	.sign-up-button:after {
+		content: '';
+		position: absolute;
+		background-size: cover;
+		background-repeat: no-repeat;
+		height: 75px;
+		top: 0;
+	}
+
+	.sign-up-button:before {
+		width: 25px;
+		left: -25px;
+		background-image: url('../images/angle-button-teal-left.png');
+	}
+
+	.sign-up-button:after {
+		background-image: url('../images/angle-button-teal-right.png');
+		width: 36px;
+		right: -35px;
 	}
 }
 
 
+////////////////////////////////////////////////////////////
+/////////////////////////////////////// SIGN UP/SIGN IN VIEW
+////////////////////////////////////////////////////////////
 
-
-.new-user-login-container, .existing-user-login-container {
-	width: 50%;
+.new-user-login-container, .existing-user-login-container, .settings-container {
 	min-height: 15em;
-	margin: 5em auto;
+	background: $colorLightGray;
+	padding-bottom: 2em;
+}
+
+.sign-up-view-header, .sign-in-view-header, .settings-header {
+	@extend .content-header;
+	@extend .clearfix;
 	background: $colorWhite;
-	padding: 1em;
+}
+
+.sign-up-view-content, .sign-in-view-content, .settings-content {
+	padding: 25px 0;
 
 	& input, & button {
 		display: block;
-		margin: 1em auto;
+		margin: 22px auto;
 		width: 45%;
 		font-size: 1.5em;
+		border: none;
+	}
+
+	& input {
+		padding: 5px 15px;
+		border-radius: 6px;
+		font-family: "proxima-nova", sans-serif;
+		font-weight: bold;
+		&:focus {
+			outline: none;
+		}
 	}
 
 	& button {
 		width: 20%;
+		padding: 0 15px 5px;
+		border-radius: 6px;
+		background: $colorCharcoal;
+		color: $colorWhite;
+		box-shadow: inset 0 	-5px 	0   	darken($colorCharcoal, 10%),
+						  1px 	2px 	1px 0 	darken($colorCharcoal, 25%);
+
+		&:hover {
+			margin-top: 23px;
+			padding-bottom: 4px;
+			background: $colorCharcoalDark;
+			box-shadow: inset 0 	-4px 	0   	darken($colorCharcoal, 20%),
+							  1px 	2px 	1px 0 	darken($colorCharcoal, 35%);
+		}
+
+		&:active {
+			margin-top: 25px;
+			padding-bottom: 2px;
+			outline: none;
+			background: darken($colorCharcoalDark, 5%);
+			box-shadow: inset 0 	-2px 	0   	darken($colorCharcoal, 30%),
+							  1px 	2px 	1px 0 	darken($colorCharcoal, 45%);
+		}
 	}
 }
 
 .error-report {
 	text-align: center;
+}
+
+.settings-content {
+	width: 30%;
+
+	& div {
+		font-size: 1.5em;
+		display: inline-block;
+	}
+	& input {
+		width: 100%;
+		margin-top: 5px;
+		margin-bottom: 10px;
+	}
+	& button {
+		width: auto;
+	}
+	& span {
+		margin-left: 15px;
+		// font-size: 1.05em;
+		// display: block;
+	}
+	.save-email {
+		display: none;
+	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -260,11 +477,6 @@ header {
 }
 
 
-
-
-
-
-
 .picker{font-size:16px;text-align:left;line-height:1.2;color:#000;position:absolute;z-index:10000}.picker__input.picker__input--active{border-color:#0089ec}.picker__holder{width:100%;overflow-y:auto;-webkit-overflow-scrolling:touch}.picker{width:100%}.picker__holder{position:absolute;background:#fff;border:1px solid #aaa;border-top:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;min-width:176px;max-width:466px;-webkit-border-radius:0 0 6px 6px;-moz-border-radius:0 0 6px 6px;border-radius:0 0 6px 6px;max-height:0;-ms-filter:"alpha(Opacity=0)";filter:alpha(opacity=0);-moz-opacity:0;opacity:0;-webkit-transform:translateY(-1em) perspective(600px) rotateX(10deg);-moz-transform:translateY(-1em) perspective(600px) rotateX(10deg);transform:translateY(-1em) perspective(600px) rotateX(10deg);-webkit-transition:all .15s ease-out,max-height 0 .15s;-moz-transition:all .15s ease-out,max-height 0 .15s;transition:all .15s ease-out,max-height 0 .15s}.picker--opened .picker__holder{max-height:25em;-ms-filter:"alpha(Opacity=100)";filter:alpha(opacity=100);-moz-opacity:1;opacity:1;-webkit-transform:translateY(0) perspective(600px) rotateX(0);-moz-transform:translateY(0) perspective(600px) rotateX(0);transform:translateY(0) perspective(600px) rotateX(0);-webkit-transition:all .15s ease-out,max-height 0;-moz-transition:all .15s ease-out,max-height 0;transition:all .15s ease-out,max-height 0;-webkit-box-shadow:0 6px 18px 1px rgba(0,0,0,.12);-moz-box-shadow:0 6px 18px 1px rgba(0,0,0,.12);box-shadow:0 6px 18px 1px rgba(0,0,0,.12)}
 
 
@@ -275,6 +487,9 @@ header {
 	background: transparent;
 }
 
+.picker thead tr {
+	height: auto;
+}
 
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// TOTAL COUNTER
@@ -321,14 +536,8 @@ header {
 	width: 100%;
 	min-height: 80px;
 	padding: 20px 20px 20px 0;
-
-	& .dashboard-location {
-		padding: 5px 15px;
-		display: inline-block;
-		font-size: 2.75em;
-		background: $colorGoldenrod;
-	}
 }
+
 
 .dashboard-nav {
 	@extend .clearfix;
@@ -337,14 +546,14 @@ header {
 		list-style: none;
 		float: right;
 		padding: 0;
-		margin: -30px 0 0;
+		margin: -30px 20px 0;
 		vertical-align: bottom;
 
 		& li {
+			@extend .angle-button-teal;
 			margin-right: 20px;
 			padding: 3px 10px;
 			display: inline-block;
-			border: 1px solid black;
 			cursor: pointer;
 		}
 	}
@@ -365,7 +574,6 @@ header {
 	margin-right: 5%;
 	margin-bottom: 50px;
 	padding: 10px;
-	border: 1px solid black;
 	background: $colorWhite;
 		
 	&:nth-of-type(2n) {
@@ -377,17 +585,19 @@ header {
 	height: 80px;
 	width: 100%;
 	padding: 10px;
-	border-bottom: 1px solid $colorStoneGray
+	border-bottom: 1px solid $colorTextDarkGray;
 }
 
 .groupname-and-code {
 	display: inline-block;
 
-	& h3 {
+	& h2, & h3 {
 		margin-top: 0;
 		margin-bottom: 2px;
 	}
 	& p {
+		font-family: "proxima-nova", sans-serif;
+		font-size: 1.1em;
 		margin: 0;
 	}
 }
@@ -399,7 +609,8 @@ header {
 	list-style: none;
 
 	& li {
-
+		font-family: "proxima-nova", sans-serif;
+		font-size: 1.1em;
 	}
 }
 
@@ -413,41 +624,34 @@ header {
 	padding: 10px 20px 0;
 }
 .minion-image, .coins-image, .meals-image, .collectibles-image {
-	height: 80px;
-	width: 80px;
+	height: 95px;
+	width: 108px;
+	margin-left: -7px;
+}
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////// SETTINGS VIEW
+////////////////////////////////////////////////////////////
+
+
+
+.settings-content {
+	// width: 30%;
 	margin: 0 auto;
-	background: lighten($colorDuskBlue, 18%);
 }
-
-.coins-image {
-	background: $colorBurntOrange;
-}
-
-.meals-image {
-	background: $colorGoldenrod;
-}
-
-.collectibles-image {
-	background: $colorMidnightGray;
-}
-
 
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// GROUP VIEW
 ////////////////////////////////////////////////////////////
 
 .group-view-header-content {
-	@extend .dashboard-header;
+	@extend .content-header;
 	@extend .clearfix;
 }
 
 .group-view-location-banner {
-	padding: 5px 15px;
 	min-width: 250px;
-	float: left;
 	text-align: center;
-	font-size: 2.75em;
-	background: $colorGoldenrod;
 }
 
 .group-view-details {
@@ -455,6 +659,7 @@ header {
 	float: right;
 	padding: 0;
 	margin: 0;
+	font-family: 'proxima-nova', sans-serif;
 
 	& li {
 		display: inline-block;
@@ -467,14 +672,23 @@ header {
 	list-style: none;
 	float: right;
 	padding: 0;
-	margin: 20px 0 0;
+	margin: 0 30px 0 0;
 	clear: right;
 
 	& li {
+		@extend .angle-button-teal;
 		margin-right: 30px;
 		padding: 3px 10px;
-		border: 1px solid black;
 		display: inline-block;
+		cursor: pointer;
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+
+	& .save-dates {
+		display: none;
 	}
 }
 
@@ -484,15 +698,18 @@ header {
 	min-height: 150px;
 	padding: 35px;
 	background: $colorLightGray;
+	color: $colorCharcoal;
+	& h1, & h3, & h4 {
+		margin: 0;
+	}
 
-	& > h3 {
-		margin-top: 0;
+	& h3 {
 		margin-bottom: 40px;
 	}
 
 	& ul {
 		list-style: none;
-		margin: 0 auto;
+		margin: 0 auto 20px;
 		padding: 0 25px;
 
 		& li {
@@ -504,11 +721,20 @@ header {
 		}
 	}
 }
-
+.group-view-details {
+	& input {
+		width: 85px;
+		border: none;
+		&:focus {
+			outline: none;
+		}
+	}
+}
 .group-summary-stats {
 	margin-left: 10px;
 	display: inline-block;
-	vertical-align: super;
+	vertical-align: bottom;
+	color: $colorCharcoal;
 }
 
 .group-stats-container {
@@ -522,53 +748,27 @@ header {
 .group-stats-drop-down {
 	padding: 30px 100px;
 	text-align: center; 
-	color: $colorStoneGray;
+	color: $colorTextDarkGray;
 
 	& table {
-		width: 100%;
 		// all cells
 		& tr {
-			border-bottom: 1px solid $colorLightGray;
-			height: 40px;
-			vertical-align: middle;
-			font-size: 1.15em;
-
+			font-size: 1.25em;
 			& td {
-				border-right: 1px solid $colorLightGray;
-				border-left: 1px solid $colorLightGray;
-				width: 23.3333333%;
-
+				& span, & button {
+					display: block;
+					margin: 0 auto;
+				}
 				&:first-child {
-					width: 30%;
 					text-align: left;
-					border-left: none;
-					cursor: pointer;
-				}
-
-				&:last-child {
-					border-right: none;
 				}
 			}
-		}
-
-		// only table header
-		& thead tr{
-			height: 160px;
-			font-size: 1em;
-			vertical-align: bottom;
-
-			& td:first-child {
-				cursor: default;
-			}
-				
 		}
 		// only the first three rows of table body
-		& tbody tr {
-			&:nth-child(-n+3) {
+		& tbody tr:nth-child(-n+3) {
 				height: 70px;
 				font-size: 1.5em;
 				font-weight: bold;
-			}
 		}	
 	}
 }
@@ -578,34 +778,30 @@ header {
 ////////////////////////////////////////////////////////////
 
 .player-view-header-content {
-	@extend .dashboard-header;
+	@extend .content-header;
 	@extend .clearfix;
 }
 
 .player-view-location-banner {
-	padding: 5px 15px;
 	min-width: 250px;
-	float: left;
 	text-align: center;
-	font-size: 2.75em;
-	background: $colorGoldenrod;
 
-	& span {
-		font-size: .5em;
+	& svg {
+		vertical-align: middle;
 	}
 }
-
 .remove-player-button {
+	@extend .angle-button-teal;
 	float: right;
 	margin-right: 30px;
 	margin-top: 15px;
 	padding: 3px 10px;
-	border: 1px solid black;
+	cursor: pointer;
 }
 .player-view-content {
-	border-top: 1px solid $colorStoneGray;
+	border-top: 1px solid $colorCharcoal;
 	padding: 25px 75px;
-	color: $colorStoneGray;
+	color: $colorTextDarkGray;
 	@extend .clearfix;
 }
 
@@ -613,7 +809,7 @@ header {
 	width: 49%;
 	float: left;
 
-	& > h3 {
+	& > h1, & h3 {
 		margin-top: 0;
 		margin-bottom: 40px;
 	}
@@ -629,12 +825,16 @@ header {
 			}
 		}
 	}
+
+	& img {
+		vertical-align: baseline;
+	}
 }
 
 .player-summary-stats {
 	margin-left: 10px;
 	display: inline-block;
-	vertical-align: super;
+	vertical-align: bottom;
 }
 
 
@@ -645,51 +845,6 @@ header {
 	& h3 {
 		margin-top: 0;
 	}
-
-	& table {
-		text-align: center; 
-		width: 100%;
-		// all cells
-		& tr {
-			border-bottom: 1px solid $colorLightGray;
-			height: 50px;
-			vertical-align: middle;
-			font-size: 1.5em;
-			font-weight: bold;
-
-			& td {
-				border-right: 1px solid $colorLightGray;
-				border-left: 1px solid $colorLightGray;
-				width: 23.3333333%;
-
-				&:first-child {
-					width: 30%;
-					// text-align: left;
-					border-left: none;
-					cursor: pointer;
-				}
-
-				&:last-child {
-					border-right: none;
-				}
-			}
-		}
-
-		// only table header
-		& thead tr{
-			height: 160px;
-			font-size: 1em;
-			vertical-align: bottom;
-
-			& td:first-child {
-				cursor: default;
-				& span {
-					display: block;
-				}
-			}
-				
-		}
-	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -697,82 +852,46 @@ header {
 ////////////////////////////////////////////////////////////
 
 .compare-groups-header-content {
-	@extend .dashboard-header;
+	@extend .content-header;
 	@extend .clearfix;
-}
-
-.compare-groups-location-banner {
-	padding: 5px 15px;
-	min-width: 250px;
-	float: left;
-	text-align: center;
-	font-size: 2.75em;
-	background: $colorGoldenrod;
 }
 
 .compare-groups-content {
 	padding: 30px 150px;
 	border-top: 1px solid $colorLightGray;
-}
-
-.compare-groups-content {
 	color: $colorStoneGray;
-
-	& table {
-		text-align: center; 
-		width: 100%;
-		margin-bottom: 20px;
-		// all cells
-		& tr {
-			border-bottom: 1px solid $colorLightGray;
-			height: 50px;
-			vertical-align: middle;
-			font-size: 1.5em;
-			font-weight: bold;
-
-			& td {
-				border-right: 1px solid $colorLightGray;
-				border-left: 1px solid $colorLightGray;
-				width: 23.3333333%;
-
-				&:first-child {
-					width: 30%;
-					// text-align: left;
-					border-left: none;
-					cursor: pointer;
-				}
-
-				&:last-child {
-					border-right: none;
-				}
-			}
-		}
-
-		// only table header
-		& thead tr{
-			height: 160px;
-			font-size: 1em;
-			vertical-align: bottom;
-
-			& td:first-child {
-				cursor: default;
-				& span {
-					display: block;
-				}
-			}
-				
-		}
-
-		& .table-footer {
-			padding-left: 50px;
-			text-align: left;
-			color: lighten($colorDuskBlue, 28%);
-		}
+	ul {
+		min-height: 400px;
+		overflow: scroll;
 	}
-
 }
 
+.remove-group-button {
+	height: 25px;
+	width: 25px;
+	margin: -2px 10px 0 -10px;
+	padding: 0;
+	border-radius: 50%;
+	vertical-align: middle;
+	background: $colorCoral;
+	color: $colorCoral;
+	border: none;
+	overflow: none;
+	display: inline-block;
+	position: relative;
 
+	&:after {
+		position: absolute;
+		content: '';
+		height: 4px;
+		width: 15px;
+		background: $colorWhite;
+		right: 5px;
+		top: 50%;
+		margin-top: -2px;
+
+	}
+}
 
 
 
@@ -815,7 +934,6 @@ header {
 
 .group-created-header-container{
 	text-align: center;
-	color: $colorStoneGray;
 }
 
 .group-created-header-content{
@@ -829,21 +947,26 @@ header {
 
 .group-created-main-container {
 	background: $colorLightGray;
-	color: $colorStoneGray;
 	text-align: center;
 	padding: 30px;
 }
 
 .player-instructions {
 	margin: 0 auto;
+	color: $colorCharcoal;
+	& p {
+		font-size: 1.1em;
+		font-family: "proxima-nova", sans-serif;
+	}
 }
 
 .group-code-box {
 	width: 180px;
 	margin: 0 auto;
 	font-size: 3em;
+	font-family: "proxima-nova", sans-serif;
 	background: $colorWhite;
-	color: $colorStoneGray;
+	color: $colorCharcoal;
 	padding: 5px;
 	& input {
 		width: 100%;
@@ -883,8 +1006,14 @@ header {
 }
 
 .observer-instructions {
-	border-top: 1px solid $colorStoneGray;
+	border-top: 1px solid $colorCharcoal;
 	padding: 25px;
+
+	color: $colorCharcoal;
+	& p {
+		font-size: 1.1em;
+		font-family: "proxima-nova", sans-serif;
+	}
 }
 
 .group-link-box {
@@ -892,20 +1021,47 @@ header {
 	margin: 0 auto;
 	padding: 10px;
 	overflow: auto;
-	color: $colorStoneGray;
+	color: $colorCharcoal;
 	background: $colorWhite;
 
 	& input	{
 		width: 100%;
 		text-align: center;
 		border: none;
+		font-family: "proxima-nova", sans-serif;
+		font-size: 1.1em;
 	}
 }
 
 .view-group-page {
-	width: 300px;
-	background: $colorStoneGray;
+	display: block;
+	margin: 22px auto;
+	width: 25%;
+	font-size: 1.5em;
+	border: none;
+	padding: 0 15px 5px;
+	border-radius: 6px;
+	background: $colorCharcoal;
 	color: $colorWhite;
+	box-shadow: inset 0 	-5px 	0   	darken($colorCharcoal, 10%),
+					  1px 	2px 	1px 0 	darken($colorCharcoal, 25%);
+
+	&:hover {
+		margin-top: 23px;
+		padding-bottom: 4px;
+		background: $colorCharcoalDark;
+		box-shadow: inset 0 	-4px 	0   	darken($colorCharcoal, 20%),
+						  1px 	2px 	1px 0 	darken($colorCharcoal, 35%);
+	}
+
+	&:active {
+		margin-top: 25px;
+		padding-bottom: 2px;
+		outline: none;
+		background: darken($colorCharcoalDark, 5%);
+		box-shadow: inset 0 	-2px 	0   	darken($colorCharcoal, 30%),
+						  1px 	2px 	1px 0 	darken($colorCharcoal, 45%);
+	}
 }
 
 
