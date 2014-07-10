@@ -706,11 +706,13 @@
         <!-- template for adding in groups the user has created -->
         <script type="text/template" class="compare-groups-user-groups-template">
             <tr>
-                <td class="compare-group-name"><%= groupName %></td>
+                <td class="compare-group-name">
+                    <button class="remove-group-button"><%= groupName %></button>
+                <%= groupName %>
+                </td>
                 <td class="compare-minions-data"><%= minions %></td>
                 <td class="compare-coins-data"><%= coins %></td>
                 <td class="compare-meals-data">14</td>
-                <td><button class="remove-player-button"><%= groupName %></button></td>
             </tr>
         </script>
 

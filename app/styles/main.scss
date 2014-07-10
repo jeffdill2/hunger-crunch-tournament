@@ -859,13 +859,39 @@ header {
 .compare-groups-content {
 	padding: 30px 150px;
 	border-top: 1px solid $colorLightGray;
-}
-
-.compare-groups-content {
 	color: $colorStoneGray;
+	ul {
+		min-height: 400px;
+		overflow: scroll;
+	}
 }
 
+.remove-group-button {
+	height: 25px;
+	width: 25px;
+	margin: -2px 10px 0 -10px;
+	padding: 0;
+	border-radius: 50%;
+	vertical-align: middle;
+	background: $colorCoral;
+	color: $colorCoral;
+	border: none;
+	overflow: none;
+	display: inline-block;
+	position: relative;
 
+	&:after {
+		position: absolute;
+		content: '';
+		height: 4px;
+		width: 15px;
+		background: $colorWhite;
+		right: 5px;
+		top: 50%;
+		margin-top: -2px;
+
+	}
+}
 
 
 
