@@ -5,15 +5,15 @@ var AppRouter = Parse.Router.extend({
 	routes: {
 		''								: 'home',
 		'sign-in'						: 'signInView',
-		'sign-in/passReset'				: 'passReset', 
+		'sign-in/pass-reset'			: 'passReset', 
 		'sign-up'						: 'signUpView',
 		'group/:groupID' 				: 'groupView',
 		'group/:groupID/:playerID' 		: 'playerView',
 		'dashboard' 					: 'dashboardView',
 		'dashboard/settings'			: 'settingsView',
-		'dashboard/createGroup'			: 'createGroupView',
+		'dashboard/create-group'		: 'createGroupView',
 		'dashboard/:groupID/:groupCode'	: 'groupViewCodeView',
-		'dashboard/compareGroups'		: 'compareGroupsView',
+		'dashboard/compare-groups'		: 'compareGroupsView',
 	},
 
 	initialize: function() {

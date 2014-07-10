@@ -39,7 +39,7 @@ var SignInView = Parse.View.extend ({
 	},
 
 	forgotPassword: function () {
-		router.navigate('/#sign-in/passReset', {trigger: true});
+		router.navigate('/#sign-in/pass-reset', {trigger: true});
 	},
 
 });

@@ -21,17 +21,15 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	createGroupNav: function() {
-		window.location = '/#dashboard/createGroup'
+		router.navigate('/#dashboard/create-group', {trigger: true});
 	},
 
 	compareGroupsNav: function() {
-			window.location = '/#dashboard/compareGroups'
-		
+		router.navigate('/#dashboard/compare-groups', {trigger: true});		
 	},
 
 	groupView: function() {
-			window.location = '/#group/123'
-		
+		router.navigate('/#group/123', {trigger: true});		
 	},
 
 })
