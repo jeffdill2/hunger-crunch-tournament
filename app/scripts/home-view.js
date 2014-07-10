@@ -22,15 +22,15 @@ var HomeView = Parse.View.extend ({
 	},
 
 	submitGroup : function () {
-		window.location = '/#group/' + $('.group-id').val();
+		router.navigate('/#group/' + $('.group-id').val(), {trigger: true});
 	},
 
 	signUpView: function () {
 		if(Parse.User.current()){
-			window.location = '/#dashboard';
+			router.navigate('/#dashboard' + $('.group-id').val(), {trigger: true});
 			
 		}else{
-			window.location = '/#sign-up';
+			router.navigate('/#sign-up' + $('.group-id').val(), {trigger: true});
 		}
 	},
 
