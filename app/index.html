@@ -558,7 +558,7 @@
                             </td>
                         </tr>
                     </thead>
-                    <tbody class="list">
+                    <tbody class="list compare-list">
                     <!-- place where player group totals will be appended -->
                     </tbody>
                     <tfoot>
@@ -572,13 +572,13 @@
         <!-- template for adding in groups the user has created -->
         <script type="text/template" class="compare-groups-user-groups-template">
             <tr>
-                <td class="compare-group-name"> <%= groupName %> </td>
-                <td class="compare-minions-data"><%= minionSum %></td>
-                <td class="compare-coins-data"><%= coinSum %></td>
+                <td class="compare-group-name"><%= groupName %></td>
+                <td class="compare-minions-data"><%= minions %></td>
+                <td class="compare-coins-data"><%= coins %></td>
                 <td class="compare-meals-data">14</td>
+                <td><button class="remove-player-button"><%= groupName %></button></td>
             </tr>
         </script>
-                        
 
         <!-- template for adding a group to the compare groups view -->
         <script type="text/template" class="compare-groups-add-group-template">
@@ -587,27 +587,18 @@
 
                 <input class="search" placeholder="Search" />
                 <button class="sort" data-sort="compare-group-name-search">SORT BY NAME</button>
-                <ul class="list">
-                  <li>
-                    <h3 class="compare-group-name-search">SENIORS</h3>
-                    <p class="valid">Live</p>
-                  </li>
-                  <li>
-                    <h3 class="compare-group-name-search">JUNIORS</h3>
-                    <p class="valid">Not-Live</p>
-                  </li>
-                  <li>
-                    <h3 class="compare-group-name-search">SOPHOMORES</h3>
-                    <p class="valid">Not-Live</p>
-                  </li>
-                  <li>
-                    <h3 class="compare-group-name-search">FRESHMEN</h3>
-                    <p class="valid">Live</p>
-                  </li>
+                <ul class="list add-list">
                 </ul>
             </div>
         </script>
 
+        <!-- template for drop down list of groups to add to compare list -->
+        <script type="text/template" class="compare-groups-added-group-template">
+                  <li>
+                    <h3 class="compare-group-name-search"><%= groupName %></h3>
+                    <p class="valid">Live</p>
+                  </li>
+        </script>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
