@@ -13,6 +13,7 @@ var SettingsView = Parse.View.extend({
 	initialize: function(options) {
 		$('.app-container').append(this.el);
 		this.render();
+		this.enableEnter();
 	},
 
 	render: function() {
@@ -64,5 +65,15 @@ var SettingsView = Parse.View.extend({
   			  $('.settings-content span').text("Connection Error. Password not reset. Please try again.").css('color','#EF5455');
   			}
 			});
+	},
+
+	enableEnter: function () {
+			// if user hits enter in email feild, it triggers the sign in
+		$('.user-email').keypress(function (key) {
+			if (key.which == 13) {
+				$('.save-email').click();
+			}
+		});
+
 	}
 });

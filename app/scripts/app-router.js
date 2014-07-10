@@ -3,6 +3,7 @@
 var AppRouter = Parse.Router.extend({
 
 	routes: {
+		''								: 'home',
 		'tournament'								: 'home',
 		'tournament/sign-in'						: 'signInView',
 		'tournament/sign-in/pass-reset'			: 'passReset', 
