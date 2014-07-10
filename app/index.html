@@ -59,7 +59,7 @@
 
         <div class="app-container"></div>
 
-        
+
 
 
         <!--////////////////////////////////////////////////////////
@@ -771,6 +771,13 @@
                     <h3 class="compare-group-name-search"><%= groupName %></h3>
                     <p class="valid">Live</p>
                   </li>
+        </script>
+
+        <script type="text/template" class="alert-template">
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <%= message %>
+            </div>
         </script>
 
         <!-- build:js scripts/vendor.js -->
