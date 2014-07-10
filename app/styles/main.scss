@@ -178,6 +178,14 @@ table {
 	padding: 20px 20px 20px 0;
 }
 
+.printable {
+	display: block !important;
+}
+
+.non-print {
+	display: none !important;
+}
+
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// HEADER
 ////////////////////////////////////////////////////////////
@@ -856,15 +864,26 @@ header {
 .compare-groups-header-content {
 	@extend .content-header;
 	@extend .clearfix;
+	border-bottom: 1px solid $colorCharcoal;
 }
-
+.compare-groups-content-container {
+	width: 950px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
 .compare-groups-content {
-	padding: 30px 150px;
-	border-top: 1px solid $colorLightGray;
-	color: $colorStoneGray;
-	ul {
+	color: $colorTextDarkGray;
+
+	& ul {
 		min-height: 400px;
 		overflow: scroll;
+	}
+
+	& td:first-child {
+		width: 20%;
+	}
+	& tbody td:first-child {
+		text-align: left;
 	}
 }
 
@@ -895,7 +914,21 @@ header {
 	}
 }
 
+.print {
+    float: right;
+    margin-bottom: 50px;
+    position: relative;
+    cursor: pointer;
 
+    &:before {
+        position: absolute;
+        content: ' ';
+        background: url(../images/printer.png) 0 0 / contain;
+        height: 1.4em;
+        width: 1.4em;
+        left: -1.5em;
+    }
+}
 
 .list {
   font-family:sans-serif;

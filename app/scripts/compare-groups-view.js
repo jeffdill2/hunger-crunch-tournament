@@ -9,9 +9,10 @@ var CompareGroupsView = Parse.View.extend({
 	groupsToCompare: [],
 
 	events: {
-		'click .table-footer': 'displayAvailableGroups',
-		'click .compare-group-name-search': 'addGroup',
-		'click .remove-group-button': 'removeGroup',
+		'click .table-footer'				: 'displayAvailableGroups',
+		'click .compare-group-name-search'	: 'addGroup',
+		'click .remove-group-button'		: 'removeGroup',
+		'click .print'						: 'printTable'
 	},
 
 	initialize: function(options) {
@@ -153,4 +154,24 @@ var CompareGroupsView = Parse.View.extend({
 		console.log('to compare: ' + this.groupsToCompare)
 
 	},
+
+	printTable: function () {
+			$("header").addClass('non-print')
+			$(".compare-groups-header-content").addClass('non-print')
+			$(".compare-groups-content tfoot").addClass('non-print')
+			$(".compare-groups-content button").addClass('non-print')
+			$("#avaialble-group-names").addClass('non-print')
+			
+			$('.print').addClass();
+
+			window.print();
+
+			$('.print').removeClass();
+			
+			$("header").removeClass('non-print')
+			$(".compare-groups-header-content").removeClass('non-print')
+			$(".compare-groups-content tfoot").removeClass('non-print')
+			$(".compare-groups-content button").removeClass('non-print')
+			$("#avaialble-group-names").removeClass('non-print')
+	}
 });

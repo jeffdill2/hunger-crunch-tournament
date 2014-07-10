@@ -15,8 +15,7 @@ var GroupView = Parse.View.extend({
 
 		var Group = Parse.Object.extend("Groups");
 		var query = new Parse.Query(Group);
-		var spacedGroupName = this.group.groupID.replace(/%20/g, ' ');
-		query.equalTo("groupName", spacedGroupName);
+		query.equalTo("groupID", this.group.groupID);
 
 		var that = this;
 		query.first({
@@ -41,7 +40,6 @@ var GroupView = Parse.View.extend({
 	},
 
 	showPlayer: function (location) {
-		console.log(location.currentTarget.innerHTML)
 		var playerID = location.currentTarget.innerHTML;
 		router.navigate('group/'+this.group.groupID+"/"+playerID, {trigger: true});
 	}, 
