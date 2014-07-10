@@ -1,8 +1,9 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click	.create-group-button'	: 'createGroupNav', 
-		'click	.compare-groups-button'	: 'compareGroupsNav', 
+		'click	.create-group-button'		: 'createGroupNav', 
+		'click	.compare-groups-button'		: 'compareGroupsNav', 
+		'click	.group-details-container'	: 'groupView', 
 	},
 
 	template: _.template($('.dashboard-view').text()),
@@ -25,6 +26,11 @@ var DashboardView = Parse.View.extend ({
 
 	compareGroupsNav: function() {
 			window.location = '/#dashboard/compareGroups'
+		
+	},
+
+	groupView: function() {
+			window.location = '/#group/123'
 		
 	},
 
