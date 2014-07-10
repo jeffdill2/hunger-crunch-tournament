@@ -5,12 +5,10 @@ var CompareGroupsView = Parse.View.extend({
 	template: _.template($('.compare-groups-view-template').text()),
 	addGroupTemplate: _.template($('.compare-groups-add-group-template').text()),
 	//empty array that will be filled by the objects pulled from parse in this.displayAvailableGroups
-	groupsToAdd: [],
-	groupsToCompare: [],
 
 	events: {
 		'click .table-footer'				: 'displayAvailableGroups',
-		'click .compare-group-name-search'	: 'addGroup',
+		'click .compare-group-item'			: 'addGroup',
 		'click .remove-group-button'		: 'removeGroup',
 		'click .print'						: 'printTable'
 	},
@@ -20,7 +18,9 @@ var CompareGroupsView = Parse.View.extend({
 		$('.app-container').append(this.el);
 		this.getAvailableGroups();
 		this.render();
-
+		// make sure arrays are empty on view call
+		this.groupsToAdd = [];
+		this.groupsToCompare = [];
 	},
 
 	render: function() {
@@ -148,9 +148,6 @@ var CompareGroupsView = Parse.View.extend({
 		this.groupsToAdd.push(removedGroup);
 		this.displayCompareGroups();
 		this.displayAvailableGroups();
-
-		console.log('to add: ' + this.groupsToAdd)
-		console.log('to compare: ' + this.groupsToCompare)
 
 	},
 

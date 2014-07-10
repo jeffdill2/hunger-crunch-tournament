@@ -1,5 +1,5 @@
 "use strict";
-
+	
 var AppRouter = Parse.Router.extend({
 
 	routes: {
@@ -79,7 +79,7 @@ var AppRouter = Parse.Router.extend({
 	groupViewCodeView: function (groupID, groupCode) {
 		this.swap( new GroupCodeView({'group': groupID, 'code': groupCode}));
 	},
-
+	
 	swap: function (view) {
 		this.navCheck();
 
