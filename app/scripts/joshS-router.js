@@ -5,6 +5,7 @@ var AppRouter = Parse.Router.extend({
 	routes: {
 		''								: 'home',
 		'sign-in'						: 'signInView',
+		'sign-in/passReset'				: 'passReset', 
 		'sign-up'						: 'signUpView',
 		'group/:groupID' 				: 'groupView',
 		'group/:groupID/:playerID' 		: 'playerView',
@@ -33,6 +34,10 @@ var AppRouter = Parse.Router.extend({
 
 	signInView: function() {
 		this.swap( new SignInView() );
+	},
+
+	passReset: function() {
+		this.swap( new PassResetView() );
 	},
 
 
