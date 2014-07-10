@@ -7,12 +7,13 @@ var PlayerView = Parse.View.extend({
 	initialize: function(options) {
 		$('.app-container').append(this.el);
 		this.render();
+		this.playerInfo = options;
 		var player = options.playerID;
-		console.log(player);
+		var group = options.groupID;
 	},
 
 	render: function() {
-		var renderedTemplate = this.template;
+		var renderedTemplate = this.template(this.options);
 		this.$el.html(renderedTemplate);
 		this.tableSort();
 	},

@@ -32,6 +32,7 @@ var CompareGroupsView = Parse.View.extend({
 		query.find({
 		  success: function(groups) {
 		    // Do something with the returned Parse.Object values
+		    console.log(groups)
 		    for (var i = 0; i < groups.length; i++) { 
 
 		    	// query for all playerEvent objects
@@ -42,34 +43,45 @@ var CompareGroupsView = Parse.View.extend({
 
 		    	query.find({
 		    		success: function (results) {
-		    			// gets groups that have matching names of the player events being totaled
-		    			var query = new Parse.Query(Groups);
-		    			query.equalTo("groupID", results[0].attributes.groupID);
-		    			
-		    			query.find({
-		    				success: function (group) {
-		    					console.log(results)
-		    					var groupSum = {
-		    						groupName: group[0].attributes.groupName,
-				    				coinSum: 0,
-				    				minionSum: 0
-				    			};
-				    			// adds all matching player event numbers to object being passed
-				    			// to the template
-		    					for (var i = 0; i < results.length; i++) { 
-		    						groupSum.coinSum += results[i].attributes.level.levelCoins;
-		    						groupSum.minionSum += results[i].attributes.level.levelMinions;
-		    					}
-		    			// appends instance of group totals and group name to the template
-		    					$('.list').append( compareUserGroupsTemplate( groupSum ) );
-		    					that.tableSort();
-		    				},
-		    				error: function (error) {
-		    					console.log(error);
-		    				}
-		    			})
+		    			if (results.length > 0) {
 
-		    			
+			    			// gets groups that have matching names of the player events being totaled
+			    			var query = new Parse.Query(Groups);
+			    			query.equalTo("groupID", results[0].attributes.groupID);
+			    			
+			    			query.find({
+			    				success: function (group) {
+			    					console.log(results)
+			    					var groupSum = {
+			    						groupName: group[0].attributes.groupName,
+					    				coinSum: 0,
+					    				minionSum: 0
+					    			};
+					    			// adds all matching player event numbers to object being passed
+					    			// to the template
+			    					for (var i = 0; i < results.length; i++) { 
+			    						groupSum.coinSum += results[i].attributes.level.levelCoins;
+			    						groupSum.minionSum += results[i].attributes.level.levelMinions;
+			    					}
+			    			// appends instance of group totals and group name to the template
+			    					$('.list').append( compareUserGroupsTemplate( groupSum ) );
+			    					that.tableSort();
+			    				},
+			    				error: function (error) {
+			    					console.log(error);
+			    				}
+			    			})
+
+		    			}
+		    			else {
+		    				console.log('Looks like your group '+groups[0].attributes.groupName+' hasn\'t recorded any results yet!')
+		    				var groupSum = {
+		    					groupName: groups[0].attributes.groupName,
+			    				coinSum: 0,
+			    				minionSum: 0
+		    				};
+		    				$('.list').append( compareUserGroupsTemplate( groupSum ) );
+		    			}
 		    		},
 		    		error: function(error) {
 

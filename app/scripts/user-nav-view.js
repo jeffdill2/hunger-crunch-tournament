@@ -22,7 +22,9 @@ var UserNavView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template();
 		this.$el.html(renderedTemplate);
-		var navRenderedTemplate = this.welcomeTemplate(this.user.attributes);
+		// capitalize the first letter of the org/username
+		var name = this.user.attributes.username[0].toUpperCase()+this.user.attributes.username.slice(1);
+		var navRenderedTemplate = this.welcomeTemplate({username:name});
 		$('.header-account-options').html(navRenderedTemplate);
 	},
 

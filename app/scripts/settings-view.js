@@ -22,22 +22,31 @@ var SettingsView = Parse.View.extend({
 	},
 
 	changeEmail: function() {
-		$('.user-email').html('<input class="new-user-email" placeholder=' + Parse.User.current().attributes.email + '></input>');
-		$('.update-email').html('<button class="save-email">Save Email</button>');
+
+		var email = $('.user-email').attr('placeholder');
+		$('.user-email').attr({'readonly': false,'placeholder': ''}).focus().attr('value',email).css('color', '#6D6E71')
+		$('.save-email').show().css('display','block');
+		$('.edit-email').hide();
 		
 	},
 
 	saveEmail: function() {
-		var newEmail = $('.new-user-email').val();
+		var newEmail = $('.user-email').val();
 		var user = Parse.User.current();
-
+		$('.settings-content span').html('');
   		user.set('email', newEmail);
   		user.save(null, {
   			success: function () {
-  				router.currentView.render();
+  				// router.currentView.render();
+
+  				$('.user-email').attr('readonly', true).css('color', '#939598');
+  				$('.edit-email').show().css('display','block');
+  				$('.save-email').hide();
+  				$('.settings-content span').text("Successfully updated!").css('color','#2FD03A');
   			},
   			error: function () {
   				console.log('there was a problem');
+  				$('.settings-content span').text("Connection Error. Please try again.").css('color','#EF5455');
   			}
   		});
   			
@@ -48,11 +57,11 @@ var SettingsView = Parse.View.extend({
 		Parse.User.requestPasswordReset(userEmail , {
   			success: function() {
    			 // Password reset request was sent successfully
-   			 alert("An email has been sent to your account to reset your password")
+   			 $('.settings-content span').text("An email has been sent to your account to reset your password").css('color','#2FD03A');
   			},
   			error: function(error) {
   			  // Show the error message somewhere
-  			  alert("Error: " + error.code + " " + error.message);
+  			  $('.settings-content span').text("Connection Error. Password not reset. Please try again.").css('color','#EF5455');
   			}
 			});
 	}
