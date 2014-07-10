@@ -116,8 +116,7 @@ var CompareGroupsView = Parse.View.extend({
 
 
 	addGroup: function(location) {
-
-		var addName = location.currentTarget.innerHTML;
+		var addName = location.currentTarget.children.item("h3").innerHTML;
 		var groupArr = this.groupsToAdd;
 
 		var addedGroup = _.find(groupArr, function(group) {

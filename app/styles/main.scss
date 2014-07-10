@@ -22,8 +22,6 @@ $icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/
 	padding: 0.2em 0;
 }
 
-
-
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
@@ -40,9 +38,17 @@ body {
 }
 
 table {
-	text-align: center; 
+	text-align: center;
 	width: 100%;
 	margin-bottom: 20px;
+
+	& tbody {
+		& tr {
+			&:hover {
+				background-color: $colorOffWhite;
+			}
+		}
+	}
 	// all cells
 	& tr {
 		border-bottom: 1px solid $colorLightGray;
@@ -84,7 +90,7 @@ table {
 			& span {
 				display: block;
 			}
-		}	
+		}
 	}
 
 	& .table-footer {
@@ -133,8 +139,8 @@ table {
 
 	&:after {
 		content: " ";
-		display: block; 
-		height: 0; 
+		display: block;
+		height: 0;
 		clear: both;
 	}
 }
@@ -193,12 +199,12 @@ table {
 
 header {
 	height: 110px;
-	padding: 20px 30px 10px; 
-	background: url(../images/map-bg.png); 
+	padding: 20px 30px 10px;
+	background: url(../images/map-bg.png);
 	background-size: 87px auto;
 	background-repeat: repeat;
 	background-position: top left;
-	position: relative;	
+	position: relative;
 
 	& a {
 		text-decoration: none;
@@ -327,7 +333,7 @@ header {
 	width: 23.5%;
 	margin: 45px auto;
 	text-align: center;
-	
+
 	& .sign-up-button {
 		width: 250px;
 		height: 75px;
@@ -341,6 +347,10 @@ header {
 		font-style: italic;
 		letter-spacing: 0.06em;
 		text-shadow: 1px 1px darken($colorButtonTeal, 10%);
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	.sign-up-button:before,
@@ -579,7 +589,7 @@ header {
 	margin-bottom: 50px;
 	padding: 10px;
 	background: $colorWhite;
-		
+
 	&:nth-of-type(2n) {
 		margin-right: 0;
 	}
@@ -757,7 +767,7 @@ header {
 
 .group-stats-drop-down {
 	padding: 30px 100px;
-	text-align: center; 
+	text-align: center;
 	color: $colorTextDarkGray;
 
 	& table {
@@ -779,7 +789,7 @@ header {
 				height: 70px;
 				font-size: 1.5em;
 				font-weight: bold;
-		}	
+		}
 	}
 }
 
@@ -876,7 +886,6 @@ header {
 
 	& ul {
 		min-height: 400px;
-		overflow: scroll;
 	}
 
 	& td:first-child {
@@ -938,8 +947,14 @@ header {
 .list > li {
   display:block;
   background-color: #eee;
+  margin-bottom: 10px;
   padding:10px;
   box-shadow: inset 0 1px 0 #fff;
+
+  &:hover {
+  	cursor: pointer;
+  	opacity: 0.7;
+  }
 }
 .compare-groups-add-group-template {
 
@@ -1101,5 +1116,5 @@ header {
 
 
 
-	
+
 
