@@ -24,7 +24,7 @@ var CreateGroupView = Parse.View.extend({
 		this.$el.html(renderedTemplate);
 		this.startDatePicker();
 		this.endDatePicker();
-		
+
 		this.startPicker.on('set', function (event) {
 				if (event.select) {
 					that.endPicker.set('min', that.startPicker.get('select'));
@@ -122,7 +122,7 @@ var CreateGroupView = Parse.View.extend({
 			}
 
 			var objGroup = new GroupModel();
-			
+
 			var groupName = $('.new-group-name-input').val();
 			var orgName = Parse.User.current().attributes.username;
 
@@ -161,5 +161,4 @@ var CreateGroupView = Parse.View.extend({
 			});
 		})
 	}
-
 });
