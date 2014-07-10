@@ -29,7 +29,7 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	groupView: function() {
-		router.navigate('/#group/123', {trigger: true});		
+		// router.navigate('/#group/123', {trigger: true});		
 	},
 
 })
