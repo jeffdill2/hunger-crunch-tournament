@@ -452,19 +452,19 @@ header {
 /////////////////////////////////////// SIGN UP/SIGN IN VIEW
 ////////////////////////////////////////////////////////////
 
-.new-user-login-container, .existing-user-login-container, .settings-container, .create-group-container {
+.new-user-login-container, .existing-user-login-container, .settings-container, .create-group-container, .reset-password-boundry {
 	min-height: 15em;
 	background: $colorLightGray;
 	padding-bottom: 2em;
 }
 
-.sign-up-view-header, .sign-in-view-header, .settings-header, .create-group-view-header {
+.sign-up-view-header, .sign-in-view-header, .settings-header, .create-group-view-header, .pass-reset-view-header {
 	@extend .content-header;
 	@extend .clearfix;
 	background: $colorWhite;
 }
 
-.sign-up-view-content, .sign-in-view-content, .settings-content, .create-group-view-content {
+.sign-up-view-content, .sign-in-view-content, .settings-content, .create-group-view-content, .reset-password-container {
 	padding: 25px 0;
 
 	& input, & button {

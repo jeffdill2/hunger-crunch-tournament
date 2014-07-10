@@ -28,7 +28,7 @@ var SignInView = Parse.View.extend ({
 		var pw = $('.existing-user-password-input').val();
 		Parse.User.logIn(name, pw, {
 			success: function(user) {
-				router.navigate('dashboard', {trigger:true});
+				router.navigate('/#tournament/dashboard', {trigger:true});
 			},
 			error: function(user, error) {
 				$('.error-report').html("Username or password is incorrect").css({'margin-bottom':'-19px'});
@@ -39,7 +39,7 @@ var SignInView = Parse.View.extend ({
 	},
 
 	forgotPassword: function () {
-		router.navigate('/#sign-in/pass-reset', {trigger: true});
+		router.navigate('/#tournament/sign-in/pass-reset', {trigger: true});
 	},
 
 });

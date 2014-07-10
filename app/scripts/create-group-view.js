@@ -152,7 +152,7 @@ var CreateGroupView = Parse.View.extend({
 					console.log(group)
 					var groupName = group.attributes.groupName.replace(/ /g, '%20');
 					var uniqueID = group.attributes.groupID;
-					router.navigate('/#dashboard/'+groupName+'/'+uniqueID, {trigger: true});
+					router.navigate('/#tournament/dashboard/'+groupName+'/'+uniqueID, {trigger: true});
 				},
 				error: function(error) {
 					console.log('New group was not successfully saved - details below:');

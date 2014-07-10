@@ -20,7 +20,7 @@ var HomeView = Parse.View.extend({
 	},
 
 	submitGroup : function() {
-		router.navigate('/#group/' + $('.group-id').val(), {trigger: true});
+		router.navigate('/#tournament/group/' + $('.group-id').val(), {trigger: true});
 	},
 
 	signUpView: function() {
@@ -32,7 +32,7 @@ var HomeView = Parse.View.extend({
 
 			$('.sign-up-button-container').append(renderedTemplate);
 		} else {
-			router.navigate('/#sign-up', {trigger: true});
+			router.navigate('/#tournament/sign-up', {trigger: true});
 		}
 	}
 });
