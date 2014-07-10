@@ -10,7 +10,7 @@ var CompareGroupsView = Parse.View.extend({
 
 	events: {
 		'click .table-footer': 'displayAvailableGroups',
-		'click .compare-group-name-search': 'addGroup',
+		'click .compare-group-item': 'addGroup',
 		'click .remove-group-button': 'removeGroup',
 	},
 
@@ -115,8 +115,7 @@ var CompareGroupsView = Parse.View.extend({
 
 
 	addGroup: function(location) {
-
-		var addName = location.currentTarget.innerHTML;
+		var addName = location.currentTarget.children.item("h3").innerHTML;
 		var groupArr = this.groupsToAdd;
 
 		var addedGroup = _.find(groupArr, function(group) {
