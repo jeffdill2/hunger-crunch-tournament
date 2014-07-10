@@ -22,8 +22,24 @@ var UserNavView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template();
 		this.$el.html(renderedTemplate);
-		// capitalize the first letter of the org/username
-		var name = this.user.attributes.username[0].toUpperCase()+this.user.attributes.username.slice(1);
+		
+		// regex to capitalize the first letter of the org/username including multiple words
+		function toTitleCase(str)
+		{
+		    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		}
+		// if the words contains a period, it will uppercase the entire word
+		function check (x) {
+			if (x.indexOf(".") != -1) { 
+					return x.toUpperCase()
+				}
+			else {
+				return toTitleCase(x);
+			}
+		}
+		var name = this.user.attributes.username
+		name = check(name);
+
 		var navRenderedTemplate = this.welcomeTemplate({username:name});
 		$('.header-account-options').html(navRenderedTemplate);
 	},

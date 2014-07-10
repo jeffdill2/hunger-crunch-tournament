@@ -59,6 +59,7 @@
 
         <div class="app-container"></div>
 
+        
 
 
         <!--////////////////////////////////////////////////////////
@@ -82,7 +83,37 @@
                     <div class="minion-counter-content">
                         <img class="cyclops-home-graphic" src="../images/cyclops.gif">
                         <h3>HUNGER MINIONS STOMPED</h3>
-                        <div id="flip-counter" class="flip-counter"></div>
+                        <div class="flip">
+                                    <ul class="full-counter">
+                                        <li class="counter-cards">
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <li class="counter-cards">3
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <span>,</span>
+                                        <li class="counter-cards">5
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <li class="counter-cards">9
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <li class="counter-cards">1
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <span>,</span>
+                                        <li class="counter-cards">7
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <li class="counter-cards">3
+                                            <div class="card-line"></div>
+                                        </li>
+                                        <li class="counter-cards">9
+                                            <div class="card-line"></div>
+                                        </li>
+                                    </ul>
+
+                                </div>
                     </div>
                 </div>
                 <div class="sign-up-button-container">
@@ -234,19 +265,19 @@
                             <tr>
                                 <td class="player-name">SAM</td>
                                 <td class="minions-data">400</td>
-                                <td class="coins-data">3,200</td>
+                                <td class="coins-data">3200</td>
                                 <td class="collectibles-data">14</td>
                             </tr>
                             <tr>
                                 <td class="player-name">BOB</td>
                                 <td class="minions-data">300</td>
-                                <td class="coins-data">3,100</td>
+                                <td class="coins-data">3100</td>
                                 <td class="collectibles-data">13</td>
                             </tr>
                             <tr>
                                 <td class="player-name">BILL</td>
                                 <td class="minions-data">200</td>
-                                <td class="coins-data">3,000</td>
+                                <td class="coins-data">3000</td>
                                 <td class="collectibles-data">15</td>
                             </tr>
 
@@ -396,19 +427,19 @@
                             <tr>
                                 <td class="level-play-data">3</td>
                                 <td class="level-minions-data">508</td>
-                                <td class="level-coins-data">34,405</td>
+                                <td class="level-coins-data">34405</td>
                             </tr>
 
                             <tr>
                                 <td class="level-play-data">4</td>
                                 <td class="level-minions-data">162</td>
-                                <td class="level-coins-data">13,405</td>
+                                <td class="level-coins-data">13405</td>
                             </tr>
 
                             <tr>
                                 <td class="level-play-data">5</td>
                                 <td class="level-minions-data">290</td>
-                                <td class="level-coins-data">43,405</td>
+                                <td class="level-coins-data">43405</td>
                             </tr>
                         </tbody>
                     </table>
@@ -665,46 +696,48 @@
             </div>
 
         </script>
-
         <!-- template for the compare groups view -->
         <script type="text/template" class="compare-groups-view-template">
             <div class="compare-groups-header-content">
                 <div class="compare-groups-location-banner h1-flag">COMPARE GROUPS</div>
             </div>
-            <div class="compare-groups-content" id="compare-groups-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>
-                                <button class="sort" data-sort="compare-group-name"></button>
-                                <span>GROUP NAME</span>
-                            </td>
-                            <td>
-                                <button class="sort" data-sort="compare-minions-data"></button>
-                                <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                                <span>MINIONS STOMPED</span>
-                            </td>
-                            <td>
-                                <button class="sort" data-sort="compare-coins-data"></button>
-                                <img class="coins-image" src="../images/coin-stack.png"></img>
-                                <span>COINS COLLECTED</span>
-                            </td>
-                            <td>
-                                <button class="sort" data-sort="compare-meals-data"></button>
-                                <img class="meals-image" src="../images/bowl.png"></img>
-                                <span>MEALS PROVIDED</span>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody class="list compare-list">
-                    <!-- place where player group totals will be appended -->
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td class="table-footer" colspan="4">ADD A GROUP</td>
-                        </tr>
-                    </tfoot>
-                </table>
+            <div class="compare-groups-content-container">
+                <div class="print">Print</div>
+                <div class="compare-groups-content" id="compare-groups-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <button class="sort" data-sort="compare-group-name"></button>
+                                    <span>GROUP NAME</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="compare-minions-data"></button>
+                                    <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                                    <span>MINIONS STOMPED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="compare-coins-data"></button>
+                                    <img class="coins-image" src="../images/coin-stack.png"></img>
+                                    <span>COINS COLLECTED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="compare-meals-data"></button>
+                                    <img class="meals-image" src="../images/bowl.png"></img>
+                                    <span>MEALS PROVIDED</span>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="list compare-list">
+                        <!-- place where player group totals will be appended -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="table-footer" colspan="4">ADD A GROUP</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </script>
         <!-- template for adding in groups the user has created -->
@@ -784,7 +817,6 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/create-role.js"></script>
         <script src="scripts/model.js"></script>
-        <script src="scripts/counter.js"></script>
         <script src="scripts/home-view.js"></script>
         <script src="scripts/user-nav-view.js"></script>
         <script src="scripts/sign-up-view.js"></script>

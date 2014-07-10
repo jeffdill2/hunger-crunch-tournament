@@ -184,6 +184,14 @@ table {
 	padding: 20px 20px 20px 0;
 }
 
+.printable {
+	display: block !important;
+}
+
+.non-print {
+	display: none !important;
+}
+
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// HEADER
 ////////////////////////////////////////////////////////////
@@ -293,9 +301,8 @@ header {
 
 .hunger-minions-counter-container {
 	width: 100%;
-	height: 250px;
 	background: lighten($colorStoneGray, 20%);
-	padding: 1em;
+	padding: 20px 0 0;
 
 	& .minion-counter-content {
 		width: 50%;
@@ -368,6 +375,71 @@ header {
 	}
 }
 
+.flip {
+	width: 535px;
+	margin: 30px auto 0;
+
+	& .full-counter {
+		@extend .clearfix;
+		list-style: none;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		& span {
+			float: left;
+			vertical-align: bottom;
+			font-size: 5.5em;
+			margin: 0 3px 0 0;
+			color: $colorCharcoalDark;
+		}
+		& .counter-cards {
+			float: left;
+			margin: 0 5px 0 0;
+			padding: 10px 8px;
+			min-width: 57px;
+			min-height: 91px;
+			font-size: 5em;
+			border-radius: 2px;
+			background: $colorCharcoalDark;
+			color: $colorWhite;
+			line-height: 1;
+			text-align: center;
+			position: relative;
+			text-shadow: 1px 1px darken($colorCharcoalDark, 15%);
+			box-shadow: 2px 2px 1px 0 darken($colorCharcoalDark, 15%);
+			
+			&:before, &:after {
+				position: absolute;
+				content: '';
+				width: 2px;
+				height: 12px;
+				left: 2%;
+				top: 50%;
+				margin: -4px auto 0;
+				background: $colorWhite;
+				z-index: 1;
+			}
+
+			&:after {
+				left:98%;
+			}
+
+			.card-line {
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				left: 0;
+				top: 52%;
+				margin: 0 auto 0;
+				background: darken($colorCharcoalDark, 10%);
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}
 
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////// SIGN UP/SIGN IN VIEW
@@ -497,42 +569,6 @@ header {
 	height: auto;
 }
 
-////////////////////////////////////////////////////////////
-////////////////////////////////////////////// TOTAL COUNTER
-////////////////////////////////////////////////////////////
-.flip-counter {
-	margin: 2em auto;
-	width: 400px;
-
-	& ul.cd {
-		float: left;
-		list-style-type: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	& li {
-		background: url(../images/digits.png) 0 0 no-repeat;
-	}
-
-	& li.t {
-		background-position: 0 0;
-		height: 39px;
-		width: 53px;
-	}
-
-	& li.b {
-		background-position: 0 0;
-		height: 64px;
-		width: 53px;
-	}
-
-	& li.s {
-		background-position: -53px -1030px;
-		height: 103px;
-		width: 14px;
-	}
-}
 
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// DASHBOARD VIEW
@@ -866,21 +902,32 @@ header {
 .compare-groups-header-content {
 	@extend .content-header;
 	@extend .clearfix;
+	border-bottom: 1px solid $colorCharcoal;
 }
-
+.compare-groups-content-container {
+	width: 950px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
 .compare-groups-content {
-	padding: 30px 150px;
-	border-top: 1px solid $colorLightGray;
-	color: $colorStoneGray;
-	ul {
+	color: $colorTextDarkGray;
+
+	& ul {
 		min-height: 400px;
+	}
+
+	& td:first-child {
+		width: 20%;
+	}
+	& tbody td:first-child {
+		text-align: left;
 	}
 }
 
 .remove-group-button {
 	height: 25px;
 	width: 25px;
-	margin: -2px 10px 0 -10px;
+	margin: -2px 10px 0 -30px;
 	padding: 0;
 	border-radius: 50%;
 	vertical-align: middle;
@@ -904,7 +951,21 @@ header {
 	}
 }
 
+.print {
+    float: right;
+    margin-bottom: 50px;
+    position: relative;
+    cursor: pointer;
 
+    &:before {
+        position: absolute;
+        content: ' ';
+        background: url(../images/printer.png) 0 0 / contain;
+        height: 1.4em;
+        width: 1.4em;
+        left: -1.5em;
+    }
+}
 
 .list {
   font-family:sans-serif;

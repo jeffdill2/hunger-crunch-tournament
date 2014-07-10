@@ -5,13 +5,12 @@ var CompareGroupsView = Parse.View.extend({
 	template: _.template($('.compare-groups-view-template').text()),
 	addGroupTemplate: _.template($('.compare-groups-add-group-template').text()),
 	//empty array that will be filled by the objects pulled from parse in this.displayAvailableGroups
-	groupsToAdd: [],
-	groupsToCompare: [],
 
 	events: {
-		'click .table-footer': 'displayAvailableGroups',
-		'click .compare-group-item': 'addGroup',
-		'click .remove-group-button': 'removeGroup',
+		'click .table-footer'				: 'displayAvailableGroups',
+		'click .compare-group-item'			: 'addGroup',
+		'click .remove-group-button'		: 'removeGroup',
+		'click .print'						: 'printTable'
 	},
 
 	initialize: function(options) {
@@ -19,7 +18,9 @@ var CompareGroupsView = Parse.View.extend({
 		$('.app-container').append(this.el);
 		this.getAvailableGroups();
 		this.render();
-
+		// make sure arrays are empty on view call
+		this.groupsToAdd = [];
+		this.groupsToCompare = [];
 	},
 
 	render: function() {
@@ -148,8 +149,25 @@ var CompareGroupsView = Parse.View.extend({
 		this.displayCompareGroups();
 		this.displayAvailableGroups();
 
-		console.log('to add: ' + this.groupsToAdd)
-		console.log('to compare: ' + this.groupsToCompare)
-
 	},
+
+	printTable: function () {
+			$("header").addClass('non-print')
+			$(".compare-groups-header-content").addClass('non-print')
+			$(".compare-groups-content tfoot").addClass('non-print')
+			$(".compare-groups-content button").addClass('non-print')
+			$("#avaialble-group-names").addClass('non-print')
+			
+			$('.print').addClass();
+
+			window.print();
+
+			$('.print').removeClass();
+			
+			$("header").removeClass('non-print')
+			$(".compare-groups-header-content").removeClass('non-print')
+			$(".compare-groups-content tfoot").removeClass('non-print')
+			$(".compare-groups-content button").removeClass('non-print')
+			$("#avaialble-group-names").removeClass('non-print')
+	}
 });
