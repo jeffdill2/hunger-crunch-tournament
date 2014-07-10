@@ -17,6 +17,17 @@
         var should = chai.should();
     </script>
 
+    <div class="app-container"></div>
+
+    <script type="text/template" class="create-group-view-template">
+        <input class="new-group-name-input" placeholder="Group Name">
+        <input type="text" class="new-group-start-date-input start-date-picker" placeholder="Start Date" readonly>
+        <div class="start-date-container"></div>
+        <input class="new-group-end-date-input end-date-picker" placeholder="End Date" readonly>
+        <div class="end-date-container"></div>
+        <button class="button new-group-creation-button">Create Group</button>
+    </script>
+
     <script src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
 
     <!-- include source files here... -->
@@ -24,9 +35,25 @@
     <script src="bower_components/moment/moment.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/list.js/dist/list.js"></script>
+    <script src="../bower_components/pickadate/lib/compressed/picker.js"></script>
+    <script src="../bower_components/pickadate/lib/compressed/picker.date.js"></script>
 
+    <script src="../app/scripts/create-role.js"></script>
+    <script src="../app/scripts/model.js"></script>
     <script src="../app/scripts/counter.js"></script>
-    <script src="../app/scripts/groups.js"></script>
+    <script src="../app/scripts/home-view.js"></script>
+    <script src="../app/scripts/user-nav-view.js"></script>
+    <script src="../app/scripts/sign-up-view.js"></script>
+    <script src="../app/scripts/sign-in-view.js"></script>
+    <script src="../app/scripts/dashboard-view.js"></script>
+    <script src="../app/scripts/new-group-code-view.js"></script>
+    <script src="../app/scripts/settings-view.js"></script>
+    <script src="../app/scripts/create-group-view.js"></script>
+    <script src="../app/scripts/compare-groups-view.js"></script>
+    <script src="../app/scripts/group-view.js"></script>
+    <script src="../app/scripts/player-view.js"></script>
+    <script src="../app/scripts/joshS-router.js"></script>
+    <script src="../app/scripts/main.js"></script>
 
     <!-- include spec files here... -->
     <script src="spec/test.js"></script>

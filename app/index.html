@@ -21,14 +21,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        
+
         <!--////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////// STATIC
         /////////////////////////////////////////////////////////-->
         <header>
             <div class="header-content">
                 <div class="header-account-options">
-                    
+
                 </div>
                 <div class="header-breadcrumb">
                     <a href="http://www.hungercrunch.com/"><img src="../images/breadcrumb-shield.png"></a>
@@ -58,7 +58,7 @@
 
 
         <div class="app-container"></div>
-        
+
 
 
         <!--////////////////////////////////////////////////////////
@@ -155,13 +155,13 @@
             <button class="button reset-password-button" >Reset Email</button>
         </script>
 
-        
+
         <!-- template for the single group view -->
         <script type="text/template" class="group-view-template">
             <div class="group-view-header-content">
                 <div class="group-view-location-banner h1-flag">
                 <%=groupName ? groupName:GROUPNAME%>
- 
+
                 </div>
 
                     <ul class="group-view-details">
@@ -291,7 +291,7 @@
                                 <td class="coins-data">195</td>
                                 <td class="collectibles-data">22</td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
 
@@ -303,7 +303,7 @@
         <!-- template for the single player view -->
         <script type="text/template" class="player-view">
             <div class="player-view-header-content">
-                    <div class="player-view-location-banner h1-flag"><span><%=groupID%></span> 
+                    <div class="player-view-location-banner h1-flag"><span><%=groupID%></span>
                     <svg
                       version="1.1"
                       class="arrow-2"
@@ -429,7 +429,7 @@
                 </div>
             </div>
         <div class="dashboard-group-content">
-            
+
             <div class="test-group">
                 <div class="group-details-container">
                     <div class="groupname-and-code">
@@ -568,12 +568,12 @@
                           </g>
                         </svg>
                     </button>
-                    
+
                     <button class="reset-password">Reset Password</button>
                 </div>
             </div>
         </script>
-                
+
 
           <!-- template for creating groups -->
         <script type="text/template" class="create-group-view-template">
@@ -596,7 +596,7 @@
         <!-- template for the nav options if user signed in -->
         <script type="text/template" class="user-nav-welcome-template">
             <p>Welcome back, <span><%=username%></span></p>
-            
+
         </script>
 
         <!-- template for the nav bar if user is signed in -->
@@ -613,7 +613,7 @@
         <script type="text/template" class="group-view-code-template">
             <div class="group-created-header-container">
                 <div class="group-created-header-content">
-                    <h1>GROUP CREATED FOR "WEST HILLS"</h1>
+                    <h1>GROUP CREATED FOR "<%= group %>"</h1>
                 </div>
             </div>
             <div class="group-created-main-container">
@@ -621,7 +621,7 @@
                     <h4>PLAYER INSTRUCTIONS</h4>
                     <p>Give the following code to the players in your group:</p>
                     <div class="group-code-box">
-                        <input type="text" value="<%=code%>" class="group-code" readonly="readonly">
+                        <input type="text" value="<%= code %>" class="group-code" readonly="readonly">
                     </div>
                 </div>
                 <div class="instruction-images">
@@ -638,7 +638,7 @@
                     <h4>SHARE LINK FOR OBSERVERS</h4>
                     <p>Give the following link to people that would like to observe the group:</p>
                     <div class="group-link-box">
-                        <input type="text" value="http://www.hungercrunch.com/tournaments/<%=group%>" class="group-link"readonly="readonly">
+                        <input type="text" value="http://www.hungercrunch.com/#group/<%= code %>" class="group-link"readonly="readonly">
                     </div>
                 </div>
                 <button class="view-group-page">VIEW THE GROUP PAGE
@@ -718,7 +718,7 @@
 
         <!-- template for adding a group to the compare groups view -->
         <script type="text/template" class="compare-groups-add-group-template">
-            
+
             <div id="avaialble-group-names">
 
                 <input class="search" placeholder="Search" />
@@ -776,7 +776,7 @@
 
         <script type="text/javascript" src="//use.typekit.net/pug4efg.js"></script>
         <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-       
+
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/create-role.js"></script>
         <script src="scripts/model.js"></script>

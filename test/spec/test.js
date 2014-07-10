@@ -47,11 +47,12 @@
 
             it('should be able to randomly generate a five-character group ID', function() {
                 var strGroupID;
+                var groupView = new CreateGroupView();
 
                 for (var i = 0; i <= 1000; i += 1) {
-                    strGroupID = generateRandomGroupdID();
+                    strGroupID = groupView.generateRandomGroupdID();
 
-                    expect(strGroupID.length).to.equal(5);
+                    expect(strGroupID.length).to.equal(4);
                 }
             });
 
@@ -59,15 +60,16 @@
                 var strGroupID;
                 var cCurrentCharacter;
                 var numCurrentCharacterCode;
+                var groupView = new CreateGroupView();
 
                 for (var i = 0; i <= 1000; i += 1) {
-                    strGroupID = generateRandomGroupdID();
+                    strGroupID = groupView.generateRandomGroupdID();
 
                     for (var j = 0; j <= 4; j += 1) {
                         cCurrentCharacter = strGroupID[j];
                         numCurrentCharacterCode = cCurrentCharacter.charCodeAt();
 
-                        expect(numCurrentCharacterCode).to.be.within(97, 122);
+                        expect(numCurrentCharacterCode).to.be.within(120, 122);
                     }
                 }
             });
