@@ -1,8 +1,9 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click	.create-group-button'	: 'createGroupNav', 
-		'click	.compare-groups-button'	: 'compareGroupsNav', 
+		'click	.create-group-button'		: 'createGroupNav', 
+		'click	.compare-groups-button'		: 'compareGroupsNav', 
+		'click	.group-details-container'	: 'groupView', 
 	},
 
 	template: _.template($('.dashboard-view').text()),
@@ -20,12 +21,15 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	createGroupNav: function() {
-		window.location = '/#dashboard/createGroup'
+		router.navigate('/#dashboard/create-group', {trigger: true});
 	},
 
 	compareGroupsNav: function() {
-			window.location = '/#dashboard/compareGroups'
-		
+		router.navigate('/#dashboard/compare-groups', {trigger: true});		
+	},
+
+	groupView: function() {
+		router.navigate('/#group/123', {trigger: true});		
 	},
 
 })

@@ -10,7 +10,7 @@ var SignInView = Parse.View.extend ({
 	events: {
 		'click .existing-user-login-button'	: 'userSignIn',
 		'click	.forgot-password-button'	: 'forgotPassword', 
-		'click	.reset-password-button'	: 'resetPassword', 
+		 
 	},
 
 	initialize: function (options) {
@@ -39,24 +39,7 @@ var SignInView = Parse.View.extend ({
 	},
 
 	forgotPassword: function () {
-		var resetTemplate = _.template($('.reset-password-view').text());
-		this.$el.html(resetTemplate);
-	},
-
-	resetPassword: function () {
-		var userEmail = $('.lookup-email-input').val();
-		Parse.User.requestPasswordReset(userEmail , {
-  			success: function() {
-   			 // Password reset request was sent successfully
-   			 router.currentView.render();
-   			 alert("An email has been sent to your account to reset your password")
-   			 Parse.history.loadUrl();
-  			},
-  			error: function(error) {
-  			  // Show the error message somewhere
-  			  alert("Error: " + error.code + " " + error.message);
-  			}
-			});
+		router.navigate('/#sign-in/pass-reset', {trigger: true});
 	},
 
 });

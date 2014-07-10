@@ -82,13 +82,13 @@ var NoUserNavView = Parse.View.extend({
 
 	signInNav: function () {
 		Parse.User.logOut();
-		window.location = '/#sign-in';
+		router.navigate('/#sign-in', {trigger: true});
 		Parse.history.loadUrl();
 	},
 
 	signUpNav: function () {
 		Parse.User.logOut();
-		window.location = '/#sign-up';
+		router.navigate('/#sign-up', {trigger: true});
 	},
 
 });
