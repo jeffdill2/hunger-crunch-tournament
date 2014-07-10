@@ -832,6 +832,11 @@ header {
 //////////////////////////////////////////////// PLAYER VIEW
 ////////////////////////////////////////////////////////////
 
+.group-id-crumb {
+	cursor: pointer;
+}
+
+
 .player-view-header-content {
 	@extend .content-header;
 	@extend .clearfix;
