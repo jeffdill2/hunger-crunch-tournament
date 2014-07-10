@@ -30,10 +30,5 @@ var HomeView = Parse.View.extend ({
 		}else{
 			router.navigate('/#sign-up' + $('.group-id').val(), {trigger: true});
 		}
-	},
-
-	remove: function() {
-	    stopCounter();
-	    Parse.View.prototype.remove.call(this);
 	}
 });
