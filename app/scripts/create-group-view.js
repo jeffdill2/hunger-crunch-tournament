@@ -95,70 +95,90 @@ var CreateGroupView = Parse.View.extend({
 	},
 
 	createNewGroupID: function () {
-		var groups = new GroupCollection();
-		var strGroupID = "";
+		var name = $('.new-group-name-input').val().trim();
+		var start = $('.new-group-start-date-input').val();
+		var end = $('.new-group-end-date-input').val();
+		$('.create-group-view-content .missing-field').html('');	
 
-		populateCollection(groups).done(function() {
-			var aryGroupIDs = groups.models.map(function(model) {
-				return model.attributes.groupID;
-			});
+		if (name === '') {
+			$('.create-group-view-content .missing-field:eq(0)').html('Please enter a name for this group');
+			$('.new-group-name-input').val('')	
+		}
+		if (start === '') {
+			$('.create-group-view-content .missing-field:eq(1)').html('Please enter a start date for this group');
+		}
+		if (end === '') {
+			$('.create-group-view-content .missing-field:eq(2)').html('Please enter an end date for this group');
+		}
 
-			while (true) {
-				var bolGroupIDFound = false;
 
-				// needed access to the method of this instance
-				// resolved by using router.currentview
-				strGroupID = router.currentView.generateRandomGroupdID();
+		if (name.length > 0 && start.length > 0 && end.length > 0) {
 
-				aryGroupIDs.forEach(function(groupID) {
-					if (groupID === strGroupID) {
-						bolGroupIDFound = true;
-					}
+			var groups = new GroupCollection();
+			var strGroupID = "";
+
+			populateCollection(groups).done(function() {
+				var aryGroupIDs = groups.models.map(function(model) {
+					return model.attributes.groupID;
 				});
 
-				if (!bolGroupIDFound) {
-					break;
+				while (true) {
+					var bolGroupIDFound = false;
+
+					// needed access to the method of this instance
+					// resolved by using router.currentview
+					strGroupID = router.currentView.generateRandomGroupdID();
+
+					aryGroupIDs.forEach(function(groupID) {
+						if (groupID === strGroupID) {
+							bolGroupIDFound = true;
+						}
+					});
+
+					if (!bolGroupIDFound) {
+						break;
+					}
 				}
-			}
 
-			var objGroup = new GroupModel();
+				var objGroup = new GroupModel();
 
-			var groupName = $('.new-group-name-input').val();
-			var orgName = Parse.User.current().attributes.username;
+				var groupName = $('.new-group-name-input').val();
+				var orgName = Parse.User.current().attributes.username;
 
-			var groupACL = new Parse.ACL(Parse.User.current());
-			groupACL.setPublicReadAccess(true);
-			groupACL.setPublicWriteAccess(false);
-			groupACL.setRoleReadAccess('siteAdmin', true);
-			groupACL.setRoleWriteAccess('siteAdmin', true);
+				var groupACL = new Parse.ACL(Parse.User.current());
+				groupACL.setPublicReadAccess(true);
+				groupACL.setPublicWriteAccess(false);
+				groupACL.setRoleReadAccess('siteAdmin', true);
+				groupACL.setRoleWriteAccess('siteAdmin', true);
 
-			objGroup.setACL(groupACL);
+				objGroup.setACL(groupACL);
 
-			objGroup.save({
-				groupID: strGroupID,
-				startDate: {
-	  				__type: "Date",
-	  				iso: moment($('.new-group-start-date-input').val(), "dd MMMM DD, YYYY").toISOString()
-				},
+				objGroup.save({
+					groupID: strGroupID,
+					startDate: {
+		  				__type: "Date",
+		  				iso: moment($('.new-group-start-date-input').val(), "dd MMMM DD, YYYY").toISOString()
+					},
 
-				endDate: {
-					__type: "Date",
-					iso: moment($('.new-group-end-date-input').val(), "dd MMMM DD, YYYY").toISOString()
-				},
-				groupName: groupName,
-				orgName: orgName,
-			}, {
-				success: function(group) {
-					console.log(group)
-					var groupName = group.attributes.groupName.replace(/ /g, '%20');
-					var uniqueID = group.attributes.groupID;
-					router.navigate('/#dashboard/'+groupName+'/'+uniqueID, {trigger: true});
-				},
-				error: function(error) {
-					console.log('New group was not successfully saved - details below:');
-					console.log('Error ' + error.code + " : " + error.message);
-				}
-			});
-		})
+					endDate: {
+						__type: "Date",
+						iso: moment($('.new-group-end-date-input').val(), "dd MMMM DD, YYYY").toISOString()
+					},
+					groupName: groupName,
+					orgName: orgName,
+				}, {
+					success: function(group) {
+						console.log(group)
+						var groupName = group.attributes.groupName.replace(/ /g, '%20');
+						var uniqueID = group.attributes.groupID;
+						router.navigate('/#dashboard/'+uniqueID, {trigger: true});
+					},
+					error: function(error) {
+						console.log('New group was not successfully saved - details below:');
+						console.log('Error ' + error.code + " : " + error.message);
+					}
+				});
+			})
+		}	
 	}
 });

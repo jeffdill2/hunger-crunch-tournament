@@ -6,8 +6,11 @@ var GroupView = Parse.View.extend({
 		'click .player-name' 		: 'showPlayer',
 		'click .change-group-dates'	: 'changeDatesButton',
 		'focus .date-changer'		: 'changeDates',
-		'click .save-dates'			: 'saveDates'
+		'click .save-dates'			: 'saveDates',
+		'click .print-button'		: 'print'
 	},
+
+	className: 'group-view-container',
 
 	initialize: function (options) {
 		this.group = options;
@@ -25,11 +28,16 @@ var GroupView = Parse.View.extend({
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
 				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
 				that.render();
+
+				$('.sort').click(function () {
+					$(this).toggleClass('sorted')
+				})
 			},	
 			error: function (error) {
 				console.log(error)
 			}
 		});
+
 	},
 
 	render: function () {
@@ -99,6 +107,18 @@ var GroupView = Parse.View.extend({
 				alert("An error has occurred. Group end date has not been updated.");
 			}
 		});
+	},
+
+	print: function () {
+		$("header").addClass('non-print')
+		$(".group-view-location-banner").removeClass('h1-flag')
+		$(".group-view-options").css('opacity', 0)
+
+		window.print();
+		
+		$(".group-view-location-banner").addClass('h1-flag')
+		$(".group-view-options").css('opacity', 1)
+		$("header").removeClass('non-print')
 	}
 });
 

@@ -1,9 +1,10 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click	.create-group-button'		: 'createGroupNav', 
-		'click	.compare-groups-button'		: 'compareGroupsNav', 
-		'click	.group-details-container'	: 'groupView', 
+		'click .create-group-button'		: 'createGroupNav', 
+		'click .compare-groups-button'		: 'compareGroupsNav', 
+		'click .group-details-container'	: 'groupView',
+		'click .print-button' 				: 'print'
 	},
 
 	template: _.template($('.dashboard-view').text()),
@@ -32,4 +33,15 @@ var DashboardView = Parse.View.extend ({
 		router.navigate('/#group/123', {trigger: true});		
 	},
 
+	print: function () {
+		$("header").addClass('non-print')
+		$(".dashboard-location").removeClass('h1-flag')
+		$(".dashboard-nav").css('opacity', 0)
+		
+		window.print();
+
+		$(".dashboard-location").addClass('h1-flag')
+		$(".dashboard-nav").css('opacity', 1)
+		$("header").removeClass('non-print')
+	}
 })

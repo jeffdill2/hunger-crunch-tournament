@@ -32,22 +32,22 @@
                 </div>
                 <div class="header-breadcrumb">
                     <a href="http://www.hungercrunch.com/"><img src="../images/breadcrumb-shield.png"></a>
-                     <svg
-                       version="1.1"
-                       class="arrow-2"
-                       id="Layer_1"
-                       xmlns="http://www.w3.org/2000/svg"
-                       xmlns:xlink="http://www.w3.org/1999/xlink"
-                       x="0px" y="0px"
-                       viewBox="0 0 7.7 16.2"
-                       enable-background="new 0 0 7.7 16.2"
-                       xml:space="preserve">
-                       <g>
-                         <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
-                           c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
-                       </g>
-                     </svg>
-                     <a href="http://localhost:9000/">Tournaments</a>
+                        <svg
+                            version="1.1"
+                            class="arrow-2"
+                            id="Layer_1"
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            x="0px" y="0px"
+                            viewBox="0 0 7.7 16.2"
+                            enable-background="new 0 0 7.7 16.2"
+                            xml:space="preserve">
+                            <g>
+                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                            </g>
+                        </svg>
+<a href="http://localhost:9000/">Tournaments</a>
                 </div>
                 <div class="nav-container"></div>
                 <div class="header-image">
@@ -85,40 +85,46 @@
                         <h3>HUNGER MINIONS STOMPED</h3>
                         <div class="flip">
                                     <ul class="full-counter">
+                                        
                                         <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
-                                        <li class="counter-cards">3
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
                                         <span>,</span>
-                                        <li class="counter-cards">5
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
-                                        <li class="counter-cards">9
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
-                                        <li class="counter-cards">1
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
                                         <span>,</span>
-                                        <li class="counter-cards">7
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
-                                        <li class="counter-cards">3
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
-                                        <li class="counter-cards">9
+                                        <li class="counter-cards">
                                             <div class="card-line"></div>
                                         </li>
                                     </ul>
-
-                                </div>
+                        </div>
                     </div>
                 </div>
                 <div class="sign-up-button-container">
                     <div class="sign-up-button">Sign Up</div>
                 </div>
+        </script>
+
+        <script type="text/template" class="counter-total-template">
+
+                <div class="card-line"></div>
+
         </script>
 
         <!-- template for the sign up view -->
@@ -207,6 +213,7 @@
                         <li class="change-group-dates">CHANGE DATES</li>
                         <li class="save-dates">SAVE DATES?</li>
                         <li class="edit-group-members">EDIT MEMBERS</li>
+                        <li class="print-button">Print</li>
                     </ul>
             </div>
 
@@ -214,24 +221,30 @@
                 <h3>GROUP SUMMARY</h3>
                 <ul>
                     <li>
-                        <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                        <div class="group-summary-stats">
-                            <h1>3,120</h1>
-                            <h4>MINIONS STOMPED</h4>
+                        <div class="group-summary-container">
+                            <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                            <div class="group-summary-stats">
+                                <h1>3,120</h1>
+                                <h4>MINIONS STOMPED</h4>
+                            </div>
                         </div>
                     </li>
                     <li>
-                        <img class="coins-image" src="../images/coin-stack.png"></img>
-                        <div class="group-summary-stats">
-                            <h1>312,114</h1>
-                            <h4>COINS COLLECTED</h4>
+                        <div class="group-summary-container">
+                            <img class="coins-image" src="../images/coin-stack.png"></img>
+                            <div class="group-summary-stats">
+                                <h1>312,114</h1>
+                                <h4>COINS COLLECTED</h4>
+                            </div>
                         </div>
                     </li>
                     <li>
-                        <img class="meals-image" src="../images/bowl.png"></img>
-                        <div class="group-summary-stats">
-                            <h1>203</h1>
-                            <h4>MEALS PROVIDED</h4>
+                        <div class="group-summary-container">
+                            <img class="meals-image" src="../images/bowl.png"></img>
+                            <div class="group-summary-stats">
+                                <h1>203</h1>
+                                <h4>MEALS PROVIDED</h4>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -245,17 +258,65 @@
                             <tr>
                                 <td>PLAYER NAME</td>
                                 <td>
-                                    <button class="sort" data-sort="minions-data"></button>
+                                    <button class="sort" data-sort="minions-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="minion-image" src="../images/minion-terrarium.png"></img>
                                     <span>MINIONS STOMPED</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="coins-data"></button>
+                                    <button class="sort" data-sort="coins-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="coins-image" src="../images/coin-stack.png"></img>
                                     <span>COINS COLLECTED</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="collectibles-data"></button>
+                                    <button class="sort" data-sort="collectibles-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="collectibles-image" src="../images/treasure-chest.png"></img>
                                     <span>COLLECTIBLES FOUND</span>
                                 </td>
@@ -351,8 +412,10 @@
                       </g>
                     </svg>
                     <%=playerID%></div>
-
-                    <div class="remove-player-button">REMOVE MEMBER</div>
+                    <ul class="player-view-nav">
+                        <li class="remove-player-button">REMOVE MEMBER</li>
+                        <li class="print-button">print</li>
+                    </ul>    
             </div>
             <div class="player-view-content">
                 <div class="player-view-summary">
@@ -396,16 +459,64 @@
                         <thead>
                             <tr>
                                 <td>
-                                    <button class="sort" data-sort="level-play-data"></button>
+                                    <button class="sort" data-sort="level-play-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <span>LEVEL</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="level-minions-data"></button>
+                                    <button class="sort" data-sort="level-minions-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="minion-image" src="../images/minion-terrarium.png"></img>
                                     <span>MINIONS STOMPED</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="level-coins-data"></button>
+                                    <button class="sort" data-sort="level-coins-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="coins-image" src="../images/coin-stack.png"></img>
                                     <span>COINS COLLECTED</span>
                                 </td>
@@ -456,6 +567,7 @@
                     <ul>
                         <li class="create-group-button">Create Group</li>
                         <li class="compare-groups-button">Compare Groups</li>
+                        <li class="print-button">Print</li>
                     </ul>
                 </div>
             </div>
@@ -604,19 +716,27 @@
                 </div>
             </div>
         </script>
-
-
           <!-- template for creating groups -->
         <script type="text/template" class="create-group-view-template">
             <div class="create-group-view-header">
                 <div class="h1-flag">Create Group</div>
             </div>
             <div class="create-group-view-content">
-                <input class="new-group-name-input" placeholder="Group Name">
-                <input type="text" class="new-group-start-date-input start-date-picker" placeholder="Start Date" readonly>
-                <div class="start-date-container"></div>
-                <input class="new-group-end-date-input end-date-picker" placeholder="End Date" readonly>
-                <div class="end-date-container"></div>
+
+                <fieldset>
+                    <div class="missing-field"></div>
+                    <input class="new-group-name-input" placeholder="Group Name">
+                </fieldset>
+                <fieldset>
+                    <div class="missing-field"></div>
+                    <input type="text" class="new-group-start-date-input start-date-picker" placeholder="Start Date" readonly>
+                    <div class="start-date-container"></div>
+                </fieldset>
+                <fieldset>
+                    <div class="missing-field"></div>
+                    <input class="new-group-end-date-input end-date-picker" placeholder="End Date" readonly>
+                    <div class="end-date-container"></div>
+                </fieldset>
                 <button class="button new-group-creation-button">Create Group</button>
             </div>
         </script>
@@ -673,7 +793,7 @@
                     <h4>SHARE LINK FOR OBSERVERS</h4>
                     <p>Give the following link to people that would like to observe the group:</p>
                     <div class="group-link-box">
-                        <input type="text" value="http://www.hungercrunch.com/#group/<%= code %>" class="group-link"readonly="readonly">
+                        <input type="text" value="http://www.hungercrunch.com/tournaments/#group/<%= code %>" class="group-link"readonly="readonly">
                     </div>
                 </div>
                 <button class="view-group-page">VIEW THE GROUP PAGE
@@ -700,29 +820,93 @@
         <script type="text/template" class="compare-groups-view-template">
             <div class="compare-groups-header-content">
                 <div class="compare-groups-location-banner h1-flag">COMPARE GROUPS</div>
+                <div class="print">Print</div>
             </div>
             <div class="compare-groups-content-container">
-                <div class="print">Print</div>
                 <div class="compare-groups-content" id="compare-groups-table">
                     <table>
                         <thead>
                             <tr>
                                 <td>
-                                    <button class="sort" data-sort="compare-group-name"></button>
+                                    <button class="sort" data-sort="compare-group-name">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <span>GROUP NAME</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="compare-minions-data"></button>
+                                    <button class="sort" data-sort="compare-minions-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="minion-image" src="../images/minion-terrarium.png"></img>
                                     <span>MINIONS STOMPED</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="compare-coins-data"></button>
+                                    <button class="sort" data-sort="compare-coins-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="coins-image" src="../images/coin-stack.png"></img>
                                     <span>COINS COLLECTED</span>
                                 </td>
                                 <td>
-                                    <button class="sort" data-sort="compare-meals-data"></button>
+                                    <button class="sort" data-sort="compare-meals-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
                                     <img class="meals-image" src="../images/bowl.png"></img>
                                     <span>MEALS PROVIDED</span>
                                 </td>

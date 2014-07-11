@@ -21,6 +21,10 @@ var CompareGroupsView = Parse.View.extend({
 		// make sure arrays are empty on view call
 		this.groupsToAdd = [];
 		this.groupsToCompare = [];
+
+		$('.sort').click(function () {
+			$(this).toggleClass('sorted')
+		})
 	},
 
 	render: function() {
@@ -157,12 +161,8 @@ var CompareGroupsView = Parse.View.extend({
 			$(".compare-groups-content tfoot").addClass('non-print')
 			$(".compare-groups-content button").addClass('non-print')
 			$("#avaialble-group-names").addClass('non-print')
-			
-			$('.print').addClass();
 
 			window.print();
-
-			$('.print').removeClass();
 			
 			$("header").removeClass('non-print')
 			$(".compare-groups-header-content").removeClass('non-print')
