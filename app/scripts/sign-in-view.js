@@ -16,6 +16,8 @@ var SignInView = Parse.View.extend ({
 	initialize: function (options) {
 		$('.app-container').append(this.el);
 		this.render();
+		this.enableEnter();
+
 	},
 
 	render: function () {
@@ -41,5 +43,21 @@ var SignInView = Parse.View.extend ({
 	forgotPassword: function () {
 		router.navigate('/#tournament/sign-in/pass-reset', {trigger: true});
 	},
+
+	enableEnter: function () {
+			// if user hits enter in name feild, it triggers the sign in
+		$('.existing-user-username-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.existing-user-login-button').click();
+			}
+		});
+
+		// if user hits enter in password feild, it triggers the sign in
+		$('.existing-user-password-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.existing-user-login-button').click();
+			}
+		});
+	}
 
 });
