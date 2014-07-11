@@ -39,7 +39,7 @@ var PlayerView = Parse.View.extend({
 		query.find({
 			success: function(group) {
 				that.groupName = group[0].attributes.groupName;
-				$('.group-id-crumb').html(that.groupName.substring(0, 15) + "...");
+				$('.group-id-crumb').html(that.groupName.substring(0, 15) + (that.groupName.length > 15 ? "..." : ""));
 			},
 
 			error: function(error) {
