@@ -201,7 +201,7 @@
         <script type="text/template" class="group-view-template">
             <div class="group-view-header-content">
                 <div class="group-view-location-banner h1-flag">
-                <%=groupName ? groupName:GROUPNAME%>
+                <%= groupName ? groupName.substring(0,20) + (groupName.length > 20 ? "..." : "") : GROUPNAME %>
 
                 </div>
 
