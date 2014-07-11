@@ -873,10 +873,10 @@
         </script>
         <!-- template for adding in groups the user has created -->
         <script type="text/template" class="compare-groups-user-groups-template">
-            <tr>
+            <tr <%= (groupName.length > 15 ? 'title="' + groupName + '"' : "") %>>
                 <td class="compare-group-name">
                     <button class="remove-group-button"><%= groupName %></button>
-                <%= groupName %>
+                    <%= groupName.substring(0, 15) + (groupName.length > 15 ? "..." : "") %>
                 </td>
                 <td class="compare-minions-data"><%= minions %></td>
                 <td class="compare-coins-data"><%= coins %></td>
