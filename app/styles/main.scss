@@ -682,10 +682,20 @@ header {
 .groupname-and-code {
 	display: inline-block;
 
-	& h2, & h3 {
+	& h2 {
+		margin-top: 0;
+		margin-bottom: 2px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	& h3 {
 		margin-top: 0;
 		margin-bottom: 2px;
 	}
+
 	& p {
 		font-family: "proxima-nova", sans-serif;
 		font-size: 1.1em;

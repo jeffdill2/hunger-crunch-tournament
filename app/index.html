@@ -585,7 +585,7 @@
             <div class="dash-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupName %></h2>
+                            <h2><%= groupName.substring(0, 20) + (groupName.length > 20 ? "..." : "") %></h2>
                             <p><%= groupID %></p>
                         </div>
 
