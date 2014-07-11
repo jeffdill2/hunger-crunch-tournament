@@ -3,9 +3,9 @@
 var UserNavView = Parse.View.extend({
 
 	events: {
-		'click .dashboard-button'	: "dashboardNav", 
-		'click .settings-button'	: "settingsNav", 
-		'click .sign-out-button'	: "signOutNav", 
+		'click .dashboard-button'	: "dashboardNav",
+		'click .settings-button'	: "settingsNav",
+		'click .sign-out-button'	: "signOutNav",
 	},
 
 	template: _.template($('.user-nav-view').text()),
@@ -22,7 +22,7 @@ var UserNavView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template();
 		this.$el.html(renderedTemplate);
-		
+
 		// regex to capitalize the first letter of the org/username including multiple words
 		function toTitleCase(str)
 		{
@@ -30,7 +30,7 @@ var UserNavView = Parse.View.extend({
 		}
 		// if the words contains a period, it will uppercase the entire word
 		function check (x) {
-			if (x.indexOf(".") != -1) { 
+			if (x.indexOf(".") != -1) {
 					return x.toUpperCase()
 				}
 			else {
@@ -45,24 +45,24 @@ var UserNavView = Parse.View.extend({
 	},
 
 	dashboardNav: function () {
-		router.navigate('/#dashboard', {trigger: true});
+		router.navigate('/#tournament/dashboard', {trigger: true});
 	},
 
 	settingsNav: function () {
-		router.navigate('/#dashboard/settings', {trigger: true});
+		router.navigate('/#tournament/dashboard/settings', {trigger: true});
 	},
 
 	signOutNav: function () {
 		Parse.User.logOut();
-		router.navigate('', {trigger: true});
+		router.navigate('/#tournament', {trigger: true});
 	},
 });
 
 var NoUserNavView = Parse.View.extend({
 
 	events: {
-		'click .sign-in-button'		: "signInNav", 
-		'click .sign-up-button'		: "signUpNav", 
+		'click .sign-in-button'		: "signInNav",
+		'click .sign-up-button'		: "signUpNav",
 	},
 
 	template: _.template($('.no-user-nav-view').text()),
@@ -70,25 +70,25 @@ var NoUserNavView = Parse.View.extend({
 	initialize: function () {
 		$('.nav-container').append(this.el);
 		this.render();
-		
+
 	},
 
 	render: function () {
 		$('.header-account-options').html('');
-		
+
 		var renderedTemplate = this.template;
 		this.$el.html(renderedTemplate);
 	},
 
 	signInNav: function () {
 		Parse.User.logOut();
-		router.navigate('/#sign-in', {trigger: true});
+		router.navigate('/#tournament/sign-in', {trigger: true});
 		Parse.history.loadUrl();
 	},
 
 	signUpNav: function () {
 		Parse.User.logOut();
-		router.navigate('/#sign-up', {trigger: true});
+		router.navigate('/#tournament/sign-up', {trigger: true});
 	},
 
 });

@@ -59,7 +59,7 @@
 
         <div class="app-container"></div>
 
-        
+
 
 
         <!--////////////////////////////////////////////////////////
@@ -185,11 +185,15 @@
                 <button class="forgot-password-button">Forgot Password?</button>
             </div>
         </script>
-
         <!-- reset password login screen view -->
          <script type="text/template" class="reset-password-view">
-            <input class="lookup-email-input" placeholder="Account Email">
-            <button class="button reset-password-button" >Reset Email</button>
+            <div class="pass-reset-view-header">
+                <div class="h1-flag">Reset Password</div>
+            </div>
+            <div class="reset-password-boundry reset-password-container">
+                <input class="lookup-email-input" placeholder="Account Email">
+                <button class="button reset-password-button" >Reset Email</button>
+            </div>
         </script>
 
 
@@ -395,7 +399,7 @@
         <!-- template for the single player view -->
         <script type="text/template" class="player-view">
             <div class="player-view-header-content">
-                    <div class="player-view-location-banner h1-flag"><span><%=groupID%></span>
+                    <div class="player-view-location-banner h1-flag"><span class='group-id-crumb'></span>
                     <svg
                       version="1.1"
                       class="arrow-2"
@@ -573,98 +577,41 @@
             </div>
         <div class="dashboard-group-content">
 
-            <div class="test-group">
-                <div class="group-details-container">
-                    <div class="groupname-and-code">
-                        <h2>Group Name</h2>
-                        <p>Group Code</p>
-                    </div>
-
-                    <ul class="dashboard-group-details">
-                        <li>6/30/14 - 7/30/14</li>
-                        <li>32 Players</li>
-                    </ul>
-                </div>
-                <div class="dashboard-group-statistics">
-                    <div class="group-minion-count">
-                        <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                        <h2 class="minion-stat">354</h2>
-                    </div>
-                    <div class="group-coins-count">
-                        <img class="coins-image" src="../images/coin-stack.png"></img>
-                        <h2 class="coins-stat">29,100</h2>
-
-                    </div>
-                    <div class="group-meals-provided">
-                        <img class="meals-image" src="../images/bowl.png"></img>
-                        <h2 class="meals-stat">16</h2>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="test-group">
-                <div class="group-details-container">
-                    <div class="groupname-and-code">
-                        <h2>Group Name</h2>
-                        <p>Group Code</p>
-                    </div>
-
-                    <ul class="dashboard-group-details">
-                        <li>6/30/14 - 7/30/14</li>
-                        <li>32 Players</li>
-                    </ul>
-                </div>
-                <div class="dashboard-group-statistics">
-                    <div class="group-minion-count">
-                        <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                        <h2 class="minion-stat">354</h2>
-                    </div>
-                    <div class="group-coins-count">
-                        <img class="coins-image" src="../images/coin-stack.png"></img>
-                        <h2 class="coins-stat">29,100</h2>
-
-                    </div>
-                    <div class="group-meals-provided">
-                        <img class="meals-image" src="../images/bowl.png"></img>
-                        <h2 class="meals-stat">16</h2>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="test-group">
-                <div class="group-details-container">
-                    <div class="groupname-and-code">
-                        <h2>Group Name</h2>
-                        <p>Group Code</p>
-                    </div>
-
-                    <ul class="dashboard-group-details">
-                        <li>6/30/14 - 7/30/14</li>
-                        <li>32 Players</li>
-                    </ul>
-                </div>
-                <div class="dashboard-group-statistics">
-                    <div class="group-minion-count">
-                        <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                        <h2 class="minion-stat">354</h2>
-                    </div>
-                    <div class="group-coins-count">
-                        <img class="coins-image" src="../images/coin-stack.png"></img>
-                        <h2 class="coins-stat">29,100</h2>
-
-                    </div>
-                    <div class="group-meals-provided">
-                        <img class="meals-image" src="../images/bowl.png"></img>
-                        <h2 class="meals-stat">16</h2>
-
-                    </div>
-                </div>
-            </div>
-
         </div>
         </script>
+
+        <!-- template for groups shown on dashboard view -->
+        <script type="text/template" class="dashboard-group-view">
+            <div class="dash-group">
+                    <div class="group-details-container">
+                        <div class="groupname-and-code">
+                            <h2><%= groupName %></h2>
+                            <p><%= groupID %></p>
+                        </div>
+
+                        <ul class="dashboard-group-details">
+                            <li>6/30/14 - 7/30/14</li>
+                            <li>32 Players</li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-group-statistics">
+                        <div class="group-minion-count">
+                            <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                            <h2 class="minion-stat"><%= minions %></h2>
+                        </div>
+                        <div class="group-coins-count">
+                            <img class="coins-image" src="../images/coin-stack.png"></img>
+                            <h2 class="coins-stat"><%= coins %></h2>
+                        </div>
+                        <div class="group-meals-provided">
+                            <img class="meals-image" src="../images/bowl.png"></img>
+                            <h2 class="meals-stat">16</h2>
+
+                        </div>
+                    </div>
+                </div> 
+        </script>
+
         <!-- template for the settings view -->
         <script type="text/template" class="settings-view">
             <div class="settings-header">
@@ -955,6 +902,13 @@
                     <h3 class="compare-group-name-search"><%= groupName %></h3>
                     <p class="valid">Live</p>
                   </li>
+        </script>
+
+        <script type="text/template" class="alert-template">
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <%= message %>
+            </div>
         </script>
 
         <!-- build:js scripts/vendor.js -->

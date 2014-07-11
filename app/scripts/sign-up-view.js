@@ -14,6 +14,7 @@ var SignUpView = Parse.View.extend({
 	initialize: function(options) {
 		$('.app-container').append(this.el);
 		this.render();
+		this.enableEnter();
 	},
 
 	render: function() {
@@ -38,7 +39,7 @@ var SignUpView = Parse.View.extend({
 				// remove login window and show new user dashboard/welcome
 				console.log('Welcome,', user.attributes.username);
 				$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
-				router.navigate('dashboard', {trigger: true});
+				router.navigate('/#tournament/dashboard', {trigger: true});
 			},
 			error: function(user, error) {
 				// display error and retry as necessary
@@ -65,6 +66,35 @@ var SignUpView = Parse.View.extend({
 				$(".new-user-password-verification-input").css({
 					'background': 'rgba(255, 0, 0, .7)'
 				});
+			}
+		});
+	},
+
+	enableEnter: function () {
+		// if user hits enter in username feild, it triggers the sign in
+		$('.new-user-username-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.new-user-creation-button').click();
+			}
+		});
+		
+			// if user hits enter in password feild, it triggers the sign in
+		$('.new-user-password-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.new-user-creation-button').click();
+			}
+		});
+
+			// if user hits enter in email feild, it triggers the sign in
+		$('.new-user-email-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.new-user-creation-button').click();
+			}
+		});
+			// if user hits enter in email feild, it triggers the sign in
+		$('.new-user-password-verification-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.new-user-creation-button').click();
 			}
 		});
 	}

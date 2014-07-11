@@ -49,7 +49,7 @@ var GroupView = Parse.View.extend({
 
 	showPlayer: function (location) {
 		var playerID = location.currentTarget.innerHTML;
-		router.navigate('group/'+this.group.groupID+"/"+playerID, {trigger: true});
+		router.navigate('/#tournament/group/'+this.group.groupID+"/"+playerID, {trigger: true});
 	}, 
 	// sort function
 	tableSort: function () {

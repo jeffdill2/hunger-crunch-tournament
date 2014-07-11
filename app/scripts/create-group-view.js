@@ -15,6 +15,7 @@ var CreateGroupView = Parse.View.extend({
 	initialize: function(options) {
 		$('.app-container').append(this.el);
 		this.render();
+		this.enableEnter();
 	},
 
 	render: function() {
@@ -124,7 +125,6 @@ var CreateGroupView = Parse.View.extend({
 
 				while (true) {
 					var bolGroupIDFound = false;
-
 					// needed access to the method of this instance
 					// resolved by using router.currentview
 					strGroupID = router.currentView.generateRandomGroupdID();
@@ -180,5 +180,15 @@ var CreateGroupView = Parse.View.extend({
 				});
 			})
 		}	
+	},
+	
+	enableEnter: function () {
+			// if user hits enter in email feild, it triggers the sign in
+		$('.new-group-name-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.new-group-creation-button').click();
+			}
+		});
+
 	}
 });
