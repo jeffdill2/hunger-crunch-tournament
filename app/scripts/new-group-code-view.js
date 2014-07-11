@@ -21,6 +21,8 @@ var GroupCodeView = Parse.View.extend({
 	},
 
 	render: function () {
+		this.user.group = this.user.group.replace(/%20/g, ' ');
+
 		var renderedTemplate = this.template(this.user);
 		this.$el.html(renderedTemplate);
 	},
