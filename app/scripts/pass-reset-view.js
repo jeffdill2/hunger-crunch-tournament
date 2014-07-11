@@ -11,6 +11,7 @@ var PassResetView = Parse.View.extend ({
 	initialize: function() {
 		$('.app-container').append(this.el);
 		this.render();
+		this.enableEnter();
 	},
 
 	render: function() {
@@ -33,5 +34,15 @@ var PassResetView = Parse.View.extend ({
   			}
 			});
 	},
+
+	enableEnter: function () {
+			// if user hits enter in email feild, it triggers the sign in
+		$('.lookup-email-input').keypress(function (key) {
+			if (key.which == 13) {
+				$('.reset-password-button').click();
+			}
+		});
+
+	}
 
 });

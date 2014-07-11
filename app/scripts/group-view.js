@@ -13,6 +13,8 @@ var GroupView = Parse.View.extend({
 		this.group = options;
 		$('.app-container').append(this.el);
 
+		console.log(this.group);
+
 		var Group = Parse.Object.extend("Groups");
 		var query = new Parse.Query(Group);
 		query.equalTo("groupID", this.group.groupID);
