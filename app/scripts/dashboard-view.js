@@ -63,7 +63,8 @@ var DashboardView = Parse.View.extend ({
 
 	groupNav: function(location) {
 		
-		var groupNav = location.currentTarget.children[0].children[0].children[1].innerHTML;
+		// console.log($(location.currentTarget).find("p")[0].innerHTML)
+		var groupNav = $(location.currentTarget).find("p")[0].innerHTML;
 		router.navigate('/#tournament/group/' + groupNav, {trigger: true});		
 	},
 

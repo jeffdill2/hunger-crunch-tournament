@@ -3,18 +3,33 @@ var GroupView = Parse.View.extend({
 	template: _.template($('.group-view-template').text()),
 
 	events: {
-		'click .player-name' 		: 'showPlayer',
 		'click .change-group-dates'	: 'changeDatesButton',
 		'focus .date-changer'		: 'changeDates',
-		'click .save-dates'			: 'saveDates'
+		'click .save-dates'			: 'saveDates',
+		'click .player-name' 		: 'playerNav',
 	},
 
 	initialize: function (options) {
 		this.group = options;
 		$('.app-container').append(this.el);
 
-		console.log(this.group);
+		this.getGroup();
 
+		
+	},
+
+	render: function () {
+		// called in the success inside getGroup
+		var renderedTemplate = this.template(this.groupInfo);
+		this.$el.html(renderedTemplate);
+		// using list.js to sort the table of data
+		this.tableSort();
+		this.getGroupTotals();
+
+		// console.log(this.groupInfo)
+	},
+
+	getGroup: function () {
 		var Group = Parse.Object.extend("Groups");
 		var query = new Parse.Query(Group);
 		query.equalTo("groupID", this.group.groupID);
@@ -27,6 +42,7 @@ var GroupView = Parse.View.extend({
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
 				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
 				that.render();
+				that.getPlayers();
 			},	
 			error: function (error) {
 				console.log(error)
@@ -34,14 +50,56 @@ var GroupView = Parse.View.extend({
 		});
 	},
 
-	render: function () {
-		var renderedTemplate = this.template(this.groupInfo);
-		this.$el.html(renderedTemplate);
-		// using list.js to sort the table of data
-		this.tableSort();
+	getGroupTotals: function() {
+		var GroupTotals = Parse.Object.extend("GroupTotals");
+		var query = new Parse.Query(GroupTotals);
+		query.equalTo("groupID", this.group.groupID);
+
+		var that = this;
+		query.first({
+			success: function(groupTotal) {
+				that.showGroupTotals(groupTotal);
+			},
+			error: function (error) {
+				console.log(error)
+
+			}
+		})
 	},
 
-	showPlayer: function (location) {
+	showGroupTotals: function (groupTotal) {
+		var renderedTemplate = _.template($('.group-view-group-summary-view').text());
+		$('.group-summary-info').append(renderedTemplate(groupTotal.attributes)); 
+	},
+
+	getPlayers: function () {
+		var query = new Parse.Query('playerEvent');
+		
+		console.log(this.groupInfo.groupID)
+		query.equalTo("groupID", this.groupInfo.groupID);
+		query.equalTo("eventType", "levelEnd");
+
+		var that = this;
+		query.find({
+			success: function (players) {
+				that.showPlayers(players);
+			},
+			error: function (error) {
+				console.log(error)
+			}
+		})
+	},
+
+	showPlayers: function(players) {
+		var renderedTemplate = _.template($('.group-view-player-view').text());
+		players.forEach(function(player){
+			console.log(player.attributes)
+			$('.player-list').append(renderedTemplate(player.attributes)); 	
+		})
+	},
+
+
+	playerNav: function (location) {
 		var playerID = location.currentTarget.innerHTML;
 		router.navigate('/#tournament/group/'+this.group.groupID+"/"+playerID, {trigger: true});
 	}, 
