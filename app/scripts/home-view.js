@@ -17,6 +17,7 @@ var HomeView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template;
 		this.$el.html(renderedTemplate);
+		startCounter();
 	},
 
 	submitGroup : function() {
@@ -34,6 +35,11 @@ var HomeView = Parse.View.extend({
 		} else {
 			router.navigate('/#tournament/sign-up', {trigger: true});
 		}
+	},
+
+	remove: function() {
+	    stopCounter();
+	    Parse.View.prototype.remove.call(this);
 	}
 });
 

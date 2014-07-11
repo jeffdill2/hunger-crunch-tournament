@@ -171,7 +171,7 @@ var CreateGroupView = Parse.View.extend({
 						console.log(group)
 						var groupName = group.attributes.groupName.replace(/ /g, '%20');
 						var uniqueID = group.attributes.groupID;
-						router.navigate('/#dashboard/'+uniqueID, {trigger: true});
+						router.navigate('/#tournament/dashboard/'+strGroupID+'/'+uniqueID, {trigger: true});
 					},
 					error: function(error) {
 						console.log('New group was not successfully saved - details below:');
@@ -181,7 +181,7 @@ var CreateGroupView = Parse.View.extend({
 			})
 		}	
 	},
-	
+
 	enableEnter: function () {
 			// if user hits enter in email feild, it triggers the sign in
 		$('.new-group-name-input').keypress(function (key) {
