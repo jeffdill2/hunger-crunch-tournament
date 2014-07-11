@@ -641,7 +641,7 @@ header {
 			cursor: pointer;
 
 			&:last-child {
-				margin-right: 0; 
+				margin-right: 0;
 			}
 		}
 	}
@@ -682,10 +682,20 @@ header {
 .groupname-and-code {
 	display: inline-block;
 
-	& h2, & h3 {
+	& h2 {
+		margin-top: 0;
+		margin-bottom: 2px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	& h3 {
 		margin-top: 0;
 		margin-bottom: 2px;
 	}
+
 	& p {
 		font-family: "proxima-nova", sans-serif;
 		font-size: 1.1em;
@@ -885,6 +895,10 @@ header {
 
 .group-id-crumb {
 	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .player-view-header-content {
@@ -1215,7 +1229,7 @@ header {
 
 
 .sort svg{
-	transform: rotate(90deg) 
+	transform: rotate(90deg)
 }
 
 .sort path {
@@ -1223,5 +1237,5 @@ header {
 }
 
 .sorted {
-	transform: rotate(180deg) 
+	transform: rotate(180deg)
 }
