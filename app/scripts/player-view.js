@@ -3,10 +3,13 @@
 var PlayerView = Parse.View.extend({
 
 	events: {
-		'click .group-id-crumb'	: 	'groupNav',
+		'click .group-id-crumb'	: 'groupNav',
+		'click .print-button'	: 'print'
 	},
 
 	template: _.template($('.player-view').text()),
+
+	className: 'player-view',
 
 	initialize: function(options) {
 		$('.app-container').append(this.el);
@@ -14,11 +17,14 @@ var PlayerView = Parse.View.extend({
 		this.playerInfo = options;
 		var player = options.playerID;
 		var group = options.groupID;
+
+		$('.sort').click(function () {
+			$(this).toggleClass('sorted')
+		})
 	},
 
 	render: function() {
 		var renderedTemplate = this.template(this.options);
-		console.log(this.options)
 		this.$el.html(renderedTemplate);
 		this.tableSort();
 		this.getGroupName();
@@ -52,5 +58,18 @@ var PlayerView = Parse.View.extend({
 			valueNames: ['level-play-data', 'level-minions-data', 'level-coins-data']
 		};
 		var userTable = new List('player-summary-table', options)
+	},
+
+	print: function () {
+		$("header").addClass('non-print')
+		$(".player-view-location-banner").removeClass('h1-flag')
+		$(".player-view-nav").css('opacity', 0)
+		
+		window.print();
+
+		$(".player-view-location-banner").addClass('h1-flag')
+		$(".player-view-nav").css('opacity', 1)
+		$("header").removeClass('non-print')
+
 	}
 });

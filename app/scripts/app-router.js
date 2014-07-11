@@ -3,16 +3,16 @@
 var AppRouter = Parse.Router.extend({
 
 	routes: {
-		''								: 'home',
+		''											: 'home',
 		'tournament'								: 'home',
 		'tournament/sign-in'						: 'signInView',
-		'tournament/sign-in/pass-reset'			: 'passReset', 
+		'tournament/sign-in/pass-reset'				: 'passReset', 
 		'tournament/sign-up'						: 'signUpView',
 		'tournament/group/:groupID' 				: 'groupView',
 		'tournament/group/:groupID/:playerID' 		: 'playerView',
-		'tournament/dashboard' 					: 'dashboardView',
-		'tournament/dashboard/settings'			: 'settingsView',
-		'tournament/dashboard/create-group'		: 'createGroupView',
+		'tournament/dashboard' 						: 'dashboardView',
+		'tournament/dashboard/settings'				: 'settingsView',
+		'tournament/dashboard/create-group'			: 'createGroupView',
 		'tournament/dashboard/:groupID/:groupCode'	: 'groupViewCodeView',
 		'tournament/dashboard/compare-groups'		: 'compareGroupsView',
 	},

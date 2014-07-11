@@ -28,7 +28,7 @@ var GroupCodeView = Parse.View.extend({
 	},
 
 	goToGroupView: function () {
-		router.navigate('/#tournament/group/' + this.user.group, {trigger: true});
+		router.navigate('/#tournament/group/' + this.user.code, {trigger: true});
 	}
 
 });
