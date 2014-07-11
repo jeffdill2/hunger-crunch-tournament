@@ -19,8 +19,8 @@ var PlayerView = Parse.View.extend({
 		var group = options.groupID;
 
 		$('.sort').click(function () {
-			$(this).toggleClass('sorted')
-		})
+			$(this).toggleClass('sorted');
+		});
 	},
 
 	render: function() {
@@ -39,7 +39,7 @@ var PlayerView = Parse.View.extend({
 		query.find({
 			success: function(group) {
 				that.groupName = group[0].attributes.groupName;
-				$('.group-id-crumb').html(that.groupName)
+				$('.group-id-crumb').html(that.groupName.substring(0, 15) + "...");
 			},
 
 			error: function(error) {
@@ -57,19 +57,19 @@ var PlayerView = Parse.View.extend({
 		var options = {
 			valueNames: ['level-play-data', 'level-minions-data', 'level-coins-data']
 		};
-		var userTable = new List('player-summary-table', options)
+		var userTable = new List('player-summary-table', options);
 	},
 
 	print: function () {
-		$("header").addClass('non-print')
-		$(".player-view-location-banner").removeClass('h1-flag')
-		$(".player-view-nav").css('opacity', 0)
-		
+		$("header").addClass('non-print');
+		$(".player-view-location-banner").removeClass('h1-flag');
+		$(".player-view-nav").css('opacity', 0);
+
 		window.print();
 
-		$(".player-view-location-banner").addClass('h1-flag')
-		$(".player-view-nav").css('opacity', 1)
-		$("header").removeClass('non-print')
+		$(".player-view-location-banner").addClass('h1-flag');
+		$(".player-view-nav").css('opacity', 1);
+		$("header").removeClass('non-print');
 
 	}
 });

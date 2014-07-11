@@ -641,7 +641,7 @@ header {
 			cursor: pointer;
 
 			&:last-child {
-				margin-right: 0; 
+				margin-right: 0;
 			}
 		}
 	}
@@ -885,6 +885,10 @@ header {
 
 .group-id-crumb {
 	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .player-view-header-content {
@@ -1215,7 +1219,7 @@ header {
 
 
 .sort svg{
-	transform: rotate(90deg) 
+	transform: rotate(90deg)
 }
 
 .sort path {
@@ -1223,5 +1227,5 @@ header {
 }
 
 .sorted {
-	transform: rotate(180deg) 
+	transform: rotate(180deg)
 }
