@@ -25,22 +25,36 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	getGroups: function() {
-		var Groups = Parse.Object.extend("Groups");
-		var query = new Parse.Query(Groups);
+		var TntGroup = Parse.Object.extend("TntGroup");
+		var query = new Parse.Query(TntGroup);
 		// checking for group objects made by the current user
-		query.equalTo("orgName", Parse.User.current().attributes.username);
+		query.include("user");
+		// query.equalTo("user", Parse.User.current());
 		query.find({
 			success: function(userGroups) {
+				console.log(userGroups);
+
 				var renderedTemplate = _.template($('.dashboard-group-view').text())
+
 				userGroups.forEach(function(userGroup){
-					var GroupTotals = Parse.Object.extend("GroupTotals");
+					var groupPoint = {
+						__type: 'Pointer', 
+						className: 'TntGroup', 
+						objectId: userGroup.id
+					};
+
+					var GroupTotals = Parse.Object.extend("TntGroupTotals");
 					var query = new Parse.Query(GroupTotals);
 					// checking for GroupTotals objects for the current users groups
-					query.equalTo("groupID", userGroup.attributes.groupID);
+					query.include("groupID");
+					query.include("groupID.user");
+					query.equalTo("groupID", groupPoint);
 
 					query.find({
 						success: function(groupTotal) {
+							console.log(groupTotal);
 							$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
+							// $('.groupname-and-code').html(userGroups[0].attributes.name)
 
 							stopLoadingAnimation();
 						},
@@ -66,10 +80,10 @@ var DashboardView = Parse.View.extend ({
 		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});
 	},
 
-	groupNav: function(location) {
-
-		var groupNav = location.currentTarget.children[0].children[0].children[1].innerHTML;
-		router.navigate('/#tournament/group/' + groupNav, {trigger: true});
+	groupNav: function(location) {		
+		// console.log($(location.currentTarget).find("p")[0].innerHTML)
+		var groupNav = $(location.currentTarget).find("p")[0].innerHTML;
+		router.navigate('/#tournament/group/' + groupNav, {trigger: true});		
 	},
 
 	print: function () {
