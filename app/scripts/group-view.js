@@ -20,23 +20,26 @@ var GroupView = Parse.View.extend({
 
 	render: function () {
 		// called in the success inside getGroup
+		// console.log(this.groupInfo)
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 		// using list.js to sort the table of data
 		this.tableSort();
 		this.getGroupTotals();
 
-		// console.log(this.groupInfo)
 	},
 
 	getGroup: function () {
-		var Group = Parse.Object.extend("Groups");
-		var query = new Parse.Query(Group);
-		query.equalTo("groupID", this.group.groupID);
+		var query = new Parse.Query("TntGroup");
+		query.include("user");
+		query.equalTo("groupCode", this.group.groupID);
+		// console.log(this.group);
+
 
 		var that = this;
 		query.first({
 			success: function (results) {
+				that.group = results;
 				that.groupUpdate = results;
 				that.groupInfo = results.attributes;
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
@@ -51,13 +54,16 @@ var GroupView = Parse.View.extend({
 	},
 
 	getGroupTotals: function() {
-		var GroupTotals = Parse.Object.extend("GroupTotals");
-		var query = new Parse.Query(GroupTotals);
-		query.equalTo("groupID", this.group.groupID);
+		var query = new Parse.Query("TntGroupTotals");
+		query.include("groupID");
+		query.equalTo("groupID", this.group);
+		console.log(this.group.attributes)
 
 		var that = this;
-		query.first({
+		query.find({
 			success: function(groupTotal) {
+				// console.log(groupTotal[0].attributes);
+
 				that.showGroupTotals(groupTotal);
 			},
 			error: function (error) {
@@ -69,19 +75,22 @@ var GroupView = Parse.View.extend({
 
 	showGroupTotals: function (groupTotal) {
 		var renderedTemplate = _.template($('.group-view-group-summary-view').text());
-		$('.group-summary-info').append(renderedTemplate(groupTotal.attributes)); 
+		$('.group-summary-info').append(renderedTemplate(groupTotal[0].attributes)); 
 	},
 
 	getPlayers: function () {
-		var query = new Parse.Query('playerEvent');
+		var query = new Parse.Query('TntScore');
 		
-		console.log(this.groupInfo.groupID)
-		query.equalTo("groupID", this.groupInfo.groupID);
-		query.equalTo("eventType", "levelEnd");
+		// console.log(this.groupInfo.groupID)
+		query.include('TntGrp');
+		query.equalTo("TntGrp", this.group);
+		// query.equalTo("eventType", "levelEnd");
+		console.log(this.group)
 
 		var that = this;
 		query.find({
 			success: function (players) {
+				console.log(players)
 				that.showPlayers(players);
 			},
 			error: function (error) {

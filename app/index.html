@@ -195,12 +195,12 @@
         <script type="text/template" class="group-view-template">
             <div class="group-view-header-content">
                 <div class="group-view-location-banner h1-flag">
-                <%=groupName ? groupName:GROUPNAME%>
+                <%= name %>
 
                 </div>
 
                     <ul class="group-view-details">
-                        <li>GROUP CODE: <%=groupID%></li>
+                        <li>GROUP CODE: <%=groupCode%></li>
                         <li>
                         <%=startDate%> - <input class="date-changer"placeholder="<%=endDate%>" readonly/>
                         </li>
@@ -416,12 +416,12 @@
             <div class="dash-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupName %></h2>
-                            <p><%= groupID %></p>
+                            <h2><%= groupID.attributes.name %></h2>
+                            <p><%= groupID.get("groupCode") %></p>
                         </div>
 
                         <ul class="dashboard-group-details">
-                            <li>6/30/14 - 7/30/14</li>
+                            <li><%= groupID.get('startDate').toString().substring(0,10) %> - <%= groupID.get('endDate').toString().substring(0,10) %></li>
                             <li>32 Players</li>
                         </ul>
                     </div>
