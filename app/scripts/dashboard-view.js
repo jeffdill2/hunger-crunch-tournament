@@ -1,9 +1,9 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click	.create-group-button'		: 'createGroupNav', 
-		'click	.compare-groups-button'		: 'compareGroupsNav', 
-		'click	.dash-group'				: 'groupNav', 
+		'click	.create-group-button'		: 'createGroupNav',
+		'click	.compare-groups-button'		: 'compareGroupsNav',
+		'click	.dash-group'				: 'groupNav',
 		'click .print-button' 				: 'print'
 	},
 
@@ -15,6 +15,8 @@ var DashboardView = Parse.View.extend ({
 		$('.app-container').append(this.el);
 		this.getGroups();
 		this.render();
+
+		startLoadingAnimation();
 	},
 
 	render: function() {
@@ -35,10 +37,12 @@ var DashboardView = Parse.View.extend ({
 					var query = new Parse.Query(GroupTotals);
 					// checking for GroupTotals objects for the current users groups
 					query.equalTo("groupID", userGroup.attributes.groupID);
+
 					query.find({
 						success: function(groupTotal) {
 							$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
 
+							stopLoadingAnimation();
 						},
 						error: function(error) {
 							console.log(error)
@@ -59,20 +63,20 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	compareGroupsNav: function() {
-		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});		
+		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});
 	},
 
 	groupNav: function(location) {
-		
+
 		var groupNav = location.currentTarget.children[0].children[0].children[1].innerHTML;
-		router.navigate('/#tournament/group/' + groupNav, {trigger: true});		
+		router.navigate('/#tournament/group/' + groupNav, {trigger: true});
 	},
 
 	print: function () {
 		$("header").addClass('non-print')
 		$(".dashboard-location").removeClass('h1-flag')
 		$(".dashboard-nav").css('opacity', 0)
-		
+
 		window.print();
 
 		$(".dashboard-location").addClass('h1-flag')

@@ -74,10 +74,12 @@ table {
 				top: 20%;
 				right: 15%;
 
-				&:focus, &:active {
+				&:focus,
+				&:active {
 					outline: none;
 				}
 			}
+
 			&:first-child {
 				width: 30%;
 				border-left: none;
@@ -99,8 +101,10 @@ table {
 		& td {
 			position: relative;
 		}
+
 		& td:first-child {
 			cursor: default;
+
 			& span {
 				display: block;
 			}
@@ -117,6 +121,37 @@ table {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////// MULTI-USE CLASSES
 ////////////////////////////////////////////////////////////
+.loading-spinner-image {
+	opacity: 0.6;
+	width: 60%;
+}
+
+.loading-spinner-container {
+	bottom: 0px;
+	font-size: 20px;
+	height: 300px;
+	left: 0px;
+	margin: auto;
+	position: absolute;
+	right: 0px;
+	text-align: center;
+	top: 0px;
+	width: 300px;
+	z-index: 1001;
+}
+
+.loading-spinner-focus {
+    background-color: $colorWhite;
+    bottom: 0px;
+    display: none;
+    left: 0px;
+    opacity: 0.8;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    vertical-align: middle;
+    z-index: 1001;
+}
 
 .h1-flag {
 	display: inline-block;
@@ -142,15 +177,15 @@ table {
 }
 
 .arrow-2 {
-  width: 9px;
-  height: 16px;
+	width: 9px;
+	height: 16px;
 }
+
 .arrow-2 path {
-  fill: white;
+	fill: white;
 }
 
 .clearfix {
-
 	&:after {
 		content: " ";
 		display: block;
@@ -167,11 +202,11 @@ table {
 	background-repeat: repeat-x;
 	border: none;
 	display: inline-block;
-	// margin-left: 30px;
-	color: #fff;
+	color: $colorWhite;
 	font-style: italic;
 
-	&:before, &:after {
+	&:before,
+	&:after {
 		content: '';
 		position: absolute;
 		background-size: contain;
@@ -185,6 +220,7 @@ table {
 		width: 11px;
 		left: -10px;
 	}
+
 	&:after {
 		background-image: url('../images/angle-button-teal-right.png');
 		width: 16px;
@@ -210,11 +246,10 @@ table {
 	max-width: 1150px;
 	margin: 0 auto;
 }
+
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// HEADER
 ////////////////////////////////////////////////////////////
-
-
 header {
 	height: 110px;
 	padding: 20px 30px 10px;
@@ -237,6 +272,7 @@ header {
 .header-breadcrumb {
 	color: $colorWhite;
 	font-size: 1.65em;
+
 	& img {
 		height: 36px;
 		width: 34px;
@@ -248,6 +284,7 @@ header {
 	width: 90%;
 	margin: 0 auto;
 }
+
 .header-account-options {
 	float: right;
 	color: $colorWhite;
@@ -273,7 +310,6 @@ header {
 			color: $colorWhite;
 			cursor: pointer;
 			font-size: 1.1em;
-			// letter-spacing: 0.06em;
 		}
 	}
 }
@@ -288,6 +324,7 @@ header {
 	border-radius: 100px 100px 0 0;
 	background: $colorWhite;
 	text-align: center;
+
 	& img {
 		height: 77px;
 		width: 88px;
@@ -313,7 +350,6 @@ header {
 
 	& strong {
 		color: $colorTextDarkGray;
-		// letter-spacing: 0.05em;
 		font-size: 1.5em;
 	}
 
@@ -351,7 +387,6 @@ header {
 		}
 	}
 }
-
 
 .sign-up-button-container {
 	margin: 45px auto;
@@ -407,10 +442,12 @@ header {
 
 	& .full-counter {
 		@extend .clearfix;
+
 		list-style: none;
 		width: 100%;
 		padding: 0;
 		margin: 0;
+
 		& span {
 			float: left;
 			vertical-align: bottom;
@@ -418,6 +455,7 @@ header {
 			margin: 0 3px 0 0;
 			color: $colorCharcoalDark;
 		}
+
 		& .counter-cards {
 			float: left;
 			margin: 0 5px 0 0;
@@ -434,7 +472,8 @@ header {
 			text-shadow: 1px 1px darken($colorCharcoalDark, 15%);
 			box-shadow: 2px 2px 1px 0 darken($colorCharcoalDark, 15%);
 
-			&:before, &:after {
+			&:before,
+			&:after {
 				position: absolute;
 				content: '';
 				width: 2px;
@@ -447,7 +486,7 @@ header {
 			}
 
 			&:after {
-				left:98%;
+				left: 98%;
 			}
 
 			.card-line {
@@ -470,23 +509,36 @@ header {
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////// SIGN UP/SIGN IN VIEW
 ////////////////////////////////////////////////////////////
-
-.new-user-login-container, .existing-user-login-container, .settings-container, .create-group-container, .reset-password-boundry {
+.new-user-login-container,
+.existing-user-login-container,
+.settings-container,
+.create-group-container,
+.reset-password-boundry {
 	min-height: 15em;
 	background: $colorLightGray;
 	padding-bottom: 2em;
 }
 
-.sign-up-view-header, .sign-in-view-header, .settings-header, .create-group-view-header, .pass-reset-view-header {
+.sign-up-view-header,
+.sign-in-view-header,
+.settings-header,
+.create-group-view-header,
+.pass-reset-view-header {
 	@extend .content-header;
 	@extend .clearfix;
+
 	background: $colorWhite;
 }
 
-.sign-up-view-content, .sign-in-view-content, .settings-content, .create-group-view-content, .reset-password-container {
+.sign-up-view-content,
+.sign-in-view-content,
+.settings-content,
+.create-group-view-content,
+.reset-password-container {
 	padding: 25px 0;
 
-	& input, & button {
+	& input,
+	& button {
 		display: block;
 		margin: 22px auto;
 		width: 45%;
@@ -499,6 +551,7 @@ header {
 		border-radius: 6px;
 		font-family: "proxima-nova", sans-serif;
 		font-weight: bold;
+
 		&:focus {
 			outline: none;
 		}
@@ -543,19 +596,21 @@ header {
 		font-size: 1.5em;
 		display: inline-block;
 	}
+
 	& input {
 		width: 100%;
 		margin-top: 5px;
 		margin-bottom: 10px;
 	}
+
 	& button {
 		width: auto;
 	}
+
 	& span {
 		margin-left: 15px;
-		// font-size: 1.05em;
-		// display: block;
 	}
+
 	.save-email {
 		display: none;
 	}
@@ -564,7 +619,6 @@ header {
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////// CREATE GROUP
 ////////////////////////////////////////////////////////////
-
 .create-group-view-content {
 	width: 400px;
 	margin: 0 auto;
@@ -572,6 +626,7 @@ header {
 	& input {
 		width: 100%;
 	}
+
 	& button {
 		width: auto;
 	}
@@ -579,6 +634,7 @@ header {
 	& fieldset {
 		position: relative;
 	}
+
 	& .new-group-name-input {
 		cursor: text;
 	}
@@ -593,10 +649,10 @@ header {
 	text-align: center;
 }
 
-
+////////////////////////////////////////////////////////////
+//////////////////////////////////////////// PICKER DEFAULTS
+////////////////////////////////////////////////////////////
 .picker{font-size:16px;text-align:left;line-height:1.2;color:#000;position:absolute;z-index:10000}.picker__input.picker__input--active{border-color:#0089ec}.picker__holder{width:100%;overflow-y:auto;-webkit-overflow-scrolling:touch}.picker{width:100%}.picker__holder{position:absolute;background:#fff;border:1px solid #aaa;border-top:0;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;min-width:176px;max-width:400px;-webkit-border-radius:0 0 6px 6px;-moz-border-radius:0 0 6px 6px;border-radius:0 0 6px 6px;max-height:0;-ms-filter:"alpha(Opacity=0)";filter:alpha(opacity=0);-moz-opacity:0;opacity:0;-webkit-transform:translateY(-1em) perspective(600px) rotateX(10deg);-moz-transform:translateY(-1em) perspective(600px) rotateX(10deg);transform:translateY(-1em) perspective(600px) rotateX(10deg);-webkit-transition:all .15s ease-out,max-height 0 .15s;-moz-transition:all .15s ease-out,max-height 0 .15s;transition:all .15s ease-out,max-height 0 .15s}.picker--opened .picker__holder{max-height:25em;-ms-filter:"alpha(Opacity=100)";filter:alpha(opacity=100);-moz-opacity:1;opacity:1;-webkit-transform:translateY(0) perspective(600px) rotateX(0);-moz-transform:translateY(0) perspective(600px) rotateX(0);transform:translateY(0) perspective(600px) rotateX(0);-webkit-transition:all .15s ease-out,max-height 0;-moz-transition:all .15s ease-out,max-height 0;transition:all .15s ease-out,max-height 0;-webkit-box-shadow:0 6px 18px 1px rgba(0,0,0,.12);-moz-box-shadow:0 6px 18px 1px rgba(0,0,0,.12);box-shadow:0 6px 18px 1px rgba(0,0,0,.12)}
-
-
 
 .picker__box{padding:0 1em}.picker__header{text-align:center;position:relative;margin-top:.75em}.picker__month,.picker__year{font-weight:500;display:inline-block;margin-left:.25em;margin-right:.25em}.picker__year{color:#999;font-size:.8em;font-style:italic}.picker__select--month,.picker__select--year{font-size:.8em;border:1px solid #b7b7b7;height:2.5em;padding:.66em .25em;margin-left:.25em;margin-right:.25em;margin-top:-.5em}.picker__select--month{width:35%}.picker__select--year{width:22.5%}.picker__select--month:focus,.picker__select--year:focus{border-color:#0089ec}.picker__nav--prev,.picker__nav--next{position:absolute;top:-.33em;padding:.5em 1.33em;width:1em;height:1em}.picker__nav--prev{left:-1em;padding-right:1.5em}.picker__nav--next{right:-1em;padding-left:1.5em}.picker__nav--prev:before,.picker__nav--next:before{content:" ";border-top:.5em solid transparent;border-bottom:.5em solid transparent;border-right:.75em solid #000;width:0;height:0;display:block;margin:0 auto}.picker__nav--next:before{border-right:0;border-left:.75em solid #000}.picker__nav--prev:hover,.picker__nav--next:hover{cursor:pointer;color:#000;background:#b1dcfb}.picker__nav--disabled,.picker__nav--disabled:hover,.picker__nav--disabled:before,.picker__nav--disabled:before:hover{cursor:default;background:0;border-right-color:whitesmoke;border-left-color:whitesmoke}.picker__table{text-align:center;border-collapse:collapse;border-spacing:0;table-layout:fixed;font-size:inherit;width:100%;margin-top:.75em;margin-bottom:.5em}@media (min-height:26.5em){.picker__table{margin-bottom:.75em}}.picker__table td{margin:0;padding:0}.picker__weekday{width:14.285714286%;font-size:.75em;padding-bottom:.25em;color:#999;font-weight:500}@media (min-height:26.5em){.picker__weekday{padding-bottom:.5em}}.picker__day{padding:.3125em 0;font-weight:200;border:1px solid transparent}.picker__day--today{color:#0089ec;position:relative}.picker__day--today:before{content:" ";position:absolute;top:2px;right:2px;width:0;height:0;border-top:.5em solid #0059bc;border-left:.5em solid transparent}.picker__day--selected,.picker__day--selected:hover{border-color:#0089ec}.picker__day--highlighted{background:#b1dcfb}.picker__day--disabled:before{border-top-color:#aaa}.picker__day--outfocus{color:#ddd;-ms-filter:"alpha(Opacity=66)";filter:alpha(opacity=66);-moz-opacity:.66;opacity:.66}.picker__day--infocus:hover,.picker__day--outfocus:hover{cursor:pointer;color:#000;background:#b1dcfb}.picker__day--highlighted:hover,.picker--focused .picker__day--highlighted{background:#0089ec;color:#fff}.picker__day--disabled,.picker__day--disabled:hover{background:whitesmoke;border-color:whitesmoke;color:#ddd;cursor:default}.picker__footer{text-align:center}.picker__button--today,.picker__button--clear{border:1px solid #fff;background:#fff;font-size:.8em;padding:.66em 0;font-weight:700;width:50%;display:inline-block;vertical-align:bottom}.picker__button--today:hover,.picker__button--clear:hover{cursor:pointer;color:#000;background:#b1dcfb;border-bottom-color:#b1dcfb}.picker__button--today:focus,.picker__button--clear:focus{background:#b1dcfb;border-color:#0089ec;outline:0}.picker__button--today:before,.picker__button--clear:before{position:relative;display:inline-block;height:0}.picker__button--today:before{content:" ";margin-right:.45em;top:-.05em;width:0;border-top:.66em solid #0059bc;border-left:.66em solid transparent}.picker__button--clear:before{content:"\D7";margin-right:.35em;top:-.1em;color:#e20;vertical-align:top;font-size:1.1em}
 
@@ -608,7 +664,6 @@ header {
 	height: auto;
 }
 
-
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// DASHBOARD VIEW
 ////////////////////////////////////////////////////////////
@@ -616,12 +671,12 @@ header {
 	max-width: 1150px;
 	margin: 0 auto;
 }
+
 .dashboard-header {
 	width: 100%;
 	min-height: 80px;
 	padding: 20px 0 20px 0;
 }
-
 
 .dashboard-nav {
 	@extend .clearfix;
@@ -635,6 +690,7 @@ header {
 
 		& li {
 			@extend .angle-button-teal;
+
 			margin-right: 30px;
 			padding: 3px 10px;
 			display: inline-block;
@@ -663,6 +719,7 @@ header {
 	margin-bottom: 50px;
 	padding: 10px;
 	background: $colorWhite;
+
 	& h2 {
 		cursor: pointer;
 	}
@@ -718,13 +775,20 @@ header {
 .dashboard-group-statistics {
 	padding: 10px;
 }
-.group-minion-count, .group-coins-count, .group-meals-provided {
+
+.group-minion-count,
+.group-coins-count,
+.group-meals-provided {
 	width: 33%;
 	float: left;
 	text-align: center;
 	padding: 10px 20px 0;
 }
-.minion-image, .coins-image, .meals-image, .collectibles-image {
+
+.minion-image,
+.coins-image,
+.meals-image,
+.collectibles-image {
 	height: 95px;
 	width: 108px;
 	margin-left: -7px;
@@ -733,18 +797,13 @@ header {
 ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////// SETTINGS VIEW
 ////////////////////////////////////////////////////////////
-
-
-
 .settings-content {
-	// width: 30%;
 	margin: 0 auto;
 }
 
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////// GROUP VIEW
 ////////////////////////////////////////////////////////////
-
 .group-view-header-content {
 	@extend .content-header;
 	@extend .clearfix;
@@ -779,6 +838,7 @@ header {
 		left: -100px;
 	}
 }
+
 .group-view-options {
 	list-style: none;
 	float: right;
@@ -788,6 +848,7 @@ header {
 
 	& li {
 		@extend .angle-button-teal;
+
 		margin-right: 30px;
 		padding: 3px 10px;
 		display: inline-block;
@@ -806,12 +867,16 @@ header {
 
 .group-summary-info {
 	@extend .clearfix;
+
 	width: 100%;
 	min-height: 150px;
 	padding: 35px;
 	background: $colorLightGray;
 	color: $colorCharcoal;
-	& h1, & h3, & h4 {
+
+	& h1,
+	& h3,
+	& h4 {
 		margin: 0;
 	}
 
@@ -827,25 +892,26 @@ header {
 		& li {
 			float: left;
 			width: 33%;
-			// & div:first-child {
-			// 	display: inline-block;
-			// }
 		}
 	}
 }
+
 .group-summary-container {
 	width: 79%;
 	margin: 0 auto;
 }
+
 .group-view-details {
 	& input {
 		width: 85px;
 		border: none;
+
 		&:focus {
 			outline: none;
 		}
 	}
 }
+
 .group-summary-stats {
 	margin-left: 10px;
 	display: inline-block;
@@ -870,11 +936,14 @@ header {
 		// all cells
 		& tr {
 			font-size: 1.25em;
+
 			& td {
-				& span, & button {
+				& span,
+				& button {
 					display: block;
 					margin: 0 auto;
 				}
+
 				&:first-child {
 					text-align: left;
 				}
@@ -882,9 +951,9 @@ header {
 		}
 		// only the first three rows of table body
 		& tbody tr:nth-child(-n+3) {
-				height: 70px;
-				font-size: 1.5em;
-				font-weight: bold;
+			height: 70px;
+			font-size: 1.5em;
+			font-weight: bold;
 		}
 	}
 }
@@ -892,7 +961,6 @@ header {
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////////////// PLAYER VIEW
 ////////////////////////////////////////////////////////////
-
 .group-id-crumb {
 	cursor: pointer;
 
@@ -903,9 +971,11 @@ header {
 
 .player-view-header-content {
 	@extend .content-header;
+
 	border-bottom: 1px solid $colorCharcoal;
 	padding-right: 0;
 	width: 93.5%;
+
 	& ul {
 		list-style: none;
 		float: right;
@@ -914,6 +984,7 @@ header {
 
 		& li {
 			@extend .angle-button-teal;
+
 			margin-right: 30px;
 			padding: 3px 10px;
 			display: inline-block;
@@ -938,6 +1009,7 @@ header {
 .player-view-content {
 	padding: 25px 75px;
 	color: $colorTextDarkGray;
+
 	@extend .clearfix;
 }
 
@@ -945,7 +1017,8 @@ header {
 	width: 43%;
 	float: left;
 
-	& > h1, & h3 {
+	& > h1,
+	& h3 {
 		margin-top: 0;
 		margin-bottom: 40px;
 	}
@@ -986,22 +1059,25 @@ header {
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////// COMPARE GROUPS VIEW
 ////////////////////////////////////////////////////////////
-
 .compare-groups-header-content {
 	@extend .content-header;
 	@extend .clearfix;
+
 	border-bottom: 1px solid $colorCharcoal;
 	width: 93.5%;
 }
+
 .compare-groups-content-container {
 	width: 93.5%;
 	margin: 0 auto;
 	padding: 30px 0;
 }
+
 .compare-groups-content {
 	color: $colorTextDarkGray;
 	width: 90%;
 	margin: 0 auto;
+
 	& ul {
 		min-height: 400px;
 	}
@@ -1009,6 +1085,7 @@ header {
 	& td:first-child {
 		width: 20%;
 	}
+
 	& tbody td:first-child {
 		text-align: left;
 	}
@@ -1037,53 +1114,55 @@ header {
 		right: 5px;
 		top: 50%;
 		margin-top: -2px;
-
 	}
 }
 
 .print {
 	@extend .angle-button-teal;
+
 	float: right;
-	margin:20px 20px 0;
+	margin: 20px 20px 0;
 	padding: 3px 10px;
 	cursor: pointer;
 }
 
 .list {
-  font-family:sans-serif;
-  margin:0;
-  padding:20px 0 0;
+	font-family: sans-serif;
+	margin: 0;
+	padding: 20px 0 0;
 }
+
 .list > li {
-  display:block;
-  background-color: #eee;
-  margin-bottom: 10px;
-  padding:10px;
-  box-shadow: inset 0 1px 0 #fff;
+	display:block;
+	background-color: #eee;
+	margin-bottom: 10px;
+	padding:10px;
+	box-shadow: inset 0 1px 0 #fff;
 
-  &:hover {
-  	cursor: pointer;
-  	opacity: 0.7;
-  }
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
 }
-.compare-groups-add-group-template {
 
+.compare-groups-add-group-template {
 	& h3 {
-	  font-size: 16px;
-	  margin:0 0 0.3rem;
-	  font-weight: normal;
-	  font-weight:bold;
+		font-size: 16px;
+		margin: 0 0 0.3rem;
+		font-weight: normal;
+		font-weight: bold;
 	}
 
 	& input {
-	  border:solid 1px #ccc;
-	  border-radius: 5px;
-	  padding:7px 14px;
-	  margin-bottom:10px
+		border:solid 1px #ccc;
+		border-radius: 5px;
+		padding: 7px 14px;
+		margin-bottom: 10px
 	}
+
 	& input:focus {
-	  outline:none;
-	  border-color:#aaa;
+		outline: none;
+		border-color: #aaa;
 	}
 }
 
@@ -1091,7 +1170,6 @@ header {
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////// NEW GROUP CODE VIEW
 ////////////////////////////////////////////////////////////
-
 .group-created-header-container{
 	text-align: center;
 }
@@ -1114,6 +1192,7 @@ header {
 .player-instructions {
 	margin: 0 auto;
 	color: $colorCharcoal;
+
 	& p {
 		font-size: 1.1em;
 		font-family: "proxima-nova", sans-serif;
@@ -1128,6 +1207,7 @@ header {
 	background: $colorWhite;
 	color: $colorCharcoal;
 	padding: 5px;
+
 	& input {
 		width: 100%;
 		text-align: center;
@@ -1137,12 +1217,15 @@ header {
 
 .instruction-images {
 	@extend .clearfix;
+
 	width: 870px;
 	margin: 60px auto;
 }
 
-.instruction-image-one, .instruction-image-two {
+.instruction-image-one,
+.instruction-image-two {
 	float: left;
+
 	& img {
 		height: 225px;
 		width: 400px;
@@ -1168,8 +1251,8 @@ header {
 .observer-instructions {
 	border-top: 1px solid $colorCharcoal;
 	padding: 25px;
-
 	color: $colorCharcoal;
+
 	& p {
 		font-size: 1.1em;
 		font-family: "proxima-nova", sans-serif;
@@ -1224,18 +1307,14 @@ header {
 	}
 }
 
-
-
-
-
 .sort svg{
-	transform: rotate(90deg)
+	transform: rotate(90deg);
 }
 
 .sort path {
-	  fill: $colorCharcoalDark;
+	fill: $colorCharcoalDark;
 }
 
 .sorted {
-	transform: rotate(180deg)
+	transform: rotate(180deg);
 }

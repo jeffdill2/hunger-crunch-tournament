@@ -23,6 +23,8 @@ var SignUpView = Parse.View.extend({
 	},
 
 	createParseUser: function() {
+		startLoadingAnimation();
+
 		var name = $('.new-user-username-input').val();
 		var pw = $('.new-user-password-input').val();
 		var emailAddy = $('.new-user-email-input').val();
@@ -40,6 +42,8 @@ var SignUpView = Parse.View.extend({
 				console.log('Welcome,', user.attributes.username);
 				$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
 				router.navigate('/#tournament/dashboard', {trigger: true});
+
+				stopLoadingAnimation();
 			},
 			error: function(user, error) {
 				// display error and retry as necessary
@@ -77,7 +81,7 @@ var SignUpView = Parse.View.extend({
 				$('.new-user-creation-button').click();
 			}
 		});
-		
+
 			// if user hits enter in password feild, it triggers the sign in
 		$('.new-user-password-input').keypress(function (key) {
 			if (key.which == 13) {
