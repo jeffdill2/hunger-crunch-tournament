@@ -26,8 +26,7 @@ var GroupView = Parse.View.extend({
 
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
-		// using list.js to sort the table of data
-		this.tableSort();
+		
 		this.getGroupTotals();
 
 	},
@@ -87,11 +86,14 @@ var GroupView = Parse.View.extend({
 	},
 
 	getPlayers: function () {
-		var query = new Parse.Query('TntScore');
+		var collectQuery = new Parse.Query('TntCollectibles');
+		collectQuery.include('user');
 		
-		console.log(this.group)
+		// console.log(this.group)
+		var query = new Parse.Query('TntScore');
 		query.include('TntGrp');
 		query.include('user');
+		query.include('TntCollectibles');
 		query.equalTo("tntGrp", this.group);
 		// console.log(this.group)
 
@@ -110,10 +112,18 @@ var GroupView = Parse.View.extend({
 									
 									if(grpPlayer.attributes.OIID == player.attributes.OIID){
 										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
-										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;	
-									}else if(grpPlayer.attributes.OIID !== player.attributes.OIID){
-										// grpPlayers.push(player);
-										console.log(player.attributes)
+										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
+										grpPlayer.attributes.collectibles = 0;	
+									}else{
+										var result = $.grep(grpPlayers, function(grp){ 
+											return grp.attributes.OIID == player.attributes.OIID; 
+										});
+										if(result.length == 0){
+											
+										// console.log(player.attributes)
+										grpPlayers.push(player);
+										}
+
 									}
 								})
 								
@@ -134,7 +144,9 @@ var GroupView = Parse.View.extend({
 		players.forEach(function(player){
 			// console.log(player.attributes)
 			$('.player-list').append(renderedTemplate(player.attributes)); 	
-		})
+		});
+		// using list.js to sort the table of data
+		this.tableSort();
 	},
 
 

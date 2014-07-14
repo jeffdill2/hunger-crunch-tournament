@@ -340,7 +340,7 @@
                 <td class="player-name"><%= user.attributes.username %></td>
                 <td class="minions-data"><%= minionsStomped %></td>
                 <td class="coins-data"><%= coinsCollected %></td>
-                <td class="collectibles-data">14</td>
+                <td class="collectibles-data"><%= collectibles %></td>
             </tr>
         </script>
 
@@ -457,7 +457,7 @@
         <!-- template for player view player stats -->
         <script type="text/template" class="player-view-player-stats-view">
             <tr>
-                <td class="level-play-data"><%= levelID %></td>
+                <td class="level-play-data"><%= levelID.slice(-2) %></td>
                 <td class="level-minions-data"><%= minionsStomped %></td>
                 <td class="level-coins-data"><%= coinsCollected %></td>
             </tr>

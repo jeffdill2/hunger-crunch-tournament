@@ -19,7 +19,7 @@ var PlayerView = Parse.View.extend({
 		var player = options.playerID;
 		var group = options.groupID;
 
-		this.showPlayerScores();
+		this.getPlayerScores();
 
 		$('.sort').click(function () {
 			$(this).toggleClass('sorted');
@@ -30,46 +30,51 @@ var PlayerView = Parse.View.extend({
 		var renderedTemplate = this.template(this.options);
 		// console.log(this.options)
 		this.$el.html(renderedTemplate);
-		this.tableSort();
+		
 	},
 
-	// getGroupName: function() {
-	// 	var TntGroup = Parse.Object.extend("TntGroup");
-	// 	var query = new Parse.Query(TntGroup);
-	// 	// console.log(this.options)
-	// 	// query.equalTo("groupID", this.options.groupID);
-	// 	var that = this;
-
-	// 	query.find({
-	// 		success: function(group) {
-	// 			console.log(group)
-	// 			that.groupName = group[0].attributes.groupName;
-	// 			$('.group-id-crumb').html(that.groupName.substring(0, 15) + (that.groupName.length > 15 ? "..." : ""));
-	// 		},
-
-	// 		error: function(error) {
-	// 			console.log(error);
-	// 		}
-	// 	})
-	// },
-
-	showPlayerScores: function () {
-		var renderedTemplate = _.template($('.player-view-player-stats-view').text());
-		var query = new Parse.Query("TntScore");
-
+	getPlayerScores: function () {
+		var scores = [];
 		var that = this;
+
+		var query = new Parse.Query("TntScore");
 		query.find({
 			success: function(events) {
 				events.forEach(function(event) {
-					// console.log(event.attributes)
-					$('.player-stats-list').append(renderedTemplate(event.attributes))
+					if(scores.length <= 0){
+						scores.push(event);
+					}else if(scores.length > 0){
+						scores.forEach(function(score){
+							if(score.attributes.levelID.slice(-2) == event.attributes.levelID.slice(-2)){
+								score.attributes.minionsStomped += event.attributes.minionsStomped
+								score.attributes.coinsCollected += event.attributes.coinsCollected
+							}else{
+								var result = $.grep(scores, function(scr){
+									return scr.attributes.levelID.slice(-2) == event.attributes.levelID.slice(-2);
+								});
+								if(result.length == 0){
+									scores.push(event);
+								}
+							}
+						})
+					}
+
 				})
+				that.showPlayerScores(scores);
 				that.getPlayerSummary(events);
 			},
 			error: function(error) {
 				console.log(error)
 			}
 		})
+	},
+
+	showPlayerScores: function (scores) {
+		var renderedTemplate = _.template($('.player-view-player-stats-view').text());
+		scores.forEach(function(score){
+			$('.player-stats-list').append(renderedTemplate(score.attributes))	
+		});
+		this.tableSort();
 	},
 
 	getPlayerSummary: function (events) {
