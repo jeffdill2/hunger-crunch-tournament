@@ -89,18 +89,39 @@ var GroupView = Parse.View.extend({
 	getPlayers: function () {
 		var query = new Parse.Query('TntScore');
 		
-		// console.log(this.groupInfo.groupID)
+		console.log(this.group)
 		query.include('TntGrp');
 		query.include('user');
-		// query.equalTo("TntGrp", this.group);
-		// query.equalTo("eventType", "levelEnd");
+		query.equalTo("tntGrp", this.group);
 		// console.log(this.group)
 
 		var that = this;
 		query.find({
 			success: function (players) {
-				// console.log(players)
-				that.showPlayers(players);
+				var grpPlayers = [];
+
+				players.forEach(function (player) {
+					// console.log(player.attributes)
+						if(grpPlayers.length <= 0){
+							grpPlayers.push(player);
+						}if(grpPlayers.length > 0){
+								grpPlayers.forEach(function(grpPlayer){
+									// console.log(grpPlayer.attributes)
+									
+									if(grpPlayer.attributes.OIID == player.attributes.OIID){
+										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
+										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;	
+									}else if(grpPlayer.attributes.OIID !== player.attributes.OIID){
+										// grpPlayers.push(player);
+										console.log(player.attributes)
+									}
+								})
+								
+						}
+				})
+
+				that.showPlayers(grpPlayers);
+				console.log(grpPlayers)
 			},
 			error: function (error) {
 				console.log(error)

@@ -27,7 +27,7 @@ var DashboardView = Parse.View.extend ({
 		var query = new Parse.Query(TntGroup);
 		// checking for group objects made by the current user
 		query.include("user");
-		query.equalTo("user", Parse.User.current());
+		// query.equalTo("user", Parse.User.current());
 		query.find({
 			success: function(userGroups) {
 				console.log(userGroups);

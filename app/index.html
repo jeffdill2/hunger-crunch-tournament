@@ -201,7 +201,6 @@
         <script type="text/template" class="group-view-template">
             <div class="group-view-header-content">
                 <div class="group-view-location-banner h1-flag">
-                <%= name %>
                 <%= name ? name.substring(0,20) + (name.length > 20 ? "..." : "") : GROUPNAME %>
                 </div>
 
@@ -527,7 +526,7 @@
 
                         <ul class="dashboard-group-details">
                             <li><%= groupID.get('startDate').toString().substring(0,10) %> - <%= groupID.get('endDate').toString().substring(0,10) %></li>
-                            <li>32 Players</li>
+                            <li><%= players %> Players</li>
                         </ul>
                     </div>
                     <div class="dashboard-group-statistics">
