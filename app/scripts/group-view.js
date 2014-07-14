@@ -8,7 +8,7 @@ var GroupView = Parse.View.extend({
 		'click .save-dates'			: 'saveDates',
 		'click .print-button'		: 'print',
 		'click .player-name' 		: 'playerNav',
-		'click .breadcrumb-back'	: 'goBack',
+		'click .share-code'			: 'viewCode',
 		'click .print-button'		: 'print'
 	},
 
@@ -23,13 +23,10 @@ var GroupView = Parse.View.extend({
 
 	render: function () {
 		// called in the success inside getGroup
-		// console.log(this.groupInfo)
-
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 		
 		this.getGroupTotals();
-
 	},
 
 	getGroup: function () {
@@ -58,7 +55,6 @@ var GroupView = Parse.View.extend({
 				console.log(error)
 			}
 		});
-
 	},
 
 	getGroupTotals: function() {
@@ -70,8 +66,7 @@ var GroupView = Parse.View.extend({
 		var that = this;
 		query.first({
 			success: function(groupTotal) {
-				// console.log(groupTotal);
-
+				that.info = groupTotal;
 				that.showGroupTotals(groupTotal);
 			},
 			error: function (error) {
@@ -132,7 +127,6 @@ var GroupView = Parse.View.extend({
 				})
 
 				that.showPlayers(grpPlayers);
-				console.log(grpPlayers)
 			},
 			error: function (error) {
 				console.log(error)
@@ -226,8 +220,10 @@ var GroupView = Parse.View.extend({
 		$("header").removeClass('non-print');
 	},
 
-	goBack: function () {
-		router.navigate('/#tournament/dashboard', {trigger: true});
+	viewCode: function () {
+		var groupName = this.info.attributes.groupID.attributes.name.replace(/ /g, '%20');
+		var groupCode = this.info.attributes.groupID.attributes.groupCode;
+		router.navigate('/#tournament/dashboard/'+groupName+'/'+groupCode, {trigger: true});
 	}
 });
 
