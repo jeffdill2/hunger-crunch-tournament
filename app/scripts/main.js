@@ -8,4 +8,13 @@ var router = new AppRouter();
 
 Parse.history.start();
 
+////////////////////////////////////////////////////////////
+///////////////////////////////////////// LOADING ANIMATIONS
+////////////////////////////////////////////////////////////
+function startLoadingAnimation() {
+	$('.loading-spinner-focus').show();
+}
 
+function stopLoadingAnimation() {
+	$('.loading-spinner-focus').fadeOut();
+}
