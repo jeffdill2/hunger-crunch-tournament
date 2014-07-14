@@ -1,0 +1,136 @@
+@import 'variables';
+@import 'multi-use-classes';
+@import 'input-views';
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////// DASHBOARD VIEW
+////////////////////////////////////////////////////////////
+.full-dashboard-container {
+	max-width: 1150px;
+	margin: 0 auto;
+}
+.dashboard-header {
+	@include content-header;
+}
+
+
+.dashboard-nav {
+	@extend .clearfix;
+
+	& ul {
+		list-style: none;
+		float: right;
+		padding: 0;
+		margin: -30px 20px 0;
+		vertical-align: bottom;
+
+		& li {
+			@extend .angle-button-teal;
+			margin-right: 30px;
+			padding: 5px 10px;
+			display: inline-block;
+			cursor: pointer;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+.dashboard-group-content {
+	width: 100%;
+	padding: 35px 5%;
+	background: $colorLightGray;
+
+	@extend .clearfix;
+}
+
+.dashboard-group {
+	float: left;
+	width: 47.5%;
+	min-height: 200px;
+	margin-right: 5%;
+	margin-bottom: 50px;
+	padding: 10px;
+	background: $colorWhite;
+	& h2 {
+		cursor: default;
+	}
+	& h2:first-child {
+		cursor: pointer;
+	}
+
+	&:nth-of-type(2n) {
+		margin-right: 0;
+	}
+}
+
+.group-details-container {
+	height: 80px;
+	width: 100%;
+	padding: 10px;
+	border-bottom: 1px solid $colorTextDarkGray;
+
+	& li {
+		text-align: right;
+	}
+}
+
+.groupname-and-code {
+	display: inline-block;
+
+	& h2 {
+		margin-top: 0;
+		margin-bottom: 2px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	& h3 {
+		margin-top: 0;
+		margin-bottom: 2px;
+	}
+
+	& p {
+		font-family: "proxima-nova", sans-serif;
+		font-size: 1.1em;
+		margin: 0;
+		cursor: default;
+	}
+}
+
+.dashboard-group-details {
+	float: right;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	& li {
+		font-family: "proxima-nova", sans-serif;
+		font-size: 1.1em;
+		cursor: default;
+	}
+}
+
+.dashboard-group-statistics {
+	padding: 10px;
+}
+.group-minion-count, 
+.group-coins-count, 
+.group-meals-provided {
+	width: 33%;
+	float: left;
+	text-align: center;
+	padding: 10px 20px 0;
+}
+.minion-image, 
+.coins-image, 
+.meals-image, 
+.collectibles-image {
+	height: 95px;
+	width: 108px;
+	margin-left: -7px;
+}

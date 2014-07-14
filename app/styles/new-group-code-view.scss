@@ -1,0 +1,113 @@
+@import 'variables';
+@import 'multi-use-classes';
+
+////////////////////////////////////////////////////////////
+//////////////////////////////////////// NEW GROUP CODE VIEW
+////////////////////////////////////////////////////////////
+
+.group-created-header-container{
+	text-align: center;
+}
+
+.group-created-header-content{
+	@include content-header;
+
+	& h1 {
+		margin: 0;
+		font-size: 2.5em;
+	}
+}
+
+.group-created-main-container {
+	background: $colorLightGray;
+	text-align: center;
+	padding: 30px;
+}
+
+.player-instructions {
+	margin: 0 auto;
+	color: $colorCharcoal;
+	& p {
+		font-size: 1.2em;
+		font-family: "proxima-nova", sans-serif;
+	}
+}
+
+.group-code-box {
+	width: 180px;
+	margin: 0 auto;
+	font-family: "proxima-nova", sans-serif;
+	background: $colorWhite;
+	color: $colorCharcoal;
+	padding: 5px;
+	& input {
+		font-size: 2.5em;
+		width: 100%;
+		text-align: center;
+		border: none;
+	}
+}
+
+.instruction-images {
+	@extend .clearfix;
+	width: 870px;
+	margin: 60px auto;
+}
+
+.instruction-image-one, 
+.instruction-image-two {
+	float: left;
+	& img {
+		height: 225px;
+		width: 400px;
+	}
+
+	& .placeholder-image {
+		display: inline-block;
+		height: 225px;
+		width: 400px;
+		background: $colorStoneGray;
+	}
+
+	& span {
+		vertical-align: top;
+		font-size: 1.2em;
+	}
+}
+
+.instruction-image-one {
+	margin-right: 40px;
+}
+
+.observer-instructions {
+	border-top: 1px solid $colorCharcoal;
+	padding: 25px;
+
+	color: $colorCharcoal;
+	& p {
+		font-size: 1.2em;
+		font-family: "proxima-nova", sans-serif;
+	}
+}
+
+.group-link-box {
+	width: 420px;
+	margin: 0 auto;
+	padding: 10px;
+	overflow: auto;
+	font-size: 1.2em;
+	color: $colorCharcoal;
+	background: $colorWhite;
+
+	& input	{
+		width: 100%;
+		text-align: right;
+		border: none;
+		font-family: "proxima-nova", sans-serif;
+		font-size: 1.1em;
+	}
+}
+
+.view-group-page {
+	width: 30%;
+}

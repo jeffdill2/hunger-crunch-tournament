@@ -1,0 +1,214 @@
+@import 'variables';
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////// MULTI-USE CLASSES
+////////////////////////////////////////////////////////////
+
+
+// container for all content besides the header to maintain better white space and aesthetic.
+.app-container {
+	max-width: 1150px;
+	margin: 0 auto;
+}
+
+// ">"/Greater than symbol svg graphic for breadcrumbs and table sort "buttons"
+.arrow-2 {
+  width: 9px;
+  height: 16px;
+}
+.arrow-2 path {
+  fill: white;
+}
+// banner breadcrumb sizing and underline on hover
+.breadcrumb-back {
+	font-size: 0.65em;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+// teal buttons used in page content headers (e.g. 'crate group', 'compare groups', 'print', etc)
+.angle-button-teal {
+	position: relative;
+	height: 33px;
+	background-image: url('../images/angle-button-teal-middle.png');
+	background-size: contain;
+	background-repeat: repeat-x;
+	border: none;
+	display: inline-block;
+	// margin-left: 30px;
+	color: #fff;
+	font-style: italic;
+
+	&:before, 
+	&:after {
+		content: '';
+		position: absolute;
+		background-size: contain;
+		background-repeat: no-repeat;
+		height: 33px;
+		top: 0;
+	}
+
+	&:before {
+		background-image: url('../images/angle-button-teal-left.png');
+		width: 11px;
+		left: -10px;
+	}
+	&:after {
+		background-image: url('../images/angle-button-teal-right.png');
+		width: 16px;
+		right: -15px;
+	}
+}
+
+// large buttons with hover and active states
+.button {
+	width: 45%;
+	margin: 22px auto;
+	padding: 0 15px 5px;
+	display: block;
+	border-radius: 6px;
+	background: $colorCharcoal;
+	color: $colorWhite;
+	font-family: "cubano", sans-serif;
+	font-size: 1.5em;
+	cursor: pointer;
+	box-shadow: inset 0 	-5px 	0   	darken($colorCharcoal, 10%),
+					  1px 	2px 	1px 0 	darken($colorCharcoal, 25%);
+	border: none;
+	&:hover {
+		margin-top: 23px;
+		padding-bottom: 4px;
+		background: $colorCharcoalDark;
+		box-shadow: inset 0 	-4px 	0   	darken($colorCharcoal, 20%),
+						  1px 	2px 	1px 0 	darken($colorCharcoal, 35%);
+	}
+
+	&:active {
+		margin-top: 25px;
+		padding-bottom: 2px;
+		outline: none;
+		background: darken($colorCharcoalDark, 5%);
+		box-shadow: inset 0 	-2px 	0   	darken($colorCharcoal, 30%),
+						  1px 	2px 	1px 0 	darken($colorCharcoal, 45%);
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+// clearfix
+.clearfix {
+
+	&:after {
+		content: " ";
+		display: block;
+		height: 0;
+		clear: both;
+	}
+}
+
+// location banners/bread-crumbs
+.h1-flag {
+	min-width: 250px;
+	display: inline-block;
+	background: $colorCoral;
+	color: #fff;
+	height: 60px;
+	line-height: 60px;
+	position: relative;
+	padding: 0 20px;
+	font-size: 2.75em;
+	cursor: default;
+	text-align: center;
+}
+
+.h1-flag:after {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 0;
+	border-top: 30px solid $colorCoral;
+	border-bottom: 30px solid $colorCoral;
+	border-right: 15px solid transparent;
+	right: -15px;
+	top: 0;
+}
+
+// class added to container elements to hide unnecessary elements when printing
+.non-print {
+	display: none !important;
+}
+// class added after document has been queued for printing or print has been cancelled to return it to normal
+.printable {
+	display: block !important;
+}
+
+.sort svg{
+	transform: rotate(90deg)
+}
+
+.sort path {
+	fill: $colorCharcoalDark;
+}
+
+.sorted {
+	transform: rotate(180deg)
+}
+
+// spinner loading
+.loading-spinner-image {
+	opacity: 0.6;
+	width: 60%;
+}
+
+.loading-spinner-container {
+	bottom: 0px;
+	font-size: 20px;
+	height: 300px;
+	left: 0px;
+	margin: auto;
+	position: absolute;
+	right: 0px;
+	text-align: center;
+	top: 0px;
+	width: 300px;
+	z-index: 1001;
+}
+
+.loading-spinner-focus {
+    background-color: $colorWhite;
+    bottom: 0px;
+    display: none;
+    left: 0px;
+    opacity: 0.8;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    vertical-align: middle;
+    z-index: 1001;
+}
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// MIXINS
+////////////////////////////////////////////////////////////
+
+// container that holds the banner bread crumb and content nav buttons
+@mixin content-header {
+	width: 100%;
+	min-height: 80px;
+	padding: 20px 0;
+
+	& svg {
+		margin: 0 -2.5px;
+	}
+}
+
+@mixin unordered-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}

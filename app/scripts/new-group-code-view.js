@@ -7,17 +7,22 @@ var GroupCodeView = Parse.View.extend({
 	},
 
 	initialize: function (groupID) {
-		this.user = groupID;
-		$('.app-container').html(this.el);
-		this.render();
+		if (Parse.User.current()) {
+			this.user = groupID;
+			$('.app-container').html(this.el);
+			this.render();
 
-		$('.group-link').click(function () {
-			$(this).focus().select();
-		});
+			$('.group-link').click(function () {
+				$(this).focus().select();
+			});
 
-		$('.group-code').click(function () {
-			$(this).focus().select();
-		});
+			$('.group-code').click(function () {
+				$(this).focus().select();
+			});
+		} 
+		else {
+			this.signIn();
+		}
 	},
 
 	render: function () {
@@ -25,10 +30,16 @@ var GroupCodeView = Parse.View.extend({
 
 		var renderedTemplate = this.template(this.user);
 		this.$el.html(renderedTemplate);
+		$('.group-link-box input').scrollLeft($('.group-link-box input').width());
 	},
 
 	goToGroupView: function () {
 		router.navigate('/#tournament/group/' + this.user.code, {trigger: true});
+	},
+
+	signIn:function () {
+		this.remove();
+		router.navigate('/#tournament/sign-in');
 	}
 
 });

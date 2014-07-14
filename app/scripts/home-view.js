@@ -26,14 +26,17 @@ var HomeView = Parse.View.extend({
 
 	signUpView: function() {
 		if (Parse.User.current()) {
-			$('.sign-up-button-container .alert').remove();
+			// $('.sign-up-button-container .alert').remove();
 
-			var alertTemplate = _.template($('.alert-template').text());
-			var renderedTemplate = alertTemplate({message: 'No need to sign up since you\'re already signed in!'});
+			// var alertTemplate = _.template($('.alert-template').text());
+			// var renderedTemplate = alertTemplate({message: 'No need to sign up since you\'re already signed in!'});
+			// $('.sign-up-button-container').append(renderedTemplate);
 
-			$('.sign-up-button-container').append(renderedTemplate);
+			router.navigate('tournament/dashboard', {trigger: true});
+
+			
 		} else {
-			router.navigate('/#tournament/sign-up', {trigger: true});
+			router.navigate('tournament/sign-up', {trigger: true});
 		}
 	},
 
