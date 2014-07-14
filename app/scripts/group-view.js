@@ -6,14 +6,15 @@ var GroupView = Parse.View.extend({
 		'click .change-group-dates'	: 'changeDatesButton',
 		'focus .date-changer'		: 'changeDates',
 		'click .save-dates'			: 'saveDates',
+		'click .print-button'		: 'print',
 		'click .player-name' 		: 'playerNav',
+		'click .share-code'			: 'viewCode',
 		'click .print-button'		: 'print'
 	},
 
 	className: 'group-view-container',
 
 	initialize: function (options) {
-		// console.log(options)
 		this.group = options;
 		$('.app-container').append(this.el);
 
@@ -22,13 +23,10 @@ var GroupView = Parse.View.extend({
 
 	render: function () {
 		// called in the success inside getGroup
-		// console.log(this.groupInfo)
-
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 		
 		this.getGroupTotals();
-
 	},
 
 	getGroup: function () {
@@ -57,7 +55,6 @@ var GroupView = Parse.View.extend({
 				console.log(error)
 			}
 		});
-
 	},
 
 	getGroupTotals: function() {
@@ -69,8 +66,7 @@ var GroupView = Parse.View.extend({
 		var that = this;
 		query.first({
 			success: function(groupTotal) {
-				// console.log(groupTotal);
-
+				that.info = groupTotal;
 				that.showGroupTotals(groupTotal);
 			},
 			error: function (error) {
@@ -131,7 +127,6 @@ var GroupView = Parse.View.extend({
 				})
 
 				that.showPlayers(grpPlayers);
-				console.log(grpPlayers)
 			},
 			error: function (error) {
 				console.log(error)
@@ -148,7 +143,6 @@ var GroupView = Parse.View.extend({
 		// using list.js to sort the table of data
 		this.tableSort();
 	},
-
 
 	playerNav: function (location) {
 		// will only set playerID if you click on the name itself, and not the row 	
@@ -215,15 +209,21 @@ var GroupView = Parse.View.extend({
 	},
 
 	print: function () {
-		$("header").addClass('non-print')
-		$(".group-view-location-banner").removeClass('h1-flag')
-		$(".group-view-options").css('opacity', 0)
+		$("header").addClass('non-print');
+		$(".group-view-location-banner").removeClass('h1-flag');
+		$(".group-view-options").css('opacity', 0);
 
 		window.print();
 		
-		$(".group-view-location-banner").addClass('h1-flag')
-		$(".group-view-options").css('opacity', 1)
-		$("header").removeClass('non-print')
+		$(".group-view-location-banner").addClass('h1-flag');
+		$(".group-view-options").css('opacity', 1);
+		$("header").removeClass('non-print');
+	},
+
+	viewCode: function () {
+		var groupName = this.info.attributes.groupID.attributes.name.replace(/ /g, '%20');
+		var groupCode = this.info.attributes.groupID.attributes.groupCode;
+		router.navigate('/#tournament/dashboard/'+groupName+'/'+groupCode, {trigger: true});
 	}
 });
 

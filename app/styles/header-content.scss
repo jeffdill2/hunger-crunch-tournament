@@ -1,0 +1,79 @@
+@import 'variables';
+@import 'multi-use-classes';
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////// HEADER CONTENT
+////////////////////////////////////////////////////////////
+
+.header-breadcrumb {
+	color: $colorWhite;
+	font-size: 1.65em;
+	margin-top: 10px;
+	display: inline-block;
+	& img {
+		height: 36px;
+		width: 34px;
+		margin-right: 10px;
+		vertical-align: middle;
+	}
+	& a:hover {
+		text-decoration: underline;
+	}
+}
+
+.header-content {
+	width: 100%;
+	@extend .app-container;
+	@extend .clearfix;
+}
+
+.header-account-options {
+	float: right;
+	color: $colorWhite;
+	font-family: "proxima-nova", sans-serif;
+	font-size: 1.1em;
+	& p {
+		margin: 0;
+	}
+}
+
+.header-username {
+	font-weight: bold;
+}
+.nav-container {
+	float: right;
+	clear: right;
+	margin-top: 30px;
+
+	& ul {
+		@include unordered-list;
+
+		& li {
+			margin-left: 30px;
+			font-size: 1.1em;
+			display: inline-block;
+			color: $colorWhite;
+			cursor: pointer;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.header-image {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -60px;
+	height: 50px;
+	width: 120px;
+	border-radius: 100px 100px 0 0;
+	background: $colorWhite;
+	text-align: center;
+	& img {
+		height: 77px;
+		width: 88px;
+		margin-top: -35px;
+	}
+}

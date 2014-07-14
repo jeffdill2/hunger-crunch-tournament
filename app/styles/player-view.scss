@@ -1,0 +1,80 @@
+@import 'variables';
+@import 'multi-use-classes';
+
+////////////////////////////////////////////////////////////
+//////////////////////////////////////////////// PLAYER VIEW
+////////////////////////////////////////////////////////////
+
+.player-view-header-content {
+	@include content-header;
+	border-bottom: 1px solid $colorCharcoal;
+
+	& ul {
+		list-style: none;
+		float: right;
+		padding: 0;
+		margin: 15px 0 0;
+
+		& li {
+			@extend .angle-button-teal;
+			margin-right: 30px;
+			padding: 3px 10px;
+			display: inline-block;
+			cursor: pointer;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}
+
+
+.player-view-content {
+	padding: 25px 15px 0 75px;
+	color: $colorTextDarkGray;
+	@extend .clearfix;
+}
+
+.player-view-summary {
+	width: 43%;
+	float: left;
+
+	& > h1, 
+	& h3 {
+		margin-top: 0;
+		margin-bottom: 40px;
+	}
+
+	& ul {
+		list-style: none;
+		margin: 0 auto;
+		padding: 0 25px;
+
+		& li {
+			& div:first-child {
+				display: inline-block;
+			}
+		}
+	}
+
+	& img {
+		vertical-align: baseline;
+	}
+}
+
+.player-summary-stats {
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+
+.player-summary-per-level {
+	width: 56%;
+	float: right;
+
+	& h3 {
+		margin-top: 0;
+	}
+}

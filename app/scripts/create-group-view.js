@@ -5,17 +5,26 @@ var CreateGroupView = Parse.View.extend({
 	template: _.template($('.create-group-view-template').text()),
 	className: "create-group-container",
 	events: {
-		'click .new-group-creation-button'	: "createNewGroupID",
+		'click .button'						: "createNewGroupID",
 		'click .start-date-picker'			: "startDatePicker",
 		'focus .start-date-picker'			: "startDatePicker",
 		'click .end-date-picker'			: "endDatePicker",
 		'focus .end-date-picker'			: "endDatePicker",
+		'focusout input'					: 'enableButtonCheck',
+		'blur input'						: 'enableButtonCheck',
+		'keyup input'						: 'enableButtonCheck'
 	},
 
 	initialize: function(options) {
-		$('.app-container').append(this.el);
-		this.render();
-		this.enableEnter();
+
+		if (Parse.User.current()) {
+			$('.app-container').append(this.el);
+			this.render();
+			this.enableEnter();
+		} 
+		else {
+			this.signIn();
+		}
 	},
 
 	render: function() {
@@ -44,13 +53,15 @@ var CreateGroupView = Parse.View.extend({
 		var startInput = $('.start-date-picker').pickadate({
 			format: 'ddd mmmm dd, yyyy',
 			container: '.start-date-container',
-
+			min: true,
+			// max: true,
 			onClose: function () {
 				this.stop();
 			},
 
 			onStop: function () {
 				$('.start-date-picker').attr('readonly', true);
+				$('.end-date-picker').click();
 			}
 		});
 		this.startPicker = startInput.pickadate('picker');
@@ -73,6 +84,7 @@ var CreateGroupView = Parse.View.extend({
 
 			onStop: function () {
 				$('.end-date-picker').attr('readonly', true);
+				$('.end-date-picker').blur();
 			}
 		});
 		this.endPicker = endInput.pickadate('picker');
@@ -99,17 +111,19 @@ var CreateGroupView = Parse.View.extend({
 		var name = $('.new-group-name-input').val().trim();
 		var start = $('.new-group-start-date-input').val();
 		var end = $('.new-group-end-date-input').val();
-		$('.create-group-view-content .missing-field').html('');	
+		$('.error-report').html('');	
+		$('.error-report-start-date').html('');	
+		$('.error-report-end-date').html('');	
 
 		if (name === '') {
-			$('.create-group-view-content .missing-field:eq(0)').html('Please enter a name for this group');
+			$('.error-report').html('Please enter a name for this group').css({'margin-left': '-124px'});
 			$('.new-group-name-input').val('')	
 		}
 		if (start === '') {
-			$('.create-group-view-content .missing-field:eq(1)').html('Please enter a start date for this group');
+			$('.error-report-start-date').html('Please enter a start date for this group').css({'margin-left': '-144px'});
 		}
 		if (end === '') {
-			$('.create-group-view-content .missing-field:eq(2)').html('Please enter an end date for this group');
+			$('.error-report-end-date').html('Please enter an end date for this group').css({'margin-left': '-141px'});
 		}
 
 
@@ -171,7 +185,7 @@ var CreateGroupView = Parse.View.extend({
 						console.log(group)
 						var groupName = group.attributes.groupName.replace(/ /g, '%20');
 						var uniqueID = group.attributes.groupID;
-						router.navigate('/#tournament/dashboard/'+strGroupID+'/'+uniqueID, {trigger: true});
+						router.navigate('/#tournament/dashboard/'+groupName+'/'+uniqueID, {trigger: true});
 					},
 					error: function(error) {
 						console.log('New group was not successfully saved - details below:');
@@ -190,5 +204,23 @@ var CreateGroupView = Parse.View.extend({
 			}
 		});
 
+	},
+
+	enableButtonCheck: function () {
+		var name = $('.new-group-name-input').val().trim();
+		var start = $('.new-group-start-date-input').val();
+		var end = $('.new-group-end-date-input').val();
+
+		if (name.length > 0 && start.length > 0 && end.length > 0) {
+			$('.button').css({'opacity': '1', 'cursor': 'pointer'});
+		}
+		else {
+			$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
+		}
+	},
+
+	signIn:function () {
+		this.remove();
+		router.navigate('/#tournament/sign-in');
 	}
 });

@@ -1,0 +1,108 @@
+@import 'variables';
+@import 'multi-use-classes';
+////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////// TAGS
+////////////////////////////////////////////////////////////
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased
+}
+
+body {
+	background-color: $colorWhite;
+	font-family: "cubano", sans-serif;
+	font-size: 16px;
+	line-height: 1.42857;
+	color: #939598;
+	margin: 0;
+	padding: 0;
+}
+
+table {
+	text-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+
+	& tbody tr {
+		&:hover {
+		background-color: $colorOffWhite;
+		}
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+	// all cells
+	& tr {
+		border-bottom: 1px solid $colorLightGray;
+		height: 50px;
+		vertical-align: middle;
+		font-size: 1.5em;
+		font-weight: bold;
+
+		& td {
+			border-right: 1px solid $colorLightGray;
+			width: 23%;
+			// ensures sort button and descriptions are on separate lines
+			& span {
+				display: block;
+				margin: 0 auto;
+			}
+			// "sort" buttons on tables
+			& button {
+				border: none;
+				background: none;
+				position: absolute;
+				top: 20%;
+				right: 15%;
+
+				&:focus, 
+				&:active {
+					outline: none;
+				}
+			}
+			// first column of all tables
+			&:first-child {
+				width: 29%;
+				cursor: pointer;
+			}
+			// last column of all tables
+			&:last-child {
+				width: 25%;
+				border-right: none;
+			}
+		}
+	}
+
+	// only table header
+	& thead tr{
+		height: 160px;
+		font-size: 1em;
+		vertical-align: bottom;
+
+		& td {
+			position: relative;
+		}
+		& td:first-child {
+			cursor: default;
+		}
+	}
+}
+
+header {
+	height: 120px;
+	padding: 20px 20px;
+	background: url(../images/map-bg.png);
+	background-size: 87px auto;
+	background-repeat: repeat;
+	background-position: top left;
+	position: relative;
+	& a {
+		text-decoration: none;
+		color: $colorWhite;
+
+		&:hover {
+			color: $colorWhite;
+		}
+	}
+}

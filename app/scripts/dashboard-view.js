@@ -1,9 +1,9 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click	.create-group-button'		: 'createGroupNav',
-		'click	.compare-groups-button'		: 'compareGroupsNav',
-		'click	.dash-group'				: 'groupNav',
+		'click .create-group-button'		: 'createGroupNav', 
+		'click .compare-groups-button'		: 'compareGroupsNav', 
+		'click .dashboard-group'			: 'groupNav', 
 		'click .print-button' 				: 'print'
 	},
 
@@ -12,11 +12,14 @@ var DashboardView = Parse.View.extend ({
 	className: 'full-dashboard-container',
 
 	initialize: function () {
-		$('.app-container').append(this.el);
-		this.getGroups();
-		this.render();
-
-		startLoadingAnimation();
+		if (Parse.User.current()) {
+			$('.app-container').append(this.el);
+			this.getGroups();
+			this.render();
+		} 
+		else {
+			this.signIn();
+		}
 	},
 
 	render: function() {
@@ -25,6 +28,8 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	getGroups: function() {
+
+		var that = this;
 		var TntGroup = Parse.Object.extend("TntGroup");
 		var query = new Parse.Query(TntGroup);
 		// checking for group objects made by the current user
@@ -32,44 +37,54 @@ var DashboardView = Parse.View.extend ({
 		// query.equalTo("user", Parse.User.current());
 		query.find({
 			success: function(userGroups) {
-				console.log(userGroups);
+				var renderedTemplate = _.template($('.dashboard-group-view-template').text())
+				if (userGroups.length > 0) {
+					userGroups.forEach(function(userGroup){
+						var groupPoint = {
+							__type: 'Pointer', 
+							className: 'TntGroup', 
+							objectId: userGroup.id
+						};
 
-				var renderedTemplate = _.template($('.dashboard-group-view').text())
+						var GroupTotals = Parse.Object.extend("TntGroupTotals");
+						var query = new Parse.Query(GroupTotals);
+						// checking for GroupTotals objects for the current users groups
+						query.include("groupID");
+						query.include("groupID.user");
+						query.equalTo("groupID", groupPoint);
 
-				userGroups.forEach(function(userGroup){
-					var groupPoint = {
-						__type: 'Pointer', 
-						className: 'TntGroup', 
-						objectId: userGroup.id
-					};
+						query.find({
+							success: function(groupTotal) {
+								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
+								// $('.groupname-and-code').html(userGroups[0].attributes.name)
 
-					var GroupTotals = Parse.Object.extend("TntGroupTotals");
-					var query = new Parse.Query(GroupTotals);
-					// checking for GroupTotals objects for the current users groups
-					query.include("groupID");
-					query.include("groupID.user");
-					query.equalTo("groupID", groupPoint);
-
-					query.find({
-						success: function(groupTotal) {
-							console.log(groupTotal);
-							$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
-							// $('.groupname-and-code').html(userGroups[0].attributes.name)
-
-							stopLoadingAnimation();
-						},
-						error: function(error) {
-							console.log(error)
-						}
-					})
-				})
+								stopLoadingAnimation();
+							},
+							error: function(error) {
+								console.log(error)
+							}
+						});
+					});
+				}
+				else {
+					// if no groups are found (new account), render placeholder data
+					var placeHolder = {
+						groupName: "Your Group Name",
+						groupID: "a1b2c",
+						minions: 0,
+						coins: 0
+					}
+					// append template into DOM, remove the underling on the Groupname and remove the click event from the view
+					$('.dashboard-group-content').append(renderedTemplate(placeHolder));
+					$('.groupname-and-code h2').css({'text-decoration':'none', 'cursor':'default'});
+					delete that.events['click .dashboard-group'];
+					that.delegateEvents(this.events);
+				}
 			},
 			error: function(error) {
 				console.log(error)
 			},
-
 		})
-
 	},
 
 	createGroupNav: function() {
@@ -80,9 +95,8 @@ var DashboardView = Parse.View.extend ({
 		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});
 	},
 
-	groupNav: function(location) {		
-		// console.log($(location.currentTarget).find("p")[0].innerHTML)
-		var groupNav = $(location.currentTarget).find("p")[0].innerHTML;
+	groupNav: function(location) {
+		var groupNav = location.currentTarget.children[0].children[0].children[1].innerHTML;
 		router.navigate('/#tournament/group/' + groupNav, {trigger: true});		
 	},
 
@@ -96,5 +110,10 @@ var DashboardView = Parse.View.extend ({
 		$(".dashboard-location").addClass('h1-flag')
 		$(".dashboard-nav").css('opacity', 1)
 		$("header").removeClass('non-print')
+	},
+
+	signIn:function () {
+		this.remove();
+		router.navigate('/#tournament/sign-in');
 	}
 })
