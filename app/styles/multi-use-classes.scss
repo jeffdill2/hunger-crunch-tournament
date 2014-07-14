@@ -42,7 +42,8 @@
 	color: #fff;
 	font-style: italic;
 
-	&:before, &:after {
+	&:before, 
+	&:after {
 		content: '';
 		position: absolute;
 		background-size: contain;
@@ -147,6 +148,50 @@
 	display: block !important;
 }
 
+.sort svg{
+	transform: rotate(90deg)
+}
+
+.sort path {
+	fill: $colorCharcoalDark;
+}
+
+.sorted {
+	transform: rotate(180deg)
+}
+
+// spinner loading
+.loading-spinner-image {
+	opacity: 0.6;
+	width: 60%;
+}
+
+.loading-spinner-container {
+	bottom: 0px;
+	font-size: 20px;
+	height: 300px;
+	left: 0px;
+	margin: auto;
+	position: absolute;
+	right: 0px;
+	text-align: center;
+	top: 0px;
+	width: 300px;
+	z-index: 1001;
+}
+
+.loading-spinner-focus {
+    background-color: $colorWhite;
+    bottom: 0px;
+    display: none;
+    left: 0px;
+    opacity: 0.8;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    vertical-align: middle;
+    z-index: 1001;
+}
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// MIXINS
 ////////////////////////////////////////////////////////////

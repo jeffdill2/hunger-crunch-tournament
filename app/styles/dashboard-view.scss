@@ -71,6 +71,10 @@
 	width: 100%;
 	padding: 10px;
 	border-bottom: 1px solid $colorTextDarkGray;
+
+	& li {
+		text-align: right;
+	}
 }
 
 .groupname-and-code {
@@ -114,13 +118,18 @@
 .dashboard-group-statistics {
 	padding: 10px;
 }
-.group-minion-count, .group-coins-count, .group-meals-provided {
+.group-minion-count, 
+.group-coins-count, 
+.group-meals-provided {
 	width: 33%;
 	float: left;
 	text-align: center;
 	padding: 10px 20px 0;
 }
-.minion-image, .coins-image, .meals-image, .collectibles-image {
+.minion-image, 
+.coins-image, 
+.meals-image, 
+.collectibles-image {
 	height: 95px;
 	width: 108px;
 	margin-left: -7px;

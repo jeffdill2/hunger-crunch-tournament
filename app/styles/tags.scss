@@ -56,7 +56,8 @@ table {
 				top: 20%;
 				right: 15%;
 
-				&:focus, &:active {
+				&:focus, 
+				&:active {
 					outline: none;
 				}
 			}

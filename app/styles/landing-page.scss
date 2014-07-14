@@ -140,7 +140,8 @@
 			text-shadow: 1px 1px darken($colorCharcoalDark, 15%);
 			box-shadow: 2px 2px 1px 0 darken($colorCharcoalDark, 15%);
 
-			&:before, &:after {
+			&:before, 
+			&:after {
 				position: absolute;
 				content: '';
 				width: 2px;

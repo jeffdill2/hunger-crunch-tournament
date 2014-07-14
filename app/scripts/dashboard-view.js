@@ -28,29 +28,43 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	getGroups: function() {
-		var Groups = Parse.Object.extend("Groups");
-		var query = new Parse.Query(Groups);
+
 		var that = this;
+		var TntGroup = Parse.Object.extend("TntGroup");
+		var query = new Parse.Query(TntGroup);
 		// checking for group objects made by the current user
-		query.equalTo("orgName", Parse.User.current().attributes.username);
+		query.include("user");
+		// query.equalTo("user", Parse.User.current());
 		query.find({
 			success: function(userGroups) {
 				var renderedTemplate = _.template($('.dashboard-group-view-template').text())
-				if (userGroups.length > 0){
+				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup){
-						var GroupTotals = Parse.Object.extend("GroupTotals");
+						var groupPoint = {
+							__type: 'Pointer', 
+							className: 'TntGroup', 
+							objectId: userGroup.id
+						};
+
+						var GroupTotals = Parse.Object.extend("TntGroupTotals");
 						var query = new Parse.Query(GroupTotals);
 						// checking for GroupTotals objects for the current users groups
-						query.equalTo("groupID", userGroup.attributes.groupID);
+						query.include("groupID");
+						query.include("groupID.user");
+						query.equalTo("groupID", groupPoint);
+
 						query.find({
 							success: function(groupTotal) {
 								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
+								// $('.groupname-and-code').html(userGroups[0].attributes.name)
+
+								stopLoadingAnimation();
 							},
 							error: function(error) {
 								console.log(error)
 							}
-						})
-					})
+						});
+					});
 				}
 				else {
 					// if no groups are found (new account), render placeholder data
@@ -60,17 +74,17 @@ var DashboardView = Parse.View.extend ({
 						minions: 0,
 						coins: 0
 					}
+					// append template into DOM, remove the underling on the Groupname and remove the click event from the view
 					$('.dashboard-group-content').append(renderedTemplate(placeHolder));
-						$('.groupname-and-code h2').css({'text-decoration':'none', 'cursor':'default'});
-						delete that.events['click .dashboard-group'];
-						that.delegateEvents(this.events);
+					$('.groupname-and-code h2').css({'text-decoration':'none', 'cursor':'default'});
+					delete that.events['click .dashboard-group'];
+					that.delegateEvents(this.events);
 				}
 			},
 			error: function(error) {
 				console.log(error)
 			},
 		})
-
 	},
 
 	createGroupNav: function() {
@@ -78,11 +92,10 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	compareGroupsNav: function() {
-		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});		
+		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});
 	},
 
 	groupNav: function(location) {
-		console.log('how?')
 		var groupNav = location.currentTarget.children[0].children[0].children[1].innerHTML;
 		router.navigate('/#tournament/group/' + groupNav, {trigger: true});		
 	},
@@ -91,7 +104,7 @@ var DashboardView = Parse.View.extend ({
 		$("header").addClass('non-print')
 		$(".dashboard-location").removeClass('h1-flag')
 		$(".dashboard-nav").css('opacity', 0)
-		
+
 		window.print();
 
 		$(".dashboard-location").addClass('h1-flag')

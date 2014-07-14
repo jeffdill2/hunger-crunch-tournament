@@ -24,37 +24,49 @@
             <div class="header-content">
                 <div class="header-account-options">
                 </div>
+
                 <div class="header-breadcrumb">
-                    <a href="http://www.hungercrunch.com/"><img src="../images/breadcrumb-shield.png"></a>
-                        <svg
-                            version="1.1"
-                            class="arrow-2"
-                            id="Layer_1"
-                            xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                            x="0px" y="0px"
-                            viewBox="0 0 7.7 16.2"
-                            enable-background="new 0 0 7.7 16.2"
-                            xml:space="preserve">
-                            <g>
-                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
-                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
-                            </g>
-                        </svg>
+
+                    <a href="http://www.hungercrunch.com/">
+                        <img src="../images/breadcrumb-shield.png">
+                    </a>
+
+                    <svg
+                        version="1.1"
+                        class="arrow-2"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px" y="0px"
+                        viewBox="0 0 7.7 16.2"
+                        enable-background="new 0 0 7.7 16.2"
+                        xml:space="preserve">
+                        <g>
+                        <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                        c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                        </g>
+                    </svg>
+
                     <a href="http://localhost:9000/#tournament">Tournaments</a>
                 </div>
+
                 <div class="nav-container"></div>
+
                 <div class="header-image">
                     <img src="../images/punching-glove.png">
                 </div>
             </div>
         </header>
 
+        <!-- LOADING SPINNER -->
+        <div class="loading-spinner-focus">
+            <div class="loading-spinner-container">
+                <img class="loading-spinner-image" src="../images/loading-shield.gif">
+                <br/>CRUNCHING...
+            </div>
+        </div>
 
         <div class="app-container"></div>
-
-
-
 
         <!--////////////////////////////////////////////////////////
         ////////////////////////////////////////////////// TEMPLATES
@@ -258,34 +270,16 @@
         <script type="text/template" class="group-view-template">
             <div class="group-view-header-content">
                 <div class="group-view-location-banner h1-flag">
-                <span class="breadcrumb-back">Dashboard</span>
-                    <svg
-                      version="1.1"
-                      class="arrow-2"
-                      id="Layer_1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink"
-                      x="0px" y="0px"
-                      viewBox="0 0 7.7 16.2"
-                      enable-background="new 0 0 7.7 16.2"
-                      xml:space="preserve">
-                      <g>
-                        <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
-                          c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
-                      </g>
-                    </svg>
-                <%= groupName ? groupName.substring(0,20) + (groupName.length > 20 ? "..." : "") : GROUPNAME %>
-
+                    <%= name ? name.substring(0,18) + (name.length > 18 ? "..." : "") : GROUPNAME %>
                 </div>
                     <div class="group-information">
                         <ul class="group-view-details">
-                            <li>GROUP CODE: <%=groupID%></li>
+                            <li>GROUP CODE: <%=groupCode%></li>
                             <li>
                             <%=startDate%> - <input class="date-changer"placeholder="<%=endDate%>" readonly/>
                             </li>
                             <li>32 Members</li>
                         </ul>
-
                         <ul class="group-view-options">
                             <% if (Parse.User.current()) { %>
                                 <li class="change-group-dates">CHANGE DATES</li>
@@ -300,37 +294,6 @@
             </div>
 
             <div class="group-summary-info">
-                <h2>GROUP SUMMARY</h2>
-                <ul>
-                    <li>
-                        <div class="group-summary-container">
-                            <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                            <div class="group-summary-stats">
-                                <h1>3,120</h1>
-                                <h4>MINIONS STOMPED</h4>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="group-summary-container">
-                            <img class="coins-image" src="../images/coin-stack.png"></img>
-                            <div class="group-summary-stats">
-                                <h1>312,114</h1>
-                                <h4>COINS COLLECTED</h4>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="group-summary-container">
-                            <img class="meals-image" src="../images/bowl.png"></img>
-                            <div class="group-summary-stats">
-                                <h1>203</h1>
-                                <h4>MEALS PROVIDED</h4>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-
             </div>
             <div class="group-stats-container">
                 <h2>PLAYER STATISTICS</h2>
@@ -404,68 +367,8 @@
                                 </td>
                             </tr>
                         </thead>
-                        <tbody class="list">
-                            <tr>
-                                <td class="player-name">SAM</td>
-                                <td class="minions-data">400</td>
-                                <td class="coins-data">3200</td>
-                                <td class="collectibles-data">14</td>
-                            </tr>
-                            <tr>
-                                <td class="player-name">BOB</td>
-                                <td class="minions-data">300</td>
-                                <td class="coins-data">3100</td>
-                                <td class="collectibles-data">13</td>
-                            </tr>
-                            <tr>
-                                <td class="player-name">BILL</td>
-                                <td class="minions-data">200</td>
-                                <td class="coins-data">3000</td>
-                                <td class="collectibles-data">15</td>
-                            </tr>
-
-                            <tr>
-                                <td class="player-name">SUPERLONG NAME</td>
-                                <td class="minions-data">100</td>
-                                <td class="coins-data">200</td>
-                                <td class="collectibles-data">16</td>
-                            </tr>
-
-                            <tr>
-                                <td class="player-name">SUPERLONG NAME</td>
-                                <td class="minions-data">99</td>
-                                <td class="coins-data">199</td>
-                                <td class="collectibles-data">17</td>
-                            </tr>
-
-                            <tr>
-                                <td class="player-name">SUPERLONG NAME</td>
-                                <td class="minions-data">98</td>
-                                <td class="coins-data">198</td>
-                                <td class="collectibles-data">18</td>
-                            </tr>
-
-                            <tr>
-                                <td class="player-name">SUPERLONG NAME</td>
-                                <td class="minions-data">97</td>
-                                <td class="coins-data">197</td>
-                                <td class="collectibles-data">19</td>
-                            </tr>
-
-                            <tr>
-                                <td class="player-name">SUPERLONG NAME</td>
-                                <td class="minions-data">96</td>
-                                <td class="coins-data">196</td>
-                                <td class="collectibles-data">21</td>
-                            </tr>
-
-                            <tr>
-                                <td class="player-name">SUPERLONG NAME</td>
-                                <td class="minions-data">95</td>
-                                <td class="coins-data">195</td>
-                                <td class="collectibles-data">22</td>
-                            </tr>
-
+                        <tbody class="list player-list">
+                            
                         </tbody>
                     </table>
 
@@ -474,10 +377,57 @@
             </div>
         </script>
 
+        <!-- template for group page group totals info -->
+        <script type="text/template" class="group-view-group-summary-view">
+            <h2>GROUP SUMMARY</h2>
+            <ul>
+                <li>
+                    <div class="group-summary-container">
+                        <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                        <div class="group-summary-stats">
+                            <h1><%= minions %></h1>
+                            <h4>MINIONS STOMPED</h4>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="group-summary-container">
+                        <img class="coins-image" src="../images/coin-stack.png"></img>
+                        <div class="group-summary-stats">
+                            <h1><%= coins %></h1>
+                            <h4>COINS COLLECTED</h4>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="group-summary-container">
+                        <img class="meals-image" src="../images/bowl.png"></img>
+                        <div class="group-summary-stats">
+                            <h1>0</h1>
+                            <h4>MEALS PROVIDED</h4>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </script>
+
+        <!-- template for the group page player instances -->
+        <script type="text/template" class="group-view-player-view">
+            <tr>
+                <td class="player-name"><%= user.attributes.username.length > 15 ? user.attributes.username.substring(0,15)+"..." : user.attributes.username %></td>
+                <td class="minions-data"><%= minionsStomped %></td>
+                <td class="coins-data"><%= coinsCollected %></td>
+                <td class="collectibles-data"><%= collectibles %></td>
+            </tr>
+        </script>
+
         <!-- template for the single player view -->
         <script type="text/template" class="player-view">
             <div class="player-view-header-content">
-                    <div class="player-view-location-banner h1-flag"><span class='breadcrumb-back'>Group</span>
+                    <div class="player-view-location-banner h1-flag">
+                    <span class='breadcrumb-back'>
+                        <%=groupID > 12 ? groupID.substring(0,12)+"..." : groupID%>
+                    </span>
                     <svg
                       version="1.1"
                       class="arrow-2"
@@ -507,38 +457,8 @@
             </div>
             <div class="player-view-content">
                 <div class="player-view-summary">
-                    <h3>PLAYER SUMMARY</h3>
-                    <ul>
-                        <li>
-                            <img class="minion-image" src="../images/minion-terrarium.png"></img>
-                            <div class="player-summary-stats">
-                                <h1>3,120</h1>
-                                <h4>MINIONS STOMPED</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <img class="coins-image" src="../images/coin-stack.png"></img>
-                            <div class="player-summary-stats">
-                                <h1>324,120</h1>
-                                <h4>COINS COLLECTED</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <img class="meals-image" src="../images/bowl.png"></img>
-                            <div class="player-summary-stats">
-                                <h1>120</h1>
-                                <h4>MEALS PROVIDED</h4>
-                            </div>
-                        </li>
-                        <li>
-                            <img class="collectibles-image" src="../images/treasure-chest.png"></img>
-                            <div class="player-summary-stats">
-                                <h1>12</h1>
-                                <h4>COLLECTIBLES FOUND</h4>
-                            </div>
-                        </li>
-
-                    </ul>
+                <h3>PLAYER SUMMARY</h3>
+                    
                 </div>
                 <div class="player-summary-per-level" id="player-summary-table">
                     <h3>STATISTICS PER LEVEL</h3>
@@ -610,41 +530,58 @@
                                 </td>
                             </tr>
                         </thead>
-                        <tbody class="list">
-                            <tr>
-                                <td class="level-play-data">1</td>
-                                <td class="level-minions-data">40</td>
-                                <td class="level-coins-data">345</td>
-                            </tr>
+                        <tbody class="list player-stats-list">
+                            
 
-                            <tr>
-                                <td class="level-play-data">2</td>
-                                <td class="level-minions-data">1402</td>
-                                <td class="level-coins-data">77</td>
-                            </tr>
-
-                            <tr>
-                                <td class="level-play-data">3</td>
-                                <td class="level-minions-data">508</td>
-                                <td class="level-coins-data">34405</td>
-                            </tr>
-
-                            <tr>
-                                <td class="level-play-data">4</td>
-                                <td class="level-minions-data">162</td>
-                                <td class="level-coins-data">13405</td>
-                            </tr>
-
-                            <tr>
-                                <td class="level-play-data">5</td>
-                                <td class="level-minions-data">290</td>
-                                <td class="level-coins-data">43405</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
 
             </div>
+        </script>
+
+        <!-- template for player view player stats -->
+        <script type="text/template" class="player-view-player-stats-view">
+            <tr>
+                <td class="level-play-data"><%= levelID.slice(-2) %></td>
+                <td class="level-minions-data"><%= minionsStomped %></td>
+                <td class="level-coins-data"><%= coinsCollected %></td>
+            </tr>
+        </script>
+
+        <!-- template for player view player summary -->
+        <script type="text/template" class="player-view-player-summary-view">
+                    <ul>
+                        <li>
+                            <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                            <div class="player-summary-stats">
+                                <h1><%= minions %></h1>
+                                <h4>MINIONS STOMPED</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="coins-image" src="../images/coin-stack.png"></img>
+                            <div class="player-summary-stats">
+                                <h1><%= coins %></h1>
+                                <h4>COINS COLLECTED</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="meals-image" src="../images/bowl.png"></img>
+                            <div class="player-summary-stats">
+                                <h1><%= meals %></h1>
+                                <h4>MEALS PROVIDED</h4>
+                            </div>
+                        </li>
+                        <li>
+                            <img class="collectibles-image" src="../images/treasure-chest.png"></img>
+                            <div class="player-summary-stats">
+                                <h1><%= collectibles %></h1>
+                                <h4>COLLECTIBLES FOUND</h4>
+                            </div>
+                        </li>
+
+                    </ul>
         </script>
 
         <!-- template for the dashboard view -->
@@ -669,13 +606,13 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupName.substring(0, 15) + (groupName.length > 15 ? "..." : "") %></h2>
-                            <p><%= groupID %></p>
+                            <h2><%= groupID.attributes.name.substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
+                            <p><%= groupID.get("groupCode")  %></p>
                         </div>
 
                         <ul class="dashboard-group-details">
-                            <li>6/30/14 - 7/30/14</li>
-                            <li>32 Players</li>
+                            <li><%= groupID.get('startDate').toString().substring(0,10) %> - <%= groupID.get('endDate').toString().substring(0,10) %></li>
+                            <li><%= players %> Players</li>
                         </ul>
                     </div>
                     <div class="dashboard-group-statistics">
