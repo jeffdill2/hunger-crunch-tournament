@@ -10,6 +10,8 @@ var CreateGroupView = Parse.View.extend({
 		'focus .start-date-picker'			: "startDatePicker",
 		'click .end-date-picker'			: "endDatePicker",
 		'focus .end-date-picker'			: "endDatePicker",
+		'focusout input'					: 'enableButtonCheck',
+		'blur input'						: 'enableButtonCheck'
 	},
 
 	initialize: function(options) {
@@ -44,13 +46,15 @@ var CreateGroupView = Parse.View.extend({
 		var startInput = $('.start-date-picker').pickadate({
 			format: 'ddd mmmm dd, yyyy',
 			container: '.start-date-container',
-
+			min: true,
+			// max: true,
 			onClose: function () {
 				this.stop();
 			},
 
 			onStop: function () {
 				$('.start-date-picker').attr('readonly', true);
+				$('.end-date-picker').click();
 			}
 		});
 		this.startPicker = startInput.pickadate('picker');
@@ -73,6 +77,7 @@ var CreateGroupView = Parse.View.extend({
 
 			onStop: function () {
 				$('.end-date-picker').attr('readonly', true);
+				$('.end-date-picker').blur();
 			}
 		});
 		this.endPicker = endInput.pickadate('picker');
@@ -99,17 +104,19 @@ var CreateGroupView = Parse.View.extend({
 		var name = $('.new-group-name-input').val().trim();
 		var start = $('.new-group-start-date-input').val();
 		var end = $('.new-group-end-date-input').val();
-		$('.create-group-view-content .missing-field').html('');	
+		$('.error-report').html('');	
+		$('.error-report-start-date').html('');	
+		$('.error-report-end-date').html('');	
 
 		if (name === '') {
-			$('.create-group-view-content .missing-field:eq(0)').html('Please enter a name for this group');
+			$('.error-report').html('Please enter a name for this group').css({'margin-left': '-124px'});
 			$('.new-group-name-input').val('')	
 		}
 		if (start === '') {
-			$('.create-group-view-content .missing-field:eq(1)').html('Please enter a start date for this group');
+			$('.error-report-start-date').html('Please enter a start date for this group').css({'margin-left': '-144px'});
 		}
 		if (end === '') {
-			$('.create-group-view-content .missing-field:eq(2)').html('Please enter an end date for this group');
+			$('.error-report-end-date').html('Please enter an end date for this group').css({'margin-left': '-141px'});
 		}
 
 
@@ -190,5 +197,21 @@ var CreateGroupView = Parse.View.extend({
 			}
 		});
 
-	}
+	},
+
+	enableButtonCheck: function () {
+		var name = $('.new-group-name-input').val().trim();
+		var start = $('.new-group-start-date-input').val();
+		var end = $('.new-group-end-date-input').val();
+
+		if (name.length > 0 && start.length > 0 && end.length > 0) {
+			
+			$('.create-group-view-content button').addClass('button').css('width', '50%');
+			$('.create-group-view-content button').removeClass('new-group-creation-button');
+		}
+		else {
+			$('.create-group-view-content button').addClass('new-group-creation-button');
+			$('.create-group-view-content button').removeClass('button');
+		}
+	},
 });

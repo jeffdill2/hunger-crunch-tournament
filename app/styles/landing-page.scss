@@ -1,0 +1,174 @@
+@import 'variables';
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// HOME PAGE
+////////////////////////////////////////////////////////////
+.alert {
+	font-size: 18px;
+	margin: 0 auto;
+	margin-top: 20px;
+	max-width: 800px;
+	padding: 20px;
+}
+
+.landing-page-copy {
+	width: 85%;
+	margin: 4em auto 2em;
+	text-align: center;
+
+	& strong {
+		color: $colorTextDarkGray;
+		// letter-spacing: 0.05em;
+		font-size: 1.5em;
+	}
+
+	& p {
+		color: $colorTextDarkGray;
+		font-size: 1.2em;
+		font-family: "proxima-nova", sans-serif;
+	}
+}
+
+.hunger-minions-counter-container {
+	width: 100%;
+	background: lighten($colorStoneGray, 20%);
+	padding: 20px 0 0;
+
+	& .minion-counter-content {
+		width: 665px;
+		margin: 0 auto;
+		text-align: center;
+
+		& .cyclops-home-graphic {
+			height: 90px;
+			width: 100px;
+			margin-right: .5em;
+		}
+
+		& .counter-home-graphic {
+			margin-top: 1em;
+		}
+
+		& h1 {
+			color: $colorTextDarkGray;
+			display: inline-block;
+			vertical-align: bottom;
+			margin-bottom: 5px;
+		}
+	}
+}
+
+
+.sign-up-button-container {
+	margin: 45px auto;
+	text-align: center;
+
+	& .sign-up-button {
+		width: 250px;
+		height: 75px;
+		line-height: 65px;
+		background-image: url('../images/angle-button-teal-middle.png');
+		background-size: contain;
+		background-repeat: repeat-x;
+		position: relative;
+		color: $colorWhite;
+		font-size: 2.5em;
+		font-style: italic;
+		letter-spacing: 0.06em;
+		text-shadow: 1px 1px darken($colorButtonTeal, 10%);
+		margin: 0 auto;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.sign-up-button:before,
+	.sign-up-button:after {
+		content: '';
+		position: absolute;
+		background-size: cover;
+		background-repeat: no-repeat;
+		height: 75px;
+		top: 0;
+	}
+
+	.sign-up-button:before {
+		width: 25px;
+		left: -25px;
+		background-image: url('../images/angle-button-teal-left.png');
+	}
+
+	.sign-up-button:after {
+		background-image: url('../images/angle-button-teal-right.png');
+		width: 36px;
+		right: -35px;
+	}
+}
+
+.flip {
+	width: 610px;
+	margin: 30px auto 0;
+	padding: 0 0 30px;
+
+	& .full-counter {
+		@extend .clearfix;
+		list-style: none;
+		width: 100%;
+		padding: 0;
+		margin: 0;
+		& span {
+			float: left;
+			line-height: 1.7;
+			font-size: 5.5em;
+			margin: 0 4px 0 0;
+			color: $colorCharcoalDark;
+		}
+		& .counter-cards {
+			float: left;
+			margin: 0 5px 0 0;
+			padding: 5px 8px;
+			min-width: 66px;
+			min-height: 94px;
+			font-size: 6em;
+			border-radius: 2px;
+			background: $colorCharcoalDark;
+			color: $colorWhite;
+			line-height: 1;
+			text-align: center;
+			position: relative;
+			text-shadow: 1px 1px darken($colorCharcoalDark, 15%);
+			box-shadow: 2px 2px 1px 0 darken($colorCharcoalDark, 15%);
+
+			&:before, &:after {
+				position: absolute;
+				content: '';
+				width: 2px;
+				height: 12px;
+				left: 2%;
+				top: 51%;
+				margin: -4px auto 0;
+				background: $colorWhite;
+				z-index: 1;
+			}
+
+			&:after {
+				left:98%;
+			}
+
+			.card-line {
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				left: 0;
+				top: 52%;
+				margin: 0 auto 0;
+				background: darken($colorCharcoalDark, 10%);
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}

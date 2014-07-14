@@ -1,0 +1,73 @@
+@import 'variables';
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////// HEADER CONTENT
+////////////////////////////////////////////////////////////
+
+.header-breadcrumb {
+	color: $colorWhite;
+	font-size: 1.65em;
+	margin-top: 10px;
+	& img {
+		height: 36px;
+		width: 34px;
+		margin-right: 10px;
+		vertical-align: middle;
+	}
+}
+
+.header-content {
+	width: 100%;
+	margin: 0 auto;
+	max-width: 1115px;
+}
+.header-account-options {
+	float: right;
+	color: $colorWhite;
+	font-family: "proxima-nova", sans-serif;
+	font-size: 1.1em;
+	& p {
+		margin-top: 0;
+	}
+	& span {
+		font-weight: bold;
+	}
+}
+
+.nav-container {
+	float: right;
+	clear: right;
+	margin-top: 10px;
+
+	& ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		& li {
+			margin-left: 30px;
+			display: inline-block;
+			color: $colorWhite;
+			cursor: pointer;
+			font-size: 1.1em;
+			// letter-spacing: 0.06em;
+		}
+	}
+}
+
+.header-image {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	margin-left: -60px;
+	height: 50px;
+	width: 120px;
+	border-radius: 100px 100px 0 0;
+	background: $colorWhite;
+	text-align: center;
+	& img {
+		height: 77px;
+		width: 88px;
+		margin-top: -35px;
+	}
+}

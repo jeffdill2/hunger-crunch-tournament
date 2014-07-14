@@ -1,0 +1,101 @@
+@import 'variables';
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////// MULTI-USE CLASSES
+////////////////////////////////////////////////////////////
+
+// clearfix
+.clearfix {
+
+	&:after {
+		content: " ";
+		display: block;
+		height: 0;
+		clear: both;
+	}
+}
+
+// container for all content besides the header to maintain better white space and aesthetic.
+.app-container {
+	max-width: 1150px;
+	margin: 0 auto;
+}
+
+// location banners/bread-crumbs
+.h1-flag {
+	display: inline-block;
+	background: $colorCoral;
+	color: #fff;
+	height: 60px;
+	line-height: 60px;
+	position: relative;
+	padding: 0 20px;
+	font-size: 2.75em;
+}
+
+.h1-flag:after {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 0;
+	border-top: 30px solid $colorCoral;
+	border-bottom: 30px solid $colorCoral;
+	border-right: 15px solid transparent;
+	right: -15px;
+	top: 0;
+}
+// ">"/Greater than symbol svg graphic for breadcrumbs and table sort "buttons"
+.arrow-2 {
+  width: 9px;
+  height: 16px;
+}
+.arrow-2 path {
+  fill: white;
+}
+// teal buttons used in page content headers (e.g. 'crate group', 'compare groups', 'print', etc)
+.angle-button-teal {
+	position: relative;
+	height: 33px;
+	background-image: url('../images/angle-button-teal-middle.png');
+	background-size: contain;
+	background-repeat: repeat-x;
+	border: none;
+	display: inline-block;
+	// margin-left: 30px;
+	color: #fff;
+	font-style: italic;
+
+	&:before, &:after {
+		content: '';
+		position: absolute;
+		background-size: contain;
+		background-repeat: no-repeat;
+		height: 33px;
+		top: 0;
+	}
+
+	&:before {
+		background-image: url('../images/angle-button-teal-left.png');
+		width: 11px;
+		left: -10px;
+	}
+	&:after {
+		background-image: url('../images/angle-button-teal-right.png');
+		width: 16px;
+		right: -15px;
+	}
+}
+// container that holds the bread crumb and buttons
+.content-header {
+	width: 100%;
+	min-height: 80px;
+	padding: 20px 0;
+}
+// class added to container elements to hide unnecessary elements when printing
+.non-print {
+	display: none !important;
+}
+// class added after document has been queued for printing or print has been cancelled to return it to normal
+.printable {
+	display: block !important;
+}

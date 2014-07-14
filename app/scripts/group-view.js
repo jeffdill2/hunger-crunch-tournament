@@ -13,6 +13,7 @@ var GroupView = Parse.View.extend({
 	className: 'group-view-container',
 
 	initialize: function (options) {
+		
 		this.group = options;
 		$('.app-container').append(this.el);
 

@@ -1,0 +1,159 @@
+@import 'variables';
+@import 'multi-use-classes';
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////////// GROUP VIEW
+////////////////////////////////////////////////////////////
+
+.group-view-header-content {
+	@extend .content-header;
+	@extend .clearfix;
+}
+
+.group-view-location-banner {
+	min-width: 250px;
+	text-align: center;
+}
+
+.group-view-details {
+	list-style: none;
+	float: right;
+	padding: 0;
+	margin: 0;
+	font-family: 'proxima-nova', sans-serif;
+	position: relative;
+
+	& li {
+		display: inline-block;
+		margin-right: 30px;
+		font-size: 1.5em;
+		color: $colorStoneGray;
+
+		&:last-child {
+			margin-right: 0
+		}
+	}
+
+	& input {
+		width: 95px;
+		border: none;
+		font-size: .9em;
+		&:focus {
+			outline: none;
+		}
+	}
+
+	& .picker__holder {
+		max-width: 350px;
+		left: -100px;
+	}
+}
+.group-view-options {
+	list-style: none;
+	float: right;
+	padding: 0;
+	margin-top: -25px;
+	margin-bottom: 0;
+	clear: right;
+
+	& li {
+		@extend .angle-button-teal;
+		margin-right: 30px;
+		padding: 3px 10px;
+		display: inline-block;
+		cursor: pointer;
+
+		&:last-child {
+			margin-right: 15px;
+		}
+	}
+
+	& .save-dates {
+		display: none;
+	}
+}
+
+
+.group-summary-info {
+	@extend .clearfix;
+	width: 100%;
+	min-height: 150px;
+	padding: 35px;
+	background: $colorLightGray;
+	color: lighten($colorCharcoal, 5%);
+
+	& h1, & h2, & h3, & h4 {
+		margin: 0;
+	}
+	& h1 {
+		font-size: 2.5em;
+	}
+	& h2 {
+		margin-bottom: 40px;
+		font-size: 1.75em;
+	}
+
+	& ul {
+		@extend .clearfix;
+		list-style: none;
+		margin: 0 auto 20px;
+		padding: 0 25px;
+
+		& li {
+			float: left;
+			width: 33%;
+		}
+	}
+}
+.group-summary-container {
+	width: 79%;
+	height: 100px;
+	margin: 0 auto;
+
+	& img {
+		vertical-align: middle;
+	}
+}
+
+.group-summary-stats {
+	margin-left: 10px;
+	display: inline-block;
+	vertical-align: middle;
+	color: $colorCharcoal;
+}
+
+.group-stats-container {
+	padding: 25px;
+
+	& h3 {
+		margin-top: 0;
+	}
+}
+
+.group-stats-drop-down {
+	padding: 30px 100px;
+	text-align: center;
+	color: $colorTextDarkGray;
+
+	& table {
+		// all cells
+		& tr {
+			font-size: 1.25em;
+			& td {
+				& span, & button {
+					display: block;
+					margin: 0 auto;
+				}
+				&:first-child {
+					text-align: left;
+				}
+			}
+		}
+		// only the first three rows of table body
+		& tbody tr:nth-child(-n+3) {
+				height: 70px;
+				font-size: 1.5em;
+				font-weight: bold;
+		}
+	}
+}
