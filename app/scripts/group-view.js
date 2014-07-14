@@ -7,20 +7,23 @@ var GroupView = Parse.View.extend({
 		'focus .date-changer'		: 'changeDates',
 		'click .save-dates'			: 'saveDates',
 		'click .player-name' 		: 'playerNav',
+		'click .print-button'		: 'print'
 	},
 
+	className: 'group-view-container',
+
 	initialize: function (options) {
+		// console.log(options)
 		this.group = options;
 		$('.app-container').append(this.el);
 
-		this.getGroup();
-
-		
+		this.getGroup();	
 	},
 
 	render: function () {
 		// called in the success inside getGroup
 		// console.log(this.groupInfo)
+
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 		// using list.js to sort the table of data
@@ -30,11 +33,11 @@ var GroupView = Parse.View.extend({
 	},
 
 	getGroup: function () {
+		// does not work if multiple groups with same group name
 		var query = new Parse.Query("TntGroup");
 		query.include("user");
 		query.equalTo("groupCode", this.group.groupID);
 		// console.log(this.group);
-
 
 		var that = this;
 		query.first({
@@ -45,24 +48,29 @@ var GroupView = Parse.View.extend({
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
 				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
 				that.render();
-				that.getPlayers();
+				that.getPlayers(that.group);
+
+				$('.sort').click(function () {
+					$(this).toggleClass('sorted')
+				})
 			},	
 			error: function (error) {
 				console.log(error)
 			}
 		});
+
 	},
 
 	getGroupTotals: function() {
 		var query = new Parse.Query("TntGroupTotals");
 		query.include("groupID");
 		query.equalTo("groupID", this.group);
-		console.log(this.group.attributes)
+		// console.log(this.group.attributes)
 
 		var that = this;
-		query.find({
+		query.first({
 			success: function(groupTotal) {
-				// console.log(groupTotal[0].attributes);
+				// console.log(groupTotal);
 
 				that.showGroupTotals(groupTotal);
 			},
@@ -75,7 +83,7 @@ var GroupView = Parse.View.extend({
 
 	showGroupTotals: function (groupTotal) {
 		var renderedTemplate = _.template($('.group-view-group-summary-view').text());
-		$('.group-summary-info').append(renderedTemplate(groupTotal[0].attributes)); 
+		$('.group-summary-info').append(renderedTemplate(groupTotal.attributes)); 
 	},
 
 	getPlayers: function () {
@@ -83,14 +91,15 @@ var GroupView = Parse.View.extend({
 		
 		// console.log(this.groupInfo.groupID)
 		query.include('TntGrp');
-		query.equalTo("TntGrp", this.group);
+		query.include('user');
+		// query.equalTo("TntGrp", this.group);
 		// query.equalTo("eventType", "levelEnd");
-		console.log(this.group)
+		// console.log(this.group)
 
 		var that = this;
 		query.find({
 			success: function (players) {
-				console.log(players)
+				// console.log(players)
 				that.showPlayers(players);
 			},
 			error: function (error) {
@@ -102,15 +111,17 @@ var GroupView = Parse.View.extend({
 	showPlayers: function(players) {
 		var renderedTemplate = _.template($('.group-view-player-view').text());
 		players.forEach(function(player){
-			console.log(player.attributes)
+			// console.log(player.attributes)
 			$('.player-list').append(renderedTemplate(player.attributes)); 	
 		})
 	},
 
 
 	playerNav: function (location) {
+		// will only set playerID if you click on the name itself, and not the row 	
 		var playerID = location.currentTarget.innerHTML;
-		router.navigate('/#tournament/group/'+this.group.groupID+"/"+playerID, {trigger: true});
+		console.log(this.options)
+		router.navigate('/#tournament/group/'+ this.options.groupID +"/"+ playerID, {trigger: true});
 	}, 
 	// sort function
 	tableSort: function () {
@@ -168,6 +179,18 @@ var GroupView = Parse.View.extend({
 				alert("An error has occurred. Group end date has not been updated.");
 			}
 		});
+	},
+
+	print: function () {
+		$("header").addClass('non-print')
+		$(".group-view-location-banner").removeClass('h1-flag')
+		$(".group-view-options").css('opacity', 0)
+
+		window.print();
+		
+		$(".group-view-location-banner").addClass('h1-flag')
+		$(".group-view-options").css('opacity', 1)
+		$("header").removeClass('non-print')
 	}
 });
 

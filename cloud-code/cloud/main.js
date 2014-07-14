@@ -96,7 +96,8 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 					var numGroups = groups.length;
 
 					groups.forEach(function(group) {
-						var strGroupID = group.id;
+						var scoreDataQuery = new Parse.Query(strScores);
+                        var strGroupID = group.id;
 						var objGroupTotal = new Parse.Object(strGroupTotals);
 						var objGroupPointer = {
 							__type: "Pointer",
@@ -104,23 +105,38 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 							objectId: strGroupID
 						};
 
-						var scoreDataQuery = new Parse.Query(strScores);
 						scoreDataQuery.equalTo('tntGrp', objGroupPointer);
+                        scoreDataQuery.include('user');
 
 						scoreDataQuery.find({
 							success: function(scoreData) {
 								var numTotalCoins = 0;
 								var numTotalMinions = 0;
+								var aryUniqueUsers = [];
 
 								scoreData.forEach(function(score) {
+									var strUserID = score.get('user').id;
+                                    var bolUserFound = false;
+
 									numTotalCoins += score.get('coinsCollected');
 									numTotalMinions += score.get('minionsStomped');
+
+									aryUniqueUsers.forEach(function(user) {
+                                        if (user === strUserID) {
+                                            bolUserFound = true;
+                                        }
+                                    });
+
+                                    if (!bolUserFound) {
+                                        aryUniqueUsers.push(strUserID);
+                                    }
 								});
 
 								objGroupTotal.save({
 									groupID: objGroupPointer,
 									coins: numTotalCoins,
-									minions: numTotalMinions
+									minions: numTotalMinions,
+                                    players: aryUniqueUsers.length
 								}, {
 									success: function() {
 										numCounter += 1;
@@ -244,10 +260,10 @@ Parse.Cloud.job("generateDummyData", function(request, response) {
 												user: objUserPointer
 											}, {
 												success: function() {
-													response.message('Group total save has succeeded.');
+													response.message('Score save has succeeded.');
 												},
 												error: function(error) {
-													response.message('Group total save has failed.');
+													response.message('Score save has failed.');
 												}
 											});
 										}
