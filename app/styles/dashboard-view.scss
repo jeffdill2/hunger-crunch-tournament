@@ -10,7 +10,7 @@
 	margin: 0 auto;
 }
 .dashboard-header {
-	@extend .content-header;
+	@include content-header;
 }
 
 

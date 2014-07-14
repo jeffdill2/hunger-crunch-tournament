@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>Hunger Crunch</title>
+        <title>Hunger Crunch Tournament</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="/favicon.ico">
@@ -13,7 +13,6 @@
         <!-- endbuild -->
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
-        <link href='http://fonts.googleapis.com/css?family=Sigmar+One' rel='stylesheet' type='text/css'>
         <!-- endbuild -->
     </head>
     <body>
@@ -24,7 +23,6 @@
         <header>
             <div class="header-content">
                 <div class="header-account-options">
-
                 </div>
                 <div class="header-breadcrumb">
                     <a href="http://www.hungercrunch.com/"><img src="../images/breadcrumb-shield.png"></a>
@@ -43,7 +41,7 @@
                             c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
                             </g>
                         </svg>
-<a href="http://localhost:9000/">Tournaments</a>
+                    <a href="http://localhost:9000/#tournament">Tournaments</a>
                 </div>
                 <div class="nav-container"></div>
                 <div class="header-image">
@@ -495,7 +493,8 @@
                           c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
                       </g>
                     </svg>
-                    <%=playerID%></div>
+                    <%=(playerID.length > 12) ? playerID.substring(0,12)+"..." : playerID%>
+                    </div>
                     <ul class="player-view-nav">
                     <% if (Parse.User.current()) { %>
                         <li class="remove-player-button">REMOVE MEMBER</li>
@@ -670,7 +669,7 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupName.substring(0, 20) + (groupName.length > 20 ? "..." : "") %></h2>
+                            <h2><%= groupName.substring(0, 15) + (groupName.length > 15 ? "..." : "") %></h2>
                             <p><%= groupID %></p>
                         </div>
 
@@ -690,7 +689,7 @@
                         </div>
                         <div class="group-meals-provided">
                             <img class="meals-image" src="../images/bowl.png"></img>
-                            <h2 class="meals-stat">16</h2>
+                            <h2 class="meals-stat">0</h2>
 
                         </div>
                     </div>
@@ -778,7 +777,7 @@
                     <div class="error-report-end-date"></div>
                     <input class="new-group-end-date-input end-date-picker" placeholder="End Date" readonly>
                     <div class="end-date-container"></div>
-                <button class="new-group-creation-button">Create Group
+                <button class="new-group-creation-button button">Create Group
                     <svg
                         version="1.1"
                         class="arrow-2"
@@ -800,26 +799,21 @@
 
         <!-- template for the nav bar if no user signed in -->
         <script type="text/template" class="no-user-nav-view">
-            <ul>
                 <li class="sign-in-button">Sign In</li>
                 <li class="sign-up-button">Sign Up</li>
-            </ul>
-        </script>
-        <!-- template for the nav options if user signed in -->
-        <script type="text/template" class="user-nav-welcome-template">
-            <p>Welcome back, <span><%=username%></span></p>
-
         </script>
 
         <!-- template for the nav bar if user is signed in -->
         <script type="text/template" class="user-nav-view">
-            <ul>
                 <li class="dashboard-button">DASHBOARD</li>
                 <li class="settings-button">SETTINGS</li>
                 <li class="sign-out-button">SIGN OUT</li>
-            </ul>
         </script>
 
+        <!-- template for the nav options if user signed in -->
+        <script type="text/template" class="user-nav-welcome-template">
+            <p>Welcome back, <span class="header-username"><%=shortName%></span></p>
+        </script>
 
         <!-- template for a new group's code generation page -->
         <script type="text/template" class="group-view-code-template">
@@ -847,8 +841,8 @@
                     </div>
                 </div>
                 <div class="observer-instructions">
-                    <h3>SHARE LINK FOR OBSERVERS</h3>
-                    <p>Give the following link to people that would like to observe the group:</p>
+                    <h3>LINK FOR OBSERVERS</h3>
+                    <p>Copy and share the following link with people that would like to observe the group:</p>
                     <div class="group-link-box">
                         <input type="text" value="http://www.hungercrunch.com/#tournament/group/<%= code %>" class="group-link"readonly="readonly">
                     </div>
@@ -1045,18 +1039,6 @@
         </script>
 
         <!-- build:js scripts/plugins.js -->
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/transition.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js"></script>
-        <script src="../bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js"></script>
         <!-- endbuild -->
 
         <script type="text/javascript" src="//use.typekit.net/pug4efg.js"></script>

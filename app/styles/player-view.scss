@@ -5,16 +5,8 @@
 //////////////////////////////////////////////// PLAYER VIEW
 ////////////////////////////////////////////////////////////
 
-.group-id-crumb {
-	cursor: pointer;
-
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
 .player-view-header-content {
-	@extend .content-header;
+	@include content-header;
 	border-bottom: 1px solid $colorCharcoal;
 
 	& ul {

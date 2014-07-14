@@ -30,6 +30,7 @@ var GroupCodeView = Parse.View.extend({
 
 		var renderedTemplate = this.template(this.user);
 		this.$el.html(renderedTemplate);
+		$('.group-link-box input').scrollLeft($('.group-link-box input').width());
 	},
 
 	goToGroupView: function () {

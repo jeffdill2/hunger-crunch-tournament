@@ -4,16 +4,6 @@
 ////////////////////////////////////////// MULTI-USE CLASSES
 ////////////////////////////////////////////////////////////
 
-// clearfix
-.clearfix {
-
-	&:after {
-		content: " ";
-		display: block;
-		height: 0;
-		clear: both;
-	}
-}
 
 // container for all content besides the header to maintain better white space and aesthetic.
 .app-container {
@@ -21,32 +11,6 @@
 	margin: 0 auto;
 }
 
-// location banners/bread-crumbs
-.h1-flag {
-	min-width: 250px;
-	display: inline-block;
-	background: $colorCoral;
-	color: #fff;
-	height: 60px;
-	line-height: 60px;
-	position: relative;
-	padding: 0 20px;
-	font-size: 2.75em;
-	cursor: default;
-	text-align: center;
-}
-
-.h1-flag:after {
-	content: '';
-	display: block;
-	position: absolute;
-	height: 0;
-	border-top: 30px solid $colorCoral;
-	border-bottom: 30px solid $colorCoral;
-	border-right: 15px solid transparent;
-	right: -15px;
-	top: 0;
-}
 // ">"/Greater than symbol svg graphic for breadcrumbs and table sort "buttons"
 .arrow-2 {
   width: 9px;
@@ -55,6 +19,16 @@
 .arrow-2 path {
   fill: white;
 }
+// banner breadcrumb sizing and underline on hover
+.breadcrumb-back {
+	font-size: 0.65em;
+	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
 // teal buttons used in page content headers (e.g. 'crate group', 'compare groups', 'print', etc)
 .angle-button-teal {
 	position: relative;
@@ -88,59 +62,22 @@
 		right: -15px;
 	}
 }
-// container that holds the bread crumb and buttons
-.content-header {
-	width: 100%;
-	min-height: 80px;
-	padding: 20px 0;
 
-	& svg {
-		margin: 0 -2.5px;
-	}
-}
-// class added to container elements to hide unnecessary elements when printing
-.non-print {
-	display: none !important;
-}
-// class added after document has been queued for printing or print has been cancelled to return it to normal
-.printable {
-	display: block !important;
-}
-
-.breadcrumb-back {
-	font-size: 0.65em;
-	cursor: pointer;
-
-	&:hover {
-		text-decoration: underline;
-	}
-}
-
-.sort svg{
-	transform: rotate(90deg)
-}
-
-.sort path {
-	  fill: $colorCharcoalDark;
-}
-
-.sorted {
-	transform: rotate(180deg)
-}
-
-
+// large buttons with hover and active states
 .button {
-	width: 23%;
+	width: 45%;
+	margin: 22px auto;
 	padding: 0 15px 5px;
+	display: block;
 	border-radius: 6px;
 	background: $colorCharcoal;
 	color: $colorWhite;
 	font-family: "cubano", sans-serif;
-	font-size: 1.75em;
+	font-size: 1.5em;
 	cursor: pointer;
 	box-shadow: inset 0 	-5px 	0   	darken($colorCharcoal, 10%),
 					  1px 	2px 	1px 0 	darken($colorCharcoal, 25%);
-
+	border: none;
 	&:hover {
 		margin-top: 23px;
 		padding-bottom: 4px;
@@ -161,4 +98,72 @@
 	&:focus {
 		outline: none;
 	}
+}
+
+// clearfix
+.clearfix {
+
+	&:after {
+		content: " ";
+		display: block;
+		height: 0;
+		clear: both;
+	}
+}
+
+// location banners/bread-crumbs
+.h1-flag {
+	min-width: 250px;
+	display: inline-block;
+	background: $colorCoral;
+	color: #fff;
+	height: 60px;
+	line-height: 60px;
+	position: relative;
+	padding: 0 20px;
+	font-size: 2.75em;
+	cursor: default;
+	text-align: center;
+}
+
+.h1-flag:after {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 0;
+	border-top: 30px solid $colorCoral;
+	border-bottom: 30px solid $colorCoral;
+	border-right: 15px solid transparent;
+	right: -15px;
+	top: 0;
+}
+
+// class added to container elements to hide unnecessary elements when printing
+.non-print {
+	display: none !important;
+}
+// class added after document has been queued for printing or print has been cancelled to return it to normal
+.printable {
+	display: block !important;
+}
+
+////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////// MIXINS
+////////////////////////////////////////////////////////////
+
+// container that holds the banner bread crumb and content nav buttons
+@mixin content-header {
+	width: 100%;
+	min-height: 80px;
+	padding: 20px 0;
+
+	& svg {
+		margin: 0 -2.5px;
+	}
+}
+
+@mixin unordered-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }

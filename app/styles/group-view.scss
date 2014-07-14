@@ -6,17 +6,8 @@
 ////////////////////////////////////////////////////////////
 
 .group-view-header-content {
-	@extend .content-header;
+	@include content-header;
 	@extend .clearfix;
-
-	& span {
-		font-size: 0.65em;
-		cursor: pointer;
-
-		&:hover {
-			text-decoration: underline;
-		}
-	}
 }
 
 .group-information {
@@ -24,9 +15,7 @@
 	text-align: right;
 }
 .group-view-details {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+	@include unordered-list;
 	margin-bottom: 5px;
 	font-family: 'proxima-nova', sans-serif;
 	position: relative;
@@ -34,7 +23,7 @@
 	& li {
 		display: inline-block;
 		margin-right: 30px;
-		font-size: 1.5em;
+		font-size: 1.25em;
 		color: $colorStoneGray;
 
 		&:last-child {
@@ -57,10 +46,8 @@
 	}
 }
 .group-view-options {
-	list-style: none;
+	@include unordered-list;
 	display: inline-block;
-	padding: 0;
-	margin: 0;
 	& li {
 		@extend .angle-button-teal;
 		margin-right: 30px;
@@ -111,7 +98,7 @@
 	}
 }
 .group-summary-container {
-	width: 79%;
+	width: 100%;
 	height: 100px;
 	margin: 0 auto;
 

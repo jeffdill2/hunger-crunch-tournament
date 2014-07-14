@@ -3,10 +3,12 @@
 var UserNavView = Parse.View.extend({
 
 	events: {
-		'click .dashboard-button'	: "dashboardNav",
-		'click .settings-button'	: "settingsNav",
-		'click .sign-out-button'	: "signOutNav",
+		'click .dashboard-button'		: "dashboardNav",
+		'click .settings-button'		: "settingsNav",
+		'click .sign-out-button'		: "signOutNav",
+		// 'hover .header-username'	: "showName"
 	},
+	tagName: "ul",
 
 	template: _.template($('.user-nav-view').text()),
 	welcomeTemplate: _.template($('.user-nav-welcome-template').text()),
@@ -15,14 +17,13 @@ var UserNavView = Parse.View.extend({
 	initialize: function() {
 		$('.nav-container').append(this.el);
 		this.user = Parse.User.current();
-
 		this.render();
 	},
 
 	render: function() {
 		var renderedTemplate = this.template();
+		var that=this;
 		this.$el.html(renderedTemplate);
-
 		// regex to capitalize the first letter of the org/username including multiple words
 		function toTitleCase(str)
 		{
@@ -38,9 +39,10 @@ var UserNavView = Parse.View.extend({
 			}
 		}
 		var name = this.user.attributes.username
-		name = check(name);
+		// truncate long org names
+		name = check(name).substr(0, 15) + (name.length > 15 ? "..." : "");
 
-		var navRenderedTemplate = this.welcomeTemplate({username:name});
+		var navRenderedTemplate = this.welcomeTemplate({shortName:name});
 		$('.header-account-options').html(navRenderedTemplate);
 	},
 
@@ -55,7 +57,7 @@ var UserNavView = Parse.View.extend({
 	signOutNav: function () {
 		Parse.User.logOut();
 		router.navigate('/#tournament', {trigger: true});
-	},
+	}
 });
 
 var NoUserNavView = Parse.View.extend({
@@ -64,6 +66,8 @@ var NoUserNavView = Parse.View.extend({
 		'click .sign-in-button'		: "signInNav",
 		'click .sign-up-button'		: "signUpNav",
 	},
+
+	tagName:'ul',
 
 	template: _.template($('.no-user-nav-view').text()),
 

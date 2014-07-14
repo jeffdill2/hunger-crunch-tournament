@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////
 
 .compare-groups-header-content {
-	@extend .content-header;
+	@include content-header;
 	@extend .clearfix;
 	border-bottom: 1px solid $colorLightGray;
 	width: 93.5%;

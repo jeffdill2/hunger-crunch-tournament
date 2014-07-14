@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'multi-use-classes';
 
 ////////////////////////////////////////////////////////////
 ////// SIGN UP/SIGN IN/SETTINGS/CREATE GROUP & RESET PW VIEW
@@ -15,7 +16,7 @@
 .sign-up-view-header, .sign-in-view-header, 
 .settings-header, .create-group-view-header, 
 .password-reset-view-header {
-	@extend .content-header;
+	@include content-header;
 	@extend .clearfix;
 	background: $colorWhite;
 }
@@ -27,15 +28,15 @@
 	margin: 0 auto;
 	padding: 25px 0;
 	position: relative;
-	& input, & button {
+	& input {
 		display: block;
 		margin: 22px auto;
-		width: 45%;
 		font-size: 1.5em;
 		border: none;
 	}
 
 	& input {
+		width: 75%;
 		padding: 5px 15px;
 		border-radius: 6px;
 		font-family: "proxima-nova", sans-serif;
@@ -43,6 +44,11 @@
 		&:focus {
 			outline: none;
 		}
+	}
+
+	& button {
+		// width: 45%;
+		transition: .2s all linear;
 	}
 }
 
@@ -62,9 +68,9 @@
 //////////////////////////////////////////////////// SIGN UP
 ////////////////////////////////////////////////////////////
 .sign-up-view-content .new-user-creation-button {
-	width: 23%;
+	width: 45%;
 	margin: 22px auto;
-	padding: 0 15px 5px;
+	padding: 5px 15px;
 	font-size: 1.75em;
 	display: block;
 	border-radius: 6px;
@@ -110,7 +116,6 @@
 
 .error-report-sign-up {
 	bottom: 0;
-	// margin-left: 100px;
 }
 
 .recover-account:hover {
@@ -128,7 +133,7 @@
 	& div {
 		font-size: 1.5em;
 		display: inline-block;
-		margin-left: 27.5%;
+		margin-left: 12.5%;
 	}
 	& input {
 		margin-top: 5px;
@@ -149,28 +154,13 @@
 ////////////////////////////////////////////////////////////
 
 .create-group-view-content {
-	width: 45%;
-	margin: 0 auto;
 
 	& input {
 		width: 100%;
 	}
 	& .new-group-creation-button {
-		width: 50%;
-		margin: 22px auto;
-		padding: 0 15px 5px;
-		font-size: 1.75em;
-		display: block;
-		border-radius: 6px;
-		border: none;
-		background: $colorCharcoal;
-		color: $colorWhite;
-		font-family: "cubano", sans-serif;
 		cursor: not-allowed;
-		box-shadow: inset 0 	-5px 	0   	darken($colorCharcoal, 10%),
-						  1px 	2px 	1px 0 	darken($colorCharcoal, 25%);
 		opacity: .1;
-		transition: .2s all linear;
 	}
 
 	& .create-group-input-container {

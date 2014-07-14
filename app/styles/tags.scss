@@ -1,5 +1,5 @@
 @import 'variables';
-
+@import 'multi-use-classes';
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
@@ -11,7 +11,7 @@
 body {
 	background-color: $colorWhite;
 	font-family: "cubano", sans-serif;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 1.42857;
 	color: #939598;
 	margin: 0;
@@ -22,9 +22,15 @@ table {
 	text-align: center;
 	width: 100%;
 	margin-bottom: 20px;
+	border-collapse: collapse;
 
-	& tbody tr:hover {
+	& tbody tr {
+		&:hover {
 		background-color: $colorOffWhite;
+		}
+		&:last-child {
+			border-bottom: none;
+		}
 	}
 	// all cells
 	& tr {
@@ -36,7 +42,7 @@ table {
 
 		& td {
 			border-right: 1px solid $colorLightGray;
-			width: 23.3333333%;
+			width: 23%;
 			// ensures sort button and descriptions are on separate lines
 			& span {
 				display: block;
@@ -56,11 +62,12 @@ table {
 			}
 			// first column of all tables
 			&:first-child {
-				width: 30%;
+				width: 29%;
 				cursor: pointer;
 			}
 			// last column of all tables
 			&:last-child {
+				width: 25%;
 				border-right: none;
 			}
 		}
@@ -82,14 +89,13 @@ table {
 }
 
 header {
-	height: 110px;
-	padding: 20px 20px 10px;
+	height: 120px;
+	padding: 20px 20px;
 	background: url(../images/map-bg.png);
 	background-size: 87px auto;
 	background-repeat: repeat;
 	background-position: top left;
 	position: relative;
-
 	& a {
 		text-decoration: none;
 		color: $colorWhite;

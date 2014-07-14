@@ -11,7 +11,8 @@ var CreateGroupView = Parse.View.extend({
 		'click .end-date-picker'			: "endDatePicker",
 		'focus .end-date-picker'			: "endDatePicker",
 		'focusout input'					: 'enableButtonCheck',
-		'blur input'						: 'enableButtonCheck'
+		'blur input'						: 'enableButtonCheck',
+		'keyup input'						: 'enableButtonCheck'
 	},
 
 	initialize: function(options) {
@@ -184,7 +185,7 @@ var CreateGroupView = Parse.View.extend({
 						console.log(group)
 						var groupName = group.attributes.groupName.replace(/ /g, '%20');
 						var uniqueID = group.attributes.groupID;
-						router.navigate('/#tournament/dashboard/'+strGroupID+'/'+uniqueID, {trigger: true});
+						router.navigate('/#tournament/dashboard/'+groupName+'/'+uniqueID, {trigger: true});
 					},
 					error: function(error) {
 						console.log('New group was not successfully saved - details below:');
@@ -211,13 +212,10 @@ var CreateGroupView = Parse.View.extend({
 		var end = $('.new-group-end-date-input').val();
 
 		if (name.length > 0 && start.length > 0 && end.length > 0) {
-			
-			$('.create-group-view-content button').addClass('button').css('width', '50%');
-			$('.create-group-view-content button').removeClass('new-group-creation-button');
+			$('.button').css({'opacity': '1', 'cursor': 'pointer'});
 		}
 		else {
-			$('.create-group-view-content button').addClass('new-group-creation-button');
-			$('.create-group-view-content button').removeClass('button');
+			$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 		}
 	},
 
