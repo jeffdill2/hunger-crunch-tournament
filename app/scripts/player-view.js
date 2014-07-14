@@ -12,7 +12,7 @@ var PlayerView = Parse.View.extend({
 	className: 'player-view',
 
 	initialize: function(options) {
-		console.log(options)
+		// console.log(options)
 		$('.app-container').append(this.el);
 		this.render();
 		this.playerInfo = options;
@@ -38,8 +38,12 @@ var PlayerView = Parse.View.extend({
 		var that = this;
 
 		var query = new Parse.Query("TntScore");
+		query.include('user');
+		query.include('tntGrp');
+		query.equalTo('OIID', this.playerInfo.playerID)
 		query.find({
 			success: function(events) {
+				// console.log(events)
 				events.forEach(function(event) {
 					if(scores.length <= 0){
 						scores.push(event);
@@ -48,6 +52,7 @@ var PlayerView = Parse.View.extend({
 							if(score.attributes.levelID.slice(-2) == event.attributes.levelID.slice(-2)){
 								score.attributes.minionsStomped += event.attributes.minionsStomped
 								score.attributes.coinsCollected += event.attributes.coinsCollected
+
 							}else{
 								var result = $.grep(scores, function(scr){
 									return scr.attributes.levelID.slice(-2) == event.attributes.levelID.slice(-2);
@@ -88,12 +93,32 @@ var PlayerView = Parse.View.extend({
 		};
 
 		var that = this;
-		events.forEach(function (event) {
-			that.playerSummary.minions += event.attributes.minionsStomped;
-			that.playerSummary.coins += event.attributes.coinsCollected;
-		});
+		var collectQuery = new Parse.Query('TntCollectibles');
+		collectQuery.include('user');
+		collectQuery.include('tntGrp');
+		// console.log(events)
+		collectQuery.equalTo('user', events[0].attributes.user)
+		collectQuery.equalTo('tntGrp', events[0].attributes.tntGrp)
+		collectQuery.first({
+			success: function(result){
+					// console.log(result)
+					if(!result){
+						that.playerSummary.collectibles = 0;
+					}else{
+						that.playerSummary.collectibles += result.attributes.collectibles.length;	
+					}
+					events.forEach(function (event) {
+						that.playerSummary.minions += event.attributes.minionsStomped;
+						that.playerSummary.coins += event.attributes.coinsCollected;
+					});
+					that.showPlayerSummary(that.playerSummary);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		})
 
-		this.showPlayerSummary(this.playerSummary);
+		
 
 	},
 

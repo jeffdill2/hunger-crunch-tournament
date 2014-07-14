@@ -86,55 +86,79 @@ var GroupView = Parse.View.extend({
 	},
 
 	getPlayers: function () {
-		var collectQuery = new Parse.Query('TntCollectibles');
-		collectQuery.include('user');
-		
 		// console.log(this.group)
 		var query = new Parse.Query('TntScore');
-		query.include('TntGrp');
+		query.include('tntGrp');
 		query.include('user');
-		query.include('TntCollectibles');
 		query.equalTo("tntGrp", this.group);
 		// console.log(this.group)
-
 		var that = this;
-		query.find({
-			success: function (players) {
-				var grpPlayers = [];
+		var collectQuery = new Parse.Query('TntCollectibles');
+		collectQuery.include('user');
+		collectQuery.include('tntGrp');
+		collectQuery.find({
+			success: function(results){
+					that.collectiblesArr = results;
+					// console.log(results)
+					console.log(that.collectiblesArr)
 
-				players.forEach(function (player) {
-					// console.log(player.attributes)
-						if(grpPlayers.length <= 0){
-							grpPlayers.push(player);
-						}if(grpPlayers.length > 0){
-								grpPlayers.forEach(function(grpPlayer){
-									// console.log(grpPlayer.attributes)
-									
-									if(grpPlayer.attributes.OIID == player.attributes.OIID){
-										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
-										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
-										grpPlayer.attributes.collectibles = 0;	
-									}else{
-										var result = $.grep(grpPlayers, function(grp){ 
-											return grp.attributes.OIID == player.attributes.OIID; 
-										});
-										if(result.length == 0){
+				query.find({
+					success: function (players) { 
+						var grpPlayers = [];
+
+						players.forEach(function (player) {
+							// console.log(player.attributes)
+								if(grpPlayers.length <= 0){
+									grpPlayers.push(player);
+								}if(grpPlayers.length > 0){
+										grpPlayers.forEach(function(grpPlayer){
+											// console.log(grpPlayer.attributes)
 											
-										// console.log(player.attributes)
-										grpPlayers.push(player);
-										}
+											if(grpPlayer.attributes.OIID == player.attributes.OIID){
+												grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
+												grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
-									}
-								})
-								
-						}
+												that.collectiblesArr.forEach(function(collectible){
+												// console.log('player ', player.attributes.user.attributes.username)
+												// console.log('collectible ',  collectible.attributes.user.attributes.username)
+													
+													if(player.attributes.tntGrp.attributes.groupCode == collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username == collectible.attributes.user.attributes.username){
+														grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;		
+													}else{
+														// grpPlayer.attributes.collectibles = 0;
+													}
+												})
+
+											}else{
+												var result = $.grep(grpPlayers, function(grp){ 
+													return grp.attributes.OIID == player.attributes.OIID; 
+												});
+												if(result.length == 0){
+													
+												// console.log(player.attributes)
+												grpPlayers.push(player);
+												}
+
+											}
+										})
+										
+								}
+						})
+						grpPlayers.forEach(function(player){
+							if(player.attributes.collectibles == undefined){
+								player.attributes.collectibles = 0;
+							}
+						})
+						that.showPlayers(grpPlayers);
+						// console.log(grpPlayers)
+					},
+					error: function (error) {
+						console.log(error)
+					}
 				})
-
-				that.showPlayers(grpPlayers);
-				console.log(grpPlayers)
 			},
-			error: function (error) {
-				console.log(error)
+			error: function(error){
+				console.log(error);
 			}
 		})
 	},
@@ -143,6 +167,7 @@ var GroupView = Parse.View.extend({
 		var renderedTemplate = _.template($('.group-view-player-view').text());
 		players.forEach(function(player){
 			// console.log(player.attributes)
+			console.log(player.attributes)
 			$('.player-list').append(renderedTemplate(player.attributes)); 	
 		});
 		// using list.js to sort the table of data
