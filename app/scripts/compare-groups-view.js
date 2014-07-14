@@ -14,17 +14,22 @@ var CompareGroupsView = Parse.View.extend({
 	},
 
 	initialize: function(options) {
+		if (Parse.User.current()) {
+			$('.app-container').append(this.el);
+			this.getAvailableGroups();
+			this.render();
+			// make sure arrays are empty on view call
+			this.groupsToAdd = [];
+			this.groupsToCompare = [];
 
-		$('.app-container').append(this.el);
-		this.getAvailableGroups();
-		this.render();
-		// make sure arrays are empty on view call
-		this.groupsToAdd = [];
-		this.groupsToCompare = [];
+			$('.sort').click(function () {
+				$(this).toggleClass('sorted')
+			})
 
-		$('.sort').click(function () {
-			$(this).toggleClass('sorted')
-		})
+		} 
+		else {
+			this.signIn();
+		}
 	},
 
 	render: function() {
@@ -169,5 +174,10 @@ var CompareGroupsView = Parse.View.extend({
 			$(".compare-groups-content tfoot").removeClass('non-print')
 			$(".compare-groups-content button").removeClass('non-print')
 			$("#avaialble-group-names").removeClass('non-print')
+	},
+
+	signIn:function () {
+		this.remove();
+		router.navigate('/#tournament/sign-in');
 	}
 });

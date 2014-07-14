@@ -8,21 +8,29 @@
 .group-view-header-content {
 	@extend .content-header;
 	@extend .clearfix;
+
+	& span {
+		font-size: 0.65em;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 
-.group-view-location-banner {
-	min-width: 250px;
-	text-align: center;
+.group-information {
+	float: right;
+	text-align: right;
 }
-
 .group-view-details {
 	list-style: none;
-	float: right;
 	padding: 0;
 	margin: 0;
+	margin-bottom: 5px;
 	font-family: 'proxima-nova', sans-serif;
 	position: relative;
-
+	clear: right;
 	& li {
 		display: inline-block;
 		margin-right: 30px;
@@ -50,12 +58,9 @@
 }
 .group-view-options {
 	list-style: none;
-	float: right;
+	display: inline-block;
 	padding: 0;
-	margin-top: -25px;
-	margin-bottom: 0;
-	clear: right;
-
+	margin: 0;
 	& li {
 		@extend .angle-button-teal;
 		margin-right: 30px;
@@ -125,8 +130,9 @@
 .group-stats-container {
 	padding: 25px;
 
-	& h3 {
+	& h2 {
 		margin-top: 0;
+		font-size: 1.75em;
 	}
 }
 
@@ -152,8 +158,7 @@
 		// only the first three rows of table body
 		& tbody tr:nth-child(-n+3) {
 				height: 70px;
-				font-size: 1.5em;
-				font-weight: bold;
+				font-size: 1.75em;
 		}
 	}
 }

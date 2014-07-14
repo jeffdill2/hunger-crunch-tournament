@@ -11,9 +11,14 @@ var SettingsView = Parse.View.extend({
 	template: _.template($('.settings-view').text()),
 
 	initialize: function(options) {
-		$('.app-container').append(this.el);
-		this.render();
-		this.enableEnter();
+		if (Parse.User.current()) {
+			$('.app-container').append(this.el);
+			this.render();
+			this.enableEnter();
+		} 
+		else {
+			this.signIn();
+		}
 	},
 
 	render: function() {
@@ -75,5 +80,10 @@ var SettingsView = Parse.View.extend({
 			}
 		});
 
+	},
+
+	signIn:function () {
+		this.remove();
+		router.navigate('/#tournament/sign-in');
 	}
 });

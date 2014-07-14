@@ -5,7 +5,7 @@ var CreateGroupView = Parse.View.extend({
 	template: _.template($('.create-group-view-template').text()),
 	className: "create-group-container",
 	events: {
-		'click .new-group-creation-button'	: "createNewGroupID",
+		'click .button'						: "createNewGroupID",
 		'click .start-date-picker'			: "startDatePicker",
 		'focus .start-date-picker'			: "startDatePicker",
 		'click .end-date-picker'			: "endDatePicker",
@@ -15,9 +15,15 @@ var CreateGroupView = Parse.View.extend({
 	},
 
 	initialize: function(options) {
-		$('.app-container').append(this.el);
-		this.render();
-		this.enableEnter();
+
+		if (Parse.User.current()) {
+			$('.app-container').append(this.el);
+			this.render();
+			this.enableEnter();
+		} 
+		else {
+			this.signIn();
+		}
 	},
 
 	render: function() {
@@ -214,4 +220,9 @@ var CreateGroupView = Parse.View.extend({
 			$('.create-group-view-content button').removeClass('button');
 		}
 	},
+
+	signIn:function () {
+		this.remove();
+		router.navigate('/#tournament/sign-in');
+	}
 });

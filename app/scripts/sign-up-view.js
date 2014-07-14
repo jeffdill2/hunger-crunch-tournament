@@ -8,7 +8,7 @@ var SignUpView = Parse.View.extend({
 	className: "new-user-login-container",
 
 	events: {
-		'click .sign-up-view-header span'				: 'goBack',
+		'click .breadcrumb-back'						: 'goBack',
 		'click .sign-up-view-content button'			: 'createParseUser',
 		'keyup .new-user-password-verification-input'	: 'passwordValidation',
 		'keyup .new-user-password-input'				: 'passwordValidation',

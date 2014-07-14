@@ -4,7 +4,7 @@ var PassResetView = Parse.View.extend ({
 
 	events: {
 		'click .password-reset-view-header span'	: 'goBack',
-		'click .reset-password-button'				: 'resetPassword',
+		'click .password-reset-button'				: 'resetPassword',
 	},
 
 	template: _.template($('.reset-password-view-template').text()),

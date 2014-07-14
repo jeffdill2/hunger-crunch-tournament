@@ -36,7 +36,6 @@ table {
 
 		& td {
 			border-right: 1px solid $colorLightGray;
-			border-left: 1px solid $colorLightGray;
 			width: 23.3333333%;
 			// ensures sort button and descriptions are on separate lines
 			& span {
@@ -58,7 +57,6 @@ table {
 			// first column of all tables
 			&:first-child {
 				width: 30%;
-				border-left: none;
 				cursor: pointer;
 			}
 			// last column of all tables

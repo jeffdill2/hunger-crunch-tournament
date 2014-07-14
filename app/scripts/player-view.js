@@ -3,8 +3,8 @@
 var PlayerView = Parse.View.extend({
 
 	events: {
-		'click .group-id-crumb'	: 'groupNav',
-		'click .print-button'	: 'print'
+		'click .breadcrumb-back'	: 'goBack',
+		'click .print-button'		: 'print'
 	},
 
 	template: _.template($('.player-view').text()),
@@ -39,7 +39,7 @@ var PlayerView = Parse.View.extend({
 		query.find({
 			success: function(group) {
 				that.groupName = group[0].attributes.groupName;
-				$('.group-id-crumb').html(that.groupName.substring(0, 15) + (that.groupName.length > 15 ? "..." : ""));
+				$('.breadcrumb-back').html(that.groupName.substring(0, 15) + (that.groupName.length > 15 ? "..." : ""));
 			},
 
 			error: function(error) {
@@ -48,7 +48,7 @@ var PlayerView = Parse.View.extend({
 		})
 	},
 
-	groupNav: function () {
+	goBack: function () {
 		router.navigate('/#tournament/group/' + this.options.groupID, {trigger: true});
 	},
 
@@ -64,11 +64,13 @@ var PlayerView = Parse.View.extend({
 		$("header").addClass('non-print');
 		$(".player-view-location-banner").removeClass('h1-flag');
 		$(".player-view-nav").css('opacity', 0);
+		$("button").css('opacity', 0);
 
 		window.print();
 
 		$(".player-view-location-banner").addClass('h1-flag');
 		$(".player-view-nav").css('opacity', 1);
+		$("button").css('opacity', 1);
 		$("header").removeClass('non-print');
 
 	}

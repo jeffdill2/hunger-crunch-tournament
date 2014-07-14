@@ -7,7 +7,8 @@ var GroupView = Parse.View.extend({
 		'click .change-group-dates'	: 'changeDatesButton',
 		'focus .date-changer'		: 'changeDates',
 		'click .save-dates'			: 'saveDates',
-		'click .print-button'		: 'print'
+		'click .print-button'		: 'print',
+		'click .breadcrumb-back'	: 'goBack'
 	},
 
 	className: 'group-view-container',
@@ -111,15 +112,19 @@ var GroupView = Parse.View.extend({
 	},
 
 	print: function () {
-		$("header").addClass('non-print')
-		$(".group-view-location-banner").removeClass('h1-flag')
-		$(".group-view-options").css('opacity', 0)
+		$("header").addClass('non-print');
+		$(".group-view-location-banner").removeClass('h1-flag');
+		$(".group-view-options").css('opacity', 0);
 
 		window.print();
 		
-		$(".group-view-location-banner").addClass('h1-flag')
-		$(".group-view-options").css('opacity', 1)
-		$("header").removeClass('non-print')
+		$(".group-view-location-banner").addClass('h1-flag');
+		$(".group-view-options").css('opacity', 1);
+		$("header").removeClass('non-print');
+	},
+
+	goBack: function () {
+		router.navigate('/#tournament/dashboard', {trigger: true});
 	}
 });
 

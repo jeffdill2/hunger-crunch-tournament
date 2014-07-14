@@ -8,7 +8,7 @@ var SignInView = Parse.View.extend ({
 	className: "existing-user-login-container",
 
 	events: {
-		'click .sign-in-view-header span'				: 'goBack',
+		'click .breadcrumb-back'						: 'goBack',
 		'click .existing-user-login-button'				: 'userSignIn',
 		'click .forgot-password-button'					: 'forgotPassword',
 		'keypress .existing-user-username-input-input'	: 'enableEnter',
