@@ -116,14 +116,14 @@ var CreateGroupView = Parse.View.extend({
 		$('.error-report-end-date').html('');	
 
 		if (name === '') {
-			$('.error-report').html('Please enter a name for this group').css({'margin-left': '-124px'});
+			$('.error-report').html('Please enter a name for this group');
 			$('.new-group-name-input').val('')	
 		}
 		if (start === '') {
-			$('.error-report-start-date').html('Please enter a start date for this group').css({'margin-left': '-144px'});
+			$('.error-report-start-date').html('Please enter a start date for this group');
 		}
 		if (end === '') {
-			$('.error-report-end-date').html('Please enter an end date for this group').css({'margin-left': '-141px'});
+			$('.error-report-end-date').html('Please enter an end date for this group');
 		}
 
 

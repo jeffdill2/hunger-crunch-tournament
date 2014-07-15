@@ -3,9 +3,10 @@
 var SettingsView = Parse.View.extend({
 
 	events: {
-		'click .edit-email' 	: 'changeEmail',
-		'click .save-email'		: 'saveEmail',
-		'click .reset-password'	: 'resetPassword',
+		'click .edit-email' 			: 'changeEmail',
+		'click .save-email'				: 'saveEmail',
+		'click .reset-password'			: 'resetPassword',
+		'click .return-to-dashboard'	: 'returnToDashboard'
 	},
 
 	template: _.template($('.settings-view').text()),
@@ -63,6 +64,7 @@ var SettingsView = Parse.View.extend({
 		Parse.User.requestPasswordReset(userEmail, {
   			success: function() {
    			 // Password reset request was sent successfully
+				$('.settings-content span').html('')
 				$('.password-reset-confirmation').html("A link has been sent to your provided email address. Please click the link and follow the instructions to reset your account password").css('color','#2FD03A');
 				$('.reset-password').hide();
 				$('.return-to-dashboard').css('display', 'block');
@@ -88,5 +90,9 @@ var SettingsView = Parse.View.extend({
 	signIn:function () {
 		this.remove();
 		router.navigate('/#tournament/sign-in');
+	},
+
+	returnToDashboard: function () {
+		router.navigate('/#tournament/dashboard', {trigger: true});
 	}
 });

@@ -16,7 +16,7 @@ var DashboardView = Parse.View.extend ({
 			$('.app-container').append(this.el);
 			this.getGroups();
 			this.render();
-
+			// will queue spinning Hunger Crunch logo until data is found, or error occurs and fade out
 			startLoadingAnimation();
 		} 
 		else {
@@ -42,6 +42,7 @@ var DashboardView = Parse.View.extend ({
 				var renderedTemplate = _.template($('.dashboard-group-view-template').text())
 				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup){
+					console.log (userGroup.id)
 						var groupPoint = {
 							__type: 'Pointer', 
 							className: 'TntGroup', 
@@ -53,10 +54,12 @@ var DashboardView = Parse.View.extend ({
 						// checking for GroupTotals objects for the current users groups
 						query.include("groupID");
 						query.include("groupID.user");
+						console.log(groupPoint)
 						query.equalTo("groupID", groupPoint);
 
 						query.find({
 							success: function(groupTotal) {
+								console.log(groupTotal)
 								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
 
 								stopLoadingAnimation();
@@ -78,6 +81,7 @@ var DashboardView = Parse.View.extend ({
 				}
 			},
 			error: function(error) {
+				stopLoadingAnimation();
 				console.log(error)
 			},
 		})

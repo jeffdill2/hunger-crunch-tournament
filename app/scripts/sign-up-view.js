@@ -28,8 +28,6 @@ var SignUpView = Parse.View.extend({
 	},
 
 	createParseUser: function() {
-		startLoadingAnimation();
-
 		var name = $('.new-user-username-input').val();
 		var pw = $('.new-user-password-input').val();
 		var emailAddy = $('.new-user-email-input').val();
@@ -48,7 +46,7 @@ var SignUpView = Parse.View.extend({
 		user.set("userAccess", "GroupAdmin");
 
 		if (name.length <= 0) {
-			$('.error-report').html("Please enter a name for your organization").css('margin-left','-151px');
+			$('.error-report').html("Please enter a name for your organization");
 		}
 
 		if (emailAddy.length <= 0) {
@@ -64,6 +62,7 @@ var SignUpView = Parse.View.extend({
 		}
 
 		if (name.length > 0 && emailAddy.length > 0 && (pw === check && check.length > 0 )) {
+			startLoadingAnimation();
 			user.signUp(null, {
 				success: function() {
 					// remove login window and show new user dashboard/welcome
@@ -73,12 +72,27 @@ var SignUpView = Parse.View.extend({
 				},
 				error: function(user, error) {
 					var renderedTemplate = that.errorTemplate(error);
+					$('.error-report-email').html('');
+					$('.error-report-sign-up').html('');
 					if (error.code === 203) {
-						$('.error-report-sign-up').html(renderedTemplate).css('margin-left', '-240px');
+						// email address already taken
+						$('.error-report-sign-up').html(renderedTemplate);
+						$('.new-user-email-input').val('').focus();
+						$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 					}
-					else if (error.code === 202) {
-						$('.error-report-sign-up').html(renderedTemplate).css('margin-left', '-240px');
+					else if (error.code === 202) { 
+						// username already taken
+						$('.error-report-sign-up').html(renderedTemplate);
+						$('.new-user-username-input').val('').focus();
+						$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 					}
+
+					else if (error.code === 125) {
+						$('.error-report-email').html("Please enter a valid email address for your organization");
+						$('.new-user-email-input').val('').focus();
+						$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
+					}
+					stopLoadingAnimation();
 					console.log(error)
 				}
 			});

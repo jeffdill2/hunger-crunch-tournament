@@ -187,7 +187,7 @@
 
         <script type="text/template" class="sign-up-view-errors-template">
             <div><%=message%></div>
-            <div>Please create a new account or <span class="recover-account">recover your previous account here</span></div>
+            <div>Please create a new account or recover your previous account <span class="recover-account">here</span></div>
         </script>
 
         <!-- template for the sign in view -->
@@ -240,7 +240,7 @@
          <script type="text/template" class="reset-password-view-template">
             <div class="password-reset-view-header">
                 <div class="h1-flag">
-                <span>Sign In</span>
+                <span class="breadcrumb-back">Sign In</span>
                 <svg
                   version="1.1"
                   class="arrow-2"
@@ -261,7 +261,23 @@
             <div class="password-reset-view-content">
                 <div class="error-report"></div>
                 <input class="lookup-email-input" placeholder="Account Email">
-                <button class="button password-reset-button" >Reset Password</button>
+                <button class="button password-reset-button">Reset Password
+                    <svg
+                      version="1.1"
+                      class="arrow-2"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px"
+                      viewBox="0 0 7.7 16.2"
+                      enable-background="new 0 0 7.7 16.2"
+                      xml:space="preserve">
+                      <g>
+                        <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                          c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                      </g>
+                    </svg>
+                </button>
             </div>
         </script>
 
@@ -654,7 +670,8 @@
                 <div class="settings-content">
                     <div class="settings-username">Username: </div>
                     <input class="user-username" placeholder="<%=username%>" readonly/>
-                    <div class="settings-email">Email: </div><span></span>
+                    <div class="settings-email">Email: </div>
+                    <span></span>
                     <input class="user-email" placeholder="<%= email %>" readonly/>
                     <button class="button edit-email">Edit Email
                         <svg
