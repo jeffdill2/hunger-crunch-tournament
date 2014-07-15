@@ -16,6 +16,8 @@ var DashboardView = Parse.View.extend ({
 			$('.app-container').append(this.el);
 			this.getGroups();
 			this.render();
+
+			startLoadingAnimation();
 		} 
 		else {
 			this.signIn();
@@ -56,7 +58,6 @@ var DashboardView = Parse.View.extend ({
 						query.find({
 							success: function(groupTotal) {
 								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
-								// $('.groupname-and-code').html(userGroups[0].attributes.name)
 
 								stopLoadingAnimation();
 							},
@@ -69,7 +70,7 @@ var DashboardView = Parse.View.extend ({
 				else {
 					// if no groups are found (new account), render placeholder data
 					var placeHolder = {
-						groupName: "Your Group Name",
+						name: "Your Group Name",
 						groupID: "a1b2c",
 						minions: 0,
 						coins: 0

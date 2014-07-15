@@ -47,7 +47,7 @@
                         </g>
                     </svg>
 
-                    <a href="http://localhost:9000/#tournament">Tournaments</a>
+                    <span class="shield-home">Tournaments</span>
                 </div>
 
                 <div class="nav-container"></div>
@@ -607,7 +607,7 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupID.attributes.name.substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
+                            <h2><%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
                             <p><%= groupID.get("groupCode")  %></p>
                         </div>
 
