@@ -145,12 +145,10 @@ var SignUpView = Parse.View.extend({
 		var check = $(".new-user-password-verification-input").val();
 
 		if ((pw === check && check.length > 0) && name.length > 0 && emailAddy.length > 0) {
-			$('.sign-up-view-content button').addClass('button');
-			$('.sign-up-view-content button').removeClass('new-user-creation-button');
+			$('.button').css({'opacity': '1', 'cursor': 'pointer'});
 		}
 		else {
-			$('.sign-up-view-content button').addClass('new-user-creation-button');
-			$('.sign-up-view-content button').removeClass('button');
+			$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 		}
 	},
 
