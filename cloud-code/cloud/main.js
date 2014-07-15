@@ -178,11 +178,9 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 /////////////////////////////////////// DUMMY DATA GENERATOR
 ////////////////////////////////////////////////////////////
 Parse.Cloud.job("generateDummyData", function(request, response) {
-	var usersQuery = new Parse.Query(strUsers);
 	var groupsQuery = new Parse.Query(strGroups);
 	var scoresQuery = new Parse.Query(strScores);
 
-	usersQuery.exists('objectId');
 	groupsQuery.exists('objectId');
 	scoresQuery.exists('objectId');
 
@@ -199,95 +197,73 @@ Parse.Cloud.job("generateDummyData", function(request, response) {
 				});
 			});
 
-			usersQuery.find({
-				success: function(users) {
-					users.forEach(function(user) {
-						Parse.Cloud.useMasterKey();
+			groupsQuery.find({
+				success: function(groups) {
+					groups.forEach(function(group) {
+						var strGroupID = group.id;
+						var objUser = new Parse.Object(strUsers);
+						var numLowerThreshold = 10;
+						var numUpperThreshold = 100;
+						var numRecordCount = Math.floor(Math.random() * (numUpperThreshold - numLowerThreshold + 1)) + numLowerThreshold;
+						var numRandomID = Math.floor(Math.random() * 9999999999) + 1;
+						var strUserID = 'User' + numRandomID.toString();
 
-						user.destroy({
-							success: function() {
-								response.message('User destroy succeeded.');
+						var objGroupPointer = {
+							__type: "Pointer",
+							className: strGroups,
+							objectId: strGroupID
+						};
+
+						objUser.save({
+							username: strUserID,
+							playerIOID: strUserID,
+							password: strUserID
+						}, {
+							success: function(user) {
+								var strUserObjectID = user.id;
+
+								for (var i = 0; i <= numRecordCount; i += 1) {
+									var objScore = new Parse.Object(strScores);
+									var numRandomWorld = Math.floor(Math.random() * 4) + 1;
+									var numRandomLevel = Math.floor(Math.random() * 12) + 1;
+									var numRandomCoins = Math.floor(Math.random() * 1000) + 1;
+									var numRandomMinions = Math.floor(Math.random() * 25) + 1;
+									var strLevelID = "W0" + numRandomWorld + "L" + (numRandomLevel < 10 ? "0" : "") + numRandomLevel;
+
+									var objUserPointer = {
+										__type: "Pointer",
+										className: strUsers,
+										objectId: strUserObjectID
+									}
+
+									objScore.save({
+										coinsCollected: numRandomCoins,
+										levelID: strLevelID,
+										minionsStomped: numRandomMinions,
+										tntGrp: objGroupPointer,
+										user: objUserPointer
+									}, {
+										success: function() {
+											response.message('Score save has succeeded.');
+										},
+										error: function(error) {
+											response.message('Score save has failed.');
+										}
+									});
+								}
+
+								response.message('User save succeeded.');
 							},
 							error: function() {
-								response.message('User destroy failed.');
+								response.message('User save failed.');
 							}
-						})
+						});
 					});
 
-					groupsQuery.find({
-						success: function(groups) {
-							groups.forEach(function(group) {
-								var strGroupID = group.id;
-								var objUser = new Parse.Object(strUsers);
-								var numLowerThreshold = 10;
-								var numUpperThreshold = 100;
-								var numRecordCount = Math.floor(Math.random() * (numUpperThreshold - numLowerThreshold + 1)) + numLowerThreshold;
-								var numRandomID = Math.floor(Math.random() * 9999999999) + 1;
-								var strUserID = 'User' + numRandomID.toString();
-
-								var objGroupPointer = {
-									__type: "Pointer",
-									className: strGroups,
-									objectId: strGroupID
-								};
-
-								objUser.save({
-									username: strUserID,
-									playerIOID: strUserID,
-									password: strUserID
-								}, {
-									success: function(user) {
-										var strUserObjectID = user.id;
-
-										for (var i = 0; i <= numRecordCount; i += 1) {
-											var objScore = new Parse.Object(strScores);
-											var numRandomWorld = Math.floor(Math.random() * 4) + 1;
-											var numRandomLevel = Math.floor(Math.random() * 12) + 1;
-											var numRandomCoins = Math.floor(Math.random() * 1000) + 1;
-											var numRandomMinions = Math.floor(Math.random() * 25) + 1;
-											var strLevelID = "W0" + numRandomWorld + "L" + (numRandomLevel < 10 ? "0" : "") + numRandomLevel;
-
-											var objUserPointer = {
-												__type: "Pointer",
-												className: strUsers,
-												objectId: strUserObjectID
-											}
-
-											objScore.save({
-												coinsCollected: numRandomCoins,
-												levelID: strLevelID,
-												minionsStomped: numRandomMinions,
-												tntGrp: objGroupPointer,
-												user: objUserPointer
-											}, {
-												success: function() {
-													response.message('Score save has succeeded.');
-												},
-												error: function(error) {
-													response.message('Score save has failed.');
-												}
-											});
-										}
-
-										response.message('User save succeeded.');
-									},
-									error: function() {
-										response.message('User save failed.');
-									}
-								});
-							});
-
-							response.message('Groups query succeeded.');
-						},
-						error: function() {
-							response.message('Groups query failed.');
-						}
-					});
-
-					response.message('Users query succeeded.');
+					response.message('Groups query succeeded.');
 				},
 				error: function() {
-					response.message('Users query failed.');
+					response.message('Groups query failed.');
 				}
 			});
 
