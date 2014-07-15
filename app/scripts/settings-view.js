@@ -3,8 +3,8 @@
 var SettingsView = Parse.View.extend({
 
 	events: {
-		'click .edit-email' : 'changeEmail',
-		'click .save-email'	: 'saveEmail',
+		'click .edit-email' 	: 'changeEmail',
+		'click .save-email'		: 'saveEmail',
 		'click .reset-password'	: 'resetPassword',
 	},
 
@@ -15,8 +15,7 @@ var SettingsView = Parse.View.extend({
 			$('.app-container').append(this.el);
 			this.render();
 			this.enableEnter();
-		} 
-		else {
+		} else {
 			this.signIn();
 		}
 	},
@@ -28,61 +27,58 @@ var SettingsView = Parse.View.extend({
 	},
 
 	changeEmail: function() {
-
 		var email = $('.user-email').attr('placeholder');
-		$('.user-email').attr({'readonly': false,'placeholder': ''}).focus().attr('value',email).css('color', '#6D6E71')
+
+		$('.user-email').attr({'readonly': false,'placeholder': ''}).focus().attr('value',email).css('color', '#6D6E71');
 		$('.save-email').show().css('display','block');
 		$('.edit-email').hide();
-		
 	},
 
 	saveEmail: function() {
 		var newEmail = $('.user-email').val();
 		var user = Parse.User.current();
-		$('.settings-content span').html('');
-  		user.set('email', newEmail);
-  		user.save(null, {
-  			success: function () {
-  				// router.currentView.render();
 
+		$('.settings-content span').html('');
+
+  		user.set('email', newEmail);
+
+  		user.save(null, {
+  			success: function() {
   				$('.user-email').attr('readonly', true).css('color', '#939598');
   				$('.edit-email').show().css('display','block');
   				$('.save-email').hide();
   				$('.settings-content span').text("Successfully updated!").css('color','#2FD03A');
   			},
-  			error: function () {
+  			error: function() {
   				console.log('there was a problem');
   				$('.settings-content span').text("Connection Error. Please try again.").css('color','#EF5455');
   			}
   		});
-  			
 	},
 
 	resetPassword: function() {
 		var userEmail = Parse.User.current().attributes.email;
-		Parse.User.requestPasswordReset(userEmail , {
+
+		Parse.User.requestPasswordReset(userEmail, {
   			success: function() {
-   			 // Password reset request was sent successfully
-   			 $('.settings-content span').text("An email has been sent to your account to reset your password").css('color','#2FD03A');
+				$('.settings-content span').text("An email has been sent to your account to reset your password").css('color','#2FD03A');
   			},
   			error: function(error) {
-  			  // Show the error message somewhere
-  			  $('.settings-content span').text("Connection Error. Password not reset. Please try again.").css('color','#EF5455');
+				$('.settings-content span').text("Connection Error. Password not reset. Please try again.").css('color','#EF5455');
   			}
-			});
+		});
 	},
 
-	enableEnter: function () {
-			// if user hits enter in email feild, it triggers the sign in
-		$('.user-email').keypress(function (key) {
-			if (key.which == 13) {
+	enableEnter: function() {
+		// if user hits enter in email feild, it triggers the sign in
+		$('.user-email').keypress(function(key) {
+			if (key.which === 13) {
 				$('.save-email').click();
 			}
 		});
-
 	},
 
-	signIn:function () {
+	signIn: function() {
 		this.remove();
 		router.navigate('/#tournament/sign-in');
 	}

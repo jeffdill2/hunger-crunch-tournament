@@ -3,6 +3,7 @@
 var SignUpView = Parse.View.extend({
 
 	template: _.template($('.sign-up-view').text()),
+
 	errorTemplate: _.template($('.sign-up-view-errors-template').text()),
 
 	className: "new-user-login-container",
@@ -18,6 +19,7 @@ var SignUpView = Parse.View.extend({
 
 	initialize: function(options) {
 		$('.app-container').append(this.el);
+
 		this.render();
 		this.enableEnter();
 	},
@@ -35,13 +37,14 @@ var SignUpView = Parse.View.extend({
 		var emailAddy = $('.new-user-email-input').val();
 		var check = $(".new-user-password-verification-input").val();
 		var that = this;
+		var user = new Parse.User();
+
 		$('.error-report').html('');
 		$('.error-report-email').html('');
 		$('.error-report-first-password').html('');
 		$('.error-report-confirm-password').html('');
 		$('.error-report-sign-up').html('');
 
-		var user = new Parse.User();
 		user.set("username", name);
 		user.set("password", pw);
 		user.set("email", emailAddy);
@@ -67,19 +70,20 @@ var SignUpView = Parse.View.extend({
 			user.signUp(null, {
 				success: function() {
 					// remove login window and show new user dashboard/welcome
-					console.log('Welcome,', user.attributes.username);
 					$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
+
 					router.navigate('/#tournament/dashboard', {trigger: true});
 				},
 				error: function(user, error) {
 					var renderedTemplate = that.errorTemplate(error);
+
 					if (error.code === 203) {
 						$('.error-report-sign-up').html(renderedTemplate).css('margin-left', '-240px');
-					}
-					else if (error.code === 202) {
+					} else if (error.code === 202) {
 						$('.error-report-sign-up').html(renderedTemplate).css('margin-left', '-240px');
 					}
-					console.log(error)
+
+					console.log(error);
 				}
 			});
 		}
@@ -88,17 +92,16 @@ var SignUpView = Parse.View.extend({
 	passwordValidation: function() {
 		var pw = $('.new-user-password-input').val();
 		var check = $(".new-user-password-verification-input").val();
+
 		if (pw === check && check.length > 0) {
 			$(".new-user-password-verification-input").css({
 				'background': 'rgba(255, 255, 255, 1)'
 			});
-
 		} else if (pw !== check && check.length === 0) {
 			$(".new-user-password-verification-input").css({
 				'background': 'rgba(255, 255, 255, 1)'
 			});
-		}
-		else if (pw === "" && check === "") {
+		} else if (pw === "" && check === "") {
 			$(".new-user-password-verification-input").css({
 				'background': 'rgba(255, 255, 255, 1)'
 			});
@@ -109,36 +112,37 @@ var SignUpView = Parse.View.extend({
 		}
 	},
 
-	enableEnter: function () {
+	enableEnter: function() {
 		// if user hits enter in username feild, it triggers the sign in
-		$('.new-user-username-input').keypress(function (key) {
-			if (key.which == 13) {
+		$('.new-user-username-input').keypress(function(key) {
+			if (key.which === 13) {
 				$('.new-user-creation-button').click();
 			}
 		});
 
-			// if user hits enter in password feild, it triggers the sign in
-		$('.new-user-password-input').keypress(function (key) {
-			if (key.which == 13) {
+		// if user hits enter in password feild, it triggers the sign in
+		$('.new-user-password-input').keypress(function(key) {
+			if (key.which === 13) {
 				$('.new-user-creation-button').click();
 			}
 		});
 
-			// if user hits enter in email feild, it triggers the sign in
-		$('.new-user-email-input').keypress(function (key) {
-			if (key.which == 13) {
+		// if user hits enter in email feild, it triggers the sign in
+		$('.new-user-email-input').keypress(function(key) {
+			if (key.which === 13) {
 				$('.new-user-creation-button').click();
 			}
 		});
-			// if user hits enter in email feild, it triggers the sign in
-		$('.new-user-password-verification-input').keypress(function (key) {
-			if (key.which == 13) {
+
+		// if user hits enter in email feild, it triggers the sign in
+		$('.new-user-password-verification-input').keypress(function(key) {
+			if (key.which === 13) {
 				$('.new-user-creation-button').click();
 			}
 		});
 	},
 
-	enableButtonCheck: function () {
+	enableButtonCheck: function() {
 		var name = $('.new-user-username-input').val();
 		var pw = $('.new-user-password-input').val();
 		var emailAddy = $('.new-user-email-input').val();
@@ -146,18 +150,16 @@ var SignUpView = Parse.View.extend({
 
 		if ((pw === check && check.length > 0) && name.length > 0 && emailAddy.length > 0) {
 			$('.button').css({'opacity': '1', 'cursor': 'pointer'});
-		}
-		else {
+		} else {
 			$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 		}
 	},
 
-	accountRecovery: function () {
+	accountRecovery: function() {
 		router.navigate('/#tournament/sign-in/pass-reset', {trigger: true});
 	},
 
-	goBack: function () {
+	goBack: function() {
 		router.navigate('', {trigger: true});
 	}
-
 });

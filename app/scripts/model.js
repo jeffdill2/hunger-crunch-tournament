@@ -1,10 +1,5 @@
 'use strict';
 
-// jeffs parse server
-// Parse.initialize("KjlIhHJBGyjsDEpV4Z98GBo66QCcNGukFyTbxbGH", "Kte3zdBYCUlWK03TnW3oGdgrb0oyIzBrxKCYEibE");
-
-
-// dev parse server
 Parse.initialize("4PRYxlghLlDHrL3AXef2mz3tUeiTtcfxQegE95Hc", "cBEoecDAnR0XFbrCqigPP8UVMjyvzHcavFpqZUmn");
 
 ////////////////////////////////////////////////////////////

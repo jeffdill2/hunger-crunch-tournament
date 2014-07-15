@@ -4,9 +4,9 @@
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////////////// PLAYER VIEW
 ////////////////////////////////////////////////////////////
-
 .player-view-header-content {
 	@include content-header;
+
 	border-bottom: 1px solid $colorCharcoal;
 
 	& ul {
@@ -17,6 +17,7 @@
 
 		& li {
 			@extend .angle-button-teal;
+
 			margin-right: 30px;
 			padding: 3px 10px;
 			display: inline-block;
@@ -29,10 +30,10 @@
 	}
 }
 
-
 .player-view-content {
 	padding: 25px 15px 0 75px;
 	color: $colorTextDarkGray;
+
 	@extend .clearfix;
 }
 
@@ -40,7 +41,7 @@
 	width: 43%;
 	float: left;
 
-	& > h1, 
+	& > h1,
 	& h3 {
 		margin-top: 0;
 		margin-bottom: 40px;
@@ -68,7 +69,6 @@
 	display: inline-block;
 	vertical-align: bottom;
 }
-
 
 .player-summary-per-level {
 	width: 56%;
