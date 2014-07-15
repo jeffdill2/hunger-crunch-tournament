@@ -51,11 +51,6 @@
 			outline: none;
 		}
 	}
-
-	& button {
-		// width: 45%;
-		transition: .2s all linear;
-	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -123,12 +118,10 @@
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// SETTINGS
 ////////////////////////////////////////////////////////////
+.settings-container {
+	min-height: 457px;
+}
 .settings-content {
-	& div {
-		font-size: 1.5em;
-		display: inline-block;
-		margin-left: 12.5%;
-	}
 	& input {
 		margin-top: 5px;
 		margin-bottom: 10px;
@@ -140,6 +133,24 @@
 	.save-email {
 		display: none;
 	}
+
+	.button {
+		width: 50%;
+	}
+
+	.return-to-dashboard {
+		display: none;
+	}
+}
+.settings-username, 
+.settings-email {
+	font-size: 1.5em;
+	display: inline-block;
+	margin-left: 12.5%;
+}
+.password-reset-confirmation {
+	font-size: 1.15em;
+	text-align: center;
 }
 
 
