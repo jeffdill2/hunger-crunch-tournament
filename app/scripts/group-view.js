@@ -16,6 +16,7 @@ var GroupView = Parse.View.extend({
 
 	initialize: function(options) {
 		this.group = options;
+
 		$('.app-container').append(this.el);
 
 		this.getGroup();
@@ -32,7 +33,7 @@ var GroupView = Parse.View.extend({
 	getGroup: function() {
 		// does not work if multiple groups with same group name
 		var that = this;
-		var query = new Parse.Query("TntGroup");
+		var query = new Parse.Query(strGroups);
 
 		query.include("user");
 		query.equalTo("groupCode", this.group.groupID);
@@ -59,7 +60,7 @@ var GroupView = Parse.View.extend({
 
 	getGroupTotals: function() {
 		var that = this;
-		var query = new Parse.Query("TntGroupTotals");
+		var query = new Parse.Query(strGroupTotals);
 
 		query.include("groupID");
 		query.equalTo("groupID", this.group);
@@ -83,8 +84,8 @@ var GroupView = Parse.View.extend({
 
 	getPlayers: function() {
 		var that = this;
-		var query = new Parse.Query('TntScore');
-		var collectQuery = new Parse.Query('TntCollectibles');
+		var query = new Parse.Query(strScores);
+		var collectQuery = new Parse.Query(strCollectibles);
 
 		query.include('tntGrp');
 		query.include('user');

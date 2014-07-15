@@ -9,6 +9,7 @@ var strCollectibles = 'TntCollectibles';
 var strGroupTotals = 'TntGroupTotals';
 var strGameTotals = 'TntGameTotals';
 var strUsers = 'User';
+var strCounter = 'Counter';
 
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// OVERALL TOTALS

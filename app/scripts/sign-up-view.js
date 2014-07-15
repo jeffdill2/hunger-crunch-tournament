@@ -73,6 +73,8 @@ var SignUpView = Parse.View.extend({
 					$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
 
 					router.navigate('/#tournament/dashboard', {trigger: true});
+
+					stopLoadingAnimation();
 				},
 				error: function(user, error) {
 					var renderedTemplate = that.errorTemplate(error);
@@ -82,6 +84,8 @@ var SignUpView = Parse.View.extend({
 					} else if (error.code === 202) {
 						$('.error-report-sign-up').html(renderedTemplate).css('margin-left', '-240px');
 					}
+
+					stopLoadingAnimation();
 
 					console.log(error);
 				}

@@ -13,6 +13,7 @@ var SettingsView = Parse.View.extend({
 	initialize: function(options) {
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
+
 			this.render();
 			this.enableEnter();
 		} else {
@@ -23,6 +24,7 @@ var SettingsView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template;
 		var rendered = renderedTemplate(Parse.User.current().attributes);
+
 		this.$el.html(rendered);
 	},
 

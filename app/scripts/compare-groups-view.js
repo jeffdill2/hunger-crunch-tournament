@@ -56,8 +56,7 @@ var CompareGroupsView = Parse.View.extend({
 
 	getAvailableGroups: function() {
 		var that = this;
-		var Groups = Parse.Object.extend("Groups");
-		var query = new Parse.Query(Groups);
+		var query = new Parse.Query(strGroups);
 
 		// checking for group objects made by the current user
 		query.equalTo("orgName", Parse.User.current().attributes.username);
@@ -67,8 +66,7 @@ var CompareGroupsView = Parse.View.extend({
 				var i = 0;
 
 				groups.forEach(function(groupTotals) {
-					var GroupTotals = Parse.Object.extend("GroupTotals");
-					var query = new Parse.Query(GroupTotals);
+					var query = new Parse.Query(strGroupTotals);
 
 					query.equalTo("groupID", groupTotals.attributes.groupID);
 

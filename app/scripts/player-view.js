@@ -35,7 +35,7 @@ var PlayerView = Parse.View.extend({
 	getPlayerScores: function() {
 		var scores = [];
 		var that = this;
-		var query = new Parse.Query("TntScore");
+		var query = new Parse.Query(strScores);
 
 		query.include('user');
 		query.include('tntGrp');
@@ -92,7 +92,7 @@ var PlayerView = Parse.View.extend({
 		};
 
 		var that = this;
-		var collectQuery = new Parse.Query('TntCollectibles');
+		var collectQuery = new Parse.Query(strCollectibles);
 
 		collectQuery.include('user');
 		collectQuery.include('tntGrp');

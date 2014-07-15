@@ -31,8 +31,7 @@ var DashboardView = Parse.View.extend ({
 
 	getGroups: function() {
 		var that = this;
-		var TntGroup = Parse.Object.extend("TntGroup");
-		var query = new Parse.Query(TntGroup);
+		var query = new Parse.Query(strGroups);
 
 		// checking for group objects made by the current user
 		query.include("user");
@@ -46,12 +45,11 @@ var DashboardView = Parse.View.extend ({
 					userGroups.forEach(function(userGroup) {
 						var groupPoint = {
 							__type: 'Pointer',
-							className: 'TntGroup',
+							className: strGroups,
 							objectId: userGroup.id
 						};
 
-						var GroupTotals = Parse.Object.extend("TntGroupTotals");
-						var query = new Parse.Query(GroupTotals);
+						var query = new Parse.Query(strGroupTotals);
 
 						// checking for GroupTotals objects for the current users groups
 						query.include("groupID");
@@ -60,12 +58,15 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
+								console.log('groupTotal', groupTotal);
 								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
 
 								stopLoadingAnimation();
 							},
 							error: function(error) {
 								console.log(error);
+
+								stopLoadingAnimation();
 							}
 						});
 					});

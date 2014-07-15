@@ -6,11 +6,11 @@ Parse.initialize("4PRYxlghLlDHrL3AXef2mz3tUeiTtcfxQegE95Hc", "cBEoecDAnR0XFbrCqi
 ////////////////////////////////////////////////////// MODEL
 ////////////////////////////////////////////////////////////
 var GroupModel = Parse.Object.extend({
-	className: "TntGroup"
+	className: strGroups
 });
 
 var CounterModel = Parse.Object.extend({
-	className: "TntCounter"
+	className: strCounter
 });
 
 ////////////////////////////////////////////////////////////
