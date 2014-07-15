@@ -10,6 +10,7 @@ var strGroupTotals = 'TntGroupTotals';
 var strGameTotals = 'TntGameTotals';
 var strUsers = 'User';
 var strCounter = 'Counter';
+var strPurchases = 'Purchase';
 
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// OVERALL TOTALS
@@ -52,7 +53,7 @@ Parse.Cloud.job("gameTotals", function(request, response) {
 						success: function() {
 							response.success('Game totals has succeeded!');
 						},
-						error: function(error) {
+						error: function() {
 							response.message('Game total save has failed.');
 						}
 					});
@@ -98,8 +99,10 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 
 					groups.forEach(function(group) {
 						var scoreDataQuery = new Parse.Query(strScores);
+						var purchasesQuery = new Parse.Query(strPurchases);
                         var strGroupID = group.id;
 						var objGroupTotal = new Parse.Object(strGroupTotals);
+
 						var objGroupPointer = {
 							__type: "Pointer",
 							className: strGroups,
@@ -130,26 +133,54 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 
                                     if (!bolUserFound) {
                                         aryUniqueUsers.push(strUserID);
+
+                                        var objUserPointer = {
+											__type: "Pointer",
+											className: strUsers,
+											objectId: strUserID
+										};
+
+										purchasesQuery.equalTo('user', objUserPointer);
                                     }
 								});
 
-								objGroupTotal.save({
-									groupID: objGroupPointer,
-									coins: numTotalCoins,
-									minions: numTotalMinions,
-                                    players: aryUniqueUsers.length
-								}, {
-									success: function() {
-										numCounter += 1;
+								purchasesQuery.find({
+									success: function(purchaseData) {
+										var numPurchaseTotal = 0;
+										var numMealsTotal = 0;
+										var numCostOfOneMeal = 0.5;
 
-										if (numCounter === numGroups) {
-											response.success('Group totals has succeeded!');
-										}
+										purchaseData.forEach(function(purchase) {
+											numPurchaseTotal += parseFloat(purchase.get('price'));
+										});
 
-										response.message('Group total save has succeeded.');
+										numMealsTotal = parseFloat((Math.ceil((numPurchaseTotal * numCostOfOneMeal) * 10) / 10).toFixed(1));
+
+										objGroupTotal.save({
+											groupID: objGroupPointer,
+											coins: numTotalCoins,
+											minions: numTotalMinions,
+		                                    players: aryUniqueUsers.length,
+		                                    meals: numMealsTotal
+										}, {
+											success: function() {
+												numCounter += 1;
+
+												if (numCounter === numGroups) {
+													response.success('Group totals has succeeded!');
+												}
+
+												response.message('Group total save has succeeded.');
+											},
+											error: function() {
+												response.message('Group total save has failed.');
+											}
+										});
+
+										response.message('Purchases query has succeeded.');
 									},
-									error: function(error) {
-										response.message('Group total save has failed.');
+									error: function() {
+										response.message('Purchases query has failed.');
 									}
 								});
 
@@ -246,7 +277,7 @@ Parse.Cloud.job("generateDummyData", function(request, response) {
 										success: function() {
 											response.message('Score save has succeeded.');
 										},
-										error: function(error) {
+										error: function() {
 											response.message('Score save has failed.');
 										}
 									});
