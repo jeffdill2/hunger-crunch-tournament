@@ -427,7 +427,7 @@
             <div class="player-view-header-content">
                     <div class="player-view-location-banner h1-flag">
                     <span class='breadcrumb-back'>
-                        <%=groupID > 12 ? groupID.substring(0,12)+"..." : groupID%>
+                        <%=groupName > 12 ? groupName.substring(0,12)+"..." : groupName%>
                     </span>
                     <svg
                       version="1.1"
@@ -632,6 +632,16 @@
                         </div>
                     </div>
                 </div>
+        </script>
+
+
+        <!-- template for no available groups placeholder view -->
+        <script type="text/template" class="placeholder-view">
+           
+                <h1>Hello There!</h1>
+                <h2>It looks like you dont currently have any groups to show. If you haven&#39t already, go ahead and click on the create groups button. If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>
+            
+
         </script>
 
         <!-- template for the settings view -->

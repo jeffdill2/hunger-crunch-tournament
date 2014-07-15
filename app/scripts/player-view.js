@@ -15,7 +15,7 @@ var PlayerView = Parse.View.extend({
 	initialize: function(options) {
 		// console.log(options)
 		$('.app-container').append(this.el);
-		this.render();
+		// this.render();
 		this.playerInfo = options;
 		var player = options.playerID;
 		var group = options.groupID;
@@ -44,7 +44,12 @@ var PlayerView = Parse.View.extend({
 		this.query.equalTo('OIID', this.playerInfo.playerID)
 		this.query.find({
 			success: function(events) {
-				// console.log(events)
+				
+				// sets gives the group name to this.options so that it can be rendered
+				that.options.groupName = events[0].get('tntGrp').get('name');
+				that.render();
+
+
 				events.forEach(function(event) {
 					if(scores.length <= 0){
 						scores.push(event);

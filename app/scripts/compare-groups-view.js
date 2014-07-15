@@ -103,12 +103,18 @@ var CompareGroupsView = Parse.View.extend({
 		var renderedTemplate = this.addGroupTemplate();
 		$('table').after(renderedTemplate);
 		var that = this;
-		console.log(this.groupsToAdd)
-		this.groupsToAdd.forEach(function(groupNames) {
-			console.log(groupNames.attributes)
-			$('.add-list').append(addListTemplate(groupNames.attributes));
-		})
-		this.groupList();
+		if(this.groupsToAdd.length <= 0){
+			var placeholderTemplate = _.template($('.placeholder-view').text());
+			$('.add-list').html(placeholderTemplate());
+		}else{
+
+			console.log(this.groupsToAdd)
+			this.groupsToAdd.forEach(function(groupNames) {
+				console.log(groupNames.attributes)
+				$('.add-list').append(addListTemplate(groupNames.attributes));
+			})
+			this.groupList();
+		}
 
 	},
 
