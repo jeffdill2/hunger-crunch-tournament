@@ -168,7 +168,7 @@ var CreateGroupView = Parse.View.extend({
 				objGroup.setACL(groupACL);
 
 				objGroup.save({
-					groupID: strGroupID,
+					groupCode: strGroupID,
 					startDate: {
 		  				__type: "Date",
 		  				iso: moment($('.new-group-start-date-input').val(), "dd MMMM DD, YYYY").toISOString()
@@ -178,8 +178,8 @@ var CreateGroupView = Parse.View.extend({
 						__type: "Date",
 						iso: moment($('.new-group-end-date-input').val(), "dd MMMM DD, YYYY").toISOString()
 					},
-					groupName: groupName,
-					orgName: orgName,
+					name: groupName,
+					user: Parse.User.current().id,
 				}, {
 					success: function(group) {
 						console.log(group)

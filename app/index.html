@@ -47,7 +47,7 @@
                         </g>
                     </svg>
 
-                    <a href="http://localhost:9000/#tournament">Tournaments</a>
+                    <span class="shield-home">Tournaments</span>
                 </div>
 
                 <div class="nav-container"></div>
@@ -164,7 +164,7 @@
                 <input class="new-user-password-input" placeholder="Password" type="password">
                 <div class="error-report-confirm-password"></div>
                 <input class="new-user-password-verification-input" placeholder="Confirm Password" type="password">
-                <button class="new-user-creation-button" >Sign Up
+                <button class="new-user-creation-button button" >Sign Up
                     <svg
                       version="1.1"
                       class="arrow-2"
@@ -607,7 +607,7 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupID.attributes.name.substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
+                            <h2><%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
                             <p><%= groupID.get("groupCode")  %></p>
                         </div>
 

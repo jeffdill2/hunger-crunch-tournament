@@ -16,6 +16,8 @@ var DashboardView = Parse.View.extend ({
 			$('.app-container').append(this.el);
 			this.getGroups();
 			this.render();
+
+			startLoadingAnimation();
 		} 
 		else {
 			this.signIn();
@@ -56,7 +58,6 @@ var DashboardView = Parse.View.extend ({
 						query.find({
 							success: function(groupTotal) {
 								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
-								// $('.groupname-and-code').html(userGroups[0].attributes.name)
 
 								stopLoadingAnimation();
 							},

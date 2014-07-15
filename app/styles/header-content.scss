@@ -20,6 +20,11 @@
 	}
 }
 
+.shield-home:hover {
+		text-decoration: underline;
+		cursor: pointer;
+}
+
 .header-content {
 	width: 100%;
 	@extend .app-container;
@@ -27,6 +32,7 @@
 }
 
 .header-account-options {
+	min-height: 25px;
 	float: right;
 	color: $colorWhite;
 	font-family: "proxima-nova", sans-serif;

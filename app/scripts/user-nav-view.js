@@ -5,8 +5,7 @@ var UserNavView = Parse.View.extend({
 	events: {
 		'click .dashboard-button'		: "dashboardNav",
 		'click .settings-button'		: "settingsNav",
-		'click .sign-out-button'		: "signOutNav",
-		// 'hover .header-username'	: "showName"
+		'click .sign-out-button'		: "signOutNav"
 	},
 	tagName: "ul",
 
@@ -64,7 +63,7 @@ var NoUserNavView = Parse.View.extend({
 
 	events: {
 		'click .sign-in-button'		: "signInNav",
-		'click .sign-up-button'		: "signUpNav",
+		'click .sign-up-button'		: "signUpNav"
 	},
 
 	tagName:'ul',
@@ -87,12 +86,11 @@ var NoUserNavView = Parse.View.extend({
 	signInNav: function () {
 		Parse.User.logOut();
 		router.navigate('/#tournament/sign-in', {trigger: true});
-		Parse.history.loadUrl();
+		// Parse.history.loadUrl();
 	},
 
 	signUpNav: function () {
 		Parse.User.logOut();
 		router.navigate('/#tournament/sign-up', {trigger: true});
-	},
-
+	}
 });
