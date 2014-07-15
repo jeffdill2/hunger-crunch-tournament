@@ -3,8 +3,9 @@
 var PlayerView = Parse.View.extend({
 
 	events: {
-		'click .breadcrumb-back'	: 'goBack',
-		'click .print-button'		: 'print'
+		'click .breadcrumb-back'		: 	'goBack',
+		'click .print-button'			: 	'print',
+		'click .remove-player-button'	: 	'removePlayer',
 	},
 
 	template: _.template($('.player-view').text()),
@@ -37,11 +38,11 @@ var PlayerView = Parse.View.extend({
 		var scores = [];
 		var that = this;
 
-		var query = new Parse.Query("TntScore");
-		query.include('user');
-		query.include('tntGrp');
-		query.equalTo('OIID', this.playerInfo.playerID)
-		query.find({
+		this.query = new Parse.Query("TntScore");
+		this.query.include('user');
+		this.query.include('tntGrp');
+		this.query.equalTo('OIID', this.playerInfo.playerID)
+		this.query.find({
 			success: function(events) {
 				// console.log(events)
 				events.forEach(function(event) {
@@ -152,5 +153,26 @@ var PlayerView = Parse.View.extend({
 		$("button").css('opacity', 1);
 		$("header").removeClass('non-print');
 
-	}
+	},
+
+	removePlayer: function () {
+		if (confirm('Are you sure you want to delete ' + this.playerInfo.playerID +' from the group? This action can not be undone.')) {
+    		// Save it!
+    		this.query.find({
+    			success: function(results) {
+    				results.forEach(function(result){
+    					result.set('tntGrp', null);
+    					result.save();
+    					history.back();
+    					// router.navigate('/#tournament/group/' + this.options.groupID, {trigger: true})
+    				})
+    			},
+    			error: function(error) {
+    				console.log(error)
+    			}
+    		})
+		} else {
+ 		   // Do nothing!
+		}
+	},
 });

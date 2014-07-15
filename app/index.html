@@ -915,10 +915,10 @@
         </script>
         <!-- template for adding in groups the user has created -->
         <script type="text/template" class="compare-groups-user-groups-template">
-            <tr <%= (groupName.length > 15 ? 'title="' + groupName + '"' : "") %>>
+            <tr <%= (groupID.get("name").length > 15 ? 'title="' + groupID.get("name") + '"' : "") %>>
                 <td class="compare-group-name">
-                    <button class="remove-group-button"><%= groupName %></button>
-                    <%= groupName.substring(0, 15) + (groupName.length > 15 ? "..." : "") %>
+                    <button class="remove-group-button"><%= groupID.get("name") %></button>
+                    <%= groupID.get("name").substring(0, 15) + (groupID.get("name").length > 15 ? "..." : "") %>
                 </td>
                 <td class="compare-minions-data"><%= minions %></td>
                 <td class="compare-coins-data"><%= coins %></td>
@@ -941,7 +941,7 @@
         <!-- template for drop down list of groups to add to compare list -->
         <script type="text/template" class="compare-groups-added-group-template">
                   <li class="compare-group-item">
-                    <h3 class="compare-group-name-search"><%= groupName %></h3>
+                    <h3 class="compare-group-name-search"><%= groupID.get("name") %></h3>
                     <p class="valid">Live</p>
                   </li>
         </script>
