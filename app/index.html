@@ -66,7 +66,8 @@
             </div>
         </div>
 
-        <div class="app-container"></div>
+        <div class="app-container">
+        </div>
 
         <!--////////////////////////////////////////////////////////
         ////////////////////////////////////////////////// TEMPLATES
@@ -77,12 +78,12 @@
         <script type="text/template" class="home-view">
                 <div class="landing-page-copy">
                     <strong>A war is being waged against world hunger</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>For too long, world hunger has destroyed the lives and ruined 
+                    the dreams of children around the world. Hunger Crunch gives you 
+                    the opportunity to fight back and have some fun at the same time. 
+                    Hunger Crunch is a game for and by Rice Bowls, a nonprofit working 
+                    to feed orphaned children where the need is greatest. When you play, 
+                    you can help provide much-needed food to these awesome kids.</p>
                 </div>
 
                 <div class="hunger-minions-counter-container">
@@ -801,35 +802,37 @@
         <!-- template for a new group's code generation page -->
         <script type="text/template" class="group-view-code-template">
             <div class="group-created-header-container">
-                <div class="group-created-header-content">
-                    <h1>GROUP CREATED FOR "<%= group %>"</h1>
+                <div class="group-created-header-content h1-flag">
+                    <%= group %> Group Code
                 </div>
             </div>
             <div class="group-created-main-container">
+                    <h2>Instructions</h2>
+                    <ul class="instruction-list">
+                        <li class="instruction-one">1</li>
+                        <li class="instruction-two">2</li>
+                        <li class="instruction-three">3</li>
+                    </ul>
                 <div class="player-instructions">
-                    <h3>PLAYER INSTRUCTIONS</h3>
-                    <p>Give the following code to the players in your group:</p>
+                    <p>Give the following Group Code to the players in your group:</p>
                     <div class="group-code-box">
                         <input type="text" value="<%= code %>" class="group-code" readonly="readonly">
                     </div>
-                </div>
-                <div class="instruction-images">
-                    <div class="instruction-image-one">
-                        <span>1</span>
-                        <img src="../images/game-screen.png">
+                    <div class="instruction-step-two">
+                        <p>Have each player enter the Group Code in their Hunger Crunch game:</p>
+                        <div class="instruction-image-one">
+                            <img src="../images/join-group-instructs.png">
+                        </div>
                     </div>
-                    <div class="instruction-image-two">
-                        <span>2</span>
-                        <div class="placeholder-image"></div>
-                    </div>
-                </div>
-                <div class="observer-instructions">
-                    <h3>LINK FOR OBSERVERS</h3>
-                    <p>Copy and share the following link with people that would like to observe the group:</p>
-                    <div class="group-link-box">
-                        <input type="text" value="http://www.hungercrunch.com/#tournament/group/<%= code %>" class="group-link"readonly="readonly">
+                    <div class="observer-instructions">
+                        <p>Copy and share the following link with people that would like to observe the group:</p>
+                        <div class="group-link-box">
+                            <input type="text" value="http://www.hungercrunch.com/#tournament/group/<%= code %>" class="group-link"readonly="readonly">
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="group-code-button-container">    
                 <button class="view-group-page button">VIEW THE GROUP PAGE
                     <svg
                       version="1.1"
