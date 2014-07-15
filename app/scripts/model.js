@@ -15,7 +15,7 @@ var GroupModel = Parse.Object.extend({
 });
 
 var CounterModel = Parse.Object.extend({
-	className: "Counter"
+	className: "TntCounter"
 });
 
 ////////////////////////////////////////////////////////////
