@@ -195,7 +195,6 @@ var CreateGroupView = Parse.View.extend({
 					}
 				}, {
 					success: function(group) {
-						console.log(group)
 						var groupName = group.attributes.name.replace(/ /g, '%20');
 						var uniqueID = group.attributes.groupCode;
 

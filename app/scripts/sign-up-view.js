@@ -6,7 +6,7 @@ var SignUpView = Parse.View.extend({
 
 	errorTemplate: _.template($('.sign-up-view-errors-template').text()),
 
-	className: "new-user-login-container",
+	className: "new-user-sign-up-container",
 
 	events: {
 		'click .breadcrumb-back'						: 'goBack',
@@ -71,9 +71,9 @@ var SignUpView = Parse.View.extend({
 					// remove login window and show new user dashboard/welcome
 					$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
 
-					router.navigate('/#tournament/dashboard', {trigger: true});
+					router.navigate('/#tournament/sign-up/welcome', {trigger: true});
 
-					stopLoadingAnimation();
+
 				},
 				error: function(user, error) {
 					var renderedTemplate = that.errorTemplate(error);

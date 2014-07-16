@@ -8,6 +8,7 @@ var AppRouter = Parse.Router.extend({
 		'tournament/sign-in'						: 'signInView',
 		'tournament/sign-in/pass-reset'				: 'passReset',
 		'tournament/sign-up'						: 'signUpView',
+		'tournament/sign-up/welcome'				: 'welcomeView',
 		'tournament/group/:groupID' 				: 'groupView',
 		'tournament/group/:groupID/:playerID' 		: 'playerView',
 		'tournament/dashboard' 						: 'dashboardView',
@@ -60,6 +61,9 @@ var AppRouter = Parse.Router.extend({
 
 	settingsView: function() {
 		this.swap( new SettingsView() );
+	},
+	welcomeView: function () {
+		this.swap( new UserWelcome() );
 	},
 
 	noUserNav: function() {

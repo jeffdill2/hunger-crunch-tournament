@@ -42,7 +42,6 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(results) {
-				// this looks redundant 
 				that.group = results;
 				that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
 				that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
