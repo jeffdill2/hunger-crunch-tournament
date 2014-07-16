@@ -53,7 +53,6 @@ var DashboardView = Parse.View.extend ({
 						// checking for GroupTotals objects for the current users groups
 						query.include("groupID");
 						query.include("groupID.user");
-						console.log(groupPoint)
 						query.equalTo("groupID", groupPoint);
 
 						query.find({

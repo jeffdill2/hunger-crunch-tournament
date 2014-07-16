@@ -23,11 +23,13 @@ var GroupView = Parse.View.extend({
 	},
 
 	render: function() {
-		// called in the success inside getGroup
+		// called in the success inside getGroupTotals
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 
-		this.getGroupTotals();
+		$('.sort').click(function () {
+			$(this).toggleClass('sorted');
+		});
 	},
 
 	getGroup: function() {
@@ -45,15 +47,16 @@ var GroupView = Parse.View.extend({
 				that.groupInfo = results.attributes;
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
 				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
-				that.render();
+				that.getGroupTotals();
 				that.getPlayers(that.group);
-
-				$('.sort').click(function () {
-					$(this).toggleClass('sorted');
-				});
 			},
 			error: function(error) {
 				console.log(error);
+				var renderedTemplate = _.template($('.query-error-template').text());
+				$('.app-container').html(renderedTemplate);
+				$('.dashboard-link').click(function () {
+					router.navigate('/#tournament/dashboard', {'trigger': true});
+				});
 			}
 		});
 	},
@@ -67,12 +70,13 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(groupTotal) {
+				that.groupInfo.players = groupTotal.attributes.players;
+				that.render();
 				that.info = groupTotal;
 				that.showGroupTotals(groupTotal);
 			},
 			error: function(error) {
 				console.log(error);
-
 			}
 		});
 	},

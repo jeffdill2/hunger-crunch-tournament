@@ -162,8 +162,11 @@
 	display: block !important;
 }
 
-.sort svg{
-	transform: rotate(90deg)
+.sort {
+	cursor: pointer; 
+	& svg{
+		transform: rotate(90deg)
+	}
 }
 
 .sort path {

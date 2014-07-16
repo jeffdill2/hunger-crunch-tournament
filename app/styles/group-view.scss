@@ -179,3 +179,11 @@
 		}
 	}
 }
+
+.dashboard-link {
+	color: $colorButtonTeal;
+	cursor: pointer;
+	&:hover {
+		text-decoration: underline;
+	}
+}

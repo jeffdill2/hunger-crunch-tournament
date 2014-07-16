@@ -295,7 +295,7 @@
                             <li>
                             <%=startDate%> - <input class="date-changer"placeholder="<%=endDate%>" readonly/>
                             </li>
-                            <li>32 Members</li>
+                            <li><%=players === 1 ? players+" Member" : players+" Members" %></li>
                         </ul>
                         <ul class="group-view-options">
                             <% if (Parse.User.current()) { %>
@@ -990,11 +990,13 @@
                     <p class="valid">Live</p>
                   </li>
         </script>
-
-        <script type="text/template" class="alert-template">
-            <div class="alert alert-info alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <%= message %>
+        <script type="text/template" class="query-error-template">
+            <div class="query-error-container">
+                <p>
+                    The link you have entered does not appear to be a valid Group ID. 
+                    Please check the link once more, or click <span class="dashboard-link">here</span> 
+                    to return to the Dashboard
+                </p>
             </div>
         </script>
 
