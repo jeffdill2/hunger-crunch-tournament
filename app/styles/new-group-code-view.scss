@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////// NEW GROUP CODE VIEW
 ////////////////////////////////////////////////////////////
-
 .group-created-header-container{
 	// text-align: center;
 	border-bottom: 1px solid $colorStoneGray;
@@ -74,14 +73,14 @@
 
 .instruction-step-two {
 	@extend .clearfix;
+
 	width: 870px;
 	margin: 55px auto 60px;
 }
 
-.instruction-image-one, 
+.instruction-image-one,
 .instruction-image-two {
 	float: left;
-
 	& .placeholder-image {
 		display: inline-block;
 		height: 225px;
@@ -101,11 +100,10 @@
 
 .observer-instructions {
 	padding: 15px 0 25px;
-
 	& p {
 		margin-top: 0;
 		font-size: 1.2em;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 	}
 }
 
@@ -120,7 +118,7 @@
 		width: 100%;
 		text-align: right;
 		border: none;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 		font-size: 1.1em;
 	}
 }

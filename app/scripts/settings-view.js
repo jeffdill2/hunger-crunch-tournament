@@ -14,10 +14,10 @@ var SettingsView = Parse.View.extend({
 	initialize: function(options) {
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
+
 			this.render();
 			this.enableEnter();
-		} 
-		else {
+		} else {
 			this.signIn();
 		}
 	},
@@ -25,23 +25,24 @@ var SettingsView = Parse.View.extend({
 	render: function() {
 		var renderedTemplate = this.template;
 		var rendered = renderedTemplate(Parse.User.current().attributes);
+
 		this.$el.html(rendered);
 	},
 
 	changeEmail: function() {
-
 		var email = $('.user-email').attr('placeholder');
 		$('.settings-content span').html('');
 		$('.user-email').attr({'readonly': false,'placeholder': ''}).focus().attr('value',email).css('color', '#6D6E71')
 		$('.save-email').show().css('display','block');
 		$('.edit-email').hide();
-		
 	},
 
 	saveEmail: function() {
 		var newEmail = $('.user-email').val();
 		var user = Parse.User.current();
+
 		$('.settings-content span').html('');
+
   		user.set('email', newEmail);
   		user.save(null, {
   			success: function () {
@@ -50,12 +51,11 @@ var SettingsView = Parse.View.extend({
   				$('.save-email').hide();
   				$('.settings-content span').text("Successfully updated!").css('color','#2FD03A');
   			},
-  			error: function () {
+  			error: function() {
   				console.log('there was a problem');
   				$('.settings-content span').text("Connection Error. Please try again.").css('color','#EF5455');
   			}
   		});
-  			
 	},
 
 	resetPassword: function() {
@@ -74,20 +74,18 @@ var SettingsView = Parse.View.extend({
 				$('.password-reset-confirmation').html("There has been an error and your password has not been reset. Please refresh the page and try again.").css('color','#EF5455');
   			}
 		});
-
 	},
 
-	enableEnter: function () {
-			// if user hits enter in email feild, it triggers the sign in
-		$('.user-email').keypress(function (key) {
-			if (key.which == 13) {
+	enableEnter: function() {
+		// if user hits enter in email feild, it triggers the sign in
+		$('.user-email').keypress(function(key) {
+			if (key.which === 13) {
 				$('.save-email').click();
 			}
 		});
-
 	},
 
-	signIn:function () {
+	signIn: function() {
 		this.remove();
 		router.navigate('/#tournament/sign-in');
 	},

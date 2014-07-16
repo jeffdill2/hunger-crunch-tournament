@@ -3,99 +3,106 @@
 var CreateGroupView = Parse.View.extend({
 
 	template: _.template($('.create-group-view-template').text()),
+
 	className: "create-group-container",
+
 	events: {
-		'click .button'						: "createNewGroupID",
-		'click .start-date-picker'			: "startDatePicker",
-		'focus .start-date-picker'			: "startDatePicker",
-		'click .end-date-picker'			: "endDatePicker",
-		'focus .end-date-picker'			: "endDatePicker",
-		'focusout input'					: 'enableButtonCheck',
-		'blur input'						: 'enableButtonCheck',
-		'keyup input'						: 'enableButtonCheck'
+		'click .button'				: "createNewGroupID",
+		'click .start-date-picker'	: "startDatePicker",
+		'focus .start-date-picker'	: "startDatePicker",
+		'click .end-date-picker'	: "endDatePicker",
+		'focus .end-date-picker'	: "endDatePicker",
+		'focusout input'			: 'enableButtonCheck',
+		'blur input'				: 'enableButtonCheck',
+		'keyup input'				: 'enableButtonCheck'
 	},
 
 	initialize: function(options) {
-
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
+
 			this.render();
 			this.enableEnter();
-		} 
-		else {
+		} else {
 			this.signIn();
 		}
 	},
 
 	render: function() {
 		var that = this;
-
 		var renderedTemplate = this.template;
+
 		this.$el.html(renderedTemplate);
+
 		this.startDatePicker();
 		this.endDatePicker();
 
-		this.startPicker.on('set', function (event) {
-				if (event.select) {
-					that.endPicker.set('min', that.startPicker.get('select'));
-				}
-		})
-		this.endPicker.on('set', function (event) {
-				if (event.select) {
-					that.startPicker.set('max', that.endPicker.get('select'));
-				}
-		})
+		this.startPicker.on('set', function(event) {
+			if (event.select) {
+				that.endPicker.set('min', that.startPicker.get('select'));
+			}
+		});
+
+		this.endPicker.on('set', function(event) {
+			if (event.select) {
+				that.startPicker.set('max', that.endPicker.get('select'));
+			}
+		});
 	},
 
-	startDatePicker: function () {
+	startDatePicker: function() {
 		var that = this;
 
 		var startInput = $('.start-date-picker').pickadate({
 			format: 'ddd mmmm dd, yyyy',
 			container: '.start-date-container',
 			min: true,
-			// max: true,
-			onClose: function () {
+
+			onClose: function() {
 				this.stop();
 			},
 
-			onStop: function () {
+			onStop: function() {
 				$('.start-date-picker').attr('readonly', true);
 				$('.end-date-picker').click();
 			}
 		});
+
 		this.startPicker = startInput.pickadate('picker');
-		setTimeout(function () {
-			if ( that.endPicker.get('value') ) {
+
+		setTimeout(function() {
+			if (that.endPicker.get('value')) {
 				that.startPicker.set('max', that.endPicker.get('select'));
 			}
-		},50);
+		}, 50);
 	},
 
-	endDatePicker: function () {
+	endDatePicker: function() {
 		var that = this;
+
 		var endInput = $('.end-date-picker').pickadate({
 			format: 'ddd mmmm dd, yyyy',
 			container: '.end-date-container',
 			min: true,
-			onClose: function () {
+
+			onClose: function() {
 				this.stop();
 			},
 
-			onStop: function () {
+			onStop: function() {
 				$('.end-date-picker').attr('readonly', true);
 				$('.end-date-picker').blur();
 			}
 		});
+
 		this.endPicker = endInput.pickadate('picker');
 
-		if ( this.startPicker.get('value') ) {
+		if (this.startPicker.get('value')) {
 			that.endPicker.set('min', that.startPicker.get('select'));
 		}
 	},
 
-	generateRandomGroupdID: function () {
-
+	generateRandomGroupdID: function() {
 		var strGroupID = "";
 		var strCharsAvailable = "abcdefghijklmnopqrstuvwxyz";
 		var numGroupIDLength = 5;
@@ -107,28 +114,29 @@ var CreateGroupView = Parse.View.extend({
 		return strGroupID;
 	},
 
-	createNewGroupID: function () {
+	createNewGroupID: function() {
 		var name = $('.new-group-name-input').val().trim();
 		var start = $('.new-group-start-date-input').val();
 		var end = $('.new-group-end-date-input').val();
-		$('.error-report').html('');	
-		$('.error-report-start-date').html('');	
-		$('.error-report-end-date').html('');	
+
+		$('.error-report').html('');
+		$('.error-report-start-date').html('');
+		$('.error-report-end-date').html('');
 
 		if (name === '') {
 			$('.error-report').html('Please enter a name for this group');
 			$('.new-group-name-input').val('')	
 		}
+
 		if (start === '') {
 			$('.error-report-start-date').html('Please enter a start date for this group');
 		}
+
 		if (end === '') {
 			$('.error-report-end-date').html('Please enter an end date for this group');
 		}
 
-
 		if (name.length > 0 && start.length > 0 && end.length > 0) {
-
 			var groups = new GroupCollection();
 			var strGroupID = "";
 
@@ -139,6 +147,7 @@ var CreateGroupView = Parse.View.extend({
 
 				while (true) {
 					var bolGroupIDFound = false;
+
 					// needed access to the method of this instance
 					// resolved by using router.currentview
 					strGroupID = router.currentView.generateRandomGroupdID();
@@ -155,11 +164,10 @@ var CreateGroupView = Parse.View.extend({
 				}
 
 				var objGroup = new GroupModel();
-
 				var groupName = $('.new-group-name-input').val();
 				var orgName = Parse.User.current().attributes.username;
-
 				var groupACL = new Parse.ACL(Parse.User.current());
+
 				groupACL.setPublicReadAccess(true);
 				groupACL.setPublicWriteAccess(false);
 				groupACL.setRoleReadAccess('siteAdmin', true);
@@ -178,13 +186,14 @@ var CreateGroupView = Parse.View.extend({
 						__type: "Date",
 						iso: moment($('.new-group-end-date-input').val(), "dd MMMM DD, YYYY").toISOString()
 					},
+
 					name: groupName,
 					user: Parse.User.current().id,
 				}, {
 					success: function(group) {
-						console.log(group)
 						var groupName = group.attributes.groupName.replace(/ /g, '%20');
 						var uniqueID = group.attributes.groupID;
+
 						router.navigate('/#tournament/dashboard/'+groupName+'/'+uniqueID, {trigger: true});
 					},
 					error: function(error) {
@@ -193,33 +202,31 @@ var CreateGroupView = Parse.View.extend({
 					}
 				});
 			})
-		}	
+		}
 	},
 
-	enableEnter: function () {
-			// if user hits enter in email feild, it triggers the sign in
-		$('.new-group-name-input').keypress(function (key) {
+	enableEnter: function() {
+		// if user hits enter in email feild, it triggers the sign in
+		$('.new-group-name-input').keypress(function(key) {
 			if (key.which == 13) {
 				$('.new-group-creation-button').click();
 			}
 		});
-
 	},
 
-	enableButtonCheck: function () {
+	enableButtonCheck: function() {
 		var name = $('.new-group-name-input').val().trim();
 		var start = $('.new-group-start-date-input').val();
 		var end = $('.new-group-end-date-input').val();
 
 		if (name.length > 0 && start.length > 0 && end.length > 0) {
 			$('.button').css({'opacity': '1', 'cursor': 'pointer'});
-		}
-		else {
+		} else {
 			$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 		}
 	},
 
-	signIn:function () {
+	signIn:function() {
 		this.remove();
 		router.navigate('/#tournament/sign-in');
 	}

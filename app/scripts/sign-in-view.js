@@ -2,7 +2,6 @@
 
 var SignInView = Parse.View.extend ({
 
-
 	template: _.template($('.sign-in-view').text()),
 
 	className: "existing-user-login-container",
@@ -15,20 +14,21 @@ var SignInView = Parse.View.extend ({
 		'keypress .existing-user-password-input'		: 'enableEnter'
 	},
 
-	initialize: function (options) {
+	initialize: function(options) {
 		$('.app-container').append(this.el);
+
 		this.render();
 		this.enableEnter();
-
 	},
 
-	render: function () {
+	render: function() {
 		var renderedTemplate = this.template;
 		this.$el.html(renderedTemplate);
 	},
 
-	userSignIn: function () {
+	userSignIn: function() {
 		$('.error-report').html('');
+
 		var name = $('.existing-user-username-input').val();
 		var pw = $('.existing-user-password-input').val();
 
@@ -41,34 +41,32 @@ var SignInView = Parse.View.extend ({
 					$('.error-report').html("Username or password is incorrect").css('margin-left','-124px');
 				}
 			});
-		}
-		else {
+		} else {
 			$('.error-report').html("Please enter a username and password").css('margin-left','-138px');
 		}
 	},
 
-	forgotPassword: function () {
+	forgotPassword: function() {
 		router.navigate('/#tournament/sign-in/pass-reset', {trigger: true});
 	},
 
-	enableEnter: function () {
+	enableEnter: function() {
 		// if user hits enter in name feild, it triggers the sign in
-		$('.existing-user-username-input').keypress(function (key) {
-			if (key.which == 13) {
+		$('.existing-user-username-input').keypress(function(key) {
+			if (key.which === 13) {
 				$('.existing-user-login-button').click();
 			}
 		});
 
 		// if user hits enter in password feild, it triggers the sign in
-		$('.existing-user-password-input').keypress(function (key) {
-			if (key.which == 13) {
+		$('.existing-user-password-input').keypress(function(key) {
+			if (key.which === 13) {
 				$('.existing-user-login-button').click();
 			}
 		});
 	},
 
-	goBack: function () {
+	goBack: function() {
 		router.navigate('', {trigger: true});
 	}
-
 });

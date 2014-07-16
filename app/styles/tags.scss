@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'multi-use-classes';
+
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////// TAGS
 ////////////////////////////////////////////////////////////
@@ -10,7 +11,7 @@
 
 body {
 	background-color: $colorWhite;
-	font-family: "cubano", sans-serif;
+	font-family: $fontCubano;
 	font-size: 16px;
 	line-height: 1.42857;
 	color: $colorTextDarkGray;
@@ -26,8 +27,9 @@ table {
 
 	& tbody tr {
 		&:hover {
-		background-color: $colorOffWhite;
+			background-color: $colorOffWhite;
 		}
+
 		&:last-child {
 			border-bottom: none;
 		}
@@ -56,7 +58,7 @@ table {
 				top: 20%;
 				right: 15%;
 
-				&:focus, 
+				&:focus,
 				&:active {
 					outline: none;
 				}
@@ -75,7 +77,7 @@ table {
 	}
 
 	// only table header
-	& thead tr{
+	& thead tr {
 		height: 160px;
 		font-size: 1em;
 		vertical-align: bottom;
@@ -83,6 +85,7 @@ table {
 		& td {
 			position: relative;
 		}
+
 		& td:first-child {
 			cursor: default;
 		}
@@ -97,6 +100,7 @@ header {
 	background-repeat: repeat;
 	background-position: top left;
 	position: relative;
+
 	& a {
 		text-decoration: none;
 		color: $colorWhite;
