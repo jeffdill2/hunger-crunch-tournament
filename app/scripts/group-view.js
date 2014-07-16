@@ -9,7 +9,8 @@ var GroupView = Parse.View.extend({
 		'click .print-button'		: 'print',
 		'click .player-name' 		: 'playerNav',
 		'click .share-code'			: 'viewCode',
-		'click .print-button'		: 'print'
+		'click .print-button'		: 'print',
+		'click .edit-group-members'	: 'editMembersNav',
 	},
 
 	className: 'group-view-container',
@@ -23,6 +24,7 @@ var GroupView = Parse.View.extend({
 
 	render: function () {
 		// called in the success inside getGroup
+		// console.log(this.groupInfo)
 		var renderedTemplate = this.template(this.groupInfo);
 		this.$el.html(renderedTemplate);
 		
@@ -34,7 +36,7 @@ var GroupView = Parse.View.extend({
 		var query = new Parse.Query("TntGroup");
 		query.include("user");
 		query.equalTo("groupCode", this.group.groupID);
-		// console.log(this.group);
+		console.log(this.group);
 
 		var that = this;
 		query.first({
@@ -61,11 +63,12 @@ var GroupView = Parse.View.extend({
 		var query = new Parse.Query("TntGroupTotals");
 		query.include("groupID");
 		query.equalTo("groupID", this.group);
-		// console.log(this.group.attributes)
+		console.log(this.group.attributes)
 
 		var that = this;
 		query.first({
 			success: function(groupTotal) {
+				console.log(groupTotal.attributes)
 				that.info = groupTotal;
 				that.showGroupTotals(groupTotal);
 			},
@@ -84,10 +87,11 @@ var GroupView = Parse.View.extend({
 	getPlayers: function () {
 		// console.log(this.group)
 		var query = new Parse.Query('TntScore');
-		query.include('tntGrp');
+		query.include('tntGrp.attributes.user');
 		query.include('user');
 		query.equalTo("tntGrp", this.group);
-		// console.log(this.group)
+
+		// console.log(this.group.attributes)
 		var that = this;
 		var collectQuery = new Parse.Query('TntCollectibles');
 		collectQuery.include('user');
@@ -96,14 +100,15 @@ var GroupView = Parse.View.extend({
 			success: function(results){
 					that.collectiblesArr = results;
 					// console.log(results)
-					console.log(that.collectiblesArr)
+					// console.log(that.collectiblesArr)
 
 				query.find({
 					success: function (players) { 
 						var grpPlayers = [];
 
 						players.forEach(function (player) {
-							// console.log(player.attributes)
+							// console.log(player.attributes.tntGrp)
+
 								if(grpPlayers.length <= 0){
 									grpPlayers.push(player);
 								}if(grpPlayers.length > 0){
@@ -117,7 +122,7 @@ var GroupView = Parse.View.extend({
 												that.collectiblesArr.forEach(function(collectible){
 												// console.log('player ', player.attributes.user.attributes.username)
 												// console.log('collectible ',  collectible.attributes.user.attributes.username)
-													
+													// console.log(collectible)
 													if(player.attributes.tntGrp.attributes.groupCode == collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username == collectible.attributes.user.attributes.username){
 														grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;		
 													}else{
@@ -164,7 +169,7 @@ var GroupView = Parse.View.extend({
 		var renderedTemplate = _.template($('.group-view-player-view').text());
 		players.forEach(function(player){
 			// console.log(player.attributes)
-			console.log(player.attributes)
+			// console.log(player.attributes.tntGrp.attributes.user.id)
 			$('.player-list').append(renderedTemplate(player.attributes)); 	
 		});
 		// using list.js to sort the table of data
@@ -176,6 +181,13 @@ var GroupView = Parse.View.extend({
 		var playerID = location.currentTarget.innerHTML;
 		console.log(this.options)
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/"+ playerID, {trigger: true});
+	}, 
+
+	editMembersNav: function (location) {
+		// will only set playerID if you click on the name itself, and not the row 	
+		var playerID = location.currentTarget.innerHTML;
+		console.log(this.options)
+		router.navigate('/#tournament/group/'+ this.options.groupID +"/edit-members", {trigger: true});
 	}, 
 	// sort function
 	tableSort: function () {
