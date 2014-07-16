@@ -68,6 +68,7 @@
 
         <div class="app-container">
         </div>
+    
 
         <!--////////////////////////////////////////////////////////
         ////////////////////////////////////////////////// TEMPLATES
@@ -443,7 +444,7 @@
         <!-- template for the single player view -->
         <script type="text/template" class="player-view">
             <div class="player-view-header-content">
-                    <div class="player-view-location-banner h1-flag">
+                    <div class="player-view-location-banner h1-flag" <%= (playerID.length > 12 ? 'title="' + playerID + '"' : "") %>>
                     <span class='breadcrumb-back'><%=groupName > 12 ? groupName.substring(0,12)+"..." : groupName%></span>
                     <svg
                       version="1.1"
@@ -460,6 +461,7 @@
                           c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
                       </g>
                     </svg>
+
                     <%=(playerID.length > 12) ? playerID.substring(0,12)+"..." : playerID%>
                     </div>
                     <ul class="player-view-nav">
@@ -622,13 +624,15 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
+                            <h2 <%= (groupID.get("name").length > 10 ? 'title="' + groupID.get("name") + '"' : "") %>>
+                                <%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %>
+                            </h2>
                             <p><%= groupID.get("groupCode")  %></p>
                         </div>
 
                         <ul class="dashboard-group-details">
                             <li><%= groupID.get('startDate').toString().substring(0,10) %> - <%= groupID.get('endDate').toString().substring(0,10) %></li>
-                            <li><%= players %> Players</li>
+                            <li><%= (players === 1) ? players + " Player" : players + " Players"%></li>
                         </ul>
                     </div>
                     <div class="dashboard-group-statistics">
@@ -653,7 +657,14 @@
         <!-- template for no available groups placeholder view -->
         <script type="text/template" class="placeholder-view">
                 <h1>Hello There!</h1>
-                <h2>It looks like you dont currently have any groups to show. If you haven&#39t already, go ahead and click on the create groups button. If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>   
+                <h2>It looks like you don&#39;t currently have any groups to show. If you haven&#39t already, go ahead and click on the create groups button. If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>
+        </script>
+
+        <!-- template for newly created group that is not yet available placeholder view -->
+        <script type="text/template" class="new-group-placeholder-view-template">
+           
+                <h1>Hello There!</h1>
+                <h2>If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>
         </script>
 
         <!-- template for the settings view -->
@@ -1107,6 +1118,8 @@
                     <p class="valid">Live</p>
                   </li>
         </script>
+
+        <!-- template for visiting a group page that doesn't exist -->
         <script type="text/template" class="query-error-template">
             <div class="query-error-container">
                 <p>
@@ -1115,6 +1128,122 @@
                     to return to the Dashboard
                 </p>
             </div>
+        </script>
+
+        <!-- template for the new user view -->
+        <script type="text/template" class="new-user-welecome-template">
+            <div class="new-user-welcome-container">
+                <div class="new-user-welcome-header">
+                    <h1>Hello<%= Parse.User.current() ? ", "+Parse.User.current().attributes.username : ''%> 
+                    and welcome to Hunger Crunch Tournaments</h1>
+                </div>
+                
+                <div class="welcome-holder">
+                    <div class="welcome-container">
+                    </div>
+                    <div class="welcome-previous">Previous</div>
+                    <div class="welcome-next">Next</div>
+                </div>
+                <button class="button continue-to-dashboard-button">Skip this, continue to Dashboard
+                    <svg
+                      version="1.1"
+                      class="arrow-2"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px"
+                      viewBox="0 0 7.7 16.2"
+                      enable-background="new 0 0 7.7 16.2"
+                      xml:space="preserve">
+                      <g>
+                        <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                          c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                      </g>
+                    </svg>
+                </button>              
+            </div>
+        </script>
+
+        <!-- template for the first page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-1-template">
+                <div class="welcome-number">1</div><span>Dashboard</span>
+                <div class="welcome-instruction">
+                    Your Dashboard will act as your central hub. From here you can view an overview of all of your created groups. 
+                    You can also create a new group, or compare existing groups against one another.
+                </div>
+                <img src="../images/Dashboard.png">
+                <div class="welcome-location">Dashboard</div>
+        </script>
+
+        <!-- template for the second page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-2-template">
+                <div class="welcome-number">2</div><span>Create Grou</span>
+                <div class="welcome-instruction">
+                    To create a group, simply click the "Create Group" button from your dashboard. 
+                    Once clicked, create a group name and select the groups start and end dates. Then click,
+                    "Create Group"
+                </div>
+                <img src="../images/Create-Group.png">
+                <div class="welcome-location">Create Group</div>
+        </script>
+
+        <!-- template for the third page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-3-template">
+                <div class="welcome-number">3</div><span>Share Group</span>
+                <div class="welcome-instruction">
+                    Once your group has been created, you will be taken to your group&#39;s sharing instructions.
+                    From here you can find the group code needed for players to participate in your group
+                    as well as the url for observers of your group to view the group&#39;s current results.
+                </div>
+                <img src="../images/Group-Share.png">
+                <div class="welcome-location">Share Group</div>
+        </script>
+
+        <!-- template for the fourth page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-4-template">
+                <div class="welcome-number">4</div><span>Group Overview</span>
+                <div class="welcome-instruction">
+                    You can view an individual group&#39;s current results by clicking the Group Name on your dashboard. 
+                    From the Group Overview page you can view a group results summary, view, sort and compare your group&#39;s 
+                    individual player statistics, edit the eligible group dates, remove players from your group,
+                    revisit your group&#39;s sharing instructions or print the current results.
+                </div>
+                <img src="../images/Group.png">
+                <div class="welcome-location">Group Overview</div>
+        </script>
+
+        <!-- template for the fifth page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-5-template">
+                <div class="welcome-number">5</div><span>Player Overview</span>
+                <div class="welcome-instruction">
+                    By clicking on an indvidual player you can view their individual performance while particpating
+                    in your group, including level by level breakdown of their cumulative performance. You can also print
+                    these results or remove a player from your group.
+                </div>
+                <img src="../images/Single-Player.png">
+                <div class="welcome-location">Player Overview</div>
+        </script>
+
+        <!-- template for the sixth page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-6-template">
+                <div class="welcome-number">6</div><span>Group Compare</span>
+                <div class="welcome-instruction">
+                    To compare multiple groups against one another, simply click the "Compare Groups" button on your Dashboard.
+                    Next you will be able to chose from all of your groups and view how their overall performance 
+                    stacks up to any and all other groups you have created.
+                </div>
+                <img src="../images/Group-Compare.png">
+                <div class="welcome-location">Group Compare</div>
+        </script>
+
+        <!-- template for the seventh page of the new user instructions -->
+        <script type="text/template" class="new-user-welecome-instruction-7-template">
+                <div class="welcome-number">7</div><span>Settings</span>
+                <div class="welcome-instruction">
+                    To edit your existing email address or reset your password, simply select "Settings" in the upper
+                    right-hand corner to take you to your Account Settings.
+                </div>
+                <div class="welcome-location">Settings</div>
         </script>
 
         <!-- build:js scripts/vendor.js -->
@@ -1151,6 +1280,7 @@
         <script src="scripts/create-role.js"></script>
         <script src="scripts/model.js"></script>
         <script src="scripts/home-view.js"></script>
+        <script src="scripts/new-user-welcome-view.js"></script>
         <script src="scripts/user-nav-view.js"></script>
         <script src="scripts/sign-up-view.js"></script>
         <script src="scripts/sign-in-view.js"></script>

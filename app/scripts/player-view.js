@@ -13,11 +13,8 @@ var PlayerView = Parse.View.extend({
 	className: 'player-view',
 
 	initialize: function(options) {
-		$('.app-container').append(this.el);
+		$('.app-container').html(this.el);
 		this.playerInfo = options;
-
-		var player = options.playerID;
-		var group = options.groupID;
 
 		this.getPlayerScores();
 

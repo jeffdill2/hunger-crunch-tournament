@@ -12,7 +12,7 @@ var DashboardView = Parse.View.extend ({
 
 	initialize: function() {
 		if (Parse.User.current()) {
-			$('.app-container').append(this.el);
+			$('.app-container').html(this.el);
 
 			this.getGroups();
 			this.render();
@@ -103,6 +103,6 @@ var DashboardView = Parse.View.extend ({
 
 	signIn:function () {
 		this.remove();
-		router.navigate('/#tournament/sign-in');
+		router.navigate('/#tournament/sign-in', {trigger: true});
 	}
 });

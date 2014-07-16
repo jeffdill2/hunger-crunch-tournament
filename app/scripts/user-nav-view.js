@@ -15,7 +15,7 @@ var UserNavView = Parse.View.extend({
 	welcomeTemplate: _.template($('.user-nav-welcome-template').text()),
 
 	initialize: function() {
-		$('.nav-container').append(this.el);
+		$('.nav-container').html(this.el);
 
 		this.user = Parse.User.current();
 		this.render();
@@ -76,7 +76,7 @@ var NoUserNavView = Parse.View.extend({
 	template: _.template($('.no-user-nav-view').text()),
 
 	initialize: function() {
-		$('.nav-container').append(this.el);
+		$('.nav-container').html(this.el);
 		this.render();
 	},
 

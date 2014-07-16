@@ -90,27 +90,27 @@
 			& span {
 			}
 		}
-	}
 
-	&:before,
-	&:after {
-		content: '';
-		position: absolute;
-		background-repeat: no-repeat;
-		height: 58px;
-		top: 0;
-		background-image: url('../images/angle-button-large-teal-ends.png');
-	}
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			background-repeat: no-repeat;
+			height: 58px;
+			top: 0;
+			background-image: url('../images/angle-button-large-teal-ends.png');
+		}
 
-	&:before {
-		width: 30px;
-		left: -30px;
-	}
+		&:before {
+			width: 30px;
+			left: -30px;
+		}
 
-	&:after {
-		background-position: -25px 0;
-		width: 40px;
-		right: -40px;
+		&:after {
+			background-position: -25px 0;
+			width: 40px;
+			right: -40px;
+		}
 	}
 }
 
