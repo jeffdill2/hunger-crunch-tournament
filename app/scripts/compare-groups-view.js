@@ -15,7 +15,7 @@ var CompareGroupsView = Parse.View.extend({
 
 	initialize: function(options) {
 		if (Parse.User.current()) {
-			$('.app-container').append(this.el);
+			$('.app-container').html(this.el);
 
 			this.getAvailableGroups();
 			this.render();
@@ -104,7 +104,7 @@ var CompareGroupsView = Parse.View.extend({
 
 		var that = this;
 
-		if (this.groupsToAdd.length <= 0) {
+		if (this.groupsToAdd.length <= 0 && this.groupsToCompare.length <=0) {
 			var placeholderTemplate = _.template($('.placeholder-view').text());
 
 			$('.add-list').html(placeholderTemplate());

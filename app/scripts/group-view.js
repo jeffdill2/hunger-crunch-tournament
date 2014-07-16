@@ -17,7 +17,7 @@ var GroupView = Parse.View.extend({
 	initialize: function(options) {
 		this.groupCode = options;
 
-		$('.app-container').append(this.el);
+		$('.app-container').html(this.el);
 
 		this.getGroup();
 	},
@@ -42,11 +42,20 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(results) {
-				that.group = results;
-				that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
-				that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
-				that.getGroupTotals();
-				that.getPlayers(that.group);
+				if (results !== undefined) {
+					that.group = results;
+					that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
+					that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
+					that.getGroupTotals();
+					that.getPlayers(that.group);
+				}
+				else {
+					var renderedTemplate = _.template($('.query-error-template').text());
+					$('.app-container').html(renderedTemplate);
+					$('.dashboard-link').click(function () {
+						router.navigate('/#tournament/dashboard', {'trigger': true});
+					});
+				}
 			},
 			error: function(error) {
 				console.log(error);
@@ -68,10 +77,16 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(groupTotal) {
-				that.group.attributes.players = groupTotal.attributes.players;
-				that.render();
-				that.info = groupTotal;
-				that.showGroupTotals(groupTotal);
+				if ( groupTotal !== undefined ) {
+					that.group.attributes.players = groupTotal.attributes.players;
+					that.render();
+					that.info = groupTotal;
+					that.showGroupTotals(groupTotal);
+				}
+				else {
+					var renderedTemplate = _.template($('.new-group-placeholder-view-template').text());
+					$('.app-container').html(renderedTemplate)
+				}
 			},
 			error: function(error) {
 				console.log(error);

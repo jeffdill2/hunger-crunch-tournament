@@ -12,7 +12,7 @@ var PassResetView = Parse.View.extend ({
 	className: 'password-reset-view-container',
 
 	initialize: function() {
-		$('.app-container').append(this.el);
+		$('.app-container').html(this.el);
 
 		this.render();
 		this.enableEnter();

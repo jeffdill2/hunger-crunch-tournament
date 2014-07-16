@@ -83,7 +83,7 @@
                     <div class="welcome-previous">Previous</div>
                     <div class="welcome-next">Next</div>
                 </div>
-                <button class="button continue-to-dashboard-button">Continue to Dashboard
+                <button class="button continue-to-dashboard-button">Skip this, continue to Dashboard
                     <svg
                       version="1.1"
                       class="arrow-2"
@@ -546,7 +546,7 @@
         <!-- template for the single player view -->
         <script type="text/template" class="player-view">
             <div class="player-view-header-content">
-                    <div class="player-view-location-banner h1-flag">
+                    <div class="player-view-location-banner h1-flag" <%= (playerID.length > 12 ? 'title="' + playerID + '"' : "") %>>
                     <span class='breadcrumb-back'><%=groupName > 12 ? groupName.substring(0,12)+"..." : groupName%></span>
                     <svg
                       version="1.1"
@@ -563,6 +563,7 @@
                           c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
                       </g>
                     </svg>
+
                     <%=(playerID.length > 12) ? playerID.substring(0,12)+"..." : playerID%>
                     </div>
                     <ul class="player-view-nav">
@@ -725,13 +726,15 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2><%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %></h2>
+                            <h2 <%= (groupID.get("name").length > 10 ? 'title="' + groupID.get("name") + '"' : "") %>>
+                                <%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %>
+                            </h2>
                             <p><%= groupID.get("groupCode")  %></p>
                         </div>
 
                         <ul class="dashboard-group-details">
                             <li><%= groupID.get('startDate').toString().substring(0,10) %> - <%= groupID.get('endDate').toString().substring(0,10) %></li>
-                            <li><%= players %> Players</li>
+                            <li><%= (players === 1) ? players + " Player" : players + " Players"%></li>
                         </ul>
                     </div>
                     <div class="dashboard-group-statistics">
@@ -758,8 +761,13 @@
            
                 <h1>Hello There!</h1>
                 <h2>It looks like you don&#39;t currently have any groups to show. If you haven&#39t already, go ahead and click on the create groups button. If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>
-            
+        </script>
 
+        <!-- template for newly created group that is not yet available placeholder view -->
+        <script type="text/template" class="new-group-placeholder-view-template">
+           
+                <h1>Hello There!</h1>
+                <h2>If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>
         </script>
 
         <!-- template for the settings view -->

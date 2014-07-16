@@ -19,7 +19,7 @@ var CreateGroupView = Parse.View.extend({
 
 	initialize: function(options) {
 		if (Parse.User.current()) {
-			$('.app-container').append(this.el);
+			$('.app-container').html(this.el);
 
 			this.render();
 			this.enableEnter();

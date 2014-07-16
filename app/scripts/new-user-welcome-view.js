@@ -9,7 +9,7 @@ var UserWelcome = Parse.View.extend({
 	template: _.template($('.new-user-welecome-template').text()),
 
 	initialize: function() {
-		$('.app-container').append(this.el);
+		$('.app-container').html(this.el);
 		this.counter = 0;
 		this.render();
 	},
