@@ -66,7 +66,8 @@
             </div>
         </div>
 
-        <div class="app-container"></div>
+        <div class="app-container">
+        </div>
 
         <!--////////////////////////////////////////////////////////
         ////////////////////////////////////////////////// TEMPLATES
@@ -77,12 +78,12 @@
         <script type="text/template" class="home-view">
                 <div class="landing-page-copy">
                     <strong>A war is being waged against world hunger</strong>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>For too long, world hunger has destroyed the lives and ruined 
+                    the dreams of children around the world. Hunger Crunch gives you 
+                    the opportunity to fight back and have some fun at the same time. 
+                    Hunger Crunch is a game for and by Rice Bowls, a nonprofit working 
+                    to feed orphaned children where the need is greatest. When you play, 
+                    you can help provide much-needed food to these awesome kids.</p>
                 </div>
 
                 <div class="hunger-minions-counter-container">
@@ -187,7 +188,7 @@
 
         <script type="text/template" class="sign-up-view-errors-template">
             <div><%=message%></div>
-            <div>Please create a new account or <span class="recover-account">recover your previous account here</span></div>
+            <div>Please create a new account or recover your previous account <span class="recover-account">here</span></div>
         </script>
 
         <!-- template for the sign in view -->
@@ -240,7 +241,7 @@
          <script type="text/template" class="reset-password-view-template">
             <div class="password-reset-view-header">
                 <div class="h1-flag">
-                <span>Sign In</span>
+                <span class="breadcrumb-back">Sign In</span>
                 <svg
                   version="1.1"
                   class="arrow-2"
@@ -261,7 +262,23 @@
             <div class="password-reset-view-content">
                 <div class="error-report"></div>
                 <input class="lookup-email-input" placeholder="Account Email">
-                <button class="button password-reset-button" >Reset Password</button>
+                <button class="button password-reset-button">Reset Password
+                    <svg
+                      version="1.1"
+                      class="arrow-2"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px"
+                      viewBox="0 0 7.7 16.2"
+                      enable-background="new 0 0 7.7 16.2"
+                      xml:space="preserve">
+                      <g>
+                        <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                          c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                      </g>
+                    </svg>
+                </button>
             </div>
         </script>
 
@@ -278,14 +295,14 @@
                             <li>
                             <%=startDate%> - <input class="date-changer"placeholder="<%=endDate%>" readonly/>
                             </li>
-                            <li>32 Members</li>
+                            <li><%=players === 1 ? players+" Member" : players+" Members" %></li>
                         </ul>
                         <ul class="group-view-options">
                             <% if (Parse.User.current()) { %>
-                                <li class="change-group-dates">CHANGE DATES</li>
-                                <li class="save-dates">SAVE DATES?</li>
-                                <li class="edit-group-members">EDIT MEMBERS</li>
                                 <li class="share-code">Share Group</li>
+                                <li class="edit-group-members">EDIT MEMBERS</li>
+                                <li class="save-dates">SAVE DATES?</li>
+                                <li class="change-group-dates">CHANGE DATES</li>
                                 <li class="print-button">Print</li>
                             <% } else { %>
                                 <li class="print-button">Print</li>
@@ -426,9 +443,7 @@
         <script type="text/template" class="player-view">
             <div class="player-view-header-content">
                     <div class="player-view-location-banner h1-flag">
-                    <span class='breadcrumb-back'>
-                        <%=groupName > 12 ? groupName.substring(0,12)+"..." : groupName%>
-                    </span>
+                    <span class='breadcrumb-back'><%=groupName > 12 ? groupName.substring(0,12)+"..." : groupName%></span>
                     <svg
                       version="1.1"
                       class="arrow-2"
@@ -593,7 +608,6 @@
                     <ul>
                         <li class="create-group-button">Create Group</li>
                         <li class="compare-groups-button">Compare Groups</li>
-                        <li class="print-button">Print</li>
                     </ul>
                 </div>
             </div>
@@ -652,9 +666,10 @@
 
             <div class="settings-container">
                 <div class="settings-content">
-                    <div>Username: </div>
+                    <div class="settings-username">Username: </div>
                     <input class="user-username" placeholder="<%=username%>" readonly/>
-                    <div>Email: </div><span></span>
+                    <div class="settings-email">Email: </div>
+                    <span></span>
                     <input class="user-email" placeholder="<%= email %>" readonly/>
                     <button class="button edit-email">Edit Email
                         <svg
@@ -708,6 +723,24 @@
                           </g>
                         </svg>
                     </button>
+                    <button class="button return-to-dashboard">Back to Dashboard
+                        <svg
+                          version="1.1"
+                          class="arrow-2"
+                          id="Layer_1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink"
+                          x="0px" y="0px"
+                          viewBox="0 0 7.7 16.2"
+                          enable-background="new 0 0 7.7 16.2"
+                          xml:space="preserve">
+                          <g>
+                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                              c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                          </g>
+                        </svg>
+                    </button>
+                    <div class="password-reset-confirmation"></div
                 </div>
             </div>
         </script>
@@ -766,35 +799,37 @@
         <!-- template for a new group's code generation page -->
         <script type="text/template" class="group-view-code-template">
             <div class="group-created-header-container">
-                <div class="group-created-header-content">
-                    <h1>GROUP CREATED FOR "<%= group %>"</h1>
+                <div class="group-created-header-content h1-flag">
+                    <%= group.length > 17 ? group.substring(0,17)+"..." : group %>
                 </div>
             </div>
             <div class="group-created-main-container">
+                    <h2>Instructions</h2>
+                    <ul class="instruction-list">
+                        <li class="instruction-one">1</li>
+                        <li class="instruction-two">2</li>
+                        <li class="instruction-three">3</li>
+                    </ul>
                 <div class="player-instructions">
-                    <h3>PLAYER INSTRUCTIONS</h3>
-                    <p>Give the following code to the players in your group:</p>
+                    <p>Give the following Group Code to the players in your group:</p>
                     <div class="group-code-box">
                         <input type="text" value="<%= code %>" class="group-code" readonly="readonly">
                     </div>
-                </div>
-                <div class="instruction-images">
-                    <div class="instruction-image-one">
-                        <span>1</span>
-                        <img src="../images/game-screen.png">
+                    <div class="instruction-step-two">
+                        <p>Have each player enter the Group Code in their Hunger Crunch game:</p>
+                        <div class="instruction-image-one">
+                            <img src="../images/join-group-instructs.png">
+                        </div>
                     </div>
-                    <div class="instruction-image-two">
-                        <span>2</span>
-                        <div class="placeholder-image"></div>
-                    </div>
-                </div>
-                <div class="observer-instructions">
-                    <h3>LINK FOR OBSERVERS</h3>
-                    <p>Copy and share the following link with people that would like to observe the group:</p>
-                    <div class="group-link-box">
-                        <input type="text" value="http://www.hungercrunch.com/#tournament/group/<%= code %>" class="group-link"readonly="readonly">
+                    <div class="observer-instructions">
+                        <p>Copy and share the following link with people that would like to observe the group:</p>
+                        <div class="group-link-box">
+                            <input type="text" value="http://www.hungercrunch.com/#tournament/group/<%= code %>" class="group-link"readonly="readonly">
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="group-code-button-container">    
                 <button class="view-group-page button">VIEW THE GROUP PAGE
                     <svg
                       version="1.1"
@@ -955,11 +990,13 @@
                     <p class="valid">Live</p>
                   </li>
         </script>
-
-        <script type="text/template" class="alert-template">
-            <div class="alert alert-info alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <%= message %>
+        <script type="text/template" class="query-error-template">
+            <div class="query-error-container">
+                <p>
+                    The link you have entered does not appear to be a valid Group ID. 
+                    Please check the link once more, or click <span class="dashboard-link">here</span> 
+                    to return to the Dashboard
+                </p>
             </div>
         </script>
 

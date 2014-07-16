@@ -1,10 +1,9 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click .create-group-button'	: 'createGroupNav',
-		'click .compare-groups-button'	: 'compareGroupsNav',
-		'click .dashboard-group'		: 'groupNav',
-		'click .print-button' 			: 'print'
+		'click .create-group-button'		: 'createGroupNav', 
+		'click .compare-groups-button'		: 'compareGroupsNav', 
+		'click .dashboard-group'			: 'groupNav'
 	},
 
 	template: _.template($('.dashboard-view').text()),
@@ -17,7 +16,7 @@ var DashboardView = Parse.View.extend ({
 
 			this.getGroups();
 			this.render();
-
+			// will queue spinning Hunger Crunch logo until data is found, or error occurs and fade out
 			startLoadingAnimation();
 		} else {
 			this.signIn();
@@ -58,7 +57,6 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
-								console.log('groupTotal', groupTotal);
 								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
 
 								stopLoadingAnimation();
@@ -79,7 +77,7 @@ var DashboardView = Parse.View.extend ({
 				}
 			},
 			error: function(error) {
-				console.log(error);
+				stopLoadingAnimation();
 			},
 		})
 	},
@@ -97,19 +95,7 @@ var DashboardView = Parse.View.extend ({
 		router.navigate('/#tournament/group/' + groupNav, {trigger: true});
 	},
 
-	print: function() {
-		$("header").addClass('non-print');
-		$(".dashboard-location").removeClass('h1-flag');
-		$(".dashboard-nav").css('opacity', 0);
-
-		window.print();
-
-		$(".dashboard-location").addClass('h1-flag');
-		$(".dashboard-nav").css('opacity', 1);
-		$("header").removeClass('non-print');
-	},
-
-	signIn: function() {
+	signIn:function () {
 		this.remove();
 		router.navigate('/#tournament/sign-in');
 	}

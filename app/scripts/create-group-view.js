@@ -124,16 +124,16 @@ var CreateGroupView = Parse.View.extend({
 		$('.error-report-end-date').html('');
 
 		if (name === '') {
-			$('.error-report').html('Please enter a name for this group').css({'margin-left': '-124px'});
-			$('.new-group-name-input').val('')
+			$('.error-report').html('Please enter a name for this group');
+			$('.new-group-name-input').val('')	
 		}
 
 		if (start === '') {
-			$('.error-report-start-date').html('Please enter a start date for this group').css({'margin-left': '-144px'});
+			$('.error-report-start-date').html('Please enter a start date for this group');
 		}
 
 		if (end === '') {
-			$('.error-report-end-date').html('Please enter an end date for this group').css({'margin-left': '-141px'});
+			$('.error-report-end-date').html('Please enter an end date for this group');
 		}
 
 		if (name.length > 0 && start.length > 0 && end.length > 0) {
@@ -188,17 +188,23 @@ var CreateGroupView = Parse.View.extend({
 					},
 
 					name: groupName,
-					user: Parse.User.current().id,
+					user: {
+						__type: "Pointer",
+						className: "_User",
+						objectId: Parse.User.current().id
+					}
 				}, {
 					success: function(group) {
-						var groupName = group.attributes.groupName.replace(/ /g, '%20');
-						var uniqueID = group.attributes.groupID;
+						console.log(group)
+						var groupName = group.attributes.name.replace(/ /g, '%20');
+						var uniqueID = group.attributes.groupCode;
 
 						router.navigate('/#tournament/dashboard/'+groupName+'/'+uniqueID, {trigger: true});
 					},
 					error: function(error) {
 						console.log('New group was not successfully saved - details below:');
 						console.log('Error ' + error.code + " : " + error.message);
+						console.log('Error ' + error);
 					}
 				});
 			})

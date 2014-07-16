@@ -53,10 +53,6 @@
 			outline: none;
 		}
 	}
-
-	& button {
-		transition: .2s all linear;
-	}
 }
 
 ////////////////////////////////////////////////////////////
@@ -64,11 +60,12 @@
 ////////////////////////////////////////////////////////////
 .password-reset-view-content {
 	padding: 70px;
+	
+	& .password-reset-button {
+		width: 58%;
+	}
 }
 
-.password-reset-view-container {
-	padding: 66px 0 0;
-}
 
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////// SIGN UP
@@ -85,6 +82,8 @@
 .error-report-sign-up {
 	position: absolute;
 	left: 50%;
+	margin-left: -50%;
+	width: 100%;
 	text-align: center;
 	color: $colorCoral;
 }
@@ -94,40 +93,36 @@
 }
 
 .error-report-email {
-	top: 83px;
-	margin-left: -201px;
+	top: 86px;
 }
 
 .error-report-first-password {
-	top: 140px;
-	margin-left: -93px;
+	top: 147px;
 }
 
 .error-report-confirm-password {
-	top: 198px;
-	margin-left: -141px;
+	top: 209px;
 }
 
 .error-report-sign-up {
-	bottom: 0;
+	bottom: -10px;
 }
 
-.recover-account:hover {
-	cursor: pointer;
-	text-decoration: underline;
+.recover-account {
 	color: $colorButtonTeal;
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
 }
 
 ////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////// SETTINGS
 ////////////////////////////////////////////////////////////
+.settings-container {
+	min-height: 457px;
+}
 .settings-content {
-	& div {
-		font-size: 1.5em;
-		display: inline-block;
-		margin-left: 12.5%;
-	}
-
 	& input {
 		margin-top: 5px;
 		margin-bottom: 10px;
@@ -140,6 +135,24 @@
 	.save-email {
 		display: none;
 	}
+
+	.button {
+		width: 50%;
+	}
+
+	.return-to-dashboard {
+		display: none;
+	}
+}
+.settings-username, 
+.settings-email {
+	font-size: 1.5em;
+	display: inline-block;
+	margin-left: 12.5%;
+}
+.password-reset-confirmation {
+	font-size: 1.15em;
+	text-align: center;
 }
 
 ////////////////////////////////////////////////////////////
@@ -168,17 +181,17 @@
 .error-report-start-date,
 .error-report-end-date {
 	position: absolute;
-	left: 50%;
+	width: 100%;
 	text-align: center;
 	color: $colorCoral;
 }
 
 .error-report-start-date {
-	top: 83px;
+	top: 85px;
 }
 
 .error-report-end-date {
-	top: 140px;
+	top: 147px;
 }
 
 ////////////////////////////////////////////////////////////

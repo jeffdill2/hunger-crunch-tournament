@@ -15,7 +15,7 @@ var GroupView = Parse.View.extend({
 	className: 'group-view-container',
 
 	initialize: function(options) {
-		this.group = options;
+		this.groupCode = options;
 
 		$('.app-container').append(this.el);
 
@@ -23,11 +23,13 @@ var GroupView = Parse.View.extend({
 	},
 
 	render: function() {
-		// called in the success inside getGroup
-		var renderedTemplate = this.template(this.groupInfo);
+		// called in the success inside getGroupTotals
+		var renderedTemplate = this.template(this.group.attributes);
 		this.$el.html(renderedTemplate);
 
-		this.getGroupTotals();
+		$('.sort').click(function () {
+			$(this).toggleClass('sorted');
+		});
 	},
 
 	getGroup: function() {
@@ -36,24 +38,24 @@ var GroupView = Parse.View.extend({
 		var query = new Parse.Query(strGroups);
 
 		query.include("user");
-		query.equalTo("groupCode", this.group.groupID);
+		query.equalTo("groupCode", this.groupCode.groupID);
 
 		query.first({
 			success: function(results) {
+				// this looks redundant 
 				that.group = results;
-				that.groupUpdate = results;
-				that.groupInfo = results.attributes;
-				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
-				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
-				that.render();
+				that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
+				that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
+				that.getGroupTotals();
 				that.getPlayers(that.group);
-
-				$('.sort').click(function () {
-					$(this).toggleClass('sorted');
-				});
 			},
 			error: function(error) {
 				console.log(error);
+				var renderedTemplate = _.template($('.query-error-template').text());
+				$('.app-container').html(renderedTemplate);
+				$('.dashboard-link').click(function () {
+					router.navigate('/#tournament/dashboard', {'trigger': true});
+				});
 			}
 		});
 	},
@@ -67,12 +69,13 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(groupTotal) {
+				that.group.attributes.players = groupTotal.attributes.players;
+				that.render();
 				that.info = groupTotal;
 				that.showGroupTotals(groupTotal);
 			},
 			error: function(error) {
 				console.log(error);
-
 			}
 		});
 	},
@@ -211,14 +214,14 @@ var GroupView = Parse.View.extend({
 	},
 
 	saveDates: function() {
-		this.groupUpdate.set({
+		this.group.set({
 			endDate: {
 				__type: "Date",
 				iso: moment($('.date-changer').val(), "MM/DD/YY").toISOString()
 			}
 		});
 
-		this.groupUpdate.save({
+		this.group.save({
 			success: function(group) {
 				$('.save-dates').hide();
 				$('.change-group-dates').show().css('display','inline-block');
@@ -240,9 +243,11 @@ var GroupView = Parse.View.extend({
 		$("header").addClass('non-print');
 		$(".group-view-location-banner").removeClass('h1-flag');
 		$(".group-view-options").css('opacity', 0);
+		$(".group-summary-info").css('background', '#FFF');
 
 		window.print();
 
+		$(".group-summary-info").css('background', '#DDD');
 		$(".group-view-location-banner").addClass('h1-flag');
 		$(".group-view-options").css('opacity', 1);
 		$("header").removeClass('non-print');
