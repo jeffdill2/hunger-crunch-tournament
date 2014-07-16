@@ -3,8 +3,9 @@
 var PlayerView = Parse.View.extend({
 
 	events: {
-		'click .breadcrumb-back'	: 'goBack',
-		'click .print-button'		: 'print'
+		'click .breadcrumb-back'		: 	'goBack',
+		'click .print-button'			: 	'print',
+		'click .remove-player-button'	: 	'removePlayer',
 	},
 
 	template: _.template($('.player-view').text()),
@@ -14,7 +15,6 @@ var PlayerView = Parse.View.extend({
 	initialize: function(options) {
 		$('.app-container').append(this.el);
 
-		this.render();
 		this.playerInfo = options;
 
 		var player = options.playerID;
@@ -35,14 +35,18 @@ var PlayerView = Parse.View.extend({
 	getPlayerScores: function() {
 		var scores = [];
 		var that = this;
-		var query = new Parse.Query(strScores);
 
-		query.include('user');
-		query.include('tntGrp');
-		query.equalTo('OIID', this.playerInfo.playerID);
+		this.query = new Parse.Query(strScores);
+		this.query.include('user');
+		this.query.include('tntGrp');
+		this.query.equalTo('OIID', this.playerInfo.playerID);
 
-		query.find({
+		this.query.find({
 			success: function(events) {
+				// sets gives the group name to this.options so that it can be rendered
+				that.options.groupName = events[0].get('tntGrp').get('name');
+				that.render();
+
 				events.forEach(function(event) {
 					if (scores.length <= 0) {
 						scores.push(event);
@@ -151,5 +155,23 @@ var PlayerView = Parse.View.extend({
 		$(".player-view-nav").css('opacity', 1);
 		$("button").css('opacity', 1);
 		$("header").removeClass('non-print');
+	},
+
+	removePlayer: function() {
+		if (confirm('Are you sure you want to delete ' + this.playerInfo.playerID +' from the group? This action can not be undone.')) {
+    		this.query.find({
+    			success: function(results) {
+    				results.forEach(function(result) {
+    					result.set('tntGrp', null);
+    					result.save();
+
+    					history.back();
+    				});
+    			},
+    			error: function(error) {
+    				console.log(error);
+    			}
+    		});
+		}
 	}
 });

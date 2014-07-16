@@ -24,8 +24,8 @@ var CompareGroupsView = Parse.View.extend({
 			this.groupsToAdd = [];
 			this.groupsToCompare = [];
 
-			$('.sort').click(function () {
-				$(this).toggleClass('sorted')
+			$('.sort').click(function() {
+				$(this).toggleClass('sorted');
 			});
 		} else {
 			this.signIn();
@@ -43,7 +43,7 @@ var CompareGroupsView = Parse.View.extend({
 			valueNames: ['compare-group-name', 'compare-minions-data', 'compare-coins-data', 'compare-meals-data']
 		};
 
-		var userTable = new List('compare-groups-table', options)
+		var userTable = new List('compare-groups-table', options);
 	},
 
 	groupList: function() {
@@ -51,7 +51,7 @@ var CompareGroupsView = Parse.View.extend({
 			valueNames: ['compare-group-name-search', 'valid']
 		};
 
-		var userList = new List('avaialble-group-names', options)
+		var userList = new List('avaialble-group-names', options);
 	},
 
 	getAvailableGroups: function() {
@@ -59,7 +59,8 @@ var CompareGroupsView = Parse.View.extend({
 		var query = new Parse.Query(strGroups);
 
 		// checking for group objects made by the current user
-		query.equalTo("orgName", Parse.User.current().attributes.username);
+		query.include('user');
+		query.equalTo("user", Parse.User.current());
 
 		query.find({
 			success: function(groups) {
@@ -68,7 +69,8 @@ var CompareGroupsView = Parse.View.extend({
 				groups.forEach(function(groupTotals) {
 					var query = new Parse.Query(strGroupTotals);
 
-					query.equalTo("groupID", groupTotals.attributes.groupID);
+					query.include("groupID");
+					query.equalTo("groupID", groupTotals);
 
 					query.find({
 						success: function(group) {
@@ -102,9 +104,15 @@ var CompareGroupsView = Parse.View.extend({
 
 		var that = this;
 
-		this.groupsToAdd.forEach(function(groupNames) {
-			$('.add-list').append(addListTemplate(groupNames.attributes));
-		});
+		if (this.groupsToAdd.length <= 0) {
+			var placeholderTemplate = _.template($('.placeholder-view').text());
+
+			$('.add-list').html(placeholderTemplate());
+		} else {
+			this.groupsToAdd.forEach(function(groupNames) {
+				$('.add-list').append(addListTemplate(groupNames.attributes));
+			});
+		}
 
 		this.groupList();
 	},
@@ -126,12 +134,12 @@ var CompareGroupsView = Parse.View.extend({
 		var groupArr = this.groupsToAdd;
 
 		var addedGroup = _.find(groupArr, function(group) {
-			return group.get('groupName') === addName;
+			return group.get('groupID').get('name') === addName;
 		});
 
 		this.groupsToAdd = groupArr
 			.filter(function(el) {
-				return el.get('groupName') !== addName;
+				return el.get('groupID').get('name') !== addName;
 			});
 
 		this.groupsToCompare.push(addedGroup);
@@ -144,12 +152,12 @@ var CompareGroupsView = Parse.View.extend({
 		var removeArr = this.groupsToCompare;
 
 		var removedGroup = _.find(removeArr, function(group) {
-			return group.get('groupName') === removeName;
+			return group.get('groupID').get('name') === removeName;
 		});
 
 		this.groupsToCompare = removeArr
 			.filter(function(el) {
-				return el.get('groupName') !== removeName;
+				return el.get('groupID').get('name') !== removeName;
 			});
 
 		this.groupsToAdd.push(removedGroup);

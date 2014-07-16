@@ -64,27 +64,18 @@ var DashboardView = Parse.View.extend ({
 								stopLoadingAnimation();
 							},
 							error: function(error) {
-								console.log(error);
-
 								stopLoadingAnimation();
+
+								console.log(error);
 							}
 						});
 					});
 				} else {
-					// if no groups are found (new account), render placeholder data
-					var placeHolder = {
-						name: "Your Group Name",
-						groupID: "a1b2c",
-						minions: 0,
-						coins: 0
-					};
-
 					// append template into DOM, remove the underling on the Groupname and remove the click event from the view
-					$('.dashboard-group-content').append(renderedTemplate(placeHolder));
-					$('.groupname-and-code h2').css({'text-decoration':'none', 'cursor':'default'});
+					var placeholderTemplate = _.template($('.placeholder-view').text());
+					$('.dashboard-group-content').html(placeholderTemplate());
 
-					delete that.events['click .dashboard-group'];
-					that.delegateEvents(this.events);
+					stopLoadingAnimation();
 				}
 			},
 			error: function(error) {
