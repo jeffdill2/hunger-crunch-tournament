@@ -88,7 +88,7 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	compareGroupsNav: function() {
-		router.navigate('/#tournament/dashboa¡rd/compare-groups', {trigger: true});
+		router.navigate('/#tournament/dashboard/compare-groups', {trigger: true});
 	},
 
 	groupNav: function(location) {

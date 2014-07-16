@@ -240,9 +240,11 @@ var GroupView = Parse.View.extend({
 		$("header").addClass('non-print');
 		$(".group-view-location-banner").removeClass('h1-flag');
 		$(".group-view-options").css('opacity', 0);
+		$(".group-summary-info").css('background', '#FFF');
 
 		window.print();
 
+		$(".group-summary-info").css('background', '#DDD');
 		$(".group-view-location-banner").addClass('h1-flag');
 		$(".group-view-options").css('opacity', 1);
 		$("header").removeClass('non-print');
