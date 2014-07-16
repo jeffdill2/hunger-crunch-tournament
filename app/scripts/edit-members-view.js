@@ -34,7 +34,7 @@ var EditMemberView = Parse.View.extend({
 
 	getGroup: function () {
 		// does not work if multiple groups with same group name
-		var query = new Parse.Query("TntGroup");
+		var query = new Parse.Query(strGroups);
 		query.include("user");
 		query.equalTo("groupCode", this.group.groupId);
 		// console.log(this.group);
@@ -63,14 +63,14 @@ var EditMemberView = Parse.View.extend({
 
 	getPlayers: function() {
 		// console.log(this.group)
-		var query = new Parse.Query('TntScore');
+		var query = new Parse.Query(strScores);
 		query.include('tntGrp.attributes.user');
 		query.include('user');
 		query.equalTo("tntGrp", this.group);
 
 		// console.log(this.group.attributes)
 		var that = this;
-		var collectQuery = new Parse.Query('TntCollectibles');
+		var collectQuery = new Parse.Query(strCollectibles);
 		collectQuery.include('user');
 		collectQuery.include('tntGrp');
 		collectQuery.find({
@@ -158,7 +158,7 @@ var EditMemberView = Parse.View.extend({
 
 		if (confirm('Are you sure you want to delete ' + removeName +' from the group? This action can not be undone.')) {
     			// Save it!
-    			var query = new Parse.Query('TntScore');
+    			var query = new Parse.Query(strScores);
     			query.include('tntGrp');
     			query.include('user');
 

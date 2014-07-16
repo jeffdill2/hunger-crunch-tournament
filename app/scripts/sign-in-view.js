@@ -18,7 +18,6 @@ var SignInView = Parse.View.extend ({
 		$('.app-container').append(this.el);
 
 		this.render();
-		this.enableEnter();
 	},
 
 	render: function() {
