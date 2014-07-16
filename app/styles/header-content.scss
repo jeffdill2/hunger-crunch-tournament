@@ -3,30 +3,32 @@
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// HEADER CONTENT
 ////////////////////////////////////////////////////////////
-
 .header-breadcrumb {
 	color: $colorWhite;
 	font-size: 1.65em;
 	margin-top: 10px;
 	display: inline-block;
+
 	& img {
 		height: 36px;
 		width: 34px;
 		margin-right: 10px;
 		vertical-align: middle;
 	}
+
 	& a:hover {
 		text-decoration: underline;
 	}
 }
 
 .shield-home:hover {
-		text-decoration: underline;
-		cursor: pointer;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .header-content {
 	width: 100%;
+
 	@extend .app-container;
 	@extend .clearfix;
 }
@@ -35,8 +37,9 @@
 	min-height: 25px;
 	float: right;
 	color: $colorWhite;
-	font-family: "proxima-nova", sans-serif;
+	font-family: $fontProximaNova;
 	font-size: 1.1em;
+
 	& p {
 		margin: 0;
 	}
@@ -45,6 +48,7 @@
 .header-username {
 	font-weight: bold;
 }
+
 .nav-container {
 	float: right;
 	clear: right;
@@ -77,6 +81,7 @@
 	border-radius: 100px 100px 0 0;
 	background: $colorWhite;
 	text-align: center;
+
 	& img {
 		height: 77px;
 		width: 88px;
