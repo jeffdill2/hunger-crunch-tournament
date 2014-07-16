@@ -7,27 +7,27 @@ var CompareGroupsView = Parse.View.extend({
 	//empty array that will be filled by the objects pulled from parse in this.displayAvailableGroups
 
 	events: {
-		'click .table-footer'				: 'displayAvailableGroups',
-		'click .compare-group-item'			: 'addGroup',
-		'click .remove-group-button'		: 'removeGroup',
-		'click .print'						: 'printTable'
+		'click .table-footer'			: 'displayAvailableGroups',
+		'click .compare-group-item'		: 'addGroup',
+		'click .remove-group-button'	: 'removeGroup',
+		'click .print'					: 'printTable'
 	},
 
 	initialize: function(options) {
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
+
 			this.getAvailableGroups();
 			this.render();
+
 			// make sure arrays are empty on view call
 			this.groupsToAdd = [];
 			this.groupsToCompare = [];
 
-			$('.sort').click(function () {
-				$(this).toggleClass('sorted')
-			})
-
-		} 
-		else {
+			$('.sort').click(function() {
+				$(this).toggleClass('sorted');
+			});
+		} else {
 			this.signIn();
 		}
 	},
@@ -42,39 +42,40 @@ var CompareGroupsView = Parse.View.extend({
 		var options = {
 			valueNames: ['compare-group-name', 'compare-minions-data', 'compare-coins-data', 'compare-meals-data']
 		};
-		var userTable = new List('compare-groups-table', options)
+
+		var userTable = new List('compare-groups-table', options);
 	},
 
 	groupList: function() {
 		var options = {
 			valueNames: ['compare-group-name-search', 'valid']
 		};
-		var userList = new List('avaialble-group-names', options)
+
+		var userList = new List('avaialble-group-names', options);
 	},
 
 	getAvailableGroups: function() {
 		var that = this;
+		var query = new Parse.Query(strGroups);
 
-		var TntGroup = Parse.Object.extend("TntGroup");
-		var query = new Parse.Query(TntGroup);
 		// checking for group objects made by the current user
 		query.include('user');
 		query.equalTo("user", Parse.User.current());
+
 		query.find({
 			success: function(groups) {
 				var i = 0;
 
-				// console.log(groups)
 				groups.forEach(function(groupTotals) {
+					var query = new Parse.Query(strGroupTotals);
 
-					var TntGroupTotals = Parse.Object.extend("TntGroupTotals");
-					var query = new Parse.Query(TntGroupTotals);
 					query.include("groupID");
 					query.equalTo("groupID", groupTotals);
+
 					query.find({
 						success: function(group) {
-							console.log(group)
 							that.groupsToAdd.push(group);
+
 							// if all group arrays have been pushed to the this.groupsToAdd array, run a map to turn them into objects
 							i >= groups.length - 1 ? that.groupsToAdd = that.groupsToAdd.map(function(obj) {
 								return obj[0]
@@ -85,37 +86,35 @@ var CompareGroupsView = Parse.View.extend({
 						}
 					});
 				})
-
 			},
 			error: function(error) {
-				// body...
-				console.log(error)
+				console.log(error);
 			}
 		});
-
 	},
 
 	displayAvailableGroups: function() {
 		var addListTemplate = _.template($('.compare-groups-added-group-template').text());
-		$('#avaialble-group-names').html(' ');
 
+		$('#avaialble-group-names').html(' ');
 		$('tr').last().css('border-bottom', 'none');
+
 		var renderedTemplate = this.addGroupTemplate();
 		$('table').after(renderedTemplate);
-		var that = this;
-		if(this.groupsToAdd.length <= 0){
-			var placeholderTemplate = _.template($('.placeholder-view').text());
-			$('.add-list').html(placeholderTemplate());
-		}else{
 
-			console.log(this.groupsToAdd)
+		var that = this;
+
+		if (this.groupsToAdd.length <= 0) {
+			var placeholderTemplate = _.template($('.placeholder-view').text());
+
+			$('.add-list').html(placeholderTemplate());
+		} else {
 			this.groupsToAdd.forEach(function(groupNames) {
-				console.log(groupNames.attributes)
 				$('.add-list').append(addListTemplate(groupNames.attributes));
-			})
-			this.groupList();
+			});
 		}
 
+		this.groupList();
 	},
 
 	displayCompareGroups: function() {
@@ -124,23 +123,20 @@ var CompareGroupsView = Parse.View.extend({
 		$('.compare-list').html(' ');
 
 		this.groupsToCompare.forEach(function(groupNames) {
-			console.log(groupNames)
 			$('.compare-list').append(renderedTemplate(groupNames.attributes));
-		})
+		});
 
 		this.tableSort();
-
 	},
-
 
 	addGroup: function(location) {
 		var addName = location.currentTarget.children.item("h3").innerHTML;
 		var groupArr = this.groupsToAdd;
 
 		var addedGroup = _.find(groupArr, function(group) {
-			console.log(group)
 			return group.get('groupID').get('name') === addName;
-		})
+		});
+
 		this.groupsToAdd = groupArr
 			.filter(function(el) {
 				return el.get('groupID').get('name') !== addName;
@@ -149,7 +145,6 @@ var CompareGroupsView = Parse.View.extend({
 		this.groupsToCompare.push(addedGroup);
 		this.displayCompareGroups();
 		this.displayAvailableGroups();
-
 	},
 
 	removeGroup: function(location) {
@@ -158,35 +153,35 @@ var CompareGroupsView = Parse.View.extend({
 
 		var removedGroup = _.find(removeArr, function(group) {
 			return group.get('groupID').get('name') === removeName;
-		})
+		});
+
 		this.groupsToCompare = removeArr
 			.filter(function(el) {
 				return el.get('groupID').get('name') !== removeName;
-			})
+			});
 
 		this.groupsToAdd.push(removedGroup);
 		this.displayCompareGroups();
 		this.displayAvailableGroups();
-
 	},
 
-	printTable: function () {
-			$("header").addClass('non-print')
-			$(".compare-groups-header-content").addClass('non-print')
-			$(".compare-groups-content tfoot").addClass('non-print')
-			$(".compare-groups-content button").addClass('non-print')
-			$("#avaialble-group-names").addClass('non-print')
+	printTable: function() {
+		$("header").addClass('non-print');
+		$(".compare-groups-header-content").addClass('non-print');
+		$(".compare-groups-content tfoot").addClass('non-print');
+		$(".compare-groups-content button").addClass('non-print');
+		$("#avaialble-group-names").addClass('non-print');
 
-			window.print();
-			
-			$("header").removeClass('non-print')
-			$(".compare-groups-header-content").removeClass('non-print')
-			$(".compare-groups-content tfoot").removeClass('non-print')
-			$(".compare-groups-content button").removeClass('non-print')
-			$("#avaialble-group-names").removeClass('non-print')
+		window.print();
+
+		$("header").removeClass('non-print');
+		$(".compare-groups-header-content").removeClass('non-print');
+		$(".compare-groups-content tfoot").removeClass('non-print');
+		$(".compare-groups-content button").removeClass('non-print');
+		$("#avaialble-group-names").removeClass('non-print');
 	},
 
-	signIn:function () {
+	signIn: function() {
 		this.remove();
 		router.navigate('/#tournament/sign-in');
 	}

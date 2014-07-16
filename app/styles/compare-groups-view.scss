@@ -4,22 +4,25 @@
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////// COMPARE GROUPS VIEW
 ////////////////////////////////////////////////////////////
-
 .compare-groups-header-content {
 	@include content-header;
 	@extend .clearfix;
+
 	border-bottom: 1px solid $colorLightGray;
 	width: 93.5%;
 }
+
 .compare-groups-content-container {
 	width: 93.5%;
 	margin: 0 auto;
 	padding: 30px 0;
 }
+
 .compare-groups-content {
 	color: $colorTextDarkGray;
 	width: 90%;
 	margin: 0 auto;
+
 	& ul {
 		min-height: 400px;
 	}
@@ -27,6 +30,7 @@
 	& td:first-child {
 		width: 20%;
 	}
+
 	& tbody td:first-child {
 		text-align: left;
 	}
@@ -56,7 +60,6 @@
 		right: 5px;
 		top: 50%;
 		margin-top: -2px;
-
 	}
 }
 
@@ -68,46 +71,49 @@
 
 .print {
 	@extend .angle-button-teal;
+
 	float: right;
-	margin:20px 20px 0;
+	margin: 20px 20px 0;
 	padding: 3px 10px;
 	cursor: pointer;
 }
 
 .list {
-  font-family: 'cubano', sans-serif;
-  margin:0;
-  padding:20px 0 0;
+	font-family: $fontCubano;
+	margin: 0;
+	padding: 20px 0 0;
 }
+
 .list > li {
-  display:block;
-  background-color: #eee;
-  margin-bottom: 10px;
-  padding:10px;
-  box-shadow: inset 0 1px 0 #fff;
+	display: block;
+	background-color: $colorOffWhite;
+	margin-bottom: 10px;
+	padding: 10px;
+	box-shadow: inset 0 1px 0 $colorWhite;
 
-  &:hover {
-  	cursor: pointer;
-  	opacity: 0.7;
-  }
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+	}
 }
-.compare-groups-add-group-template {
 
+.compare-groups-add-group-template {
 	& h3 {
-	  font-size: 16px;
-	  margin:0 0 0.3rem;
-	  font-weight: normal;
-	  font-weight:bold;
+		font-size: 16px;
+		margin: 0 0 0.3rem;
+		font-weight: normal;
+		font-weight: bold;
 	}
 
 	& input {
-	  border:solid 1px #ccc;
-	  border-radius: 5px;
-	  padding:7px 14px;
-	  margin-bottom:10px
+		border: solid 1px $colorFogGray;
+		border-radius: 5px;
+		padding: 7px 14px;
+		margin-bottom: 10px
 	}
+
 	& input:focus {
-	  outline:none;
-	  border-color:#aaa;
+		outline: none;
+		border-color: $colorStoneGray;
 	}
 }

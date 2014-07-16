@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////// NEW GROUP CODE VIEW
 ////////////////////////////////////////////////////////////
-
 .group-created-header-container{
 	text-align: center;
 }
@@ -27,19 +26,21 @@
 .player-instructions {
 	margin: 0 auto;
 	color: $colorCharcoal;
+
 	& p {
 		font-size: 1.2em;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 	}
 }
 
 .group-code-box {
 	width: 180px;
 	margin: 0 auto;
-	font-family: "proxima-nova", sans-serif;
+	font-family: $fontProximaNova;
 	background: $colorWhite;
 	color: $colorCharcoal;
 	padding: 5px;
+
 	& input {
 		font-size: 2.5em;
 		width: 100%;
@@ -50,13 +51,15 @@
 
 .instruction-images {
 	@extend .clearfix;
+
 	width: 870px;
 	margin: 60px auto;
 }
 
-.instruction-image-one, 
+.instruction-image-one,
 .instruction-image-two {
 	float: left;
+
 	& img {
 		height: 225px;
 		width: 400px;
@@ -82,11 +85,11 @@
 .observer-instructions {
 	border-top: 1px solid $colorCharcoal;
 	padding: 25px;
-
 	color: $colorCharcoal;
+
 	& p {
 		font-size: 1.2em;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 	}
 }
 
@@ -103,7 +106,7 @@
 		width: 100%;
 		text-align: right;
 		border: none;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 		font-size: 1.1em;
 	}
 }

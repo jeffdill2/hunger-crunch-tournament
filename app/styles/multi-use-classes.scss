@@ -4,7 +4,6 @@
 ////////////////////////////////////////// MULTI-USE CLASSES
 ////////////////////////////////////////////////////////////
 
-
 // container for all content besides the header to maintain better white space and aesthetic.
 .app-container {
 	max-width: 1150px;
@@ -16,9 +15,11 @@
   width: 9px;
   height: 16px;
 }
+
 .arrow-2 path {
   fill: white;
 }
+
 // banner breadcrumb sizing and underline on hover
 .breadcrumb-back {
 	font-size: 0.65em;
@@ -38,11 +39,10 @@
 	background-repeat: repeat-x;
 	border: none;
 	display: inline-block;
-	// margin-left: 30px;
-	color: #fff;
+	color: $colorWhite;
 	font-style: italic;
 
-	&:before, 
+	&:before,
 	&:after {
 		content: '';
 		position: absolute;
@@ -57,6 +57,7 @@
 		width: 11px;
 		left: -10px;
 	}
+
 	&:after {
 		background-image: url('../images/angle-button-teal-right.png');
 		width: 16px;
@@ -73,12 +74,13 @@
 	border-radius: 6px;
 	background: $colorCharcoal;
 	color: $colorWhite;
-	font-family: "cubano", sans-serif;
+	font-family: $fontCubano;
 	font-size: 1.5em;
 	cursor: pointer;
+	border: none;
 	box-shadow: inset 0 	-5px 	0   	darken($colorCharcoal, 10%),
 					  1px 	2px 	1px 0 	darken($colorCharcoal, 25%);
-	border: none;
+
 	&:hover {
 		margin-top: 23px;
 		padding-bottom: 4px;
@@ -103,7 +105,6 @@
 
 // clearfix
 .clearfix {
-
 	&:after {
 		content: " ";
 		display: block;
@@ -117,7 +118,7 @@
 	min-width: 250px;
 	display: inline-block;
 	background: $colorCoral;
-	color: #fff;
+	color: $colorWhite;
 	height: 60px;
 	line-height: 60px;
 	position: relative;
@@ -125,24 +126,25 @@
 	font-size: 2.75em;
 	cursor: default;
 	text-align: center;
-}
 
-.h1-flag:after {
-	content: '';
-	display: block;
-	position: absolute;
-	height: 0;
-	border-top: 30px solid $colorCoral;
-	border-bottom: 30px solid $colorCoral;
-	border-right: 15px solid transparent;
-	right: -15px;
-	top: 0;
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		height: 0;
+		border-top: 30px solid $colorCoral;
+		border-bottom: 30px solid $colorCoral;
+		border-right: 15px solid transparent;
+		right: -15px;
+		top: 0;
+	}
 }
 
 // class added to container elements to hide unnecessary elements when printing
 .non-print {
 	display: none !important;
 }
+
 // class added after document has been queued for printing or print has been cancelled to return it to normal
 .printable {
 	display: block !important;
@@ -192,6 +194,7 @@
     vertical-align: middle;
     z-index: 1001;
 }
+
 ////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////// MIXINS
 ////////////////////////////////////////////////////////////

@@ -19,6 +19,6 @@ function stopLoadingAnimation() {
 	$('.loading-spinner-focus').fadeOut();
 }
 
-$('.shield-home').click(function () {
+$('.shield-home').click(function() {
 	router.navigate('/#tournament', {trigger: true});
 });

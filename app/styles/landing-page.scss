@@ -18,14 +18,13 @@
 
 	& strong {
 		color: $colorTextDarkGray;
-		// letter-spacing: 0.05em;
 		font-size: 1.5em;
 	}
 
 	& p {
 		color: $colorTextDarkGray;
 		font-size: 1.2em;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 	}
 }
 
@@ -57,7 +56,6 @@
 		}
 	}
 }
-
 
 .sign-up-button-container {
 	margin: 45px auto;
@@ -113,10 +111,12 @@
 
 	& .full-counter {
 		@extend .clearfix;
+
 		list-style: none;
 		width: 100%;
 		padding: 0;
 		margin: 0;
+
 		& span {
 			float: left;
 			line-height: 1.7;
@@ -124,6 +124,7 @@
 			margin: 0 4px 0 0;
 			color: $colorCharcoalDark;
 		}
+
 		& .counter-cards {
 			float: left;
 			margin: 0 5px 0 0;
@@ -140,7 +141,7 @@
 			text-shadow: 1px 1px darken($colorCharcoalDark, 15%);
 			box-shadow: 2px 2px 1px 0 darken($colorCharcoalDark, 15%);
 
-			&:before, 
+			&:before,
 			&:after {
 				position: absolute;
 				content: '';

@@ -1,12 +1,12 @@
 "use strict";
-	
+
 var AppRouter = Parse.Router.extend({
 
 	routes: {
 		''											: 'home',
 		'tournament'								: 'home',
 		'tournament/sign-in'						: 'signInView',
-		'tournament/sign-in/pass-reset'				: 'passReset', 
+		'tournament/sign-in/pass-reset'				: 'passReset',
 		'tournament/sign-up'						: 'signUpView',
 		'tournament/group/:groupID' 				: 'groupView',
 		'tournament/group/:groupID/edit-members' 	: 'editMemberView',
@@ -39,7 +39,6 @@ var AppRouter = Parse.Router.extend({
 	passReset: function() {
 		this.swap( new PassResetView() );
 	},
-
 
 	dashboardView: function() {
 		this.swap( new DashboardView() );
@@ -90,7 +89,7 @@ var AppRouter = Parse.Router.extend({
 	groupViewCodeView: function (groupID, groupCode) {
 		this.swap( new GroupCodeView({'group': groupID, 'code': groupCode}));
 	},
-	
+
 	swap: function (view) {
 		this.navCheck();
 
