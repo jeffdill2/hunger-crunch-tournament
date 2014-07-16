@@ -35,31 +35,43 @@
 	position: relative;
 	height: 33px;
 	background-image: url('../images/angle-button-teal-middle.png');
-	background-size: contain;
 	background-repeat: repeat-x;
 	border: none;
 	display: inline-block;
 	color: $colorWhite;
 	font-style: italic;
+	vertical-align: bottom;
+	padding: 5px 10px;
 
-	&:before,
+	&:active {
+		background-position: 0 -34px;
+		line-height: 30px;
+		padding-left: 12px;
+		padding-right: 8px;
+		&:before {
+			background-position: 0 -34px;
+		}
+		&:after {
+			background-position: -17px -34px;
+		}
+	}
+	&:before, 
 	&:after {
 		content: '';
 		position: absolute;
-		background-size: contain;
 		background-repeat: no-repeat;
 		height: 33px;
 		top: 0;
+		background-image: url('../images/angle-button-teal-ends.png');
 	}
 
 	&:before {
-		background-image: url('../images/angle-button-teal-left.png');
-		width: 11px;
-		left: -10px;
+		width: 12px;
+		left: -12px;
 	}
 
 	&:after {
-		background-image: url('../images/angle-button-teal-right.png');
+		background-position: -17px 0;
 		width: 16px;
 		right: -15px;
 	}
@@ -150,8 +162,11 @@
 	display: block !important;
 }
 
-.sort svg{
-	transform: rotate(90deg)
+.sort {
+	cursor: pointer; 
+	& svg{
+		transform: rotate(90deg)
+	}
 }
 
 .sort path {

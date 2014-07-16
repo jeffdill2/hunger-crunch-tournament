@@ -63,10 +63,9 @@
 
 	& .sign-up-button {
 		width: 250px;
-		height: 75px;
-		line-height: 65px;
-		background-image: url('../images/angle-button-teal-middle.png');
-		background-size: contain;
+		height: 58px;
+		line-height: 48px;
+		background-image: url('../images/angle-button-large-teal-middle.png');
 		background-repeat: repeat-x;
 		position: relative;
 		color: $colorWhite;
@@ -76,31 +75,42 @@
 		text-shadow: 1px 1px darken($colorButtonTeal, 10%);
 		margin: 0 auto;
 
-		&:hover {
+		&:active {
 			cursor: pointer;
+			background-position: 0 -58px;
+			line-height: 62px;
+			padding-left: 12px;
+
+			&:before {
+				background-position: 0 -58px;
+			}
+			&:after {
+				background-position: -25px -58px;
+			}
+			& span {
+			}
 		}
 	}
 
-	.sign-up-button:before,
-	.sign-up-button:after {
+	&:before,
+	&:after {
 		content: '';
 		position: absolute;
-		background-size: cover;
 		background-repeat: no-repeat;
-		height: 75px;
+		height: 58px;
 		top: 0;
+		background-image: url('../images/angle-button-large-teal-ends.png');
 	}
 
-	.sign-up-button:before {
-		width: 25px;
-		left: -25px;
-		background-image: url('../images/angle-button-teal-left.png');
+	&:before {
+		width: 30px;
+		left: -30px;
 	}
 
-	.sign-up-button:after {
-		background-image: url('../images/angle-button-teal-right.png');
-		width: 36px;
-		right: -35px;
+	&:after {
+		background-position: -25px 0;
+		width: 40px;
+		right: -40px;
 	}
 }
 

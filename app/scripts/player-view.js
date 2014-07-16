@@ -149,9 +149,11 @@ var PlayerView = Parse.View.extend({
 		$(".player-view-location-banner").removeClass('h1-flag');
 		$(".player-view-nav").css('opacity', 0);
 		$("button").css('opacity', 0);
+		$("img").hide();
 
 		window.print();
 
+		$("img").show();
 		$(".player-view-location-banner").addClass('h1-flag');
 		$(".player-view-nav").css('opacity', 1);
 		$("button").css('opacity', 1);
