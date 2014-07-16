@@ -237,6 +237,7 @@
                 <button class="button forgot-password-button">Forgot Password?</button>
             </div>
         </script>
+
         <!-- reset password login screen view -->
          <script type="text/template" class="reset-password-view-template">
             <div class="password-reset-view-header">
@@ -298,7 +299,7 @@
                             <li><%=players === 1 ? players+" Member" : players+" Members" %></li>
                         </ul>
                         <ul class="group-view-options">
-                            <% if (Parse.User.current()) { %>
+                            <% if (Parse.User.current() && user.id == Parse.User.current().id) { %>
                                 <li class="share-code">Share Group</li>
                                 <li class="edit-group-members">EDIT MEMBERS</li>
                                 <li class="save-dates">SAVE DATES?</li>
@@ -421,7 +422,7 @@
                     <div class="group-summary-container">
                         <img class="meals-image" src="../images/bowl.png"></img>
                         <div class="group-summary-stats">
-                            <h1>0</h1>
+                            <h1><%= meals %></h1>
                             <h4>MEALS PROVIDED</h4>
                         </div>
                     </div>
@@ -462,7 +463,7 @@
                     <%=(playerID.length > 12) ? playerID.substring(0,12)+"..." : playerID%>
                     </div>
                     <ul class="player-view-nav">
-                    <% if (Parse.User.current()) { %>
+                    <% if (Parse.User.current() && userID == Parse.User.current().id) { %>
                         <li class="remove-player-button">REMOVE MEMBER</li>
                         <li class="print-button">print</li>
 
@@ -641,7 +642,7 @@
                         </div>
                         <div class="group-meals-provided">
                             <img class="meals-image" src="../images/bowl.png"></img>
-                            <h2 class="meals-stat">0</h2>
+                            <h2 class="meals-stat"><%= meals %></h2>
 
                         </div>
                     </div>
@@ -651,11 +652,8 @@
 
         <!-- template for no available groups placeholder view -->
         <script type="text/template" class="placeholder-view">
-           
                 <h1>Hello There!</h1>
-                <h2>It looks like you dont currently have any groups to show. If you haven&#39t already, go ahead and click on the create groups button. If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>
-            
-
+                <h2>It looks like you dont currently have any groups to show. If you haven&#39t already, go ahead and click on the create groups button. If you have recently made a group, it can take five to ten minutes to grab the information, so check back soon. Good luck crunching hunger!</h2>   
         </script>
 
         <!-- template for the settings view -->
@@ -971,6 +969,125 @@
             </tr>
         </script>
 
+        <!-- template for the edit members view -->
+        <script type="text/template" class="edit-members-view">
+            <div class="compare-groups-header-content">
+                <div class="compare-groups-location-banner h1-flag">EDIT MEMBERS</div>
+                
+            </div>
+            <div class="compare-groups-content-container">
+                <div class="compare-groups-content" id="compare-groups-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <button class="sort" data-sort="compare-group-name">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <span>PLAYER NAME</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="compare-minions-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                                    <span>MINIONS STOMPED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="compare-coins-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <img class="coins-image" src="../images/coin-stack.png"></img>
+                                    <span>COINS COLLECTED</span>
+                                </td>
+                                <td>
+                                    <button class="sort" data-sort="compare-meals-data">
+                                        <svg
+                                            version="1.1"
+                                            class="arrow-2"
+                                            id="Layer_1"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px"
+                                            viewBox="0 0 7.7 16.2"
+                                            enable-background="new 0 0 7.7 16.2"
+                                            xml:space="preserve">
+                                            <g>
+                                            <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                                            c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                                            </g>
+                                        </svg>
+                                    </button>
+                                    <img class="meals-image" src="../images/bowl.png"></img>
+                                    <span>MEALS PROVIDED</span>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody class="list compare-list">
+                        <!-- place where player group totals will be appended -->
+                        </tbody>
+                        <tfoot>
+                            
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </script>
+        <!-- template for adding in members of the group -->
+        <script type="text/template" class="edit-members-template">
+            <tr <%= (OIID.length > 15 ? 'title="' + OIID + '"' : "") %>>
+                <td class="compare-group-name">
+                    <button class="remove-group-button"><%= OIID %></button>
+                    <%= OIID.substring(0, 15) + (OIID.length > 15 ? "..." : "") %>
+                </td>
+                <td class="compare-minions-data"><%= minionsStomped %></td>
+                <td class="compare-coins-data"><%= coinsCollected %></td>
+                <td class="compare-meals-data">14</td>
+            </tr>
+        </script>
+
         <!-- template for adding a group to the compare groups view -->
         <script type="text/template" class="compare-groups-add-group-template">
 
@@ -1044,6 +1161,7 @@
         <script src="scripts/create-group-view.js"></script>
         <script src="scripts/compare-groups-view.js"></script>
         <script src="scripts/group-view.js"></script>
+        <script src="scripts/edit-members-view.js"></script>
         <script src="scripts/player-view.js"></script>
         <script src="scripts/app-router.js"></script>
         <script src="scripts/main.js"></script>

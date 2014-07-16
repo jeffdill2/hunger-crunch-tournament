@@ -14,7 +14,6 @@ var PlayerView = Parse.View.extend({
 
 	initialize: function(options) {
 		$('.app-container').append(this.el);
-
 		this.playerInfo = options;
 
 		var player = options.playerID;
@@ -28,6 +27,7 @@ var PlayerView = Parse.View.extend({
 	},
 
 	render: function() {
+		console.log(this.options)
 		var renderedTemplate = this.template(this.options);
 		this.$el.html(renderedTemplate);
 	},
@@ -45,6 +45,7 @@ var PlayerView = Parse.View.extend({
 			success: function(events) {
 				// sets gives the group name to this.options so that it can be rendered
 				that.options.groupName = events[0].get('tntGrp').get('name');
+				that.options.userID = events[0].get('tntGrp').get('user').id;
 				that.render();
 
 				events.forEach(function(event) {
