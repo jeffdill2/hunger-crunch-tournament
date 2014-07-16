@@ -9,7 +9,8 @@ var GroupView = Parse.View.extend({
 		'click .print-button'		: 'print',
 		'click .player-name' 		: 'playerNav',
 		'click .share-code'			: 'viewCode',
-		'click .print-button'		: 'print'
+		'click .print-button'		: 'print',
+		'click .edit-group-members'	: 'editMembersNav',
 	},
 
 	className: 'group-view-container',
@@ -23,6 +24,7 @@ var GroupView = Parse.View.extend({
 	},
 
 	render: function() {
+
 		// called in the success inside getGroupTotals
 		var renderedTemplate = this.template(this.group.attributes);
 		this.$el.html(renderedTemplate);
@@ -104,7 +106,7 @@ var GroupView = Parse.View.extend({
 		var query = new Parse.Query(strScores);
 		var collectQuery = new Parse.Query(strCollectibles);
 
-		query.include('tntGrp');
+		query.include('tntGrp.attributes.user');
 		query.include('user');
 		query.equalTo("tntGrp", this.group);
 
@@ -112,6 +114,7 @@ var GroupView = Parse.View.extend({
 		collectQuery.include('tntGrp');
 
 		collectQuery.find({
+
 			success: function(results) {
 				that.collectiblesArr = results;
 
@@ -119,36 +122,34 @@ var GroupView = Parse.View.extend({
 					success: function(players) {
 						var grpPlayers = [];
 
-						players.forEach(function(player) {
-							if (grpPlayers.length <= 0) {
-								grpPlayers.push(player);
-							}
+						players.forEach(function (player) {
+								if(grpPlayers.length <= 0){
+									grpPlayers.push(player);
+								} if (grpPlayers.length > 0) {
+									grpPlayers.forEach(function(grpPlayer) {
+										if (grpPlayer.attributes.OIID === player.attributes.OIID) {
+											grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
+											grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
-							if (grpPlayers.length > 0) {
-								grpPlayers.forEach(function(grpPlayer) {
-									if (grpPlayer.attributes.OIID === player.attributes.OIID) {
-										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
-										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
+											that.collectiblesArr.forEach(function(collectible) {
+												if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
+													grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
+												} else {
+													// grpPlayer.attributes.collectibles = 0;
+												}
+											});
+										} else {
+											var result = $.grep(grpPlayers, function(grp) {
+												return grp.attributes.OIID === player.attributes.OIID;
+											});
 
-										that.collectiblesArr.forEach(function(collectible) {
-											if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
-												grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
-											} else {
-												// grpPlayer.attributes.collectibles = 0;
+											if (result.length === 0) {
+												grpPlayers.push(player);
 											}
-										});
-									} else {
-										var result = $.grep(grpPlayers, function(grp) {
-											return grp.attributes.OIID === player.attributes.OIID;
-										});
-
-										if (result.length === 0) {
-											grpPlayers.push(player);
 										}
-									}
-								});
-							}
-						});
+									});
+								}
+							});
 
 						grpPlayers.forEach(function(player) {
 							if (player.attributes.collectibles === undefined) {
@@ -185,6 +186,13 @@ var GroupView = Parse.View.extend({
 		var playerID = location.currentTarget.innerHTML;
 
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/"+ playerID, {trigger: true});
+	}, 
+
+	editMembersNav: function (location) {
+		// will only set playerID if you click on the name itself, and not the row 	
+		var playerID = location.currentTarget.innerHTML;
+		console.log(this.options)
+		router.navigate('/#tournament/group/'+ this.options.groupID +"/edit-members", {trigger: true});
 	},
 
 	// sort function

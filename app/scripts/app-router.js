@@ -10,6 +10,7 @@ var AppRouter = Parse.Router.extend({
 		'tournament/sign-up'						: 'signUpView',
 		'tournament/sign-up/welcome'				: 'welcomeView',
 		'tournament/group/:groupID' 				: 'groupView',
+		'tournament/group/:groupID/edit-members' 	: 'editMemberView',
 		'tournament/group/:groupID/:playerID' 		: 'playerView',
 		'tournament/dashboard' 						: 'dashboardView',
 		'tournament/dashboard/settings'				: 'settingsView',
@@ -46,6 +47,10 @@ var AppRouter = Parse.Router.extend({
 
 	groupView: function (groupID) {
 		this.swap( new GroupView({"groupID": groupID}) );
+	},
+
+	editMemberView: function (groupID) {
+		this.swap( new EditMemberView({"groupId": groupID}) );
 	},
 
 	playerView: function(groupID, playerID) {

@@ -20,7 +20,6 @@ var SignUpView = Parse.View.extend({
 		$('.app-container').html(this.el);
 
 		this.render();
-		this.enableEnter();
 	},
 
 	render: function() {
