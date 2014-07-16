@@ -800,7 +800,7 @@
         <script type="text/template" class="group-view-code-template">
             <div class="group-created-header-container">
                 <div class="group-created-header-content h1-flag">
-                    <%= group %> Group Code
+                    <%= group.length > 17 ? group.substring(0,17)+"..." : group %>
                 </div>
             </div>
             <div class="group-created-main-container">
