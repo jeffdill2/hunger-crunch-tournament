@@ -25,7 +25,7 @@ var DashboardView = Parse.View.extend ({
 
 	render: function() {
 		var renderedTemplate = this.template;
-		this.$el.html(renderedTemplate);
+		this.$el.html(renderedTemplate());
 	},
 
 	getGroups: function() {
@@ -38,7 +38,7 @@ var DashboardView = Parse.View.extend ({
 
 		query.find({
 			success: function(userGroups) {
-				var renderedTemplate = _.template($('.dashboard-group-view-template').text());
+				console.log(userGroups);	
 
 				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup) {
@@ -57,8 +57,8 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
-								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
-
+								
+								that.showGroups(groupTotal[0].attributes);
 								stopLoadingAnimation();
 							},
 							error: function(error) {
@@ -80,6 +80,12 @@ var DashboardView = Parse.View.extend ({
 				stopLoadingAnimation();
 			},
 		})
+	},
+
+	showGroups: function(groupTotal) {
+		var renderedTemplate = _.template($('.dashboard-group-view-template').text());
+		$('.dashboard-group-content').append(renderedTemplate(groupTotal));
+
 	},
 
 	createGroupNav: function() {
