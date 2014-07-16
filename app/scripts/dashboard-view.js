@@ -57,13 +57,17 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
-								
-								that.showGroups(groupTotal[0].attributes);
 								stopLoadingAnimation();
+								if (groupTotal.length > 0) {
+									that.showGroups(groupTotal[0].attributes);
+								}
+								else {
+									var placeholderTemplate = _.template($('.placeholder-view').text());
+									$('.dashboard-group-content').html(placeholderTemplate());
+								}
 							},
 							error: function(error) {
 								stopLoadingAnimation();
-
 								console.log(error);
 							}
 						});
