@@ -6,10 +6,12 @@ var EditMemberView = Parse.View.extend({
 	template: _.template($('.edit-members-view').text()),
 
 	events: {
-		'click .remove-group-button' : 'removePlayer',
+		'click .breadcrumb-back'		: 'goBack',
+		'click .remove-group-button'	: 'removePlayer',
 	},
 
 	initialize: function(options) {
+		console.log(options)
 		this.group = options;
 		this.getGroup();
 
@@ -26,7 +28,7 @@ var EditMemberView = Parse.View.extend({
 	},
 
 	render: function() {
-		var renderedTemplate = this.template();
+		var renderedTemplate = this.template(this.options);
 		this.$el.html(renderedTemplate);
 	},
 
@@ -43,6 +45,7 @@ var EditMemberView = Parse.View.extend({
 				that.group = results;
 				that.groupUpdate = results;
 				that.groupInfo = results.attributes;
+				that.options.name = results.attributes.name
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
 				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
 				that.render();
@@ -180,6 +183,10 @@ var EditMemberView = Parse.View.extend({
 		};
 
 		var userList = new List('avaialble-group-names', options);
+	},
+
+	goBack: function() {
+		router.navigate('/#tournament/group/' + this.options.groupId, {trigger: true});
 	},
 
 	signIn:function() {
