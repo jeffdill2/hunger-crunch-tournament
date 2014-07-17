@@ -3,9 +3,9 @@
 var PlayerView = Parse.View.extend({
 
 	events: {
-		'click .breadcrumb-back'		: 	'goBack',
-		'click .print-button'			: 	'print',
-		'click .remove-player-button'	: 	'removePlayer',
+		'click .breadcrumb-back'		:'goBack',
+		'click .print-button'			:'print',
+		'click .remove-player-button'	:'removePlayer',
 	},
 
 	template: _.template($('.player-view').text()),
@@ -24,7 +24,6 @@ var PlayerView = Parse.View.extend({
 	},
 
 	render: function() {
-		console.log(this.options)
 		var renderedTemplate = this.template(this.options);
 		this.$el.html(renderedTemplate);
 	},
@@ -40,12 +39,13 @@ var PlayerView = Parse.View.extend({
 
 		this.query.find({
 			success: function(events) {
+
 				// sets gives the group name to this.options so that it can be rendered
 				that.options.groupName = events[0].get('tntGrp').get('name');
 				that.options.userID = events[0].get('tntGrp').get('user').id;
 				that.render();
 
-				events.forEach(function(event) {
+				events.forEach(function(event) { ///////
 					if (scores.length <= 0) {
 						scores.push(event);
 					} else if (scores.length > 0) {
@@ -67,7 +67,7 @@ var PlayerView = Parse.View.extend({
 				});
 
 				that.showPlayerScores(scores);
-				that.getPlayerSummary(events);
+				that.getPlayerSummary(scores);
 			},
 			error: function(error) {
 				console.log(error);
@@ -95,7 +95,6 @@ var PlayerView = Parse.View.extend({
 
 		var that = this;
 		var collectQuery = new Parse.Query(strCollectibles);
-
 		collectQuery.include('user');
 		collectQuery.include('tntGrp');
 
@@ -111,6 +110,9 @@ var PlayerView = Parse.View.extend({
 				}
 
 				events.forEach(function(event) {
+					// console.log('minions is',event.attributes.minionsStomped)
+					// console.log('coins is',event.attributes.coinsCollected)
+
 					that.playerSummary.minions += event.attributes.minionsStomped;
 					that.playerSummary.coins += event.attributes.coinsCollected;
 				});

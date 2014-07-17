@@ -405,7 +405,7 @@
                     <div class="group-summary-container">
                         <img class="minion-image" src="../images/minion-terrarium.png"></img>
                         <div class="group-summary-stats">
-                            <h1><%= minions %></h1>
+                            <h1><%= minionsStomped %></h1>
                             <h4>MINIONS STOMPED</h4>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                     <div class="group-summary-container">
                         <img class="coins-image" src="../images/coin-stack.png"></img>
                         <div class="group-summary-stats">
-                            <h1><%= coins %></h1>
+                            <h1><%= coinsCollected %></h1>
                             <h4>COINS COLLECTED</h4>
                         </div>
                     </div>
@@ -434,7 +434,7 @@
         <!-- template for the group page player instances -->
         <script type="text/template" class="group-view-player-view">
             <tr>
-                <td class="player-name"><%= user.attributes.username.length > 15 ? user.attributes.username.substring(0,15)+"..." : user.attributes.username %></td>
+                <td class="player-name"><%= username.length > 15 ? username.substring(0,15)+"..." : username %></td>
                 <td class="minions-data"><%= minionsStomped %></td>
                 <td class="coins-data"><%= coinsCollected %></td>
                 <td class="collectibles-data"><%= collectibles %></td>
@@ -624,14 +624,14 @@
             <div class="dashboard-group">
                     <div class="group-details-container">
                         <div class="groupname-and-code">
-                            <h2 <%= (groupID.get("name").length > 10 ? 'title="' + groupID.get("name") + '"' : "") %>>
-                                <%= groupID.get('name').substring(0, 10) + (groupID.attributes.name.length > 20 ? "..." : "") %>
+                            <h2 <%= groupID.attributes.name.length > 15 ? 'title="' + groupID.attributes.name + '"': "" %> >
+                                <%= groupID.attributes.name.length > 15 ? groupID.attributes.name.substring(0, 15) + "..." : groupID.attributes.name %>
                             </h2>
-                            <p><%= groupID.get("groupCode")  %></p>
+                            <p><%= groupID.attributes.groupCode %></p>
                         </div>
 
                         <ul class="dashboard-group-details">
-                            <li><%= groupID.get('startDate').toString().substring(0,10) %> - <%= groupID.get('endDate').toString().substring(0,10) %></li>
+                            <li><%= groupID.attributes.startDate.toString().substring(0,10) %> - <%= groupID.attributes.endDate.toString().substring(0,10) %></li>
                             <li><%= (players === 1) ? players + " Player" : players + " Players"%></li>
                         </ul>
                     </div>
@@ -1134,7 +1134,7 @@
         <script type="text/template" class="new-user-welecome-template">
             <div class="new-user-welcome-container">
                 <div class="new-user-welcome-header">
-                    <h1>Hello<%= Parse.User.current() ? ", "+Parse.User.current().attributes.username : ''%> 
+                    <h1>Hello<%= Parse.User.current() ? Parse.User.current().attributes.username + ", " : ''%> 
                     and welcome to Hunger Crunch Tournaments</h1>
                 </div>
                 

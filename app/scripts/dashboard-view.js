@@ -34,12 +34,11 @@ var DashboardView = Parse.View.extend ({
 
 		// checking for group objects made by the current user
 		query.include("user");
+		query.ascending("name")
 		query.equalTo("user", Parse.User.current());
 
 		query.find({
 			success: function(userGroups) {
-				console.log(userGroups);	
-
 				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup) {
 						var groupPoint = {
@@ -62,8 +61,21 @@ var DashboardView = Parse.View.extend ({
 									that.showGroups(groupTotal[0].attributes);
 								}
 								else {
-									var placeholderTemplate = _.template($('.placeholder-view').text());
-									$('.dashboard-group-content').html(placeholderTemplate());
+									var placeHolder = {
+										groupID: {
+											attributes: {
+												name: 'New Group',
+												groupCode: '#####',
+												startDate: 'Soon',
+												endDate: 'Later',
+											}
+										},
+										coins: 0,
+										minions: 0,
+										players: 0,
+										meals: 0
+									}
+									that.showGroups(placeHolder);	
 								}
 							},
 							error: function(error) {
@@ -89,7 +101,6 @@ var DashboardView = Parse.View.extend ({
 	showGroups: function(groupTotal) {
 		var renderedTemplate = _.template($('.dashboard-group-view-template').text());
 		$('.dashboard-group-content').append(renderedTemplate(groupTotal));
-
 	},
 
 	createGroupNav: function() {
@@ -107,6 +118,8 @@ var DashboardView = Parse.View.extend ({
 
 	signIn:function () {
 		this.remove();
-		router.navigate('/#tournament/sign-in', {trigger: true});
+		setTimeout(function () {
+			router.navigate('/#tournament/sign-in', {trigger: true});
+		}, 50)
 	}
 });

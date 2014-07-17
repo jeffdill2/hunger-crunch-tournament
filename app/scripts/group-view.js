@@ -24,18 +24,20 @@ var GroupView = Parse.View.extend({
 	},
 
 	render: function() {
-
-		// called in the success inside getGroupTotals
+		// called in the success inside getPlayers
 		var renderedTemplate = this.template(this.group.attributes);
 		this.$el.html(renderedTemplate);
 
 		$('.sort').click(function () {
 			$(this).toggleClass('sorted');
 		});
+		// once the primary template is rendered on the page, then render the map-reduced group summary data
+		this.showGroupTotals(this.groupTotal);
+
+		this.showPlayers(this.eachPlayerTotal);
 	},
 
 	getGroup: function() {
-		// does not work if multiple groups with same group name
 		var that = this;
 		var query = new Parse.Query(strGroups);
 
@@ -48,7 +50,7 @@ var GroupView = Parse.View.extend({
 					that.group = results;
 					that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
 					that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
-					that.getGroupTotals();
+
 					that.getPlayers(that.group);
 				}
 				else {
@@ -70,35 +72,9 @@ var GroupView = Parse.View.extend({
 		});
 	},
 
-	getGroupTotals: function() {
-		var that = this;
-		var query = new Parse.Query(strGroupTotals);
-
-		query.include("groupID");
-		query.equalTo("groupID", this.group);
-
-		query.first({
-			success: function(groupTotal) {
-				if ( groupTotal !== undefined ) {
-					that.group.attributes.players = groupTotal.attributes.players;
-					that.render();
-					that.info = groupTotal;
-					that.showGroupTotals(groupTotal);
-				}
-				else {
-					var renderedTemplate = _.template($('.new-group-placeholder-view-template').text());
-					$('.app-container').html(renderedTemplate)
-				}
-			},
-			error: function(error) {
-				console.log(error);
-			}
-		});
-	},
-
 	showGroupTotals: function(groupTotal) {
 		var renderedTemplate = _.template($('.group-view-group-summary-view').text());
-		$('.group-summary-info').append(renderedTemplate(groupTotal.attributes));
+		$('.group-summary-info').append(renderedTemplate(groupTotal));
 	},
 
 	getPlayers: function() {
@@ -108,56 +84,79 @@ var GroupView = Parse.View.extend({
 
 		query.include('tntGrp.attributes.user');
 		query.include('user');
+		query.ascending('OIID')
+		query.limit(150);
 		query.equalTo("tntGrp", this.group);
 
 		collectQuery.include('user');
 		collectQuery.include('tntGrp');
-
+		collectQuery.equalTo("tntGrp", this.group)
 		collectQuery.find({
 
 			success: function(results) {
 				that.collectiblesArr = results;
 
 				query.find({
-					success: function(players) {
+					success: function(groupPlayerEvents) {
 						var grpPlayers = [];
+						var mappedEventAttributes = groupPlayerEvents.map(function(playerEvent){
+							return playerEvent.attributes
+						})
 
-						players.forEach(function (player) {
-								if(grpPlayers.length <= 0){
-									grpPlayers.push(player);
-								} if (grpPlayers.length > 0) {
-									grpPlayers.forEach(function(grpPlayer) {
-										if (grpPlayer.attributes.OIID === player.attributes.OIID) {
-											grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
-											grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
-
-											that.collectiblesArr.forEach(function(collectible) {
-												if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
-													grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
-												} else {
-													// grpPlayer.attributes.collectibles = 0;
-												}
-											});
-										} else {
-											var result = $.grep(grpPlayers, function(grp) {
-												return grp.attributes.OIID === player.attributes.OIID;
-											});
-
-											if (result.length === 0) {
-												grpPlayers.push(player);
-											}
-										}
-									});
-								}
-							});
-
-						grpPlayers.forEach(function(player) {
-							if (player.attributes.collectibles === undefined) {
-								player.attributes.collectibles = 0;
+						that.groupTotal = mappedEventAttributes.reduce(function(prevVal, nextVal){
+							return {
+								minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
+								coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
+								meals:0,
+								OIID: prevVal.OIID === nextVal.OIID ? grpPlayers.push(prevVal.OIID) : grpPlayers.push(nextVal.OIID)
 							}
-						});
+						})
+						// join all like OIID's together, the length is your member of contributing group members
+						var playerCount = _.union(grpPlayers);
+						that.group.attributes.players = playerCount.length;
 
-						that.showPlayers(grpPlayers);
+
+						that.eachPlayerTotal = playerCount.map(function(playerID) {
+							var userCollectibles;
+							if (that.collectiblesArr.length > 0) {
+								that.collectiblesArr.forEach(function(index){
+									var user = index.attributes.user.attributes.username
+									if(playerID === user) {
+										userCollectibles = index.attributes.collectibles.length;
+									} else {
+										userCollectibles = 0;
+									}
+								})
+							} else {
+								userCollectibles = 0;
+							}
+							return mappedEventAttributes.reduce(function(prevVal, nextVal){
+								if (playerID === nextVal.OIID) {
+									return {
+										minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
+										coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
+										username: playerID,
+										collectibles: prevVal.collectibles
+									}
+								}
+								else {
+									return {
+										minionsStomped: prevVal.minionsStomped,
+										coinsCollected: prevVal.coinsCollected,
+										username: playerID,
+										collectibles: prevVal.collectibles
+									}
+								}
+							}, {
+								minionsStomped: 0,
+								coinsCollected: 0,
+								username: playerID,
+								collectibles: userCollectibles
+							})
+						})
+
+						that.render();
+						
 					},
 					error: function (error) {
 						console.log(error);
@@ -174,7 +173,7 @@ var GroupView = Parse.View.extend({
 		var renderedTemplate = _.template($('.group-view-player-view').text());
 
 		players.forEach(function(player){
-			$('.player-list').append(renderedTemplate(player.attributes));
+			$('.player-list').append(renderedTemplate(player));
 		});
 
 		// using list.js to sort the table of data

@@ -52,11 +52,11 @@ var SignInView = Parse.View.extend ({
 					router.navigate('/#tournament/dashboard', {trigger:true});
 				},
 				error: function(user, error) {
-					$('.error-report').html("Username or password is incorrect").css('margin-left','-124px');
+					$('.error-report').html("Username or password is incorrect");
 				}
 			});
 		} else {
-			$('.error-report').html("Please enter a username and password").css('margin-left','-138px');
+			$('.error-report').html("Please enter a username and password");
 		}
 	},
 
