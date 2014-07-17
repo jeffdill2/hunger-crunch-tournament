@@ -9,25 +9,29 @@ var GroupView = Parse.View.extend({
 		'click .print-button'		: 'print',
 		'click .player-name' 		: 'playerNav',
 		'click .share-code'			: 'viewCode',
-		'click .print-button'		: 'print'
+		'click .print-button'		: 'print',
+		'click .edit-group-members'	: 'editMembersNav',
 	},
 
 	className: 'group-view-container',
 
 	initialize: function(options) {
-		this.group = options;
+		this.groupCode = options;
 
-		$('.app-container').append(this.el);
+		$('.app-container').html(this.el);
 
 		this.getGroup();
 	},
 
 	render: function() {
-		// called in the success inside getGroup
-		var renderedTemplate = this.template(this.groupInfo);
+
+		// called in the success inside getGroupTotals
+		var renderedTemplate = this.template(this.group.attributes);
 		this.$el.html(renderedTemplate);
 
-		this.getGroupTotals();
+		$('.sort').click(function () {
+			$(this).toggleClass('sorted');
+		});
 	},
 
 	getGroup: function() {
@@ -36,24 +40,32 @@ var GroupView = Parse.View.extend({
 		var query = new Parse.Query(strGroups);
 
 		query.include("user");
-		query.equalTo("groupCode", this.group.groupID);
+		query.equalTo("groupCode", this.groupCode.groupID);
 
 		query.first({
 			success: function(results) {
-				that.group = results;
-				that.groupUpdate = results;
-				that.groupInfo = results.attributes;
-				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
-				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
-				that.render();
-				that.getPlayers(that.group);
-
-				$('.sort').click(function () {
-					$(this).toggleClass('sorted');
-				});
+				if (results !== undefined) {
+					that.group = results;
+					that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
+					that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
+					that.getGroupTotals();
+					that.getPlayers(that.group);
+				}
+				else {
+					var renderedTemplate = _.template($('.query-error-template').text());
+					$('.app-container').html(renderedTemplate);
+					$('.dashboard-link').click(function () {
+						router.navigate('/#tournament/dashboard', {'trigger': true});
+					});
+				}
 			},
 			error: function(error) {
 				console.log(error);
+				var renderedTemplate = _.template($('.query-error-template').text());
+				$('.app-container').html(renderedTemplate);
+				$('.dashboard-link').click(function () {
+					router.navigate('/#tournament/dashboard', {'trigger': true});
+				});
 			}
 		});
 	},
@@ -67,12 +79,19 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(groupTotal) {
-				that.info = groupTotal;
-				that.showGroupTotals(groupTotal);
+				if ( groupTotal !== undefined ) {
+					that.group.attributes.players = groupTotal.attributes.players;
+					that.render();
+					that.info = groupTotal;
+					that.showGroupTotals(groupTotal);
+				}
+				else {
+					var renderedTemplate = _.template($('.new-group-placeholder-view-template').text());
+					$('.app-container').html(renderedTemplate)
+				}
 			},
 			error: function(error) {
 				console.log(error);
-
 			}
 		});
 	},
@@ -87,7 +106,7 @@ var GroupView = Parse.View.extend({
 		var query = new Parse.Query(strScores);
 		var collectQuery = new Parse.Query(strCollectibles);
 
-		query.include('tntGrp');
+		query.include('tntGrp.attributes.user');
 		query.include('user');
 		query.equalTo("tntGrp", this.group);
 
@@ -95,6 +114,7 @@ var GroupView = Parse.View.extend({
 		collectQuery.include('tntGrp');
 
 		collectQuery.find({
+
 			success: function(results) {
 				that.collectiblesArr = results;
 
@@ -102,36 +122,34 @@ var GroupView = Parse.View.extend({
 					success: function(players) {
 						var grpPlayers = [];
 
-						players.forEach(function(player) {
-							if (grpPlayers.length <= 0) {
-								grpPlayers.push(player);
-							}
+						players.forEach(function (player) {
+								if(grpPlayers.length <= 0){
+									grpPlayers.push(player);
+								} if (grpPlayers.length > 0) {
+									grpPlayers.forEach(function(grpPlayer) {
+										if (grpPlayer.attributes.OIID === player.attributes.OIID) {
+											grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
+											grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
-							if (grpPlayers.length > 0) {
-								grpPlayers.forEach(function(grpPlayer) {
-									if (grpPlayer.attributes.OIID === player.attributes.OIID) {
-										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
-										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
+											that.collectiblesArr.forEach(function(collectible) {
+												if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
+													grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
+												} else {
+													// grpPlayer.attributes.collectibles = 0;
+												}
+											});
+										} else {
+											var result = $.grep(grpPlayers, function(grp) {
+												return grp.attributes.OIID === player.attributes.OIID;
+											});
 
-										that.collectiblesArr.forEach(function(collectible) {
-											if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
-												grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
-											} else {
-												// grpPlayer.attributes.collectibles = 0;
+											if (result.length === 0) {
+												grpPlayers.push(player);
 											}
-										});
-									} else {
-										var result = $.grep(grpPlayers, function(grp) {
-											return grp.attributes.OIID === player.attributes.OIID;
-										});
-
-										if (result.length === 0) {
-											grpPlayers.push(player);
 										}
-									}
-								});
-							}
-						});
+									});
+								}
+							});
 
 						grpPlayers.forEach(function(player) {
 							if (player.attributes.collectibles === undefined) {
@@ -168,6 +186,13 @@ var GroupView = Parse.View.extend({
 		var playerID = location.currentTarget.innerHTML;
 
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/"+ playerID, {trigger: true});
+	}, 
+
+	editMembersNav: function (location) {
+		// will only set playerID if you click on the name itself, and not the row 	
+		var playerID = location.currentTarget.innerHTML;
+		console.log(this.options)
+		router.navigate('/#tournament/group/'+ this.options.groupID +"/edit-members", {trigger: true});
 	},
 
 	// sort function
@@ -211,14 +236,14 @@ var GroupView = Parse.View.extend({
 	},
 
 	saveDates: function() {
-		this.groupUpdate.set({
+		this.group.set({
 			endDate: {
 				__type: "Date",
 				iso: moment($('.date-changer').val(), "MM/DD/YY").toISOString()
 			}
 		});
 
-		this.groupUpdate.save({
+		this.group.save({
 			success: function(group) {
 				$('.save-dates').hide();
 				$('.change-group-dates').show().css('display','inline-block');
@@ -240,9 +265,11 @@ var GroupView = Parse.View.extend({
 		$("header").addClass('non-print');
 		$(".group-view-location-banner").removeClass('h1-flag');
 		$(".group-view-options").css('opacity', 0);
+		$(".group-summary-info").css('background', '#FFF');
 
 		window.print();
 
+		$(".group-summary-info").css('background', '#DDD');
 		$(".group-view-location-banner").addClass('h1-flag');
 		$(".group-view-options").css('opacity', 1);
 		$("header").removeClass('non-print');

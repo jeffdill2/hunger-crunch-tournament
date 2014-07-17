@@ -13,12 +13,8 @@ var PlayerView = Parse.View.extend({
 	className: 'player-view',
 
 	initialize: function(options) {
-		$('.app-container').append(this.el);
-
+		$('.app-container').html(this.el);
 		this.playerInfo = options;
-
-		var player = options.playerID;
-		var group = options.groupID;
 
 		this.getPlayerScores();
 
@@ -28,6 +24,7 @@ var PlayerView = Parse.View.extend({
 	},
 
 	render: function() {
+		console.log(this.options)
 		var renderedTemplate = this.template(this.options);
 		this.$el.html(renderedTemplate);
 	},
@@ -45,6 +42,7 @@ var PlayerView = Parse.View.extend({
 			success: function(events) {
 				// sets gives the group name to this.options so that it can be rendered
 				that.options.groupName = events[0].get('tntGrp').get('name');
+				that.options.userID = events[0].get('tntGrp').get('user').id;
 				that.render();
 
 				events.forEach(function(event) {
@@ -148,9 +146,11 @@ var PlayerView = Parse.View.extend({
 		$(".player-view-location-banner").removeClass('h1-flag');
 		$(".player-view-nav").css('opacity', 0);
 		$("button").css('opacity', 0);
+		$("img").hide();
 
 		window.print();
 
+		$("img").show();
 		$(".player-view-location-banner").addClass('h1-flag');
 		$(".player-view-nav").css('opacity', 1);
 		$("button").css('opacity', 1);

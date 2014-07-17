@@ -1,10 +1,9 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click .create-group-button'	: 'createGroupNav',
-		'click .compare-groups-button'	: 'compareGroupsNav',
-		'click .dashboard-group'		: 'groupNav',
-		'click .print-button' 			: 'print'
+		'click .create-group-button'		: 'createGroupNav', 
+		'click .compare-groups-button'		: 'compareGroupsNav', 
+		'click .dashboard-group'			: 'groupNav'
 	},
 
 	template: _.template($('.dashboard-view').text()),
@@ -13,11 +12,11 @@ var DashboardView = Parse.View.extend ({
 
 	initialize: function() {
 		if (Parse.User.current()) {
-			$('.app-container').append(this.el);
+			$('.app-container').html(this.el);
 
 			this.getGroups();
 			this.render();
-
+			// will queue spinning Hunger Crunch logo until data is found, or error occurs and fade out
 			startLoadingAnimation();
 		} else {
 			this.signIn();
@@ -26,7 +25,7 @@ var DashboardView = Parse.View.extend ({
 
 	render: function() {
 		var renderedTemplate = this.template;
-		this.$el.html(renderedTemplate);
+		this.$el.html(renderedTemplate());
 	},
 
 	getGroups: function() {
@@ -39,7 +38,7 @@ var DashboardView = Parse.View.extend ({
 
 		query.find({
 			success: function(userGroups) {
-				var renderedTemplate = _.template($('.dashboard-group-view-template').text());
+				console.log(userGroups);	
 
 				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup) {
@@ -58,9 +57,8 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
-								console.log('groupTotal', groupTotal);
-								$('.dashboard-group-content').append(renderedTemplate(groupTotal[0].attributes));
-
+								
+								that.showGroups(groupTotal[0].attributes);
 								stopLoadingAnimation();
 							},
 							error: function(error) {
@@ -79,9 +77,15 @@ var DashboardView = Parse.View.extend ({
 				}
 			},
 			error: function(error) {
-				console.log(error);
+				stopLoadingAnimation();
 			},
 		})
+	},
+
+	showGroups: function(groupTotal) {
+		var renderedTemplate = _.template($('.dashboard-group-view-template').text());
+		$('.dashboard-group-content').append(renderedTemplate(groupTotal));
+
 	},
 
 	createGroupNav: function() {
@@ -97,20 +101,8 @@ var DashboardView = Parse.View.extend ({
 		router.navigate('/#tournament/group/' + groupNav, {trigger: true});
 	},
 
-	print: function() {
-		$("header").addClass('non-print');
-		$(".dashboard-location").removeClass('h1-flag');
-		$(".dashboard-nav").css('opacity', 0);
-
-		window.print();
-
-		$(".dashboard-location").addClass('h1-flag');
-		$(".dashboard-nav").css('opacity', 1);
-		$("header").removeClass('non-print');
-	},
-
-	signIn: function() {
+	signIn:function () {
 		this.remove();
-		router.navigate('/#tournament/sign-in');
+		router.navigate('/#tournament/sign-in', {trigger: true});
 	}
 });

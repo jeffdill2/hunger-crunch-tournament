@@ -1,0 +1,77 @@
+@import 'variables';
+@import 'multi-use-classes';
+
+.new-user-welcome-container {
+	// display: none;
+	min-height: 1150px;
+}
+
+.new-user-welcome-header {
+	@include content-header;
+	text-align: center;
+	width: 90%;
+	margin: 0 auto;
+	font-size: 1.1em;
+}
+
+.welcome-holder {
+	width: 65%;
+	margin: 0 auto;
+	padding: 15px;
+	position: relative;
+	background: $colorLightGray;
+
+	.welcome-previous,
+	.welcome-next {
+		position: absolute;
+		bottom: 15px;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+	}
+	.welcome-previous {
+		left: 30px;
+	}
+	.welcome-next {
+		right: 30px;
+	}
+}
+
+.welcome-container {
+	.welcome-number {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		font-size: 1.5em;
+		display: inline-block;
+		text-align: center;
+		color: $colorLightGray;
+		background: $colorTextDarkGray;
+		border-radius: 100%;
+	}
+
+	.welcome-instruction {
+		margin: 15px auto;
+		width: 80%;
+	}
+
+	& img {
+		display: block;
+		width: 80%;
+		margin: 0 auto 35px;
+	}
+
+	& span {
+		font-size: 1.75em;
+		margin-left: 2%;
+	}
+
+	.welcome-location {
+		width: 18.5%;
+		text-align: center;
+		margin: 0 auto;
+	}
+}
