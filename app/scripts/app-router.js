@@ -50,7 +50,7 @@ var AppRouter = Parse.Router.extend({
 	},
 
 	editMemberView: function (groupID) {
-		this.swap( new EditMemberView({"groupId": groupID}) );
+		this.swap( new EditMemberView({"groupID": groupID}) );
 	},
 
 	playerView: function(groupID, playerID) {
