@@ -3,8 +3,8 @@
 var CompareGroupsView = Parse.View.extend({
 
 	template: _.template($('.compare-groups-view-template').text()),
+
 	addGroupTemplate: _.template($('.compare-groups-add-group-template').text()),
-	//empty array that will be filled by the objects pulled from parse in this.displayAvailableGroups
 
 	events: {
 		'click .table-footer'			: 'displayAvailableGroups',

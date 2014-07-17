@@ -125,7 +125,7 @@ var CreateGroupView = Parse.View.extend({
 
 		if (name === '') {
 			$('.error-report').html('Please enter a name for this group');
-			$('.new-group-name-input').val('')	
+			$('.new-group-name-input').val('');
 		}
 
 		if (start === '') {
@@ -190,7 +190,7 @@ var CreateGroupView = Parse.View.extend({
 					name: groupName,
 					user: {
 						__type: "Pointer",
-						className: "_User",
+						className: strUsers,
 						objectId: Parse.User.current().id
 					}
 				}, {

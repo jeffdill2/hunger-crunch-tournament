@@ -1,3 +1,5 @@
+'use strict';
+
 var UserWelcome = Parse.View.extend({
 
 	events: {
@@ -11,34 +13,42 @@ var UserWelcome = Parse.View.extend({
 	initialize: function() {
 		$('.app-container').html(this.el);
 		this.counter = 0;
+
 		this.render();
 	},
 
 	render: function() {
 		var renderedTemplate = this.template();
 		this.$el.html(renderedTemplate);
+
 		this.nextTab();
+
 		stopLoadingAnimation();
 	},
-	previousTab: function () {
+
+	previousTab: function() {
 		var that = this;
 		this.counter -= 1;
-		
-		var instructionsTemplate = _.template($('.new-user-welecome-instruction-'+that.counter+'-template').text())
-		$('.welcome-container').html(instructionsTemplate)
-		$(window).scrollTop($('.welcome-container').height())
+
+		var instructionsTemplate = _.template($('.new-user-welecome-instruction-' + that.counter + '-template').text());
+
+		$('.welcome-container').html(instructionsTemplate);
+		$(window).scrollTop($('.welcome-container').height());
 		this.navButtons();
 	},
-	nextTab: function () {
+
+	nextTab: function() {
 		var that = this;
 		this.counter += 1;
-		
-		var instructionsTemplate = _.template($('.new-user-welecome-instruction-'+that.counter+'-template').text())
-		$('.welcome-container').html(instructionsTemplate)
-		$(window).scrollTop($('.welcome-container').height())
+
+		var instructionsTemplate = _.template($('.new-user-welecome-instruction-' + that.counter + '-template').text());
+
+		$('.welcome-container').html(instructionsTemplate);
+		$(window).scrollTop($('.welcome-container').height());
 		this.navButtons();
 	},
-	navButtons: function () {
+
+	navButtons: function() {
 		if (this.counter <= 1) {
 			$('.welcome-previous').hide();
 		}
@@ -55,9 +65,9 @@ var UserWelcome = Parse.View.extend({
 			$('.welcome-next').hide();
 		}
 	},
-	goToDash: function () {
+	goToDash: function() {
 		startLoadingAnimation();
+
 		router.navigate('/#tournament/dashboard', {trigger: true});
 	}
-
 });

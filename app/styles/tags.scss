@@ -34,6 +34,7 @@ table {
 			border-bottom: none;
 		}
 	}
+
 	// all cells
 	& tr {
 		border-bottom: 1px solid $colorLightGray;
@@ -45,11 +46,13 @@ table {
 		& td {
 			border-right: 1px solid $colorLightGray;
 			width: 23%;
+
 			// ensures sort button and descriptions are on separate lines
 			& span {
 				display: block;
 				margin: 0 auto;
 			}
+
 			// "sort" buttons on tables
 			& button {
 				border: none;
@@ -63,11 +66,13 @@ table {
 					outline: none;
 				}
 			}
+
 			// first column of all tables
 			&:first-child {
 				width: 29%;
 				cursor: pointer;
 			}
+
 			// last column of all tables
 			&:last-child {
 				width: 25%;
