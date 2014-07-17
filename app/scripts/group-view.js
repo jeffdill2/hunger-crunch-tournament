@@ -98,6 +98,10 @@ var GroupView = Parse.View.extend({
 
 				query.find({
 					success: function(groupPlayerEvents) {
+
+						if (groupPlayerEvents.length > 0) {
+
+
 						var grpPlayers = [];
 						var dateCheck;
 						var now = new Date();
@@ -169,7 +173,11 @@ var GroupView = Parse.View.extend({
 							})
 						})
 						that.render();
-						
+						} else {
+							var renderedTemplate = _.template($('.new-group-placeholder-view-template').text());
+							$('.app-container').html(renderedTemplate);
+						}
+
 					},
 					error: function(error) {
 						console.log(error);

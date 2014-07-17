@@ -12,7 +12,6 @@ var EditMemberView = Parse.View.extend({
 	initialize: function(options) {
 		this.group = options;
 		this.getGroup();
-
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
 			this.render();
@@ -139,7 +138,7 @@ var EditMemberView = Parse.View.extend({
 
 	removePlayer: function(location) {
 		var removeName = location.currentTarget.innerHTML;
-
+		var that = this;
 		if (confirm('Are you sure you want to delete ' + removeName +' from the group? This action can not be undone.')) {
     		var query = new Parse.Query(strScores);
 
@@ -154,8 +153,7 @@ var EditMemberView = Parse.View.extend({
     					result.set('tntGrp', null);
     					result.save();
 
-    					history.back();
-    					router.navigate('/#tournament/group/' + this.options.groupID, {trigger: true})
+    					router.navigate('/#tournament/group/' + that.group.groupID, {trigger: true})
     				});
     			},
     			error: function(error) {

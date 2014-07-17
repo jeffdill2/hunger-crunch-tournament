@@ -110,7 +110,9 @@ var CompareGroupsView = Parse.View.extend({
 			$('.add-list').html(placeholderTemplate());
 		} else {
 			this.groupsToAdd.forEach(function(groupNames) {
-				$('.add-list').append(addListTemplate(groupNames.attributes));
+				if (groupNames!== undefined) {	
+					$('.add-list').append(addListTemplate(groupNames.attributes));
+				}
 			});
 		}
 
