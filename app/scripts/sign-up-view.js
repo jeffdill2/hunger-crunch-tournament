@@ -13,6 +13,7 @@ var SignUpView = Parse.View.extend({
 		'click .sign-up-view-content button'			: 'createParseUser',
 		'keyup .new-user-password-verification-input'	: 'passwordValidation',
 		'keyup .new-user-password-input'				: 'passwordValidation',
+		'keyup input'									: 'enableButtonCheck',
 		'click .recover-account'						: 'accountRecovery'
 	},
 

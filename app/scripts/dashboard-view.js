@@ -12,13 +12,11 @@ var DashboardView = Parse.View.extend ({
 
 	initialize: function() {
 		if (Parse.User.current()) {
+			startLoadingAnimation();
 			$('.app-container').html(this.el);
 
 			this.getGroups();
 			this.render();
-
-			// will queue spinning Hunger Crunch logo until data is found, or error occurs and fade out
-			startLoadingAnimation();
 		} else {
 			this.signIn();
 		}
@@ -35,12 +33,14 @@ var DashboardView = Parse.View.extend ({
 
 		// checking for group objects made by the current user
 		query.include("user");
-		query.equalTo("user", Parse.User.current());
 
+		// query for groups that ended no later than 5 days ago
+
+
+		query.equalTo("user", Parse.User.current());
+		query.descending("endDate")
 		query.find({
 			success: function(userGroups) {
-				console.log(userGroups);
-
 				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup) {
 						var groupPoint = {
@@ -58,19 +58,36 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
-
-								that.showGroups(groupTotal[0].attributes);
 								stopLoadingAnimation();
+								if (groupTotal.length > 0) {
+									that.showGroups(groupTotal[0].attributes);
+								}
+								else {
+									var placeHolder = {
+										groupID: {
+											attributes: {
+												name: 'New Group',
+												groupCode: '#####',
+												startDate: 'Soon',
+												endDate: 'Later',
+											}
+										},
+										coins: 0,
+										minions: 0,
+										players: 0,
+										meals: 0
+									}
+									that.showGroups(placeHolder);	
+								}
 							},
 							error: function(error) {
 								stopLoadingAnimation();
-
 								console.log(error);
 							}
 						});
 					});
 				} else {
-					// append template into DOM, remove the underling on the Groupname and remove the click event from the view
+					// if the group has not been populated yet, provide the placeholder content
 					var placeholderTemplate = _.template($('.placeholder-view').text());
 					$('.dashboard-group-content').html(placeholderTemplate());
 
@@ -84,9 +101,20 @@ var DashboardView = Parse.View.extend ({
 	},
 
 	showGroups: function(groupTotal) {
+		var now = new Date();
+		var time = (5 * 24 * 3600 * 1000)
+		var fiveDaysAgo = new Date(now.getTime()-time)
+		// check if group ended more than five days ago - if so, will render gray icons in dash
+		if (fiveDaysAgo > groupTotal.groupID.attributes.endDate) {
+			groupTotal.dateCheck = 0
+		} else {
+			groupTotal.dateCheck = 1
+		}
+
+		groupTotal.groupID.attributes.startDate = groupTotal.groupID.attributes.startDate.toString().substring(0,10)
+		groupTotal.groupID.attributes.endDate = groupTotal.groupID.attributes.endDate.toString().substring(0,10)
 		var renderedTemplate = _.template($('.dashboard-group-view-template').text());
 		$('.dashboard-group-content').append(renderedTemplate(groupTotal));
-
 	},
 
 	createGroupNav: function() {
@@ -104,6 +132,8 @@ var DashboardView = Parse.View.extend ({
 
 	signIn:function () {
 		this.remove();
-		router.navigate('/#tournament/sign-in', {trigger: true});
+		setTimeout(function () {
+			router.navigate('/#tournament/sign-in', {trigger: true});
+		}, 50)
 	}
 });
