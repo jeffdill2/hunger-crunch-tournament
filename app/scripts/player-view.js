@@ -39,6 +39,7 @@ var PlayerView = Parse.View.extend({
 
 		this.query.find({
 			success: function(events) {
+				console.log(events)
 				that.options.groupName = events[0].get('tntGrp').get('name');
 				that.options.userID = events[0].get('tntGrp').get('user').id;
 				that.render();
