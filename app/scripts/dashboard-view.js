@@ -64,20 +64,11 @@ var DashboardView = Parse.View.extend ({
 								}
 								else {
 									var placeHolder = {
-										groupID: {
-											attributes: {
-												name: 'New Group',
-												groupCode: '#####',
-												startDate: 'Soon',
-												endDate: 'Later',
-											}
-										},
-										coins: 0,
-										minions: 0,
-										players: 0,
-										meals: 0
+										groupName: userGroup.attributes.name
 									}
-									that.showGroups(placeHolder);	
+									// if the group has not been populated yet, however other groups exist on the page provide the placeholder content
+									var placeholderTemplate = _.template($('.existing-groups-dashboard-placeholder-template').text());
+									$('.dashboard-group-content').html(placeholderTemplate(placeHolder));
 								}
 							},
 							error: function(error) {
@@ -88,7 +79,7 @@ var DashboardView = Parse.View.extend ({
 					});
 				} else {
 					// if the group has not been populated yet, provide the placeholder content
-					var placeholderTemplate = _.template($('.placeholder-view').text());
+					var placeholderTemplate = _.template($('.no-groups-dashboard-placeholder-template').text());
 					$('.dashboard-group-content').html(placeholderTemplate());
 
 					stopLoadingAnimation();

@@ -149,7 +149,7 @@ var EditMemberView = Parse.View.extend({
     		query.include('tntGrp');
     		query.include('user');
     		query.equalTo("tntGrp", this.group);
-    		query.equalTo("groupCode", this.group.groupId);
+    		query.equalTo("groupCode", this.group.groupID);
 
     		query.find({
     			success: function(results) {
