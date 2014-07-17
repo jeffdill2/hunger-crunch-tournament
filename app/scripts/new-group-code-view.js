@@ -4,7 +4,7 @@ var GroupCodeView = Parse.View.extend({
 	template: _.template($('.group-view-code-template').text()),
 
 	events: {
-		'click .view-group-page'	: 'goToGroupView'
+		'click .view-group-page'	: 'goToDashboard'
 	},
 
 	initialize: function(groupID) {
@@ -35,8 +35,8 @@ var GroupCodeView = Parse.View.extend({
 		$('.group-link-box input').scrollLeft($('.group-link-box input').width());
 	},
 
-	goToGroupView: function() {
-		router.navigate('/#tournament/group/' + this.user.code, {trigger: true});
+	goToDashboard: function() {
+		router.navigate('/#tournament/dashboard', {trigger: true});
 	},
 
 	signIn: function() {
