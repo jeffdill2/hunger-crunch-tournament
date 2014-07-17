@@ -2,12 +2,12 @@
 @import 'multi-use-classes';
 
 .new-user-welcome-container {
-	// display: none;
 	min-height: 1150px;
 }
 
 .new-user-welcome-header {
 	@include content-header;
+
 	text-align: center;
 	width: 90%;
 	margin: 0 auto;
@@ -30,11 +30,12 @@
 		&:hover {
 			text-decoration: underline;
 		}
-
 	}
+
 	.welcome-previous {
 		left: 30px;
 	}
+
 	.welcome-next {
 		right: 30px;
 	}

@@ -24,12 +24,11 @@ var GroupView = Parse.View.extend({
 	},
 
 	render: function() {
-
 		// called in the success inside getGroupTotals
 		var renderedTemplate = this.template(this.group.attributes);
 		this.$el.html(renderedTemplate);
 
-		$('.sort').click(function () {
+		$('.sort').click(function() {
 			$(this).toggleClass('sorted');
 		});
 	},
@@ -48,13 +47,15 @@ var GroupView = Parse.View.extend({
 					that.group = results;
 					that.group.attributes.startDate = moment(that.group.attributes.startDate).format("MM/DD/YY");
 					that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
+
 					that.getGroupTotals();
 					that.getPlayers(that.group);
-				}
-				else {
+				} else {
 					var renderedTemplate = _.template($('.query-error-template').text());
+
 					$('.app-container').html(renderedTemplate);
-					$('.dashboard-link').click(function () {
+
+					$('.dashboard-link').click(function() {
 						router.navigate('/#tournament/dashboard', {'trigger': true});
 					});
 				}
@@ -63,7 +64,7 @@ var GroupView = Parse.View.extend({
 				console.log(error);
 				var renderedTemplate = _.template($('.query-error-template').text());
 				$('.app-container').html(renderedTemplate);
-				$('.dashboard-link').click(function () {
+				$('.dashboard-link').click(function() {
 					router.navigate('/#tournament/dashboard', {'trigger': true});
 				});
 			}
@@ -79,15 +80,14 @@ var GroupView = Parse.View.extend({
 
 		query.first({
 			success: function(groupTotal) {
-				if ( groupTotal !== undefined ) {
+				if (groupTotal !== undefined) {
 					that.group.attributes.players = groupTotal.attributes.players;
 					that.render();
 					that.info = groupTotal;
 					that.showGroupTotals(groupTotal);
-				}
-				else {
+				} else {
 					var renderedTemplate = _.template($('.new-group-placeholder-view-template').text());
-					$('.app-container').html(renderedTemplate)
+					$('.app-container').html(renderedTemplate);
 				}
 			},
 			error: function(error) {
@@ -114,7 +114,6 @@ var GroupView = Parse.View.extend({
 		collectQuery.include('tntGrp');
 
 		collectQuery.find({
-
 			success: function(results) {
 				that.collectiblesArr = results;
 
@@ -122,34 +121,34 @@ var GroupView = Parse.View.extend({
 					success: function(players) {
 						var grpPlayers = [];
 
-						players.forEach(function (player) {
-								if(grpPlayers.length <= 0){
-									grpPlayers.push(player);
-								} if (grpPlayers.length > 0) {
-									grpPlayers.forEach(function(grpPlayer) {
-										if (grpPlayer.attributes.OIID === player.attributes.OIID) {
-											grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
-											grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
+						players.forEach(function(player) {
+							if (grpPlayers.length <= 0) {
+								grpPlayers.push(player);
+							}
 
-											that.collectiblesArr.forEach(function(collectible) {
-												if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
-													grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
-												} else {
-													// grpPlayer.attributes.collectibles = 0;
-												}
-											});
-										} else {
-											var result = $.grep(grpPlayers, function(grp) {
-												return grp.attributes.OIID === player.attributes.OIID;
-											});
+							if (grpPlayers.length > 0) {
+								grpPlayers.forEach(function(grpPlayer) {
+									if (grpPlayer.attributes.OIID === player.attributes.OIID) {
+										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
+										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
-											if (result.length === 0) {
-												grpPlayers.push(player);
+										that.collectiblesArr.forEach(function(collectible) {
+											if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
+												grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
 											}
+										});
+									} else {
+										var result = $.grep(grpPlayers, function(grp) {
+											return grp.attributes.OIID === player.attributes.OIID;
+										});
+
+										if (result.length === 0) {
+											grpPlayers.push(player);
 										}
-									});
-								}
-							});
+									}
+								});
+							}
+						});
 
 						grpPlayers.forEach(function(player) {
 							if (player.attributes.collectibles === undefined) {
@@ -159,7 +158,7 @@ var GroupView = Parse.View.extend({
 
 						that.showPlayers(grpPlayers);
 					},
-					error: function (error) {
+					error: function(error) {
 						console.log(error);
 					}
 				});
@@ -186,12 +185,12 @@ var GroupView = Parse.View.extend({
 		var playerID = location.currentTarget.innerHTML;
 
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/"+ playerID, {trigger: true});
-	}, 
+	},
 
-	editMembersNav: function (location) {
-		// will only set playerID if you click on the name itself, and not the row 	
+	editMembersNav: function(location) {
+		// will only set playerID if you click on the name itself, and not the row
 		var playerID = location.currentTarget.innerHTML;
-		console.log(this.options)
+
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/edit-members", {trigger: true});
 	},
 

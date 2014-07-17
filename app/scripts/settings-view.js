@@ -31,6 +31,7 @@ var SettingsView = Parse.View.extend({
 
 	changeEmail: function() {
 		var email = $('.user-email').attr('placeholder');
+
 		$('.settings-content span').html('');
 		$('.user-email').attr({'readonly': false,'placeholder': ''}).focus().attr('value',email).css('color', '#6D6E71')
 		$('.save-email').show().css('display','block');
@@ -44,8 +45,9 @@ var SettingsView = Parse.View.extend({
 		$('.settings-content span').html('');
 
   		user.set('email', newEmail);
+
   		user.save(null, {
-  			success: function () {
+  			success: function() {
   				$('.user-email').attr({'readonly': true, 'placeholder':newEmail}).css('color', '#939598');
   				$('.edit-email').show().css('display','block');
   				$('.save-email').hide();
@@ -61,9 +63,9 @@ var SettingsView = Parse.View.extend({
 	resetPassword: function() {
 		var userEmail = Parse.User.current().attributes.email;
 		var that = this;
+
 		Parse.User.requestPasswordReset(userEmail, {
   			success: function() {
-   			 // Password reset request was sent successfully
 				$('.settings-content span').html('')
 				$('.password-reset-confirmation').html("A link has been sent to your provided email address. Please click the link and follow the instructions to reset your account password").css('color','#2FD03A');
 				$('.reset-password').hide();
@@ -90,7 +92,7 @@ var SettingsView = Parse.View.extend({
 		router.navigate('/#tournament/sign-in');
 	},
 
-	returnToDashboard: function () {
+	returnToDashboard: function() {
 		router.navigate('/#tournament/dashboard', {trigger: true});
 	}
 });

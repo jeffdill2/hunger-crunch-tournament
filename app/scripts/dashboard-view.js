@@ -1,8 +1,8 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click .create-group-button'		: 'createGroupNav', 
-		'click .compare-groups-button'		: 'compareGroupsNav', 
+		'click .create-group-button'		: 'createGroupNav',
+		'click .compare-groups-button'		: 'compareGroupsNav',
 		'click .dashboard-group'			: 'groupNav'
 	},
 
@@ -16,6 +16,7 @@ var DashboardView = Parse.View.extend ({
 
 			this.getGroups();
 			this.render();
+
 			// will queue spinning Hunger Crunch logo until data is found, or error occurs and fade out
 			startLoadingAnimation();
 		} else {
@@ -38,7 +39,7 @@ var DashboardView = Parse.View.extend ({
 
 		query.find({
 			success: function(userGroups) {
-				console.log(userGroups);	
+				console.log(userGroups);
 
 				if (userGroups.length > 0) {
 					userGroups.forEach(function(userGroup) {
@@ -57,7 +58,7 @@ var DashboardView = Parse.View.extend ({
 
 						query.find({
 							success: function(groupTotal) {
-								
+
 								that.showGroups(groupTotal[0].attributes);
 								stopLoadingAnimation();
 							},

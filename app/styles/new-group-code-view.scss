@@ -4,14 +4,15 @@
 ////////////////////////////////////////////////////////////
 //////////////////////////////////////// NEW GROUP CODE VIEW
 ////////////////////////////////////////////////////////////
-.group-created-header-container{
-	// text-align: center;
+.group-created-header-container {
 	border-bottom: 1px solid $colorStoneGray;
+
 	@include content-header;
 }
 
 .group-created-main-container {
 	@extend .clearfix;
+
 	background: $colorLightGray;
 	padding: 30px;
 
@@ -43,6 +44,7 @@
 	.instruction-two {
 		margin-top: 128px;
 	}
+
 	.instruction-three {
 		margin-top: 266px;
 	}
@@ -51,23 +53,25 @@
 .player-instructions {
 	float: left;
 	margin: 0 auto;
+
 	& p {
 		font-size: 1.2em;
 		margin: 15px 0 10px;
 		color: $colorCharcoal;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 	}
 }
 
 .group-code-box {
 	width: 200px;
+
 	& input {
 		width: 100%;
 		font-size: 4em;
 		border: none;
 		color: $colorCharcoal;
 		text-align: center;
-		font-family: "proxima-nova", sans-serif;
+		font-family: $fontProximaNova;
 	}
 }
 
@@ -81,6 +85,7 @@
 .instruction-image-one,
 .instruction-image-two {
 	float: left;
+
 	& .placeholder-image {
 		display: inline-block;
 		height: 225px;
@@ -100,6 +105,7 @@
 
 .observer-instructions {
 	padding: 15px 0 25px;
+
 	& p {
 		margin-top: 0;
 		font-size: 1.2em;
@@ -128,6 +134,7 @@
 	border-top: 1px solid $colorCharcoal;
 	background: $colorLightGray;
 }
+
 .view-group-page {
 	width: 30%;
 }
