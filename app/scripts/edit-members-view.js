@@ -37,10 +37,11 @@ var EditMemberView = Parse.View.extend({
 		var query = new Parse.Query(strGroups);
 
 		query.include("user");
-		query.equalTo("groupCode", this.group.groupId);
+		query.equalTo("groupCode", this.group.groupID);
 
 		query.first({
 			success: function(results) {
+				console.log(results)
 				that.group = results;
 				that.groupUpdate = results;
 				that.groupInfo = results.attributes;
@@ -184,7 +185,7 @@ var EditMemberView = Parse.View.extend({
 	},
 
 	goBack: function() {
-		router.navigate('/#tournament/group/' + this.options.groupId, {trigger: true});
+		router.navigate('/#tournament/group/' + this.options.groupID, {trigger: true});
 	},
 
 	signIn:function() {
