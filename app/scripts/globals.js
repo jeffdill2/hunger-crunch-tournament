@@ -6,5 +6,6 @@ var strGroups = 'TntGroup';
 var strCollectibles = 'TntCollectibles';
 var strGroupTotals = 'TntGroupTotals';
 var strGameTotals = 'TntGameTotals';
-var strUsers = 'User';
+var strUsers = '_User';
 var strCounter = 'TntCounter';
+var strPurchases = 'Purchase';

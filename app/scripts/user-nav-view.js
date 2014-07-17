@@ -26,9 +26,12 @@ var UserNavView = Parse.View.extend({
 		var that = this;
 
 		this.$el.html(renderedTemplate);
+
 		// regex to capitalize the first letter of the org/username including multiple words
 		function toTitleCase(str) {
-		    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		    return str.replace(/\w\S*/g, function(txt) {
+		    	return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+		    });
 		}
 
 		// if the words contains a period, it will uppercase the entire word
@@ -71,7 +74,7 @@ var NoUserNavView = Parse.View.extend({
 		'click .sign-up-button'	: "signUpNav"
 	},
 
-	tagName:'ul',
+	tagName: 'ul',
 
 	template: _.template($('.no-user-nav-view').text()),
 

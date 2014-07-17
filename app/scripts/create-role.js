@@ -10,7 +10,7 @@ function createRole() {
     }).then(function(role) {
         alert('role creation done');
         getUser();
-    }, function(error){
+    }, function(error) {
         window.alert("Error: " + error.code + ":"+ error.message);
     });
 }
