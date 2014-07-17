@@ -399,7 +399,7 @@
 
         <!-- template for group page group totals info -->
         <script type="text/template" class="group-view-group-summary-view">
-            <h2>GROUP SUMMARY</h2>
+            <h2> <%=dateCheck === 1 ? "GROUP SUMMARY" : "<span>Group Summary - Group Completed!</span>" %> </h2>
             <ul>
                 <li>
                     <div class="group-summary-container">
@@ -631,21 +631,55 @@
                         </div>
 
                         <ul class="dashboard-group-details">
+                            <li><%= groupID.attributes.startDate %> - <%= groupID.attributes.endDate %></li>
+                            <li><%= (players === 1) ? players + " Player" : players + " Players"%></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-group-statistics">
+                        <div class="group-minion-count">
+                            <img class="minion-image" <%= dateCheck === 0 ? 'src="../images/gray-minion-terrarium.png"' : 'src="../images/minion-terrarium.png"' %> ></img>
+                            <h2 class="minion-stat"><%= minions %></h2>
+                        </div>
+                        <div class="group-coins-count">
+                            <img class="coins-image" <%=dateCheck === 0 ? 'src="../images/gray-coin-stack.png"' : 'src="../images/coin-stack.png"' %> ></img>
+                            <h2 class="coins-stat"><%= coins %></h2>
+                        </div>
+                        <div class="group-meals-provided">
+                            <img class="meals-image" <%=dateCheck === 0 ? 'src="../images/gray-bowl.png"' : 'src="../images/bowl.png"' %>></img>
+                            <h2 class="meals-stat"><%= meals %></h2>
+
+                        </div>
+                    </div>
+                </div>
+        </script>
+
+        <!-- template for expired groups shown on dashboard view -->
+        <script type="text/template" class="dashboard-expired-group-view-template">
+            <div class="dashboard-group">
+                    <div class="group-details-container">
+                        <div class="groupname-and-code">
+                            <h2 <%= groupID.attributes.name.length > 15 ? 'title="' + groupID.attributes.name + '"': "" %> >
+                                <%= groupID.attributes.name.length > 15 ? groupID.attributes.name.substring(0, 15) + "..." : groupID.attributes.name %>
+                            </h2>
+                            <p><%= groupID.attributes.groupCode %></p>
+                        </div>
+
+                        <ul class="dashboard-group-details">
                             <li><%= groupID.attributes.startDate.toString().substring(0,10) %> - <%= groupID.attributes.endDate.toString().substring(0,10) %></li>
                             <li><%= (players === 1) ? players + " Player" : players + " Players"%></li>
                         </ul>
                     </div>
                     <div class="dashboard-group-statistics">
                         <div class="group-minion-count">
-                            <img class="minion-image" src="../images/minion-terrarium.png"></img>
+                            <img class="minion-image" src="../images/gray-minion-terrarium.png"></img>
                             <h2 class="minion-stat"><%= minions %></h2>
                         </div>
                         <div class="group-coins-count">
-                            <img class="coins-image" src="../images/coin-stack.png"></img>
+                            <img class="coins-image" src="../images/gray-coin-stack.png"></img>
                             <h2 class="coins-stat"><%= coins %></h2>
                         </div>
                         <div class="group-meals-provided">
-                            <img class="meals-image" src="../images/bowl.png"></img>
+                            <img class="meals-image" src="../images/gray-bowl.png"></img>
                             <h2 class="meals-stat"><%= meals %></h2>
 
                         </div>

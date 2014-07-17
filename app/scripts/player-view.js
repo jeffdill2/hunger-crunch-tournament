@@ -39,8 +39,6 @@ var PlayerView = Parse.View.extend({
 
 		this.query.find({
 			success: function(events) {
-
-				// sets gives the group name to this.options so that it can be rendered
 				that.options.groupName = events[0].get('tntGrp').get('name');
 				that.options.userID = events[0].get('tntGrp').get('user').id;
 				that.render();
@@ -110,9 +108,6 @@ var PlayerView = Parse.View.extend({
 				}
 
 				events.forEach(function(event) {
-					// console.log('minions is',event.attributes.minionsStomped)
-					// console.log('coins is',event.attributes.coinsCollected)
-
 					that.playerSummary.minions += event.attributes.minionsStomped;
 					that.playerSummary.coins += event.attributes.coinsCollected;
 				});

@@ -99,25 +99,39 @@ var GroupView = Parse.View.extend({
 				query.find({
 					success: function(groupPlayerEvents) {
 						var grpPlayers = [];
+						var dateCheck;
+						var now = new Date();
+						var time = (5 * 24 * 3600 * 1000)
+						var fiveDaysAgo = new Date(now.getTime()-time)
+
+						if (fiveDaysAgo > groupPlayerEvents[0].attributes.tntGrp.attributes.endDate) {
+							grayCheck = 0;
+						} else {
+							grayCheck = 1;
+						}
+						// map all of the player events and return only their attributes
 						var mappedEventAttributes = groupPlayerEvents.map(function(playerEvent){
+							// console.log(playerEvent.attributes.tntGrp.attributes.endDate)
 							return playerEvent.attributes
 						})
-
+						// use that mapped function and reduce all of the attributes together to get group summary values
 						that.groupTotal = mappedEventAttributes.reduce(function(prevVal, nextVal){
 							return {
 								minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
 								coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
 								meals:0,
-								OIID: prevVal.OIID === nextVal.OIID ? grpPlayers.push(prevVal.OIID) : grpPlayers.push(nextVal.OIID)
+								OIID: prevVal.OIID === nextVal.OIID ? grpPlayers.push(prevVal.OIID) : grpPlayers.push(nextVal.OIID),
+								dateCheck: grayCheck
 							}
 						})
-						// join all like OIID's together, the length is your member of contributing group members
+						// join all like OIID's together, the length is your number of contributing group members
 						var playerCount = _.union(grpPlayers);
 						that.group.attributes.players = playerCount.length;
 
-
+						// for each unique user name, run another map/reduce for only their values
 						that.eachPlayerTotal = playerCount.map(function(playerID) {
 							var userCollectibles;
+							// check the results of the collectibles query, if it has length, at least one player has earned a collectible, assign appropriately
 							if (that.collectiblesArr.length > 0) {
 								that.collectiblesArr.forEach(function(index){
 									var user = index.attributes.user.attributes.username
@@ -154,7 +168,6 @@ var GroupView = Parse.View.extend({
 								collectibles: userCollectibles
 							})
 						})
-
 						that.render();
 						
 					},
@@ -190,7 +203,6 @@ var GroupView = Parse.View.extend({
 	editMembersNav: function (location) {
 		// will only set playerID if you click on the name itself, and not the row 	
 		var playerID = location.currentTarget.innerHTML;
-		console.log(this.options)
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/edit-members", {trigger: true});
 	},
 

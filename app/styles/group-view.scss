@@ -96,6 +96,10 @@
 	& h2 {
 		margin-bottom: 40px;
 		font-size: 1.75em;
+
+		& span {
+			color: $colorCoral;
+		}
 	}
 
 	& ul {
@@ -135,6 +139,10 @@
 	float: left;
 	vertical-align: middle;
 	color: $colorCharcoal;
+
+	&:last-of-type {
+		margin-left: 15px;
+	}
 }
 
 .group-stats-container {
