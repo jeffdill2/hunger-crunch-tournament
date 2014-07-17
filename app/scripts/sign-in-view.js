@@ -1,6 +1,6 @@
 "use strict";
 
-var SignInView = Parse.View.extend ({
+var SignInView = Parse.View.extend({
 
 	template: _.template($('.sign-in-view').text()),
 
@@ -15,8 +15,7 @@ var SignInView = Parse.View.extend ({
 	initialize: function(options) {
 		if (Parse.User.current()) {
 			this.reRoute();
-		}
-		else {
+		} else {
 			$('.app-container').html(this.el);
 			this.render();
 			stopLoadingAnimation();
@@ -43,6 +42,7 @@ var SignInView = Parse.View.extend ({
 
 	userSignIn: function() {
 		$('.error-report').html('');
+
 		var name = $('.existing-user-username-input').val();
 		var pw = $('.existing-user-password-input').val();
 
@@ -68,9 +68,10 @@ var SignInView = Parse.View.extend ({
 		router.navigate('', {trigger: true});
 	},
 
-	reRoute:function () {
+	reRoute:function() {
 		this.remove();
-		setTimeout(function () {
+
+		setTimeout(function() {
 			router.navigate('/#tournament/dashboard', {trigger: true});
 		}, 50)
 	}

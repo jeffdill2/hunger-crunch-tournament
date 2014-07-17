@@ -3,9 +3,9 @@
 var PlayerView = Parse.View.extend({
 
 	events: {
-		'click .breadcrumb-back'		:'goBack',
-		'click .print-button'			:'print',
-		'click .remove-player-button'	:'removePlayer',
+		'click .breadcrumb-back'		: 'goBack',
+		'click .print-button'			: 'print',
+		'click .remove-player-button'	: 'removePlayer',
 	},
 
 	template: _.template($('.player-view').text()),

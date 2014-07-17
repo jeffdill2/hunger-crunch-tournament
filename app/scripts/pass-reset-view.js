@@ -1,6 +1,6 @@
 "use strict";
 
-var PassResetView = Parse.View.extend ({
+var PassResetView = Parse.View.extend({
 
 	events: {
 		'click .password-reset-view-header span'	: 'goBack',

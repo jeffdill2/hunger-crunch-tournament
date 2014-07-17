@@ -24,11 +24,11 @@ var GroupView = Parse.View.extend({
 	},
 
 	render: function() {
-		// called in the success inside getPlayers
+		// render is called in the success inside getPlayers
 		var renderedTemplate = this.template(this.group.attributes);
 		this.$el.html(renderedTemplate);
 
-		$('.sort').click(function () {
+		$('.sort').click(function() {
 			$(this).toggleClass('sorted');
 		});
 		// once the primary template is rendered on the page, then render the map-reduced group summary data
@@ -52,11 +52,12 @@ var GroupView = Parse.View.extend({
 					that.group.attributes.endDate = moment(that.group.attributes.endDate).format("MM/DD/YY");
 
 					that.getPlayers(that.group);
-				}
-				else {
+				} else {
 					var renderedTemplate = _.template($('.query-error-template').text());
+
 					$('.app-container').html(renderedTemplate);
-					$('.dashboard-link').click(function () {
+
+					$('.dashboard-link').click(function() {
 						router.navigate('/#tournament/dashboard', {'trigger': true});
 					});
 				}
@@ -65,7 +66,7 @@ var GroupView = Parse.View.extend({
 				console.log(error);
 				var renderedTemplate = _.template($('.query-error-template').text());
 				$('.app-container').html(renderedTemplate);
-				$('.dashboard-link').click(function () {
+				$('.dashboard-link').click(function() {
 					router.navigate('/#tournament/dashboard', {'trigger': true});
 				});
 			}
@@ -92,7 +93,6 @@ var GroupView = Parse.View.extend({
 		collectQuery.include('tntGrp');
 		collectQuery.equalTo("tntGrp", this.group)
 		collectQuery.find({
-
 			success: function(results) {
 				that.collectiblesArr = results;
 
@@ -171,7 +171,7 @@ var GroupView = Parse.View.extend({
 						that.render();
 						
 					},
-					error: function (error) {
+					error: function(error) {
 						console.log(error);
 					}
 				});
@@ -198,10 +198,10 @@ var GroupView = Parse.View.extend({
 		var playerID = location.currentTarget.innerHTML;
 
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/"+ playerID, {trigger: true});
-	}, 
+	},
 
-	editMembersNav: function (location) {
-		// will only set playerID if you click on the name itself, and not the row 	
+	editMembersNav: function(location) {
+		// will only set playerID if you click on the name itself, and not the row
 		var playerID = location.currentTarget.innerHTML;
 		router.navigate('/#tournament/group/'+ this.options.groupID +"/edit-members", {trigger: true});
 	},

@@ -48,14 +48,17 @@
 		line-height: 30px;
 		padding-left: 12px;
 		padding-right: 8px;
+
 		&:before {
 			background-position: 0 -34px;
 		}
+
 		&:after {
 			background-position: -17px -34px;
 		}
 	}
-	&:before, 
+
+	&:before,
 	&:after {
 		content: '';
 		position: absolute;
@@ -163,9 +166,10 @@
 }
 
 .sort {
-	cursor: pointer; 
+	cursor: pointer;
+
 	& svg{
-		transform: rotate(90deg)
+		transform: rotate(90deg);
 	}
 }
 
@@ -174,7 +178,7 @@
 }
 
 .sorted {
-	transform: rotate(180deg)
+	transform: rotate(180deg);
 }
 
 // spinner loading

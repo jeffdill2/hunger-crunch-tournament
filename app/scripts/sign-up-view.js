@@ -92,37 +92,36 @@ var SignUpView = Parse.View.extend({
 
 		if (name.length > 0 && emailAddy.length > 0 && (pw === check && check.length > 0 )) {
 			startLoadingAnimation();
+
 			user.signUp(null, {
 				success: function() {
 					// remove login window and show new user dashboard/welcome
 					$('.header-account-options').html("<p>Welcome, " + user.attributes.username + "</p>");
 
 					router.navigate('/#tournament/sign-up/welcome', {trigger: true});
-
-
 				},
 				error: function(user, error) {
 					var renderedTemplate = that.errorTemplate(error);
+
 					$('.error-report-email').html('');
 					$('.error-report-sign-up').html('');
+
 					if (error.code === 203) {
 						// email address already taken
 						$('.error-report-sign-up').html(renderedTemplate);
 						$('.new-user-email-input').val('').focus();
 						$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
-					}
-					else if (error.code === 202) { 
+					} else if (error.code === 202) {
 						// username already taken
 						$('.error-report-sign-up').html(renderedTemplate);
 						$('.new-user-username-input').val('').focus();
 						$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
-					}
-
-					else if (error.code === 125) {
+					} else if (error.code === 125) {
 						$('.error-report-email').html("Please enter a valid email address for your organization");
 						$('.new-user-email-input').val('').focus();
 						$('.button').css({'opacity': '.1', 'cursor': 'not-allowed'});
 					}
+
 					stopLoadingAnimation();
 				}
 			});

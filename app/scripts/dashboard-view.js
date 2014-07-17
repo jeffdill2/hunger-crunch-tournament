@@ -1,8 +1,8 @@
 var DashboardView = Parse.View.extend ({
 
 	events: {
-		'click .create-group-button'		: 'createGroupNav', 
-		'click .compare-groups-button'		: 'compareGroupsNav', 
+		'click .create-group-button'		: 'createGroupNav',
+		'click .compare-groups-button'		: 'compareGroupsNav',
 		'click .dashboard-group'			: 'groupNav'
 	},
 
@@ -17,7 +17,6 @@ var DashboardView = Parse.View.extend ({
 
 			this.getGroups();
 			this.render();
-
 		} else {
 			this.signIn();
 		}
