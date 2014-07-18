@@ -20,28 +20,36 @@ Parse.Cloud.job("gameTotals", function(request, response) {
 	var numTotalMinions = 0;
 	var gameTotalsQuery = new Parse.Query(strGameTotals);
 	var scoreDataQuery = new Parse.Query(strScores);
+	var objGameTotal = new Parse.Object(strGameTotals);
 
 	gameTotalsQuery.exists('objectId');
 	scoreDataQuery.exists('objectId');
+	scoreDataQuery.limit(1000);
 
-	gameTotalsQuery.find({
-		success: function(gameTotals) {
-			gameTotals.forEach(function(gameTotal) {
-				gameTotal.destroy({
-					success: function() {
-						response.message('Game total successfully destroyed.');
-					},
-					error: function() {
-						response.message('Game total failed to destroy.');
-					}
-				});
+	gameTotalsQuery.find().then(function(gameTotals) {
+		gameTotals.forEach(function(gameTotal) {
+			gameTotal.destroy({
+				success: function() {
+					response.message('Game total successfully destroyed.');
+				},
+				error: function() {
+					response.message('Game total failed to destroy.');
+				}
 			});
+		});
 
-			scoreDataQuery.find({
-				success: function(scoreData) {
-					var objGameTotal = new Parse.Object(strGameTotals);
+		return scoreDataQuery.count();
+	}).then(function(count) {
+		var aryCombinedScoreData = [];
 
-					scoreData.forEach(function(score) {
+		for (var i = 0; i <= count; i += 1000) {
+			scoreDataQuery.skip(i);
+
+			scoreDataQuery.find().then(function(scoreData) {
+				$.merge(aryCombinedScoreData, scoreData);
+
+				if (aryCombinedScoreData.length === count) {
+					aryCombinedScoreData.forEach(function(score) {
 						numTotalCoins += score.get('coinsCollected');
 						numTotalMinions += score.get('minionsStomped');
 					});
@@ -54,17 +62,11 @@ Parse.Cloud.job("gameTotals", function(request, response) {
 							response.success('Game totals has succeeded!');
 						},
 						error: function() {
-							response.message('Game total save has failed.');
+							response.error('Game total save has failed.');
 						}
 					});
-				},
-				error: function() {
-					response.message('Score data query failed.');
 				}
 			});
-		},
-		error: function() {
-			response.message('Game total query failed.');
 		}
 	});
 });
