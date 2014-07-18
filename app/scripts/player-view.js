@@ -77,10 +77,8 @@ var PlayerView = Parse.View.extend({
 						console.log(error);
 					}
 				});
-		}
-		})
-
-		
+			}
+		});
 	},
 
 	showPlayerScores: function(scores) {

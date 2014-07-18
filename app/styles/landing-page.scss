@@ -74,7 +74,8 @@
 		letter-spacing: 0.06em;
 		text-shadow: 1px 1px darken($colorButtonTeal, 10%);
 		margin: 0 auto;
-
+		cursor: pointer;
+		
 		&:active {
 			cursor: pointer;
 			background-position: 0 -58px;
