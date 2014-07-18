@@ -11,9 +11,9 @@ var EditMemberView = Parse.View.extend({
 	},
 
 	initialize: function(options) {
-		console.log(options)
 		this.group = options;
 		this.getGroup();
+
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
 			this.render();
@@ -92,8 +92,6 @@ var EditMemberView = Parse.View.extend({
 										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
 										that.collectiblesArr.forEach(function(collectible) {
-											console.log(collectible)
-											console.log(player)
 											if (collectible.attributes.tntGrp !== undefined && player.attributes.user !== undefined && player.attributes !== undefined && collectible.attributes !== undefined){
 												if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
 													grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
@@ -146,6 +144,7 @@ var EditMemberView = Parse.View.extend({
 	removePlayer: function(location) {
 		var removeName = location.currentTarget.innerHTML;
 		var that = this;
+
 		if (confirm('Are you sure you want to delete ' + removeName +' from the group? This action can not be undone.')) {
     		var query = new Parse.Query(strScores);
 
@@ -160,7 +159,10 @@ var EditMemberView = Parse.View.extend({
     					result.set('tntGrp', null);
     					result.save();
 
-    					router.navigate('/#tournament/group/' + that.group.groupID, {trigger: true})
+
+    					setTimeout(function() {
+	    					router.navigate('/#tournament/group/' + that.group.attributes.groupCode, {trigger: true});
+    					},50);
     				});
     			},
     			error: function(error) {

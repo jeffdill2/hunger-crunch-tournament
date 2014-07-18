@@ -49,7 +49,7 @@ var PlayerView = Parse.View.extend({
 						that.options.userID = events[0].get('tntGrp').get('user').id;
 						that.render();
 
-						events.forEach(function(event) { ///////
+						events.forEach(function(event) {
 							if (scores.length <= 0) {
 								scores.push(event);
 							} else if (scores.length > 0) {
@@ -101,6 +101,7 @@ var PlayerView = Parse.View.extend({
 
 		var that = this;
 		var collectQuery = new Parse.Query(strCollectibles);
+
 		collectQuery.include('user');
 		collectQuery.include('tntGrp');
 
