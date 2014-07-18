@@ -41,7 +41,6 @@ var EditMemberView = Parse.View.extend({
 
 		query.first({
 			success: function(results) {
-				console.log(results)
 				that.group = results;
 				that.groupUpdate = results;
 				that.groupInfo = results.attributes;
@@ -93,8 +92,12 @@ var EditMemberView = Parse.View.extend({
 										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
 										that.collectiblesArr.forEach(function(collectible) {
-											if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
-												grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
+											console.log(collectible)
+											console.log(player)
+											if (collectible.attributes.tntGrp !== undefined && player.attributes.user !== undefined && player.attributes !== undefined && collectible.attributes !== undefined){
+												if (player.attributes.tntGrp.attributes.groupCode === collectible.attributes.tntGrp.attributes.groupCode && player.attributes.user.attributes.username === collectible.attributes.user.attributes.username) {
+													grpPlayer.attributes.collectibles = collectible.attributes.collectibles.length;
+												}
 											}
 										});
 									} else {
