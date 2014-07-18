@@ -30,7 +30,7 @@ var CounterCollection = Parse.Collection.extend({
 function populateCollection(collection) {
 	return collection.fetch({
 		success: function() {
-			console.log('Data successfully retrieved');
+			// console.log('Data successfully retrieved');
 		},
 		error: function(error) {
 			console.log('An error has occured - details below:');

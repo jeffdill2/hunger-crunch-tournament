@@ -87,7 +87,7 @@ var EditMemberView = Parse.View.extend({
 
 							if (grpPlayers.length > 0) {
 								grpPlayers.forEach(function(grpPlayer) {
-									if (grpPlayer.attributes.user.attributes.username === player.attributes.user.attributes.username) {
+									if (grpPlayer.attributes.OIID === player.attributes.OIID) {
 										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
 										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
@@ -100,7 +100,7 @@ var EditMemberView = Parse.View.extend({
 										});
 									} else {
 										var result = $.grep(grpPlayers, function(grp) {
-											return grp.attributes.user.attributes.username === player.attributes.user.attributes.username;
+											return grp.attributes.OIID === player.attributes.OIID;
 										});
 
 										if (result.length === 0) {
@@ -159,9 +159,10 @@ var EditMemberView = Parse.View.extend({
     					result.set('tntGrp', null);
     					result.save();
 
+
     					setTimeout(function() {
 	    					router.navigate('/#tournament/group/' + that.group.attributes.groupCode, {trigger: true});
-    					});
+    					},50);
     				});
     			},
     			error: function(error) {
