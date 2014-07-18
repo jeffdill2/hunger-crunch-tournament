@@ -1113,10 +1113,10 @@
         </script>
         <!-- template for adding in members of the group -->
         <script type="text/template" class="edit-members-template">
-            <tr <%= (OIID.length > 15 ? 'title="' + OIID + '"' : "") %>>
+            <tr <%= (user.attributes.username.length > 15 ? 'title="' + user.attributes.username + '"' : "") %>>
                 <td class="compare-group-name">
-                    <button class="remove-group-button"><%= OIID %></button>
-                    <%= OIID.substring(0, 15) + (OIID.length > 15 ? "..." : "") %>
+                    <button class="remove-group-button"><%= user.attributes.username %></button>
+                    <%= user.attributes.username.substring(0, 15) + (user.attributes.username.length > 15 ? "..." : "") %>
                 </td>
                 <td class="compare-minions-data"><%= minionsStomped %></td>
                 <td class="compare-coins-data"><%= coinsCollected %></td>
