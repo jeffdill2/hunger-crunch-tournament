@@ -295,7 +295,6 @@ var GroupView = Parse.View.extend({
 	},
 
 	viewCode: function() {
-		console.log(this.group)
 		var groupName = this.group.attributes.name.replace(/ /g, '%20');
 		var groupCode = this.group.attributes.groupCode;
 		router.navigate('/#tournament/dashboard/'+groupName+'/'+groupCode, {trigger: true});
