@@ -13,6 +13,29 @@ var strCounter = 'Counter';
 var strPurchases = 'Purchase';
 
 ////////////////////////////////////////////////////////////
+/////////////////////////////////////////// GLOBAL FUNCTIONS
+////////////////////////////////////////////////////////////
+function merge(aryFirst, arySecond) {
+	var len = +arySecond.length;
+	var j = 0;
+	var i = aryFirst.length;
+
+	while (j < len) {
+		aryFirst[i++] = arySecond[j++];
+	}
+
+	if (len !== len) {
+		while (arySecond[j] !== undefined) {
+			aryFirst[i++] = arySecond[j++];
+		}
+	}
+
+	aryFirst.length = i;
+
+	return aryFirst;
+}
+
+////////////////////////////////////////////////////////////
 ///////////////////////////////////////////// OVERALL TOTALS
 ////////////////////////////////////////////////////////////
 Parse.Cloud.job("gameTotals", function(request, response) {
@@ -46,7 +69,7 @@ Parse.Cloud.job("gameTotals", function(request, response) {
 			scoreDataQuery.skip(i);
 
 			scoreDataQuery.find().then(function(scoreData) {
-				$.merge(aryCombinedScoreData, scoreData);
+				merge(aryCombinedScoreData, scoreData);
 
 				if (aryCombinedScoreData.length === count) {
 					aryCombinedScoreData.forEach(function(score) {
