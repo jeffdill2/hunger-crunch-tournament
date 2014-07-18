@@ -106,8 +106,8 @@ var GroupView = Parse.View.extend({
 							var grpPlayers = [];
 							var dateCheck;
 							var now = new Date();
-							var time = (5 * 24 * 3600 * 1000)
-							var fiveDaysAgo = new Date(now.getTime()-time)
+							var time = (5 * 24 * 3600 * 1000);
+							var fiveDaysAgo = new Date(now.getTime()-time);
 
 							if (fiveDaysAgo > groupPlayerEvents[0].attributes.tntGrp.attributes.endDate) {
 								grayCheck = 0;
@@ -117,7 +117,7 @@ var GroupView = Parse.View.extend({
 
 							// map all of the player events and return only their attributes
 							var mappedEventAttributes = groupPlayerEvents.map(function(playerEvent) {
-								return playerEvent.attributes
+								return playerEvent.attributes;
 							});
 
 							// use that mapped function and reduce all of the attributes together to get group summary values
