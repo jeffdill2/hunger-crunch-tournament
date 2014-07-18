@@ -101,7 +101,6 @@ var DashboardView = Parse.View.extend ({
 		} else {
 			groupTotal.dateCheck = 1
 		}
-
 		groupTotal.groupID.attributes.startDate = groupTotal.groupID.attributes.startDate.toString().substring(0,10)
 		groupTotal.groupID.attributes.endDate = groupTotal.groupID.attributes.endDate.toString().substring(0,10)
 		var renderedTemplate = _.template($('.dashboard-group-view-template').text());
