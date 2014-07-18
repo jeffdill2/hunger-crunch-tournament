@@ -85,7 +85,7 @@ var GroupView = Parse.View.extend({
 
 		query.include('tntGrp.attributes.user');
 		query.include('user');
-		query.ascending('OIID')
+
 		query.limit(150);
 		query.equalTo("tntGrp", this.group);
 
@@ -98,81 +98,94 @@ var GroupView = Parse.View.extend({
 
 				query.find({
 					success: function(groupPlayerEvents) {
-
 						if (groupPlayerEvents.length > 0) {
+							var grpPlayers = [];
+							var dateCheck;
+							var now = new Date();
+							var time = (5 * 24 * 3600 * 1000)
+							var fiveDaysAgo = new Date(now.getTime()-time)
 
-
-						var grpPlayers = [];
-						var dateCheck;
-						var now = new Date();
-						var time = (5 * 24 * 3600 * 1000)
-						var fiveDaysAgo = new Date(now.getTime()-time)
-
-						if (fiveDaysAgo > groupPlayerEvents[0].attributes.tntGrp.attributes.endDate) {
-							grayCheck = 0;
-						} else {
-							grayCheck = 1;
-						}
-						// map all of the player events and return only their attributes
-						var mappedEventAttributes = groupPlayerEvents.map(function(playerEvent){
-							// console.log(playerEvent.attributes.tntGrp.attributes.endDate)
-							return playerEvent.attributes
-						})
-						// use that mapped function and reduce all of the attributes together to get group summary values
-						that.groupTotal = mappedEventAttributes.reduce(function(prevVal, nextVal){
-							return {
-								minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
-								coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
-								meals:0,
-								OIID: prevVal.OIID === nextVal.OIID ? grpPlayers.push(prevVal.OIID) : grpPlayers.push(nextVal.OIID),
-								dateCheck: grayCheck
-							}
-						})
-						// join all like OIID's together, the length is your number of contributing group members
-						var playerCount = _.union(grpPlayers);
-						that.group.attributes.players = playerCount.length;
-
-						// for each unique user name, run another map/reduce for only their values
-						that.eachPlayerTotal = playerCount.map(function(playerID) {
-							var userCollectibles;
-							// check the results of the collectibles query, if it has length, at least one player has earned a collectible, assign appropriately
-							if (that.collectiblesArr.length > 0) {
-								that.collectiblesArr.forEach(function(index){
-									var user = index.attributes.user.attributes.username
-									if(playerID === user) {
-										userCollectibles = index.attributes.collectibles.length;
-									} else {
-										userCollectibles = 0;
-									}
-								})
+							if (fiveDaysAgo > groupPlayerEvents[0].attributes.tntGrp.attributes.endDate) {
+								grayCheck = 0;
 							} else {
-								userCollectibles = 0;
+								grayCheck = 1;
 							}
-							return mappedEventAttributes.reduce(function(prevVal, nextVal){
-								if (playerID === nextVal.OIID) {
-									return {
-										minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
-										coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
-										username: playerID,
-										collectibles: prevVal.collectibles
-									}
+							// map all of the player events and return only their attributes
+							var mappedEventAttributes = groupPlayerEvents.map(function(playerEvent){
+								// console.log(playerEvent.attributes.tntGrp.attributes.endDate)
+								return playerEvent.attributes
+							})
+							// use that mapped function and reduce all of the attributes together to get group summary values
+							that.groupTotal = mappedEventAttributes.reduce(function(prevVal, nextVal){
+								var prevUserID = prevVal.user.attributes.username;
+								var nextUserID = nextVal.user.attributes.username;
+								var userID;
+								if (prevUserID === nextUserID) {
+									userID = {attributes: {username: prevUserID}};
+									grpPlayers.push(prevUserID)
+								} else {
+									userID = {attributes: {username: nextUserID}};
+									grpPlayers.push(nextUserID)
 								}
-								else {
-									return {
-										minionsStomped: prevVal.minionsStomped,
-										coinsCollected: prevVal.coinsCollected,
-										username: playerID,
-										collectibles: prevVal.collectibles
-									}
+								return {
+									minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
+									coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
+									user: userID,
+									meals:0,
+									dateCheck: grayCheck
 								}
 							}, {
-								minionsStomped: 0,
-								coinsCollected: 0,
-								username: playerID,
-								collectibles: userCollectibles
+								minionsStomped:0,
+								coinsCollected:0,
+								user:{attributes: {username: ""}},
+								meals:0,
+								dateCheck: grayCheck
 							})
-						})
-						that.render();
+							// join all like playerID's together, the length is your number of contributing group members
+							var playerCount = _.union(grpPlayers);
+							that.group.attributes.players = playerCount.length;
+							// for each unique user name, run another map/reduce for only their values
+							that.eachPlayerTotal = playerCount.map(function(playerID) {
+								var userCollectibles;
+								// check the results of the collectibles query, if it has length, at least one player has earned a collectible, assign appropriately
+								if (that.collectiblesArr.length > 0) {
+									that.collectiblesArr.forEach(function(index){
+										var user = index.attributes.user.attributes.username
+										if(playerID === user) {
+											userCollectibles = index.attributes.collectibles.length;
+										} else {
+											userCollectibles = 0;
+										}
+									})
+								} else {
+									userCollectibles = 0;
+								}
+								return mappedEventAttributes.reduce(function(prevVal, nextVal){
+
+									if (playerID === nextVal.user.attributes.username) {
+										return {
+											minionsStomped: prevVal.minionsStomped + nextVal.minionsStomped,
+											coinsCollected: prevVal.coinsCollected + nextVal.coinsCollected,
+											username: playerID,
+											collectibles: prevVal.collectibles
+										}
+									}
+									else {
+										return {
+											minionsStomped: prevVal.minionsStomped,
+											coinsCollected: prevVal.coinsCollected,
+											username: playerID,
+											collectibles: prevVal.collectibles
+										}
+									}
+								}, {
+									minionsStomped: 0,
+									coinsCollected: 0,
+									username: playerID,
+									collectibles: userCollectibles
+								})
+							})
+							that.render();
 						} else {
 							var renderedTemplate = _.template($('.new-group-placeholder-view-template').text());
 							$('.app-container').html(renderedTemplate);

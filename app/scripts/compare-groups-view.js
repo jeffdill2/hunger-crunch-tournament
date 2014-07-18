@@ -74,12 +74,13 @@ var CompareGroupsView = Parse.View.extend({
 
 					query.find({
 						success: function(group) {
-							that.groupsToAdd.push(group);
+								that.groupsToAdd.push(group);
 
-							// if all group arrays have been pushed to the this.groupsToAdd array, run a map to turn them into objects
-							i >= groups.length - 1 ? that.groupsToAdd = that.groupsToAdd.map(function(obj) {
-								return obj[0]
-							}) : i += 1;
+								// if all group arrays have been pushed to the this.groupsToAdd array, run a map to turn them into objects
+								i >= groups.length - 1 ? that.groupsToAdd = that.groupsToAdd.map(function(obj) {
+									return obj[0]
+								}) : i += 1;
+
 						},
 						error: function(error) {
 							console.log(error);
@@ -103,14 +104,13 @@ var CompareGroupsView = Parse.View.extend({
 		$('table').after(renderedTemplate);
 
 		var that = this;
-
 		if (this.groupsToAdd.length <= 0 && this.groupsToCompare.length <=0) {
 			var placeholderTemplate = _.template($('.placeholder-view').text());
 
 			$('.add-list').html(placeholderTemplate());
 		} else {
 			this.groupsToAdd.forEach(function(groupNames) {
-				if (groupNames!== undefined) {	
+				if (groupNames) {	
 					$('.add-list').append(addListTemplate(groupNames.attributes));
 				}
 			});
@@ -136,13 +136,16 @@ var CompareGroupsView = Parse.View.extend({
 		var groupArr = this.groupsToAdd;
 
 		var addedGroup = _.find(groupArr, function(group) {
-			return group.get('groupID').get('name') === addName;
+			if (group !== undefined) {
+				return group.get('groupID').get('name') === addName;
+			}
 		});
 
-		this.groupsToAdd = groupArr
-			.filter(function(el) {
+		this.groupsToAdd = groupArr.filter(function(el) {
+			if (el !== undefined) {
 				return el.get('groupID').get('name') !== addName;
-			});
+			}
+		});
 
 		this.groupsToCompare.push(addedGroup);
 		this.displayCompareGroups();

@@ -31,47 +31,62 @@ var PlayerView = Parse.View.extend({
 	getPlayerScores: function() {
 		var scores = [];
 		var that = this;
-
-		this.query = new Parse.Query(strScores);
-		this.query.include('user');
-		this.query.include('tntGrp');
-		this.query.equalTo('OIID', this.playerInfo.playerID);
-
-		this.query.find({
-			success: function(events) {
-				console.log(events)
-				that.options.groupName = events[0].get('tntGrp').get('name');
-				that.options.userID = events[0].get('tntGrp').get('user').id;
-				that.render();
-
-				events.forEach(function(event) { ///////
-					if (scores.length <= 0) {
-						scores.push(event);
-					} else if (scores.length > 0) {
-						scores.forEach(function(score) {
-							if (score.attributes.levelID.slice(-2) === event.attributes.levelID.slice(-2)) {
-								score.attributes.minionsStomped += event.attributes.minionsStomped;
-								score.attributes.coinsCollected += event.attributes.coinsCollected;
-							} else {
-								var result = $.grep(scores, function(scr) {
-									return scr.attributes.levelID.slice(-2) === event.attributes.levelID.slice(-2);
-								});
-
-								if (result.length === 0) {
-									scores.push(event);
-								}
+		var query = new Parse.Query(strUsers)
+		query.equalTo('playerIOID',this.playerInfo.playerID)
+		query.first({
+			success: function (stuff) {
+					var userID = stuff.id
+					this.query = new Parse.Query(strScores);
+					this.query.include('user');
+					this.query.include('tntGrp');
+					var userID= {
+						__type: "Pointer",
+						className: strUsers,
+						objectId: userID
 							}
-						});
-					}
-				});
 
-				that.showPlayerScores(scores);
-				that.getPlayerSummary(scores);
+					this.query.equalTo('user', userID);
+
+					this.query.find({
+						success: function(events) {
+							that.options.groupName = events[0].get('tntGrp').get('name');
+							that.options.userID = events[0].get('tntGrp').get('user').id;
+							that.render();
+
+							events.forEach(function(event) { ///////
+								if (scores.length <= 0) {
+									scores.push(event);
+								} else if (scores.length > 0) {
+									scores.forEach(function(score) {
+										if (score.attributes.levelID.slice(-2) === event.attributes.levelID.slice(-2)) {
+											score.attributes.minionsStomped += event.attributes.minionsStomped;
+											score.attributes.coinsCollected += event.attributes.coinsCollected;
+										} else {
+											var result = $.grep(scores, function(scr) {
+												return scr.attributes.levelID.slice(-2) === event.attributes.levelID.slice(-2);
+											});
+
+											if (result.length === 0) {
+												scores.push(event);
+											}
+										}
+									});
+								}
+							});
+
+							that.showPlayerScores(scores);
+							that.getPlayerSummary(scores);
+						},
+						error: function(error) {
+							console.log(error);
+						}
+					});
 			},
-			error: function(error) {
-				console.log(error);
+			error: function (stuff, error) {
+				console.log('stuff is', stuff)
+				console.log('error is', error)
 			}
-		});
+		})
 	},
 
 	showPlayerScores: function(scores) {
