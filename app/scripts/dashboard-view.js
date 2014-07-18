@@ -35,10 +35,9 @@ var DashboardView = Parse.View.extend ({
 		query.include("user");
 
 		// query for groups that ended no later than 5 days ago
-
-
 		query.equalTo("user", Parse.User.current());
-		query.descending("endDate")
+		query.descending("endDate");
+
 		query.find({
 			success: function(userGroups) {
 				if (userGroups.length > 0) {
@@ -61,11 +60,11 @@ var DashboardView = Parse.View.extend ({
 								stopLoadingAnimation();
 								if (groupTotal.length > 0) {
 									that.showGroups(groupTotal[0].attributes);
-								}
-								else {
+								} else {
 									var placeHolder = {
 										groupName: userGroup.attributes.name
-									}
+									};
+
 									// if the group has not been populated yet, however other groups exist on the page provide the placeholder content
 									var placeholderTemplate = _.template($('.existing-groups-dashboard-placeholder-template').text());
 									$('.dashboard-group-content').html(placeholderTemplate(placeHolder));
@@ -93,17 +92,19 @@ var DashboardView = Parse.View.extend ({
 
 	showGroups: function(groupTotal) {
 		var now = new Date();
-		var time = (5 * 24 * 3600 * 1000)
-		var fiveDaysAgo = new Date(now.getTime()-time)
+		var time = (5 * 24 * 3600 * 1000);
+		var fiveDaysAgo = new Date(now.getTime()-time);
+
 		// check if group ended more than five days ago - if so, will render gray icons in dash
 		if (fiveDaysAgo > groupTotal.groupID.attributes.endDate) {
-			groupTotal.dateCheck = 0
+			groupTotal.dateCheck = 0;
 		} else {
-			groupTotal.dateCheck = 1
+			groupTotal.dateCheck = 1;
 		}
 
-		groupTotal.groupID.attributes.startDate = groupTotal.groupID.attributes.startDate.toString().substring(0,10)
-		groupTotal.groupID.attributes.endDate = groupTotal.groupID.attributes.endDate.toString().substring(0,10)
+		groupTotal.groupID.attributes.startDate = groupTotal.groupID.attributes.startDate.toString().substring(0,10);
+		groupTotal.groupID.attributes.endDate = groupTotal.groupID.attributes.endDate.toString().substring(0,10);
+
 		var renderedTemplate = _.template($('.dashboard-group-view-template').text());
 		$('.dashboard-group-content').append(renderedTemplate(groupTotal));
 	},
@@ -121,9 +122,10 @@ var DashboardView = Parse.View.extend ({
 		router.navigate('/#tournament/group/' + groupNav, {trigger: true});
 	},
 
-	signIn:function () {
+	signIn:function() {
 		this.remove();
-		setTimeout(function () {
+
+		setTimeout(function() {
 			router.navigate('/#tournament/sign-in', {trigger: true});
 		}, 50)
 	}

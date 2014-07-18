@@ -34,6 +34,7 @@ var UserWelcome = Parse.View.extend({
 
 		$('.welcome-container').html(instructionsTemplate);
 		$(window).scrollTop($('.welcome-container').height());
+
 		this.navButtons();
 	},
 
@@ -45,6 +46,7 @@ var UserWelcome = Parse.View.extend({
 
 		$('.welcome-container').html(instructionsTemplate);
 		$(window).scrollTop($('.welcome-container').height());
+
 		this.navButtons();
 	},
 

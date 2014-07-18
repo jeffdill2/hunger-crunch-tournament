@@ -6,12 +6,14 @@ var EditMemberView = Parse.View.extend({
 	template: _.template($('.edit-members-view').text()),
 
 	events: {
-		'click .remove-group-button' : 'removePlayer',
+		'click .breadcrumb-back'		: 'goBack',
+		'click .remove-group-button'	: 'removePlayer',
 	},
 
 	initialize: function(options) {
 		this.group = options;
 		this.getGroup();
+
 		if (Parse.User.current()) {
 			$('.app-container').append(this.el);
 			this.render();
@@ -25,7 +27,7 @@ var EditMemberView = Parse.View.extend({
 	},
 
 	render: function() {
-		var renderedTemplate = this.template();
+		var renderedTemplate = this.template(this.options);
 		this.$el.html(renderedTemplate);
 	},
 
@@ -42,6 +44,7 @@ var EditMemberView = Parse.View.extend({
 				that.group = results;
 				that.groupUpdate = results;
 				that.groupInfo = results.attributes;
+				that.options.name = results.attributes.name
 				that.groupInfo.startDate = moment(that.groupInfo.startDate).format("MM/DD/YY");
 				that.groupInfo.endDate = moment(that.groupInfo.endDate).format("MM/DD/YY");
 				that.render();
@@ -84,7 +87,7 @@ var EditMemberView = Parse.View.extend({
 
 							if (grpPlayers.length > 0) {
 								grpPlayers.forEach(function(grpPlayer) {
-									if (grpPlayer.attributes.OIID === player.attributes.OIID) {
+									if (grpPlayer.attributes.user.attributes.username === player.attributes.user.attributes.username) {
 										grpPlayer.attributes.minionsStomped += player.attributes.minionsStomped;
 										grpPlayer.attributes.coinsCollected += player.attributes.coinsCollected;
 
@@ -95,7 +98,7 @@ var EditMemberView = Parse.View.extend({
 										});
 									} else {
 										var result = $.grep(grpPlayers, function(grp) {
-											return grp.attributes.OIID === player.attributes.OIID;
+											return grp.attributes.user.attributes.username === player.attributes.user.attributes.username;
 										});
 
 										if (result.length === 0) {
@@ -139,6 +142,7 @@ var EditMemberView = Parse.View.extend({
 	removePlayer: function(location) {
 		var removeName = location.currentTarget.innerHTML;
 		var that = this;
+
 		if (confirm('Are you sure you want to delete ' + removeName +' from the group? This action can not be undone.')) {
     		var query = new Parse.Query(strScores);
 
@@ -153,7 +157,9 @@ var EditMemberView = Parse.View.extend({
     					result.set('tntGrp', null);
     					result.save();
 
-    					router.navigate('/#tournament/group/' + that.group.groupID, {trigger: true})
+    					setTimeout(function() {
+	    					router.navigate('/#tournament/group/' + that.group.attributes.groupCode, {trigger: true});
+    					});
     				});
     			},
     			error: function(error) {
@@ -178,6 +184,10 @@ var EditMemberView = Parse.View.extend({
 		};
 
 		var userList = new List('avaialble-group-names', options);
+	},
+
+	goBack: function() {
+		router.navigate('/#tournament/group/' + this.options.groupID, {trigger: true});
 	},
 
 	signIn:function() {

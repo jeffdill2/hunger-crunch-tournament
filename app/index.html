@@ -992,7 +992,24 @@
         <!-- template for the edit members view -->
         <script type="text/template" class="edit-members-view">
             <div class="compare-groups-header-content">
-                <div class="compare-groups-location-banner h1-flag">EDIT MEMBERS</div>
+                <div class="compare-groups-location-banner h1-flag">
+                  <span class='breadcrumb-back'><%=(name.length > 12) ? name.substring(0,12)+"..." : name%></span>
+                  <svg
+                      version="1.1"
+                      class="arrow-2"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      x="0px" y="0px"
+                      viewBox="0 0 7.7 16.2"
+                      enable-background="new 0 0 7.7 16.2"
+                      xml:space="preserve">
+                      <g>
+                        <path d="M7.5,7.4L1.3,0.3C1.1,0,0.8-0.1,0.5,0.1C0.2,0.2,0,0.5,0,0.9l1.8,7.8L0,15.3c0,0.4,0.2,0.7,0.5,0.8c0.1,0,0.2,0.1,0.3,0.1
+                          c0.2,0,0.4-0.1,0.5-0.3l6.2-7.2c0.1-0.2,0.2-0.4,0.2-0.6C7.7,7.8,7.7,7.7,7.5,7.4z"/>
+                      </g>
+                    </svg> EDIT MEMBERS   
+                </div>
             </div>
             <div class="compare-groups-content-container">
                 <div class="compare-groups-content" id="compare-groups-table">
@@ -1096,10 +1113,10 @@
         </script>
         <!-- template for adding in members of the group -->
         <script type="text/template" class="edit-members-template">
-            <tr <%= (OIID.length > 15 ? 'title="' + OIID + '"' : "") %>>
+            <tr <%= (user.attributes.username.length > 15 ? 'title="' + user.attributes.username + '"' : "") %>>
                 <td class="compare-group-name">
-                    <button class="remove-group-button"><%= OIID %></button>
-                    <%= OIID.substring(0, 15) + (OIID.length > 15 ? "..." : "") %>
+                    <button class="remove-group-button"><%= user.attributes.username %></button>
+                    <%= user.attributes.username.substring(0, 15) + (user.attributes.username.length > 15 ? "..." : "") %>
                 </td>
                 <td class="compare-minions-data"><%= minionsStomped %></td>
                 <td class="compare-coins-data"><%= coinsCollected %></td>
