@@ -131,6 +131,7 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 			var aryUniqueUsers = [];
 			var aryPurchaseUsers = [];
 			var objGroupTotal = new Parse.Object(strGroupTotals);
+			var aryCombinedScoreData = [];
 
 			var objGroupPointer = {
 				__type: "Pointer",
@@ -142,67 +143,76 @@ Parse.Cloud.job("groupTotals", function(request, response) {
 			scoreDataQuery.include('user');
 			scoreDataQuery.limit(1000);
 
-			scoreDataQuery.find().then(function(scoreData) {
-				scoreData.forEach(function(score) {
-					var strUserID = score.get('user').id;
-					var bolUserFound = false;
+			scoreDataQuery.count().then(function(count) {
+				for (var i = 0; i <= count; i += 1000) {
+					scoreDataQuery.skip(i);
 
-					numTotalCoins += score.get('coinsCollected');
-					numTotalMinions += score.get('minionsStomped');
+					scoreDataQuery.find().then(function(scoreData) {
+						merge(aryCombinedScoreData, scoreData);
 
-					aryUniqueUsers.forEach(function(user) {
-						if (user === strUserID) {
-							bolUserFound = true;
+						if (aryCombinedScoreData.length === count) {
+							aryCombinedScoreData.forEach(function(score) {
+								var strUserID = score.get('user').id;
+								var bolUserFound = false;
+
+								numTotalCoins += score.get('coinsCollected');
+								numTotalMinions += score.get('minionsStomped');
+
+								aryUniqueUsers.forEach(function(user) {
+									if (user === strUserID) {
+										bolUserFound = true;
+									}
+								});
+
+								if (!bolUserFound) {
+									var objUserPointer = {
+										__type: "Pointer",
+										className: strUsers,
+										objectId: strUserID
+									};
+
+									aryUniqueUsers.push(strUserID);
+									aryPurchaseUsers.push(objUserPointer);
+								}
+							});
+
+							purchasesQuery.containedIn('user', aryPurchaseUsers);
+
+							purchasesQuery.find().then(function(purchaseData) {
+								var numPurchaseTotal = 0;
+								var numMealsTotal = 0;
+								var numCostOfOneMeal = 0.5;
+
+								purchaseData.forEach(function(purchase) {
+									numPurchaseTotal += parseFloat(purchase.get('price'));
+								});
+
+								numMealsTotal = parseFloat((Math.ceil((numPurchaseTotal * numCostOfOneMeal) * 10) / 10).toFixed(1));
+
+								objGroupTotal.save({
+									groupID: objGroupPointer,
+									coins: numTotalCoins,
+									minions: numTotalMinions,
+									players: aryUniqueUsers.length,
+									meals: numMealsTotal
+								}, {
+									success: function() {
+										numCounter += 1;
+
+										if (numCounter === numGroups) {
+											response.success('Group totals has succeeded!');
+										}
+
+										response.message('Group total save has succeeded.');
+									},
+									error: function() {
+										response.message('Group total save has failed.');
+									}
+								});
+							});
 						}
 					});
-
-					if (!bolUserFound) {
-						var objUserPointer = {
-							__type: "Pointer",
-							className: strUsers,
-							objectId: strUserID
-						};
-
-						aryUniqueUsers.push(strUserID);
-						aryPurchaseUsers.push(objUserPointer);
-					}
-				});
-
-				purchasesQuery.containedIn('user', aryPurchaseUsers);
-
-				return purchasesQuery.find();
-
-			}).then(function(purchaseData) {
-				var numPurchaseTotal = 0;
-				var numMealsTotal = 0;
-				var numCostOfOneMeal = 0.5;
-
-				purchaseData.forEach(function(purchase) {
-					numPurchaseTotal += parseFloat(purchase.get('price'));
-				});
-
-				numMealsTotal = parseFloat((Math.ceil((numPurchaseTotal * numCostOfOneMeal) * 10) / 10).toFixed(1));
-
-				objGroupTotal.save({
-					groupID: objGroupPointer,
-					coins: numTotalCoins,
-					minions: numTotalMinions,
-					players: aryUniqueUsers.length,
-					meals: numMealsTotal
-				}, {
-					success: function() {
-						numCounter += 1;
-
-						if (numCounter === numGroups) {
-							response.success('Group totals has succeeded!');
-						}
-
-						response.message('Group total save has succeeded.');
-					},
-					error: function() {
-						response.message('Group total save has failed.');
-					}
-				});
+				}
 			});
 		});
 	});
